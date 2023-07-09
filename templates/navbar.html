@@ -1,5 +1,14 @@
 <h1>NAVIGATION BAR</h1>
 <hr>
 
+{% if request.user.is_authenticated %}
+
 <h3>Hi {{ request.user.username }}</h3>
 <a href="{% url 'account' %}">Account</a>
+<a href="{% url 'sign-out' %}">Sign Out</a>
+
+{% else %}
+
+<a href="{% url 'sign-in' %}">Sign In</a>
+
+{% endif %}
