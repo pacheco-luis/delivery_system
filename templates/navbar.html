@@ -1,2 +1,5 @@
 <h1>NAVIGATION BAR</h1>
 <hr>
+
+<h3>Hi {{ request.user.username }}</h3>
+<a href="{% url 'account' %}">Account</a>
