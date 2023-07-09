@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from django.contrib.auth.models import User
+from .forms import CustomUserCreationForm, CustomerForm
 
 # Create your views here.
 @login_required(login_url='sign-in')
@@ -37,6 +38,27 @@ def signOutUser(request):
     logout(request)
     messages.success(request, 'You have been logged out')
     return redirect('sign-in')
+
+def signUpUser(request):
+    page = 'sign-up'
+    form = CustomUserCreationForm()
+    context = {'page': page, 'form': form}
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, 'User account was created')
+
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'An error has occurred during registration')
+
+    return render(request, 'users/sign-in-sign-up.html', context)
 
 @login_required(login_url='sign-in')
 def customerAccount(request):
