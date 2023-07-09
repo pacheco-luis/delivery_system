@@ -62,4 +62,19 @@ def signUpUser(request):
 
 @login_required(login_url='sign-in')
 def customerAccount(request):
-    return render(request, 'users/account.html')
+    customer = request.user.customer
+    context = {'customer': customer}
+    return render(request, 'users/account.html', context)
+
+@login_required(login_url='sign-in')
+def editAccount(request):
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account was updated')
+            return redirect('account')
+    context = {'form': form}
+    return render(request, 'users/account_form.html', context)

@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Account{% endblock title %}
 
 {% block content %}
 
 <h1>User Profile</h1>
 <hr>
-<h3>{{ user.first_name }}</h3>
-<h3>{{ user.last_name }}</h3>
-<h3>{{ user.username }}</h3>
-<h3>{{ user.email }}</h3>
+<h3>First Name: </h3> {{ customer.first_name }}
+<h3>Last Name: </h3> {{ customer.last_name }}
+<h3>Username: </h3> {{ customer.username }}
+<h3>Email: </h3> {{ customer.email }}
+<h3>Phone: </h3> {{ customer.phone_number }}
+<h3>Address: </h3> {{ customer.address }}
+<h3>Profile Image: </h3>
+<img src="{{ customer.profile_image.url }}">
+<br>
+
+<a href="{% url 'edit-account' %}">Edit</a>
 
 {% endblock content %}
