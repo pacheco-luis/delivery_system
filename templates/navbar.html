@@ -4,13 +4,13 @@
 
 <a href="{% url 'home' %}">Home</a>
 <a href="{% url 'account' %}">Account</a>
-<a href="{% url 'sign-out' %}">Sign Out</a>
+<a href="{% url 'logout' %}">Sign Out</a>
 
 <h3>Hi {{ request.user.username }}</h3>
 
 {% else %}
 
-<a href="{% url 'sign-in' %}">Sign In</a>
+<a href="{% url 'login' %}">Sign In</a>
 
 {% endif %}
 

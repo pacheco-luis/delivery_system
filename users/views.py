@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomerForm
 
 # Create your views here.
-@login_required(login_url='sign-in')
+@login_required(login_url='login')
 def home(request):
     return render(request, 'users/home.html')
 
-def signInUser(request):
+def loginUser(request):
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -34,13 +34,13 @@ def signInUser(request):
 
     return render(request, 'users/sign-in-sign-up.html')
 
-def signOutUser(request):
+def logoutUser(request):
     logout(request)
     messages.info(request, 'You have been logged out')
-    return redirect('sign-in')
+    return redirect('login')
 
-def signUpUser(request):
-    page = 'sign-up'
+def registerUser(request):
+    page = 'register'
     form = CustomUserCreationForm()
     context = {'page': page, 'form': form}
 
@@ -60,13 +60,13 @@ def signUpUser(request):
 
     return render(request, 'users/sign-in-sign-up.html', context)
 
-@login_required(login_url='sign-in')
+@login_required(login_url='login')
 def customerAccount(request):
     customer = request.user.customer
     context = {'customer': customer}
     return render(request, 'users/account.html', context)
 
-@login_required(login_url='sign-in')
+@login_required(login_url='login')
 def editAccount(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)

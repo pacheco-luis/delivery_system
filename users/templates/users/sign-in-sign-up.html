@@ -2,7 +2,7 @@
 
 {% block title %}
 
-{% if page == 'sign-up' %}
+{% if page == 'register' %}
 Sign In
 {% else %}
 Sign Up
@@ -12,10 +12,10 @@ Sign Up
 
 {% block content %}
 
-{% if page == 'sign-up' %}
+{% if page == 'register' %}
 
 <h1>Register User</h1>
-<form action="{% url 'sign-up' %}" method="POST">
+<form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
 
     {% for field in form %}
@@ -35,19 +35,19 @@ Sign Up
 </form>
 <p>
     Already have an account?
-    <a href="{% url 'sign-in' %}">Sign In</a>
+    <a href="{% url 'login' %}">Sign In</a>
 </p>
 
 {% else %}
 
-<form action="{% url 'sign-in' %}" method="POST">
+<form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Enter password">
     <input type="submit" value="Login">
     <p>
         Don't have an account
-        <a href="{% url 'sign-up' %}">Sign Up</a>
+        <a href="{% url 'register' %}">Sign Up</a>
     </p>
 </form>
 
