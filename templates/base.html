@@ -5,26 +5,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery System | {% block title %}{% endblock title %}</title>
+
+    <title>Delivery System &mdash; {% block title %}{% endblock title %}</title>
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    {% include 'navbar.html' %}
+    {% include 'sidebar.html' %}
 
-    {% if messages %}
+    <main class="main">
+        {% include 'header.html' %}
 
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+        {% if messages %}
 
-    {% endif %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
 
-    {% block content %}{% endblock content %}
+        {% endif %}
 
-    {% include 'footer.html' %}
+        {% block content %}{% endblock content %}
+
+        {% include 'footer.html' %}
+    </main>
 </body>
 
 </html>
