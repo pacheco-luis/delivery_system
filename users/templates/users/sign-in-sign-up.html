@@ -3,14 +3,14 @@
 {% block title %}
 
 {% if page == 'register' %}
-Sign In
-{% else %}
 Sign Up
+{% elif page == 'login' %}
+Sign In
 {% endif %}
 
 {% endblock title %}
 
-{% block content %}
+{% block authentication %}
 
 {% if page == 'register' %}
 
@@ -53,4 +53,4 @@ Sign Up
 
 {% endif %}
 
-{% endblock content %}
+{% endblock authentication %}

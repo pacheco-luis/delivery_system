@@ -12,6 +12,9 @@ def home(request):
     return render(request, 'users/home.html')
 
 def loginUser(request):
+    page = 'login'
+    context = {'page': page}
+
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -32,7 +35,7 @@ def loginUser(request):
         else:
             messages.error(request, 'Username and password do not match')
 
-    return render(request, 'users/sign-in-sign-up.html')
+    return render(request, 'users/sign-in-sign-up.html', context)
 
 def logoutUser(request):
     logout(request)

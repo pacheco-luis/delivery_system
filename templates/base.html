@@ -16,25 +16,40 @@
 </head>
 
 <body>
-    {% include 'sidebar.html' %}
+    {% if messages %}
 
-    <main class="main">
+    <div class="alert-wrapper">
+        {% for message in messages %}
+        <div class="alert alert--{{ message.tags }}">
+            <p class="alert__message">{{ message }}</p>
+            <button class="alert__close">
+                &times;
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+
+    <div class="container">
         {% include 'header.html' %}
 
-        {% if messages %}
+        {% include 'sidebar.html' %}
 
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+        <main class="main">
+            {% block content %}{% endblock content %}
+        </main>
+    </div>
 
-        {% endif %}
+    {% else %}
 
-        {% block content %}{% endblock content %}
+    {% block authentication %}{% endblock authentication %}
 
-        {% include 'footer.html' %}
-    </main>
+    {% endif %}
 </body>
+
+<script src="{% static 'js/script.js' %}"></script>
 
 </html>

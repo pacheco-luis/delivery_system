@@ -1,11 +1,12 @@
 {% load static %}
 
 <header class="header">
+    <a href="{% url 'logout' %}">Sign Out</a>
     <div class="user">
         <div class="user__image-box">
             <img src="{% static 'images/user-default.png' %}" alt="User Profile" class="user__image">
         </div>
-        <div class="user__name">John Doe</div>
+        <div class="user__name">{{ request.user.username }}</div>
         <svg class="user__icon">
             <use xlink:href="{% static 'images/sprite.svg' %}#chevron-down"></use>
         </svg>
