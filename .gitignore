@@ -20,5 +20,8 @@ db.sqlite3
 db.sqlite3-journal
 media
 
+# Dependency directories
+node_modules/
+
 # User uploaded files
 static/images/profiles/

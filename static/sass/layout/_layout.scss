@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    grid-template-columns: $sidebar-width 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    height: 100vh;
+}
+
+.container>* {
+    border: 1px solid #eee;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "delivery_system",
+  "version": "1.0.0",
+  "description": "Dashboard for a Delivery System",
+  "main": "index.js",
+  "scripts": {
+    "start": "sass static/sass/main.scss static/css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pacheco-luis/delivery_system.git"
+  },
+  "author": "Luis Pacheco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pacheco-luis/delivery_system/issues"
+  },
+  "homepage": "https://github.com/pacheco-luis/delivery_system#readme",
+  "devDependencies": {
+    "sass": "^1.65.1"
+  }
+}

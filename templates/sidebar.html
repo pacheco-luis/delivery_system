@@ -1,45 +1,12 @@
 {% load static %}
 
-<div class="sidebar">
-    <img src="{% static 'images/logo-large.png' %}" alt="Full Logo" class="logo">
-
-    <nav class="navigation">
-        <div class="navigation__group">
-            <div class="navigation__title">Menu</div>
-
-            <ul class="navigation__menu">
-                <li class="navigation__item">
-                    <a href="{% url 'home' %}" class="navigation__link navigation__link--active">
-                        <svg class="navigation__icon">
-                            <use xlink:href="{% static 'images/sprite.svg' %}#home"></use>
-                        </svg>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="navigation__item">
-                    <a href="{% url 'account' %}" class="navigation__link">
-                        <svg class="navigation__icon">
-                            <use xlink:href="{% static 'images/sprite.svg' %}#user"></use>
-                        </svg>
-                        <span>Account</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="navigation__group">
-            <div class="navigation__title">Other</div>
-
-            <ul class="navigation__menu">
-                <li class="navigation__item navigation__item--active">
-                    <a href="#" class="navigation__link">
-                        <svg class="navigation__icon">
-                            <use xlink:href="{% static 'images/sprite.svg' %}#gear"></use>
-                        </svg>
-                        <span>Settings</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+<nav class="sidebar">
+    <ul class="side-nav">
+        <li class="side-nav__item">
+            <a href="{% url 'home' %}" class="side-nav__link">Home</a>
+        </li>
+        <li class="side-nav__item">
+            <a href="{% url 'account' %}" class="side-nav__link">Account</a>
+        </li>
+    </ul>
+</nav>
