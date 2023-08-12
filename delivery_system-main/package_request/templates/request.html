@@ -1,0 +1,23 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Make a delivery request</title>  
+</head>
+
+{% extends 'base.html' %}
+{% block title %}Edit Account{% endblock %}
+
+<body>
+<h1>To deliver the package, please enter the following information:</h1>
+    <br/>
+    {% block content %} 
+    <form action="{% url 'package_request_app:request_form' %}" method="post" >
+            <P style="font-style: italic; color:rgb(85, 85, 85)">Note: the phone number and address in your settings will be used to pick up the package. Please <a href="{% url 'users:edit-account' %}"><span>update</span></a> if needed.</P>
+            {% csrf_token %}
+            {{ sender_form.as_p }}
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    {% endblock content %} 
+</body>

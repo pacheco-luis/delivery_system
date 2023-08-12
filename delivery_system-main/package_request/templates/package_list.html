@@ -1,0 +1,35 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<style>
+        table, th, td {
+          border:1px solid black;
+        }
+</style>
+<head>  
+    <meta charset="UTF-8">  
+    <title>Package List</title>  
+</head>  
+<body>
+    <h1> Active Packages </h1>
+    <table style="width:100%"> 
+        <tr>
+            <th> Package ID : </th>
+            <th> Item Description : </th>
+            <th> Weight : </th>
+            <th> Request Date : </th>
+        </tr>   
+    {% for package_request in package_list  %}
+        <tr>
+            <td> {{ package_request.id }} </td>
+            <td> {{ package_request.package_description }} </td>
+            <td> {{ package_request.estimate_package_weight }} </td>
+            <td> {{ package_request.order_date }} </td>
+            <td>
+                <a href = "{% url 'package_request_app:delete_request' id=package_request.id %}"
+                >Delete Request</a>
+            </td> 
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+    
