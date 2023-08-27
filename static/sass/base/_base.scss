@@ -12,9 +12,9 @@ html {
 }
 
 body {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-family: $font-base;
+    font-size: $font-size-base;
+    font-weight: $font-regular;
     line-height: 1.6;
 }
 

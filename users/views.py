@@ -6,15 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomerForm
 
-# Create your views here.
-@login_required(login_url='login')
-def home(request):
-    return render(request, 'users/home.html')
-
+# Authentication views
 def loginUser(request):
-    page = 'login'
-    context = {'page': page}
-
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -35,7 +28,7 @@ def loginUser(request):
         else:
             messages.error(request, 'Username and password do not match')
 
-    return render(request, 'users/sign-in-sign-up.html', context)
+    return render(request, 'sign-in.html')
 
 def logoutUser(request):
     logout(request)
@@ -43,12 +36,11 @@ def logoutUser(request):
     return redirect('login')
 
 def registerUser(request):
-    page = 'register'
     form = CustomUserCreationForm()
-    context = {'page': page, 'form': form}
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -61,23 +53,32 @@ def registerUser(request):
         else:
             messages.error(request, 'An error has occurred during registration')
 
-    return render(request, 'users/sign-in-sign-up.html', context)
+    context = { 'form': form }
+    return render(request, 'sign-up.html', context)
+
+# Customer views
+@login_required(login_url='login')
+def home(request):
+    return render(request, 'customer/home.html')
 
 @login_required(login_url='login')
-def customerAccount(request):
+def account(request):
     customer = request.user.customer
     context = {'customer': customer}
-    return render(request, 'users/account.html', context)
+    return render(request, 'customer/account.html', context)
 
 @login_required(login_url='login')
 def editAccount(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)
+
     if request.method == 'POST':
         form = CustomerForm(request.POST, request.FILES, instance=customer)
+
         if form.is_valid():
             form.save()
             messages.success(request, 'Account was updated')
             return redirect('account')
-    context = {'form': form}
-    return render(request, 'users/account_form.html', context)
+
+    context = { 'form': form }
+    return render(request, 'customer/account_form.html', context)

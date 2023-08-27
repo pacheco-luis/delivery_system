@@ -3,6 +3,7 @@ from django.db.models.signals import post_save, post_delete
 from django.contrib.auth.models import User
 from .models import Customer
 
+# Authentication signals
 def createCustomer(sender, instance, created, **kwargs):
     if created:
         user = instance
@@ -14,6 +15,7 @@ def createCustomer(sender, instance, created, **kwargs):
             email=user.email,
         )
 
+# Customer signals
 def updateCustomer(sender, instance, created, **kwargs):
     customer = instance
     user = customer.user

@@ -14,9 +14,11 @@
 <h3>Email: </h3> {{ customer.email }}
 <h3>Phone: </h3> {{ customer.phone_number }}
 <h3>Address: </h3> {{ customer.address }}
+{% if customer.profile_image %}
 <h3>Profile Image: </h3>
 <img src="{{ customer.profile_image.url }}">
 <br>
+{% endif %}
 
 <a href="{% url 'edit-account' %}">Edit</a>
 
