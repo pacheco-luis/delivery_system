@@ -5,9 +5,7 @@ from users.models import Customer
 from package_request.models import Package
 from django.contrib.auth.decorators import login_required
 from places import Places
-from places.fields import PlacesField
 from decimal import Decimal
-import requests
 
 
 
@@ -94,15 +92,9 @@ def sender_form_handler(request):
             coor = (0.0, 0.0)
             
             try:
-                # print( addr1 )
                 coor = (float(addr1[1]), float(addr1[2]))
             except IndexError:
                 pass
-                # messages.error(request, "invalid input ")
-                # print("exception met: line 167")
-        
-            # print( "address     :", addr1 )
-            # print( "coordinates :", coor )
             
             addr_stat = in_range_of_stations( coor )
             print("validation return:", addr_stat)
@@ -130,7 +122,7 @@ def sender_form_handler(request):
     context = {
         'sender_form': SENDER_FORM(sender_form_inst),
     }
-    # print('returning 203')
+    
     return render(request,"step1.html", context=context)
 
 @login_required
@@ -145,28 +137,14 @@ def receiver_form_handler(request):
             addr = r_raw['recipient_address']
             r_coor = (0.0, 0.0)
             
-            # print(r_raw)
-            # print(addr)
-            
             try:
-                # print( addr )
                 r_coor = (float(addr[1]), float(addr[2]))
             except IndexError:
                 pass
-        
-            # print( "address     :", addr )
-            # print( "coordinates :", r_coor )
-            
+
             r_addr_stat = in_range_of_stations( r_coor )
-            # print("validation return:", r_addr_stat)
-            
             temp_stat = request.session['sender_addr_stat']
             temp_stat2 = json.loads( json.dumps(r_addr_stat) )
-            # print('stat1:')
-            # print(temp_stat)
-            # print('stat2:')
-            # print(temp_stat2)
-            
             
             if r_addr_stat[0] == False:
                 messages.error(request, "The receipient's address must be wihin 10 km of the station: " + stations_addr[1] )
@@ -175,8 +153,6 @@ def receiver_form_handler(request):
             elif temp_stat == temp_stat2:
                 messages.error(request, "Sender address and receiver address are in range of the same station: " + stations_addr[1] )
                 return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
-            
-            # print( r_form.cleaned_data )
             
             request.session['receiver_data'] = json.dumps(r_raw, default=str)
             del request.session['sender_addr_stat']
