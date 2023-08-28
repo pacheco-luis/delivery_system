@@ -58,10 +58,6 @@ def registerUser(request):
 
 # Customer views
 @login_required(login_url='login')
-def home(request):
-    return render(request, 'customer/home.html')
-
-@login_required(login_url='login')
 def account(request):
     customer = request.user.customer
     context = {'customer': customer}

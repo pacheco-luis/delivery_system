@@ -22,6 +22,3 @@ media
 
 # Dependency directories
 node_modules/
-
-# User uploaded files
-static/images/profiles/
