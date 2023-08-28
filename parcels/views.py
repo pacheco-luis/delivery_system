@@ -59,3 +59,17 @@ def updateParcel(request, pk):
     
     context = { 'form': form }
     return render(request, 'customer/parcel_form.html', context)
+
+@login_required(login_url='login')
+def deleteParcel(request, pk):
+    parcel = Parcel.objects.get(id=pk)
+
+    if request.method == 'POST':
+        parcel.delete()
+
+        messages.success(request, 'Parcel was deleted successfully')
+
+        return redirect('parcels')
+    
+    context = { 'parcel': parcel }
+    return render(request, 'delete_confirm.html', context)
