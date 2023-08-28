@@ -20,5 +20,8 @@
 <p>Recipient Name: {{ parcel.recipient_name }}</p>
 <p>Recipient Phone: {{ parcel.recipient_phone }}</p>
 <p>Recipient Address: {{ parcel.recipient_address }}</p>
+<br>
+
+<a href="{% url 'update-parcel' parcel.id %}">Update Parcel</a>
 
 {% endblock content %}

@@ -42,3 +42,20 @@ def createParcel(request):
 
     context = { 'form': form }
     return render(request, 'customer/parcel_form.html', context)
+
+@login_required(login_url='login')
+def updateParcel(request, pk):
+    parcel = Parcel.objects.get(id=pk)
+    form = ParcelForm(instance=parcel)
+
+    if request.method == 'POST':
+        form = ParcelForm(request.POST, instance=parcel)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, 'Parcel was updated successfully')
+
+            return redirect('parcels')
+    
+    context = { 'form': form }
+    return render(request, 'customer/parcel_form.html', context)

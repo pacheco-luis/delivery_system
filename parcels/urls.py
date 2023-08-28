@@ -7,4 +7,5 @@ urlpatterns = [
     path('parcels/', views.parcels, name='parcels'),
     path('parcel/<str:pk>/', views.parcel, name='parcel'),
     path('create-parcel/', views.createParcel, name='create-parcel'),
+    path('update-parcel/<str:pk>/', views.updateParcel, name='update-parcel'),
 ]
