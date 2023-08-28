@@ -26,7 +26,9 @@ stations_coo = [
                 ]
 
 # radius away from stations in km
-radius = 10             
+radius = 10        
+
+# !!!!!!!!!!!! END OF GLOBAL VARIABLES !!!!!!!!!!!!!!!!
 
 
 # Create your views here.
@@ -89,7 +91,7 @@ def sender_form_handler(request):
         if form.is_valid():
             raw = form.cleaned_data
             addr1 = raw['sender_address']
-            coor = (10.9, 9.10)
+            coor = (0.0, 0.0)
             
             try:
                 # print( addr1 )

@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'package_request',
-    'phonenumber_field',
-    'places'
+    'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
+    'places'                                #   https://pypi.org/project/dj-places/
     # 'django_pdb'
 ]
 
@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # add by Sam for dj-places
-PLACES_MAPS_API_KEY='AIzaSyCRD_c1qJnv4COYHM95Q9jP3iz6LBl3OMY'
+PLACES_MAPS_API_KEY= YOUR_API_KEY
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
