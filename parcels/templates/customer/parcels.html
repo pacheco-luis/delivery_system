@@ -13,6 +13,7 @@
 
     <li>
         {{ parcel.name }}
+        <a href="{% url 'parcel' parcel.id %}">View Parcel</a>
     </li>
 
     {% endfor %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Single Parcel{% endblock title %}
+
+{% block content %}
+
+<h1>Parcel Details</h1>
+
+<p>Parcel Name: {{ parcel.name }}</p>
+<p>Parcel Description: {{ parcel.description }}</p>
+<p>Parcel Weight: {{ parcel.get_weight_display }}</p>
+<p>Parcel Status: {{ parcel.status }}</p>
+<br>
+<p>Parcel Name: {{ parcel.pickup_name }}</p>
+<p>Parcel Phone: {{ parcel.pickup_phone }}</p>
+<p>Parcel Address: {{ parcel.pickup_address }}</p>
+<br>
+<p>Delivery Name: {{ parcel.delivery_name }}</p>
+<p>Delivery Phone: {{ parcel.delivery_phone }}</p>
+<p>Delivery Address: {{ parcel.delivery_address }}</p>
+
+{% endblock content %}
