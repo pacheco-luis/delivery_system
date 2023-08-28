@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('parcels/', views.parcels, name='parcels'),
     path('parcel/<str:pk>/', views.parcel, name='parcel'),
+    path('create-parcel/', views.createParcel, name='create-parcel'),
 ]
-

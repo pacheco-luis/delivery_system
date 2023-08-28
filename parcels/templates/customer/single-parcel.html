@@ -13,12 +13,12 @@
 <p>Parcel Weight: {{ parcel.get_weight_display }}</p>
 <p>Parcel Status: {{ parcel.status }}</p>
 <br>
-<p>Parcel Name: {{ parcel.pickup_name }}</p>
-<p>Parcel Phone: {{ parcel.pickup_phone }}</p>
-<p>Parcel Address: {{ parcel.pickup_address }}</p>
+<p>Parcel Name: {{ parcel.sender_name }}</p>
+<p>Parcel Phone: {{ parcel.sender_phone }}</p>
+<p>Parcel Address: {{ parcel.sender_address }}</p>
 <br>
-<p>Delivery Name: {{ parcel.delivery_name }}</p>
-<p>Delivery Phone: {{ parcel.delivery_phone }}</p>
-<p>Delivery Address: {{ parcel.delivery_address }}</p>
+<p>Recipient Name: {{ parcel.recipient_name }}</p>
+<p>Recipient Phone: {{ parcel.recipient_phone }}</p>
+<p>Recipient Address: {{ parcel.recipient_address }}</p>
 
 {% endblock content %}

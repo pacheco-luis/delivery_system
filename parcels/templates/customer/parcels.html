@@ -7,6 +7,7 @@
 {% block content %}
 
 <h1>Parcels Page</h1>
+<a href="{% url 'create-parcel' %}">Create Parcel</a>
 
 <ul>
     {% for parcel in parcels %}
