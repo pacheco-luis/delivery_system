@@ -10,6 +10,9 @@
     <input type="password" name="password" placeholder="Enter password">
     <input type="submit" value="Login">
     <p>
+        <a href="{% url 'reset_password' %}">Forget Password?</a>
+    </p>
+    <p>
         Don't have an account
         <a href="{% url 'register' %}">Sign Up</a>
     </p>
