@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Parcels{% endblock title %}
+
+{% block content %}
+
+<h1>Parcels Page</h1>
+
+<ul>
+    {% for parcel in parcels %}
+
+    <li>
+        {{ parcel.name }}
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% endblock content %}
