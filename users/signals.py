@@ -1,4 +1,6 @@
 from django.db.models.signals import post_save, post_delete
+from django.core.mail import send_mail
+from django.conf import settings
 
 from django.contrib.auth.models import User
 from .models import Customer
@@ -13,6 +15,17 @@ def createCustomer(sender, instance, created, **kwargs):
             last_name=user.last_name,
             username=user.username,
             email=user.email,
+        )
+
+        subject = "Welcome to the Delivery App"
+        message = "We are glad you are here. Thank you for joining us."
+
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [customer.email],
+            fail_silently=False,
         )
 
 # Customer signals
