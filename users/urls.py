@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 from django.urls import path
 
 from django.contrib.auth import views as auth_views
 from . import views
 
+
+app_name = 'users'
 urlpatterns = [
     # authentication urls
     path('login/', views.loginUser, name='login'),
@@ -20,17 +21,3 @@ urlpatterns = [
     path('account/', views.account, name='account'),
     path('edit-account/', views.editAccount, name='edit-account'),
 ]
-=======
-from django.urls import path, include
-from . import views
-
-app_name = 'users'
-urlpatterns = [
-    path('', views.home, name='home'),
-    path('login/', views.loginUser, name='login'),
-    path('logout/', views.logoutUser, name='logout'),
-    path('register/', views.registerUser, name='register'),
-    path('account/', views.customerAccount, name='account'),
-    path('edit-account/', views.editAccount, name='edit-account'),
-]
->>>>>>> package_request

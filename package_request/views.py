@@ -219,4 +219,8 @@ def delete_request(request, id):
     delete_obj = Package.objects.get( pk=id )
     delete_obj.delete()
    
-    return redirect ('package_request_app:package_list')    
+    return redirect ('package_request_app:package_list')
+
+
+def home( request ):
+    return render( request, "home.html" )

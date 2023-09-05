@@ -1,17 +1,11 @@
 from django.db.models.signals import post_save, post_delete
-<<<<<<< HEAD
 from django.core.mail import send_mail
 from django.conf import settings
-=======
->>>>>>> package_request
 
 from django.contrib.auth.models import User
 from .models import Customer
 
-<<<<<<< HEAD
 # Authentication signals
-=======
->>>>>>> package_request
 def createCustomer(sender, instance, created, **kwargs):
     if created:
         user = instance
@@ -23,7 +17,6 @@ def createCustomer(sender, instance, created, **kwargs):
             email=user.email,
         )
 
-<<<<<<< HEAD
         subject = "Welcome to the Delivery App"
         message = "We are glad you are here. Thank you for joining us."
 
@@ -36,8 +29,6 @@ def createCustomer(sender, instance, created, **kwargs):
         )
 
 # Customer signals
-=======
->>>>>>> package_request
 def updateCustomer(sender, instance, created, **kwargs):
     customer = instance
     user = customer.user

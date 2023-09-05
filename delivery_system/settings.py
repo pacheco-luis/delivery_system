@@ -157,7 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # add by Sam for dj-places
-PLACES_MAPS_API_KEY= YOUR_API_KEY           # enable maps JavaScript and Places google APIs
+PLACES_MAPS_API_KEY= "AIzaSyA3uDGgpFuvXmSiuu2anaaEmJIwFQJjehI"           # enable maps JavaScript and Places google APIs
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
