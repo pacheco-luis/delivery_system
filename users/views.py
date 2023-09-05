@@ -6,10 +6,21 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomerForm
 
+<<<<<<< HEAD
 # Authentication views
 def loginUser(request):
     if request.user.is_authenticated:
         return redirect('home')
+=======
+# Create your views here.
+@login_required(login_url='users:login')
+def home(request):
+    return render(request, 'users/home.html')
+
+def loginUser(request):
+    if request.user.is_authenticated:
+        return redirect('users:home')
+>>>>>>> package_request
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -24,15 +35,24 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
+<<<<<<< HEAD
             return redirect('home')
         else:
             messages.error(request, 'Username and password do not match')
 
     return render(request, 'sign-in.html')
+=======
+            return redirect('users:home')
+        else:
+            messages.error(request, 'Username and password do not match')
+
+    return render(request, 'users/sign-in-sign-up.html')
+>>>>>>> package_request
 
 def logoutUser(request):
     logout(request)
     messages.info(request, 'You have been logged out')
+<<<<<<< HEAD
     return redirect('login')
 
 def registerUser(request):
@@ -41,6 +61,17 @@ def registerUser(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
 
+=======
+    return redirect('users:login')
+
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+    context = {'page': page, 'form': form}
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+>>>>>>> package_request
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -49,6 +80,7 @@ def registerUser(request):
             messages.success(request, 'User account was created')
 
             login(request, user)
+<<<<<<< HEAD
             return redirect('home')
         else:
             messages.error(request, 'An error has occurred during registration')
@@ -78,3 +110,29 @@ def editAccount(request):
 
     context = { 'form': form }
     return render(request, 'customer/account_form.html', context)
+=======
+            return redirect('users:home')
+        else:
+            messages.error(request, 'An error has occurred during registration')
+
+    return render(request, 'users/sign-in-sign-up.html', context)
+
+@login_required(login_url='users:login')
+def customerAccount(request):
+    customer = request.user.customer
+    context = {'customer': customer}
+    return render(request, 'users/account.html', context)
+
+@login_required(login_url='users:login')
+def editAccount(request):
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account was updated')
+            return redirect('users:account')
+    context = {'form': form}
+    return render(request, 'users/account_form.html', context)
+>>>>>>> package_request
