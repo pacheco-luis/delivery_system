@@ -39,14 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
-<<<<<<< HEAD
-    'parcels.apps.ParcelsConfig',
-=======
+    # 'parcels.apps.ParcelsConfig',
     'package_request',
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
     'places'                                #   https://pypi.org/project/dj-places/
     # 'django_pdb'
->>>>>>> package_request
 ]
 
 MIDDLEWARE = [
@@ -124,7 +121,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-<<<<<<< HEAD
 # Email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -142,34 +138,21 @@ EMAIL_HOST_PASSWORD = 'oildlnyofgezgynh'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-=======
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
->>>>>>> package_request
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-<<<<<<< HEAD
-MEDIA_URL = 'media/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
-=======
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
->>>>>>> package_request
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< HEAD
-=======
 
 
 
@@ -178,4 +161,3 @@ PLACES_MAPS_API_KEY= YOUR_API_KEY           # enable maps JavaScript and Places 
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
->>>>>>> package_request

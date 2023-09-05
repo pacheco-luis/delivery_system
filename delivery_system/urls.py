@@ -22,14 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
-<<<<<<< HEAD
-    path('', include('parcels.urls')),
-]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-=======
     path('package_request/', include('package_request.urls'), name='package_request'),
 ]
 
 urlpatterns += static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
->>>>>>> package_request
