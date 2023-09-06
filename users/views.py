@@ -28,7 +28,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('package_request_app:home')
         else:
             messages.error(request, 'Username and password do not match')
 
@@ -54,11 +54,11 @@ def registerUser(request):
             messages.success(request, 'User account was created')
 
             login(request, user)
-            return redirect('users:home')
+            return redirect('package_request_app:home')
         else:
             messages.error(request, 'An error has occurred during registration')
 
-    return render(request, 'users/sign-up.html', context)
+    return render(request, 'sign-up.html', context)
 
 @login_required(login_url='users:login')
 def account(request):

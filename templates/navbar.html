@@ -2,7 +2,7 @@
 
 {% if request.user.is_authenticated %}
 
-<a href="{% url 'users:home' %}">Home</a>
+<a href="{% url 'package_request_app:home' %}">Home</a>
 <a href="{% url 'users:account' %}">Account</a>
 <a href="{% url 'users:logout' %}">Sign Out</a>
 <a href="{% url 'package_request_app:request_form' %}">Make a request</a>
