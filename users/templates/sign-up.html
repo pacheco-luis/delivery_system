@@ -2,7 +2,7 @@
 
 {% block title %}Sign Up{% endblock title %}
 
-{% block authentication %}
+{% block content %}
 
 <form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
@@ -27,4 +27,4 @@
     <a href="{% url 'login' %}">Sign In</a>
 </p>
 
-{% endblock authentication %}
+{% endblock content %}
