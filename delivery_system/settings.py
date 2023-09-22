@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
     'places'                                #   https://pypi.org/project/dj-places/
     # 'django_pdb'
+    'driver'
 ]
 
 MIDDLEWARE = [
