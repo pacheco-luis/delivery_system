@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('', include('package_request.urls')),
+    
     # path('package_request/', include('package_request.urls'), name='package_request'),
+    
+    # path('driver-sign-up', include('driver.urls')),
 ]
 
 urlpatterns += static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
