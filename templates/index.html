@@ -297,7 +297,7 @@
 </head>
 <body>
     <header class="LP_header">
-        <a href="#" class="brand">System Name</a>
+        <a href="{% url 'package_request_app:landing_page' %}" class="brand">System Name</a>
         <div class="menue-btn"></div>
         <div class="navigation">
             <div class="navigation-items">
@@ -306,7 +306,7 @@
                 <a href="#">Explore</a>
                 <a href="#">Gallery</a>
                 <a href="#">Contact</a>
-                <a href="#">Customer log-in</a>
+                <a href="{% url 'package_request_app:home' %}">Customer log-in</a>
                 <a href="#">Driver log-in</a>
             </div>
         </div>
