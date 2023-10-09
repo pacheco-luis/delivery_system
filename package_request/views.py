@@ -224,3 +224,6 @@ def delete_request(request, id):
 
 def home( request ):
     return render( request, "home.html" )
+
+def landing_page( request ):
+    return render( request, "../templates/index.html" )

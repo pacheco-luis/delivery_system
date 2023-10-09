@@ -3,28 +3,23 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
+  box-sizing: inherit; }
 
 html {
   font-size: 62.5%;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 body {
   font-family: "Space Grotesk", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
-  line-height: 1.6;
-}
+  line-height: 1.6; }
 
 ul {
-  list-style: none;
-}
+  list-style: none; }
 
 a {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 .alert-wrapper {
   position: fixed;
@@ -35,8 +30,7 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  z-index: 1000;
-}
+  z-index: 1000; }
 
 .alert {
   display: flex;
@@ -44,31 +38,26 @@ a {
   width: fit-content;
   padding: 1.5rem 2.5rem;
   border-radius: 3px;
-  border: 1px solid #f3f3f3;
-}
+  border: 1px solid #f3f3f3; }
 
 .alert__message {
   font-size: 1.4rem;
-  font-weight: 500;
-}
+  font-weight: 500; }
 
 .alert--info,
 .alert--info > .alert__message {
   color: #5aa5b9;
-  background-color: #e6faff;
-}
+  background-color: #e6faff; }
 
 .alert--success,
 .alert--success > .alert__message {
   color: #359e64;
-  background-color: #def8e8;
-}
+  background-color: #def8e8; }
 
 .alert--error,
 .alert--error > .alert__message {
   color: #fc4b0b;
-  background-color: #fff2ee;
-}
+  background-color: #fff2ee; }
 
 .alert__close {
   background: transparent;
@@ -77,31 +66,43 @@ a {
   outline: transparent;
   font-size: 2rem;
   transition: all 0.3s ease-in-out;
-  color: currentColor;
-}
+  color: currentColor; }
 
 .alert__close:hover {
-  opacity: 0.85;
-}
+  opacity: 0.85; }
 
 .header {
-  grid-area: header;
-}
+  grid-area: header; }
 
 .sidebar {
-  grid-area: sidebar;
-}
+  grid-area: sidebar; }
 
 .container {
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: "header header" "sidebar main";
-  height: 100vh;
-}
+  height: 100vh; }
 
 .container > * {
-  border: 1px solid #f3f3f3;
-}
+  border: 1px solid #f3f3f3; }
+
+.tabs {
+  color: #fff; }
+
+.LP_header {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 200px;
+  transition: 0.5s ease;
+  background-color: #5aa5b9;
+  color: #000;
+  font-size: 2em; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,19 @@
+.tabs {
+    color: #fff
+}
+
+.LP_header {
+   z-index: 999;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px 200px;
+   transition: 0.5s ease;
+   background-color: $color-main;
+   color: #000;
+   font-size: 2em;
+}
