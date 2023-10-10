@@ -23,3 +23,5 @@ media
 # Dependency directories
 node_modules/
 db.sqlite3
+
+.sass-chache
