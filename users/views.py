@@ -3,32 +3,36 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from django.contrib.auth.models import User
-from .forms import CustomUserCreationForm, CustomerForm
+# from django.contrib.auth.models import User
+from .models import User
+from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 
 # Create your views here.
-@login_required(login_url='users:login')
-def home(request):
-    return render(request, 'users/home.html')
+# @login_required(login_url='users:login')
+# def home(request):
+#     return render(request, 'users/home.html')
 
 def loginUser(request):
     if request.user.is_authenticated:
-        return redirect('users:home')
+        return redirect('package_request_app:home')
 
     if request.method == 'POST':
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
 
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except:
-            messages.error(request, 'Username does not exist')
+            messages.error(request, 'Email does not exist')
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)
-            return redirect('package_request_app:home')
+            if user.is_customer:
+                return redirect('package_request_app:home')
+            elif user.is_driver:
+                return redirect('package_request_app:home')
         else:
             messages.error(request, 'Username and password do not match')
 
@@ -39,7 +43,7 @@ def logoutUser(request):
     messages.info(request, 'You have been logged out')
     return redirect('users:login')
 
-def registerUser(request):
+def registerCustomer(request):
     page = 'register'
     form = CustomUserCreationForm()
     context = {'page': page, 'form': form}
@@ -49,6 +53,31 @@ def registerUser(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.email = user.email.lower()
+            user.is_customer = True
+            user.save()
+
+            messages.success(request, 'User account was created')
+
+            login(request, user)
+            return redirect('package_request_app:home')
+        else:
+            messages.error(request, 'An error has occurred during registration')
+
+    return render(request, 'sign-up.html', context)
+
+def registerDriver(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+    context = {'page': page, 'form': form}
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.email = user.email.lower()
+            user.is_driver = True
             user.save()
 
             messages.success(request, 'User account was created')
@@ -61,13 +90,19 @@ def registerUser(request):
     return render(request, 'sign-up.html', context)
 
 @login_required(login_url='users:login')
-def account(request):
-    customer = request.user.customer
-    context = {'customer': customer}
+def driverAccount(request):
+    account = request.user.driver
+    context = {'account': account}
     return render(request, 'users/account.html', context)
 
 @login_required(login_url='users:login')
-def editAccount(request):
+def customerAccount(request):
+    account = request.user.customer
+    context = {'account': account}
+    return render(request, 'users/account.html', context)
+
+@login_required(login_url='users:login')
+def editCustomerAccount(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)
     if request.method == 'POST':
@@ -75,8 +110,19 @@ def editAccount(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account was updated')
-            return redirect('users:account')
+            return redirect('users:customer-account')
     context = {'form': form}
     return render(request, 'users/account_form.html', context)
 
-
+@login_required(login_url='users:login')
+def editDriverAccount(request):
+    driver = request.user.driver
+    form = DriverForm(instance=driver)
+    if request.method == 'POST':
+        form = DriverForm(request.POST, request.FILES, instance=driver)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account was updated')
+            return redirect('users:driver-account')
+    context = {'form': form}
+    return render(request, 'users/account_form.html', context)

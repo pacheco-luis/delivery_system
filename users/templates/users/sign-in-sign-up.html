@@ -15,7 +15,7 @@ Sign Up
 {% if page == 'register' %}
 
 <h1>Register User</h1>
-<form action="{% url 'users:register' %}" method="POST">
+<form action="" method="POST">
     {% csrf_token %}
 
     {% for field in form %}
@@ -47,7 +47,8 @@ Sign Up
     <input type="submit" value="Login">
     <p>
         Don't have an account
-        <a href="{% url 'users:register' %}">Sign Up</a>
+        <a href="{% url 'users:register-customer' %}">Sign Up Customer</a>
+        <a href="{% url 'users:register-driver' %}">Sign Up Driver</a>
     </p>
 </form>
 

@@ -8,20 +8,24 @@
 
 <h1>User Profile</h1>
 
-<h3>First Name: </h3> {{ customer.first_name }}
-<h3>Last Name: </h3> {{ customer.last_name }}
-<h3>Username: </h3> {{ customer.username }}
-<h3>Email: </h3> {{ customer.email }}
-<h3>Phone: </h3> {{ customer.phone_number }}
-<h3>Address: </h3> {{ customer.address }}
-{% if customer.profile_image %}
+<h3>First Name: </h3> {{ account.first_name }}
+<h3>Last Name: </h3> {{ account.last_name }}
+<h3>Username: </h3> {{ account.username }}
+<h3>Email: </h3> {{ account.email }}
+<h3>Phone: </h3> {{ account.phone_number }}
+<h3>Address: </h3> {{ account.address }}
+{% if account.profile_image %}
 <h3>Profile Image: </h3>
-    <img src= "{{ customer.profile_image.url }} "> 
+<img src="{{ account.profile_image.url }} ">
 {% else %}
-    <img src="{% static 'images/user-default.png' %}", alt="user profile image">
+<img src="{% static 'images/user-default.png' %}" , alt="user profile image">
 <br>
 {% endif %}
 
-<a href="{% url 'users:edit-account' %}">Edit</a>
+{% if request.user.is_customer %}
+<a href="{% url 'users:edit-customer-account' %}">Edit</a>
+{% else %}
+<a href="{% url 'users:edit-driver-account' %}">Edit</a>
+{% endif %}
 
 {% endblock content %}

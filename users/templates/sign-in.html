@@ -6,7 +6,7 @@
 
 <form action="{% url 'users:login' %}" method="POST">
     {% csrf_token %}
-    <input type="text" name="username" placeholder="Username">
+    <input type="text" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Enter password">
     <input type="submit" value="Login">
     <p>
@@ -14,7 +14,8 @@
     </p>
     <p>
         Don't have an account
-        <a href="{% url 'users:register' %}">Sign Up</a>
+        <a href="{% url 'users:register-customer' %}">Sign Up Customer</a>
+        <a href="{% url 'users:register-driver' %}">Sign Up Driver</a>
     </p>
 </form>
 

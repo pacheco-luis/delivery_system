@@ -154,6 +154,9 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Custom user model
+
+AUTH_USER_MODEL = 'users.User'
 
 
 # add by Sam for dj-places

@@ -1,8 +1,8 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 
-from django.contrib.auth.models import User
-from .models import Customer
+# from django.contrib.auth.models import User
+from .models import User, Customer, Driver
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -18,4 +18,9 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomerForm(ModelForm):
     class Meta:
         model = Customer
+        fields = ['first_name', 'last_name', 'username', 'email', 'address', 'phone_number', 'profile_image']
+
+class DriverForm(ModelForm):
+    class Meta:
+        model = Driver
         fields = ['first_name', 'last_name', 'username', 'email', 'address', 'phone_number', 'profile_image']

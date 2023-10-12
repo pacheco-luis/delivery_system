@@ -9,7 +9,8 @@ urlpatterns = [
     # authentication urls
     path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
-    path('register/', views.registerUser, name='register'),
+    path('register/customer/', views.registerCustomer, name='register-customer'),
+    path('register/driver/', views.registerDriver, name='register-driver'),
 
     # reset password urls
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html", success_url = reverse_lazy('users:password_reset_done')), name='reset_password'),
@@ -18,6 +19,8 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"), name='password_reset_complete'),
 
     # customer urls
-    path('account/', views.account, name='account'),
-    path('edit-account/', views.editAccount, name='edit-account'),
+    path('account/customer/', views.customerAccount, name='customer-account'),
+    path('account/driver/', views.driverAccount, name='driver-account'),
+    path('edit-customer-account/', views.editCustomerAccount, name='edit-customer-account'),
+    path('edit-driver-account/', views.editDriverAccount, name='edit-driver-account'),
 ]
