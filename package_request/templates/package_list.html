@@ -1,34 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Packages{% endblock title %}
+{% block content %}
 <!DOCTYPE html>  
 <html lang="en">  
-<style>
-        table, th, td {
-          border:1px solid black;
-        }
-</style>
 <head>  
     <meta charset="UTF-8">  
     <title>Package List</title>  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>  
-<body>
-    <h1> Active Packages </h1>
-    <table style="width:100%"> 
+<body here add a class too i told you you have to bes specific>
+    <h1>Active Packages</h1>
+    <table class = "del-table" style="width:100%"> 
         <tr>
-            <th> Package ID : </th>
-            <th> Item Description : </th>
-            <th> Weight : </th>
-            <th> Request Date : </th>
+            <th>Package ID</th>
+            <th>Item Description</th>
+            <th>Weight</th>
+            <th>Request Date</th>
         </tr>   
-    {% for package_obj in package_list  %}
+        {% for package_obj in package_list %}
         <tr>
-            <td> {{ package_obj.id }} </td>
-            <td> {{ package_obj.package_description }} </td>
-            <td> {{ package_obj.estimate_package_weight }} </td>
-            <td> {{ package_obj.order_date }} </td>
+            <td>{{ package_obj.id }}</td>
+            <td>{{ package_obj.package_description }}</td>
+            <td>{{ package_obj.estimate_package_weight }}</td>
+            <td>{{ package_obj.order_date }}</td>
             <td>
-                <a href = "{% url 'package_request_app:delete_request' id=package_obj.id %}"
-                >Delete Request</a>
-            </td> 
+                <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='block'">Delete Request</button>
+                <div id="deleteModal{{ package_obj.id }}" class="modal">
+                    <div class="modal-content">
+                        <div class="cont"> 
+                            <span onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='none'" class="close" title="Close">×</span>
+                            <h1>You are about to delete a request</h1>
+                            <p>Are you sure you want to delete this request?</p>
+                            <div class="clearfix">
+                                <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='none'" class="cancelbtn del_button">Cancel</button>
+                                <a href="{% url 'package_request_app:delete_request' id=package_obj.id %}"><button type="button" class="deletebtn del_button">Delete</button></a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
+        
+      <script src="{% static 'js/package_list.js' %}"></script>
     </table>
 </body>
+{% endblock content %}
