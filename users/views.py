@@ -62,7 +62,8 @@ def registerCustomer(request):
             login(request, user)
             return redirect('package_request_app:home')
         else:
-            messages.error(request, 'An error has occurred during registration')
+            # messages.error(request, 'An error has occurred during registration')
+            messages.error(request, form.errors )
 
     return render(request, 'sign-up.html', context)
 
@@ -85,7 +86,8 @@ def registerDriver(request):
             login(request, user)
             return redirect('package_request_app:home')
         else:
-            messages.error(request, 'An error has occurred during registration')
+            # messages.error(request, 'An error has occurred during registration')
+            messages.error(request, form.errors)
 
     return render(request, 'sign-up.html', context)
 
