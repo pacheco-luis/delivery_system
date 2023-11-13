@@ -36,3 +36,16 @@ btns.forEach((btn, i) => {
         sliderNav(i);
     });
 });
+
+function myFunction() {
+    var popupcontainer = document.getElementById("popup-container-button");
+    popupcontainer.classList.toggle("show");
+}
+
+document.getElementById("reg-driver").onclick = function () {
+    location.href = "/register/driver/";
+};
+
+document.getElementById("reg-customer").onclick = function () {
+    location.href = "/register/customer/";
+};

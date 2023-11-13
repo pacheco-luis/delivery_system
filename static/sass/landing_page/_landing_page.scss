@@ -1,4 +1,9 @@
-    .LP_header {
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.LP_header {
         z-index: 999;
         position: absolute;
         top: 0;
@@ -33,6 +38,57 @@
         transition: 0.3s ease;
         padding-bottom: 0.2em;
     }
+
+    .popup-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      
+      
+      .popup-container .popup-container-content {
+        visibility: hidden;
+        width: 250px;
+        background-color: #fff;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 999;
+        top: 125%;
+        left: -50%;
+        margin-left: 0;
+      }
+
+      .popup-container .popup-container-content .popup-btns{
+        width: 90%;
+        padding: 10px 0;
+        margin: 5px 0;
+        text-transform: uppercase;
+      }
+      
+      
+      .popup-container .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+      }
+      
+      
+      @-webkit-keyframes fadeIn {
+        from {opacity: 0;} 
+        to {opacity: 1;}
+      }
+      
+      @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity:1 ;}
+      }
 
 
     header .navigation .navigation-items a::before{
@@ -203,7 +259,7 @@
 
 
 
-    @media (max-width: 1040px){
+    @media (max-width: 1290px){
         .LP_header {
             padding: 12px 20px;
         }
@@ -256,6 +312,10 @@
 
         }
 
+        .popup-container .popup-container-content {
+            left: -30%;
+        }
+        
         .menue-btn {
             background: url( "../../images/landing_page/menu_list_menu2_icon_white.png" ) no-repeat;
             background-size: 30px;

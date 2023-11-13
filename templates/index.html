@@ -22,8 +22,13 @@
                 <a href="#">Explore</a>
                 <a href="#">Gallery</a>
                 <a href="#">Contact</a>
-                <a href="#">Create an account</a>
-                <a href="{% url 'package_request_app:home' %}">Log In</a>
+                <a  class="popup-container" onclick="myFunction()">Create an account
+                    <div class="popup-container-content" id="popup-container-button">
+                        <button id="reg-customer" class="popup-btns" >register asa a customer</button>
+                        <button id="reg-driver" class="popup-btns" >register as a driver</button>
+                    </div>
+                </a>
+                <a href="{% url 'users:login' %}">Log In</a>
             </div>
         </div>
     </header>
