@@ -46,6 +46,11 @@ document.getElementById("reg-driver").onclick = function () {
     location.href = "/register/driver/";
 };
 
+document.getElementById("reg-driver").onclick = function () {
+    location.href = "/register/driver/";
+};
+
 document.getElementById("reg-customer").onclick = function () {
     location.href = "/register/customer/";
 };
+

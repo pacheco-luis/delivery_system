@@ -44,6 +44,9 @@ def logoutUser(request):
     return redirect('users:login')
 
 def registerCustomer(request):
+    if request.user.is_authenticated:
+        return redirect('package_request_app:home')
+    
     page = 'register'
     form = CustomUserCreationForm()
     context = {'page': page, 'form': form}
@@ -68,6 +71,8 @@ def registerCustomer(request):
     return render(request, 'sign-up.html', context)
 
 def registerDriver(request):
+    if request.user.is_authenticated:
+        return redirect('package_request_app:home')
     page = 'register'
     form = CustomUserCreationForm()
     context = {'page': page, 'form': form}

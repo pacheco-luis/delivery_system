@@ -1,23 +1,24 @@
 <h1>NAVIGATION BAR</h1>
 
-{% if request.user.is_authenticated %}
+<nav styl="background-color: orange; height: 300px;" class="nav flex-column">
 
-<a href="{% url 'package_request_app:home' %}">Home</a>
+    {% if request.user.is_authenticated %}
+        <a class="nav-link active" href="{% url 'package_request_app:home' %}">Home</a>
 
-{% if request.user.is_customer %}
-<a href="{% url 'users:customer-account' %}">Account</a>
-<a href="{% url 'package_request_app:request_form' %}">Make a request</a>
-<a href="{% url 'package_request_app:package_list' %}">View Packages' Status</a>
-{% else %}
-<a href="{% url 'users:driver-account' %}">Account</a>
-{% endif %}
-<a href="{% url 'users:logout' %}">Sign Out</a>
-<h3>Hi {{ request.user.username }}</h3>
+        {% if request.user.is_customer %}
+        <a class="nav-link" href="{% url 'users:customer-account' %}">Account</a>
+        <a class="nav-link" href="{% url 'package_request_app:request_form_1_of_3' %}">Make a request</a>
+        <a class="nav-link" href="{% url 'package_request_app:package_list' %}">View Packages' Status</a>
+        {% else %}
+        <a class="nav-link" href="{% url 'users:driver-account' %}">Account</a>
+        {% endif %}
+        <a class="nav-link" href="{% url 'users:logout' %}">Sign Out</a>
+        <h3>Hi {{ request.user.username }}</h3>
 
-{% else %}
+    {% else %}
 
-<a href="{% url 'users:login' %}">Sign In</a>
+    <a href="{% url 'package_request_app:landing_page' %}">Back to Home</a>
 
-{% endif %}
+    {% endif %}
 
-<hr>
+</nav>

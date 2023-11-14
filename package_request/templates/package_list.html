@@ -20,21 +20,21 @@
         </tr>   
         {% for package_obj in package_list %}
         <tr>
-            <td>{{ package_obj.id }}</td>
+            <td>{{ package_obj.package_id }}</td>
             <td>{{ package_obj.package_description }}</td>
             <td>{{ package_obj.estimate_package_weight }}</td>
             <td>{{ package_obj.order_date }}</td>
             <td>
-                <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='block'">Delete Request</button>
-                <div id="deleteModal{{ package_obj.id }}" class="modal">
+                <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='block'">Delete Request</button>
+                <div id="deleteModal{{ package_obj.package_id }}" class="modal">
                     <div class="modal-content">
                         <div class="cont"> 
-                            <span onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='none'" class="close" title="Close">×</span>
+                            <span onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="close" title="Close">×</span>
                             <h1>You are about to delete a request</h1>
                             <p>Are you sure you want to delete this request?</p>
                             <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.id }}').style.display='none'" class="cancelbtn del_button">Cancel</button>
-                                <a href="{% url 'package_request_app:delete_request' id=package_obj.id %}"><button type="button" class="deletebtn del_button">Delete</button></a>
+                                <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="cancelbtn del_button">Cancel</button>
+                                <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="deletebtn del_button">Delete</button></a>
                             </div>
                         </div>
                     </div> 

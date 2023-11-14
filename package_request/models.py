@@ -2,13 +2,14 @@ from django.db import models
 from users.models import Customer
 from phonenumber_field.modelfields import PhoneNumberField
 from places.fields import PlacesField
+import uuid
 
 # Create your models here.
 class Package(models.Model):
     WEIGHT_CHOICES = [ ('<2', '<2'), ('2-5', '2-5'), 
                       ('5-10', '5-10'), ('>10', '>10'),
                       ]
-    
+    package_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sender_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     sender_phone = PhoneNumberField(region='TW', blank=False)
     sender_address = PlacesField(blank = True)
