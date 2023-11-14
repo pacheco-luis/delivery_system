@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}Packages{% endblock title %}
 {% block content %}
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>Package List</title>  
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>  
-<body here add a class too i told you you have to bes specific>
     <h1>Active Packages</h1>
     <table class = "del-table" style="width:100%"> 
         <tr>
@@ -42,8 +33,6 @@
             </td>
         </tr>
         {% endfor %}
-        
-      <script src="{% static 'js/package_list.js' %}"></script>
     </table>
-</body>
+
 {% endblock content %}
