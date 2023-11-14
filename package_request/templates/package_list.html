@@ -9,7 +9,7 @@
     <title>Package List</title>  
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>  
-<body here add a class too i told you you have to bes specific>
+<body class = "del-body">
     <h1>Active Packages</h1>
     <table class = "del-table" style="width:100%"> 
         <tr>
@@ -17,6 +17,7 @@
             <th>Item Description</th>
             <th>Weight</th>
             <th>Request Date</th>
+            <th>Action </th>
         </tr>   
         {% for package_obj in package_list %}
         <tr>
@@ -26,6 +27,7 @@
             <td>{{ package_obj.order_date }}</td>
             <td>
                 <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='block'">Delete Request</button>
+                <button class = "view_button" onclick="document.getElementById('viewModal{{ package_obj.package_id }}').style.display= 'block'">View Request</button>
                 <div id="deleteModal{{ package_obj.package_id }}" class="modal">
                     <div class="modal-content">
                         <div class="cont"> 
@@ -36,8 +38,21 @@
                                 <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="cancelbtn del_button">Cancel</button>
                                 <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="deletebtn del_button">Delete</button></a>
                             </div>
+                            </div>
                         </div>
                     </div> 
+                </div>
+                <div id="viewModal{{ package_obj.package_id}}" class = "modal" >
+                    <div class="view_cont"> 
+                        <span onclick="document.getElementById('viewModal{{ package_obj.package_id }}').style.display='none'" class="close" title="Close">×</span>
+                        <h2>This is the information of your active request: </h2><br>
+                        <p><b>Package ID: </b> {{ package_obj.package_id }}</p><br>
+                        <p><b>Receiver: </b> {{ package_obj.recipient_name }}</p><br>
+                        <p><b>Date and Time: </b> {{ package_obj.order_date }}</p><br>
+                        <p><b>Destination: </b> {{ package_obj.recipient_address}}</p><br>
+                        <p><b>Item Description: </b> {{ package_obj.package_description}}</p><br>
+                       
+                    </div>
                 </div>
             </td>
         </tr>

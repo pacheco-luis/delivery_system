@@ -3,7 +3,7 @@
     width: 100%;
 }
   
-.del-table td, .del-table th {
+.del-table td, .del-table th, .del-table tr{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -12,6 +12,17 @@
 * {box-sizing: border-box;}
 .del_button {
     background-color: hsl(9, 95%, 34%);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.view_button {
+    background-color: hsl(130, 95%, 34%);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -45,7 +56,13 @@
     text-align: center;
 
 }
-
+.view_cont {
+    padding: 16px;
+    text-align: left;
+}
+.view_cont p {
+    text-align: left;
+}
     
 /* The Modal (background) */
 .modal {
