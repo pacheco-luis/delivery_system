@@ -6,8 +6,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
+
 {% load static %}
 
 <html lang="en">
@@ -27,11 +26,64 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+    {% comment %} <style>
+      body {
+        background-color: #fbfbfb;
+    }
+    
+    @media (min-width: 991.98px) {
+        main {
+            padding-left: 240px;
+        }
+    }
+    
+    /* Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        padding: 58px 0 0; /* Height of navbar */
+        box-shadow:
+            0 2px 5px 0 #000,
+            0 2px 10px 0 #000;
+        width: 240px;
+        z-index: 600;
+    }
+    
+    @media (max-width: 991.98px) {
+        .sidebar {
+            width: 100%;
+        }
+    }
+    
+    .sidebar .active {
+        border-radius: 5px;
+        box-shadow:
+            0 2px 5px 0 #000,
+            0 2px 10px 0 #000;
+    }
+    
+    .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: 0.5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    }
+    
+    </style> {% endcomment %}
+
   </head>
 
   <body>
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    <div> 
+      {% bootstrap_messages %} 
+    </div>
     {% include 'navbar.html' %}
-    {% if messages %}
+    {% comment %} {% if messages %}
       <div class="alert-wrapper">
           {% for message in messages %}
           <div class="alert alert--{{ message.tags }}">
@@ -41,7 +93,7 @@
           {% endfor %}
       </div>
 
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     <main style="margin-top: 58px">
       <div class="container pt-4">
