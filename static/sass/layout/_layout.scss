@@ -1,4 +1,4 @@
-.container {
+main .container {
     display: grid;
     grid-template-columns: $sidebar-width 1fr;
     grid-template-rows: auto 1fr;
@@ -8,6 +8,6 @@
     height: 100vh;
 }
 
-.container>* {
+main .container>* {
     border: 1px solid $color-border;
 }

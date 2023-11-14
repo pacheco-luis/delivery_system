@@ -36,7 +36,8 @@ def loginUser(request):
         else:
             messages.error(request, 'Username and password do not match')
 
-    return render(request, 'sign-in.html')
+    # return render(request, 'sign-in.html')
+    return render(request, 'login.html')
 
 def logoutUser(request):
     logout(request)

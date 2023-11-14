@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     # 'parcels.apps.ParcelsConfig',
     'package_request',
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
-    'places'                                #   https://pypi.org/project/dj-places/
+    'places',                                #   https://pypi.org/project/dj-places/
     # 'django_pdb'
     # 'driver'
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
