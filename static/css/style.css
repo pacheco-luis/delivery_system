@@ -76,16 +76,6 @@ a {
 .sidebar {
   grid-area: sidebar; }
 
-main .container {
-  display: grid;
-  grid-template-columns: 26rem 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas: "header header" "sidebar main";
-  height: 100vh; }
-
-main .container > * {
-  border: 1px solid #f3f3f3; }
-
 * {
   margin: 0;
   padding: 0; }
@@ -500,5 +490,8 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   /* Scrollable contents if viewport is shorter than content. */ }
+
+.gradient-custom-2 {
+  background: linear-gradient(110.1deg, #f1731e 18.9%, #e71d36 90.7%); }
 
 /*# sourceMappingURL=style.css.map */
