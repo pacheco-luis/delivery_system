@@ -221,7 +221,7 @@ def delete_request(request, id):
    
     return redirect ('package_request_app:package_list')
 
-
+@login_required(login_url='users:login')
 def home( request ):
     return render( request, "home.html" )
 
