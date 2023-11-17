@@ -2,14 +2,17 @@
     border-collapse: collapse;
     width: 100%;
 }
-  
-.del-table td, .del-table th {
+
+.del-table td,
+.del-table th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
-  
-* {box-sizing: border-box;}
+
+* {
+    box-sizing: border-box;
+}
 .del_button {
     background-color: hsl(9, 95%, 34%);
     color: white;
@@ -20,63 +23,65 @@
     width: 100%;
     opacity: 0.9;
 }
-    
+
 .del_button:hover {
-    opacity:1;
+    opacity: 1;
 }
 
-.cancelbtn, .deletebtn {
+.cancelbtn,
+.deletebtn {
     float: left;
     width: 50%;
 }
-    
+
 .cancelbtn {
     background-color: #ccc;
     color: black;
 }
-  
+
 .deletebtn {
     background-color: #f44336;
 }
-    
+
 /* Add padding and center-align text to the cont */
 .cont {
     padding: 16px;
     text-align: center;
-
 }
 
-    
 /* The Modal (background) */
-.modal {
-    background-color: #fefefe;
-    border: 1px solid #888;
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 50%;
-    top: 50%;
-    width: auto; /* Full width */
-    height: auto; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    padding-top: 50px;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
+.modal_a {
+    // background-color: #fefefe;
+    background-color: #ccc;
+    height: max-content;
+    width: fit-content;
+    // border: 1px solid #888;
+    // display: none; /* Hidden by default */
+    // position: absolute; /* Stay in place */
+    // z-index: 1000; /* Sit on top */
+    // left: 50%;
+    // top: 50%;
+    // // width: auto; /* Full width */
+    // // height: auto; /* Full height */
+    // overflow: auto; /* Enable scroll if needed */
+    // padding-top: 50px;
+    // transform: translate(-50%, -50%);
+    // border-radius: 10px;
 }
-    
+
 /* Modal Content/Box */
 .modal-content {
     margin: 0 auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
     // border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
-    
+
 /* Style the horizontal ruler */
 hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
 }
-     
+
 /* The Modal Close Button (x) */
 .close {
     position: absolute;
@@ -86,23 +91,24 @@ hr {
     font-weight: bold;
     color: #cccccc;
 }
-    
+
 .close:hover,
 .close:focus {
     color: #f44336;
     cursor: pointer;
 }
-    
+
 /* Clear floats */
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
 }
-    
+
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
-    .cancelbtn, .deletebtn {
+    .cancelbtn,
+    .deletebtn {
         width: 100%;
     }
 }

@@ -13,6 +13,7 @@
       <div class="list-group list-group-flush mx-3 mt-4">
         <a
           href="{% url 'package_request_app:home' %}"
+          id="home-tab"
           class="list-group-item list-group-item-action py-2 ripple"
           aria-current="true"
         >
@@ -21,12 +22,13 @@
         </a>
         <a
           href="{% url 'package_request_app:package_list' %}"
+          id="history-tab"
           class="list-group-item list-group-item-action py-2 ripple"
         >
           <i class="fas fa-chart-area fa-fw me-3"></i
           ><span>History</span>
         </a>
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+        <!-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-lock fa-fw me-3"></i><span>Settings</span></a
         >
         <a href="#" class="list-group-item list-group-item-action py-2 ripple"
@@ -52,7 +54,7 @@
         >
         <a href="#" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
-        >
+        > -->
       </div>
     </div>
   </nav>
@@ -220,11 +222,8 @@
               <img src="{% static 'images/user-default.png' %}" class="rounded-circle" height="22" alt="user profile image" loading="lazy" />
               {% endif %}
             </a>
-          
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href=" {% url 'users:customer-account' %} ">My account</a></li>
-
-              
               <li><a class="dropdown-item" href="#">.....</a></li>
               <li><a class="dropdown-item" href="{% url 'users:logout' %}">Log-out</a></li>
             </ul>

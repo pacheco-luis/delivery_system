@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% block title %}Packages{% endblock title %}
 {% block content %}
     <h1>Active Packages</h1>
@@ -16,8 +21,37 @@
             <td>{{ package_obj.estimate_package_weight }}</td>
             <td>{{ package_obj.order_date }}</td>
             <td>
-                <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='block'">Delete Request</button>
-                <div id="deleteModal{{ package_obj.package_id }}" class="modal">
+                <!-- <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='block'">Delete Request</button> -->
+                <button type="button" 
+                    style="width: 100%;"
+                    class="btn btn-primary gradient-custom-2" 
+                    data-mdb-toggle="modal" 
+                    data-mdb-target="#deleteModal{{ package_obj.package_id }}"
+                >Delete</button>
+                <div class="modal fade" id="deleteModal{{ package_obj.package_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">You are about to delete a request</h5>
+                          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this request?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                          <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}">
+                              <button type="button" class="btn btn-primary gradient-custom-2">Delete</button>
+                            <!-- <button type="button"
+                                class="deletebtn del_button">Delete</button> -->
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                
+                <!-- <div id="deleteModal{{ package_obj.package_id }}" class="popconfirm-toggle inline modal">
                     <div class="modal-content">
                         <div class="cont"> 
                             <span onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="close" title="Close">×</span>
@@ -29,10 +63,14 @@
                             </div>
                         </div>
                     </div> 
-                </div>
+                </div> -->
             </td>
         </tr>
         {% endfor %}
     </table>
 
 {% endblock content %}
+
+{% block script_files %}
+    <script type="text/javascript" src=" {% static 'js/package_list.js' %} " ></script>
+{% endblock script_files %} 

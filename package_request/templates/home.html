@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
-
 {% block content %}
 
 <section id="user home" class="vh-100 user-home-content-container" style="background-color: #f4f5f7;">
@@ -25,3 +25,9 @@
 </section>
 
 {% endblock content %}
+
+{% block script_files %}
+    <script type="text/javascript"
+    src=" {% static 'js/home.js' %} "
+    ></script>
+{% endblock script_files %} 
