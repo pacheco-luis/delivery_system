@@ -13,9 +13,6 @@ from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 #     return render(request, 'users/home.html')
 
 def loginUser(request):
-    if request.user.is_authenticated:
-        return redirect('package_request_app:home')
-
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -36,7 +33,8 @@ def loginUser(request):
         else:
             messages.error(request, 'Username and password do not match')
 
-    return render(request, 'sign-in.html')
+    # return render(request, 'sign-in.html')
+    return render(request, 'login.html')
 
 def logoutUser(request):
     logout(request)

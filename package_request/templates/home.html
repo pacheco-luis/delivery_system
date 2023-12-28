@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
-
 {% block content %}
 
-<h1>Home Page</h1>
-<p>Welcome to the Delivery System</p>
+<section id="user home" class="vh-100 user-home-content-container" style="background-color: #f4f5f7;">
+    <div class="blur row">
+        <div class="col-sm">
+            <h1>Welcome home <span style="text-transform: uppercase;" > {{ user.username }}</span>!</h1>
+            <h3>What would you like to do today? </h3>
+        </div>
+        <div class="col-sm">
+            <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" 
+                style="width: 100%; margin-top: 5em; padding: 1em; border-color: orange;"
+                href="{% url 'package_request_app:request_form_1_of_3' %}"
+                >Create a Request</a>
+            <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                style="width: 100%; margin-top: 5em; padding: 1em; border-color: orange;"
+                href="{% url 'package_request_app:package_list' %}"
+                >View progress</a>
+        </div>
+    </div>
+
+</section>
 
 {% endblock content %}
+
+{% block script_files %}
+    <script type="text/javascript"
+    src=" {% static 'js/home.js' %} "
+    ></script>
+{% endblock script_files %} 

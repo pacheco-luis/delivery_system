@@ -1,0 +1,18 @@
+.user-home-content-container{
+    background-image: url( "../../images/home/background.jpg" );
+    background-size: cover;
+    backdrop-filter: blur(100px);
+}
+
+.blur{  
+    background-color: rgba(255, 94, 0, 0.17);
+    height: 100%; 
+    padding: 2em;
+
+    // background: hsla(0, 100%, 50%, 0.616);
+}
+
+.blur h1{
+    color: #000;
+
+}

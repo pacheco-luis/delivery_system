@@ -29,9 +29,9 @@
                 <button class = "del_button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='block'">Delete Request</button>
                 <button class = "view_button" onclick="document.getElementById('viewModal{{ package_obj.package_id }}').style.display= 'block'">View Request</button>
                 <div id="deleteModal{{ package_obj.package_id }}" class="modal">
-                    <div class="modal-content">
-                        <div class="cont"> 
-                            <span onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="close" title="Close">×</span>
+                    <span onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="close" title="Close">×</span>
+                    <div class="ls_modal-content">
+                        <div class="ls_cont"> 
                             <h1>You are about to delete a request</h1>
                             <p>Are you sure you want to delete this request?</p>
                             <div class="clearfix">

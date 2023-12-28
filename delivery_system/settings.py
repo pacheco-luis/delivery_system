@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'places',                               #   https://pypi.org/project/dj-places/
     # 'django_pdb'
     # 'driver'
+    
     'bootstrap5'
 ]
 
@@ -162,7 +163,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 # add by Sam for dj-places
-PLACES_MAPS_API_KEY= ""           # enable maps JavaScript and Places google APIs,
+PLACES_MAPS_API_KEY= "wGzwRFkoP4UW_AcThqIC"           # enable maps JavaScript and Places google APIs,
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
