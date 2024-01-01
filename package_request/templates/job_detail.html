@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Jobs{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Job List</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
+        async defer></script>
+
+    <style>
+        .gm-ui-hover-effect {
+            display: none !important;
+        }
+
+        .job-details {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="del-body">
+    <a href="{% url 'package_request_app:job_list' %}">Back to jobs</a>
+
+    <h1>Job</h1>
+    <h2>Description: {{ job.package_description }}</h2>
+    <p>Price: ${{ job.price }} NTD</p>
+    <p>Distance: {{ job.distance }} km</p>
+    <p>Pickup: {{ job.sender_address }}</p>
+    <p>Deliver: {{ job.recipient_address }}</p>
+
+    <h1>Customer</h1>
+    <p>{{ job.customer.first_name }} {{ job.customer.last_name }}</p>
+    <p>{{ job.customer.email }}</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Accept job">
+    </form>
+
+    <script>
+
+    </script>
+</body>
+{% endblock content %}

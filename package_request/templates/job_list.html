@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Jobs{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Job List</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
+        async defer></script>
+
+    <style>
+        .gm-ui-hover-effect {
+            display: none !important;
+        }
+
+        .job-details {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="del-body">
+    <h1>Jobs</h1>
+
+    <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
+
+    <div class="job-details">
+        <h2 class="job-name"></h2>
+        <p class="job-distance"></p>
+        <p class="job-duration"></p>
+        <p class="job-price"></p>
+        <p class="job-pickup-address"></p>
+        <p class="job-delivery-address"></p>
+    </div>
+
+    <script>
+        function initMap() {
+            const taiwan = {
+                lat: 23.69781,
+                lng: 120.960515
+            };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: taiwan,
+            });
+
+            // Get jobs from API
+            fetch("{% url 'package_request_app:api_job_list' %}")
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data);
+
+                    // Create new bounds object
+                    let bounds = new google.maps.LatLngBounds();
+
+                    // Get the jobs via the API
+                    for (let i = 0; i < data.jobs.length; i++) {
+                        const job = data.jobs[i];
+                        const position = { lat: job.sender_latitude, lng: job.sender_longitude };
+                        const marker = new google.maps.Marker({
+                            position,
+                            map,
+                            title: job.title,
+                        });
+
+                        // Extend bounds to include marker
+                        bounds.extend(position);
+
+                        new google.maps.InfoWindow({
+                            content: `
+                                <div>
+                                    <h3>${job.package_description}</h3>
+                                    <p>${job.distance} km</p>
+                                </div>
+                            `
+                        }).open(map, marker);
+
+                        marker.addListener("click", () => {
+                            showJobDetails(job);
+                        });
+                    }
+                });
+        }
+
+        function showJobDetails(job) {
+            const jobDetails = document.querySelector(".job-details");
+            const jobName = document.querySelector(".job-name");
+            const jobDistance = document.querySelector(".job-distance");
+            const jobDuration = document.querySelector(".job-duration");
+            const jobPrice = document.querySelector(".job-price");
+            const jobPickupAddress = document.querySelector(".job-pickup-address");
+            const jobDeliveryAddress = document.querySelector(".job-delivery-address");
+
+            jobDetails.style.display = "block";
+            jobName.innerHTML = job.package_description;
+            jobDistance.innerHTML = job.distance + " km";
+            jobDuration.innerHTML = job.duration + " min";
+            jobPrice.innerHTML = "$" + job.price + " NTD";
+            jobPickupAddress.innerHTML = job.sender_address;
+            jobDeliveryAddress.innerHTML = job.recipient_address;
+
+            // If job card is clicked, redirect to job page
+            jobDetails.addEventListener("click", () => {
+                window.location.href = "/job_list/" + job.package_id + "/";
+            });
+        }
+    </script>
+</body>
+{% endblock content %}

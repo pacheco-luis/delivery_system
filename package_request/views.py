@@ -6,6 +6,10 @@ from package_request.models import Package
 from django.contrib.auth.decorators import login_required
 from places import Places
 from decimal import Decimal
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+import requests
 
 
 
@@ -79,7 +83,7 @@ def haversine(coord1: object, coord2: object):
 
     return km
 
-@login_required
+@login_required(login_url='users:login-customer')
 def sender_form_handler(request):
     import json
 
@@ -125,7 +129,7 @@ def sender_form_handler(request):
     
     return render(request,"step1.html", context=context)
 
-@login_required
+@login_required(login_url='users:login-customer')
 def receiver_form_handler(request):
     import json
     
@@ -168,62 +172,174 @@ def receiver_form_handler(request):
     return render(request,"step2.html", context=context)
 
 
-@login_required
+@login_required(login_url='users:login-customer')
 def package_form_handler(request):
     import json
+    dollar_per_kilometer = 10 # NTD
     
     if request.method == 'POST':
         form = PACKAGE_FORM( request.POST )
         if form.is_valid():
             
-            p_data = form.cleaned_data
-            s_data = json.loads(request.session['sender_data'])
-            r_data = json.loads(request.session['receiver_data'])
-            s_addr = s_data['sender_address']
-            r_addr = r_data['recipient_address']
-            
-            combined_data = { **s_data, **r_data, **p_data }
-            package_obj = Package.objects.create( **combined_data )
-            package_obj.sender_id = request.user.customer
-            package_obj.sender_address = Places( s_addr[0], Decimal(s_addr[1]), Decimal(s_addr[2]) )
-            package_obj.recipient_address = Places( r_addr[0], Decimal(r_addr[1]), Decimal(r_addr[2]) )
-            
-            Customer.objects.filter(user=request.user).update(
-                phone_number=package_obj.sender_phone, 
-                address=package_obj.sender_address
-                )
-            print( package_obj.sender_address )
-            print( package_obj.recipient_address )
-            
-            package_obj.save()
-            
-            del request.session['sender_data']
-            del request.session['receiver_data']
-            
-            return redirect( 'package_request_app:successful')
+            try:
+                p_data = form.cleaned_data
+                s_data = json.loads(request.session['sender_data'])
+                r_data = json.loads(request.session['receiver_data'])
+                s_addr = s_data['sender_address']
+                r_addr = r_data['recipient_address']
+                
+                combined_data = { **s_data, **r_data, **p_data }
+                package_obj = Package.objects.create( **combined_data )
+                package_obj.customer = request.user.customer
+                package_obj.sender_address = Places( s_addr[0], Decimal(s_addr[1]), Decimal(s_addr[2]) )
+                package_obj.recipient_address = Places( r_addr[0], Decimal(r_addr[1]), Decimal(r_addr[2]) )
+                
+                Customer.objects.filter(user=request.user).update(
+                    phone_number=package_obj.sender_phone, 
+                    address=package_obj.sender_address
+                    )
+                print( package_obj.sender_address )
+                print( package_obj.recipient_address )
+
+                # check if the location is inside the radius
+                req = requests.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins={}&destinations={}&mode=transit&key={}'.format(
+                   package_obj.sender_address,
+                   package_obj.recipient_address,
+                   settings.PLACES_MAPS_API_KEY
+                ))
+                res = req.json()
+                print(res['rows'])
+
+                distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
+                duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
+                
+                package_obj.distance = round(distance / 1000, 2) # kilometers
+                package_obj.duration = int(duration / 60) # minutes
+                package_obj.price = package_obj.distance * dollar_per_kilometer # NTD                
+                package_obj.status = package_obj.STATUS_PENDING
+
+                package_obj.save()
+                
+                del request.session['sender_data']
+                del request.session['receiver_data']
+                
+                return redirect( 'package_request_app:successful')
+            except Exception as e:
+                print(e)
+                messages.error(request, "Something went wrong, please try again")
+                return redirect( 'package_request_app:request_form_1_of_3')
         
         else:
             return render( request, "step3.html", {'package_form': PACKAGE_FORM(request.POST)})
         
     return render( request, "step3.html", {'package_form': PACKAGE_FORM()})
 
-@login_required
+@login_required(login_url='users:login-customer')
 def all_packages(request):
     import json
     
-    package_list = Package.objects.filter( sender_id=request.user.customer )
+    package_list = Package.objects.filter( customer=request.user.customer )
         
     return render(request, 'package_list.html', {'package_list' : package_list})
 
+@login_required(login_url='users:login-customer')
 def delete_request(request, id):
     delete_obj = Package.objects.get( pk=id )
     delete_obj.delete()
    
     return redirect ('package_request_app:package_list')
 
-@login_required(login_url='users:login')
+@login_required(login_url='package_request_app:landing_page')
 def home( request ):
     return render( request, "home.html" )
 
 def landing_page( request ):
     return render( request, "../templates/index.html" )
+
+# HERE BE DRAGONS
+@login_required(login_url='users:login-driver')
+def all_jobs(request):
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    context = {
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+    }
+    return render(request, 'job_list.html', context)
+
+@login_required(login_url='users:login-driver')
+def job_detail(request, id):
+    job = Package.objects.get(pk=id)
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+
+    if not job:
+        messages.error(request, 'Job is no longer available')
+        return redirect('package_request_app:job_list')
+    
+    if request.method == 'POST':
+        job.driver = request.user.driver
+        job.status = Package.STATUS_PICKING
+        job.save()
+        messages.success(request, 'Job is successfully taken')
+        return redirect('package_request_app:job_current')
+
+    context = {
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        'job': job,
+    }
+    return render(request, 'job_detail.html', context)
+
+@login_required(login_url='users:login-driver')
+def current_job(request):
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    driver = request.user.driver
+    job = Package.objects.filter(
+        driver=driver,
+        status__in=[
+            Package.STATUS_PICKING,
+            Package.STATUS_DELIVERING,
+        ]
+    ).last()
+    archived = Package.objects.filter(
+        driver=driver,
+        status__in=[
+            Package.STATUS_COMPLETED,
+        ]
+    )
+
+    if request.method == 'POST':
+        if job.status == Package.STATUS_PICKING:
+            job.status = Package.STATUS_DELIVERING
+            job.save()
+            messages.success(request, 'Job is successfully started')
+            return redirect('package_request_app:job_current')
+        elif job.status == Package.STATUS_DELIVERING:
+            job.status = Package.STATUS_COMPLETED
+            job.save()
+            messages.success(request, 'Job is successfully completed')
+        return redirect('package_request_app:job_completed')
+    
+    context = {
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        'job': job,
+        'archived': archived,
+    }
+    return render(request, 'current_job.html', context)
+
+@login_required(login_url='users:login-driver')
+def completed_job(request):
+    return render(request, 'completed_job.html')
+
+@csrf_exempt
+@login_required(login_url='users:login-driver')
+def api_all_jobs(request):
+    jobs = list(Package.objects.filter(status=Package.STATUS_PENDING).values())
+    for job in jobs:
+        job['sender_latitude'] = float(str(job['sender_address']).split(', ')[-2])
+        job['sender_longitude'] = float(str(job['sender_address']).split(', ')[-1])
+        job['sender_address'] = ', '.join(str(job['sender_address']).split(', ')[:-2])
+        job['recipient_latitude'] = float(str(job['recipient_address']).split(', ')[-2])
+        job['recipient_longitude'] = float(str(job['recipient_address']).split(', ')[-1])
+        job['recipient_address'] = ', '.join(str(job['recipient_address']).split(',')[:-3])
+    return JsonResponse({
+        'success': True,
+        'jobs': jobs,
+    })

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
-    <link rel="stylesheet" href= "{% static 'css/style.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
 
 </head>
+
 <body>
     <header class="LP_header">
         <a href="{% url 'package_request_app:landing_page' %}" class="brand">System Name</a>
@@ -22,19 +23,25 @@
                 <a href="#">Explore</a>
                 <a href="#">Gallery</a>
                 <a href="#">Contact</a>
-                <a  class="popup-container" onclick="myFunction()">Create an account
-                    <div class="popup-container-content" id="popup-container-button">
-                        <button id="reg-customer" class="popup-btns" >register asa a customer</button>
-                        <button id="reg-driver" class="popup-btns" >register as a driver</button>
+                <a class="popup-container" onclick="register()">Create an account
+                    <div class="popup-container-content" id="popup-container-button-reg">
+                        <button id="reg-customer" class="popup-btns">register asa a customer</button>
+                        <button id="reg-driver" class="popup-btns">register as a driver</button>
                     </div>
                 </a>
-                <a href="{% url 'users:login' %}">Log In</a>
+                <a class="popup-container" onclick="login()">Log In
+                    <div class="popup-container-content" id="popup-container-button-log">
+                        <button id="log-customer" class="popup-btns">login as a a customer</button>
+                        <button id="log-driver" class="popup-btns">login as a driver</button>
+                    </div>
+                </a>
             </div>
         </div>
     </header>
 
     <section class="LP_home">
-        <video class="video-slide active" src="{% static 'images/landing_page/videos/1.mp4'%}" autoplay muted loop></video>
+        <video class="video-slide active" src="{% static 'images/landing_page/videos/1.mp4'%}" autoplay muted
+            loop></video>
         <video class="video-slide" src="{% static 'images/landing_page/videos/2.mp4'%}" autoplay muted loop></video>
         <video class="video-slide" src="{% static 'images/landing_page/videos/3.mp4'%}" autoplay muted loop></video>
         <video class="video-slide" src="{% static 'images/landing_page/videos/4.mp4'%}" autoplay muted loop></video>
@@ -42,34 +49,59 @@
 
         <div class="content active">
             <h1>Our<br><span>Service</span></h1>
-            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit, aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu purus, dapibus vitae tortor non, accumsan viverra justo.</p>
+            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex
+                lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis
+                feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam
+                tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit,
+                aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu
+                purus, dapibus vitae tortor non, accumsan viverra justo.</p>
             <a href="#">Read More</a>
         </div>
-    
+
         <div class="content">
             <h1>On-demand<br><span>Service</span></h1>
-            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit, aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu purus, dapibus vitae tortor non, accumsan viverra justo.</p>
+            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex
+                lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis
+                feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam
+                tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit,
+                aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu
+                purus, dapibus vitae tortor non, accumsan viverra justo.</p>
             <a href="#">Read More</a>
         </div>
 
         <div class="content">
             <h1>Our staff<br><span>Members</span></h1>
-            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit, aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu purus, dapibus vitae tortor non, accumsan viverra justo.</p>
+            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex
+                lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis
+                feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam
+                tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit,
+                aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu
+                purus, dapibus vitae tortor non, accumsan viverra justo.</p>
             <a href="#">Read More</a>
         </div>
 
         <div class="content">
             <h1>our service<br><span>model</span></h1>
-            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit, aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu purus, dapibus vitae tortor non, accumsan viverra justo.</p>
+            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex
+                lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis
+                feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam
+                tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit,
+                aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu
+                purus, dapibus vitae tortor non, accumsan viverra justo.</p>
             <a href="#">Read More</a>
         </div>
 
         <div class="content">
             <h1>Our<br><span>mission</span></h1>
-            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit, aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu purus, dapibus vitae tortor non, accumsan viverra justo.</p>
+            <p>Quisque nulla augue, commodo at posuere vel, imperdiet id tellus. Donec sed tempor dui. Nunc ultrices ex
+                lectus, vitae pharetra massa vulputate vel. Vestibulum pretium blandit congue. Sed facilisis ut est quis
+                feugiat. Donec aliquam vestibulum nisl at hendrerit. Morbi nec quam vel lectus varius malesuada. Nullam
+                tincidunt pellentesque diam, vitae luctus ante efficitur in. Nullam sed massa velit. Morbi mauris elit,
+                aliquet sed condimentum nec, hendrerit cursus leo. Quisque dignissim bibendum malesuada. Donec arcu
+                purus, dapibus vitae tortor non, accumsan viverra justo.</p>
             <a href="#">Read More</a>
         </div>
-    
+
         <div class="media-icons">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
@@ -84,8 +116,9 @@
             <div class="nav-btn"></div>
         </div>
     </section>
-    
+
     <script src="{% static 'js/landing_page.js' %}"></script>
 
 </body>
+
 </html>

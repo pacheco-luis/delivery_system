@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<form action="{% url 'users:login' %}" method="POST">
+<form action="" method="POST">
     {% csrf_token %}
     <input type="text" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Enter password">
@@ -14,8 +14,11 @@
     </p>
     <p>
         Don't have an account
-        <a href="{% url 'users:register-customer' %}">Sign Up Customer</a>
-        <a href="{% url 'users:register-driver' %}">Sign Up Driver</a>
+        {% if page == 'customer' %}
+        <a href="{% url 'users:register-customer' %}">Sign Up</a>
+        {% elif page == 'driver' %}
+        <a href="{% url 'users:register-driver' %}">Sign Up</a>
+        {% endif %}
     </p>
 </form>
 
