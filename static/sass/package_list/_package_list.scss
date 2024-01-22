@@ -1,16 +1,32 @@
-.del-table {
+#pack-list-body {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: rgb(99.2%, 93.3%, 85.9%);
+
+}
+.pack-list-table {
     border-collapse: collapse;
     width: 100%;
 }
-  
-.del-table td, .del-table th, .del-table tr{
-    border: 1px solid #dddddd;
+.pack-list-table th{
+    background-color:  rgb(89%, 54.5%, 16.1%);
+} 
+.pack-list-table td, .pack-list-table th {
+    
     text-align: left;
     padding: 8px;
 }
+.pack-list-table tr:nth-child(even){
+    background-color: rgb(98.4%, 80.4%, 60.8%);
+}
+.pack-list-table tr:nth-child(odd){
+    background-color: rgb(98.8%, 90.6%, 82.4%);
+}
   
 * {box-sizing: border-box;}
-.del_button {
+.ps_del_button {
     background-color: hsl(9, 95%, 34%);
     color: white;
     padding: 14px 20px;
@@ -21,7 +37,7 @@
     opacity: 0.9;
 }
 
-.view_button {
+.ps_view_button {
     background-color: hsl(130, 95%, 34%);
     color: white;
     padding: 14px 20px;
@@ -32,16 +48,16 @@
     opacity: 0.9;
 }
     
-.del_button:hover {
+.ps_del_button:hover {
     opacity:1;
 }
 
-.cancelbtn, .deletebtn {
+.ps_cancelbtn, .ps_deletebtn {
     float: left;
     width: 50%;
 }
     
-.cancelbtn {
+.ps_cancelbtn {
     background-color: #ccc;
     color: black;
 }
@@ -51,21 +67,21 @@
 }
     
 /* Add padding and center-align text to the cont */
-.ls_cont {
+.ps_cont {
     padding: 16px;
     text-align: center;
 
 }
-.view_cont {
+.ps_view_cont {
     padding: 16px;
     text-align: left;
 }
-.view_cont p {
+.ps_view_cont p {
     text-align: left;
 }
     
 /* The Modal (background) */
-.modal {
+.ps_modal {
     background-color: #fefefe;
     border: 1px solid #888;
     display: none; /* Hidden by default */
@@ -82,7 +98,7 @@
 }
     
 /* Modal Content/Box */
-.ls_modal-content {
+.ps_modal-content {
     margin: 0 auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
     // border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
@@ -95,7 +111,7 @@ hr {
 }
      
 /* The Modal Close Button (x) */
-.close {
+.ps_close {
     position: absolute;
     right: 35px;
     top: 15px;
@@ -104,8 +120,8 @@ hr {
     color: #cccccc;
 }
     
-.close:hover,
-.close:focus {
+.ps_close:hover,
+.ps_close:focus {
     color: #f44336;
     cursor: pointer;
 }
@@ -119,7 +135,7 @@ hr {
     
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
-    .cancelbtn, .deletebtn {
+    .ps_cancelbtn, .ps_deletebtn {
         width: 100%;
     }
 }
