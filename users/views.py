@@ -164,3 +164,6 @@ def editDriverAccount(request):
             return redirect('users:driver-account')
     context = {'form': form}
     return render(request, 'users/account_form.html', context)
+
+def register(request):
+    return render(request, 'register.html')

@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#register_pg_bd header nav{
+    padding: 0.1em 3em;
+    background-color: #454545;
+    text-transform: uppercase;
+    text-shadow: #fff;
+    font-weight: 600;
+}
+
+#nav_logo{
+    font-family: 'RoundslabSerif', sans-serif;
+    color: #fff;                                     
+}
+#primary_logo, #secondary_logo{
+    margin-right: 0.5em;
+}
+
+#secondary_logo{
+    display: none;
+}
+
+
+#register_pg_bd header nav #sign_up_link{
+    font-size: medium;
+    background-color: #ff6000;
+    color: #fff;
+    margin-right: 0;
+    margin-left: auto;
+}
+.button_orange{
+    background-color: #ff6000;
+    color: #fff;
+}
+
+
+#register_pg_bd header nav #nav_logo img{
+    height: 2em;
+}
+
+
+.reg_pg_emphasis{
+    font-weight: bold;
+    font-style: italic;
+}
+
+#register_pg_bd section{
+    background-image: url("../images/register_page/driver-in-truck.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding: 2em 0;
+}
+
+#register_pg_bd section .text{
+    font-size: 0.9em;
+    width: 30% ;
+    margin: 0 10% auto auto;
+}
+
+#register_pg_bd section .btn{
+    display: block;
+    width: 25%;
+    margin: auto;
+}
+
+#register_pg_bd section .register_btns{
+    padding: 2em 0;
+}
+
+#register_pg_bd section .register_btns a{
+    padding: 1em;
+    color: #000;
+}
+
+#register_pg_bd section .register_btns #register_customer{
+    background-color: #ffe6c7;
+    border: none;
+}
+
+#register_pg_bd section .register_btns #register_driver{
+    background-color: #ffa559;
+    border: none;
+}
+
+#register_pg_bd section .invite_link{
+    margin-left: 10%;
+}
+
+#register_pg_bd section .invite_link h6{
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#register_pg_bd footer{
+    padding: 3em 0;
+    color: #fff;
+    background-color: #000;
+}
+
+#register_pg_bd footer ul{
+    margin: 0 auto;
+    width: fit-content;
+}
+#register_pg_bd footer ul li{
+    font-size: 0.75em;
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0;
+}
+
+#register_pg_bd footer ul li a{
+    color: #fff;
+    text-decoration: wavy;
+}
+
+
+@media screen and (max-width: 870px) {
+    #register_pg_bd section .text{
+        background-color: #ffffff50;
+    }
+    #register_pg_bd section .text,
+    #register_pg_bd section .invite_link{
+        width: 75% ;
+        margin:  auto;
+        font-size: 0.75em;
+    }
+    #register_pg_bd section .btn{
+        display: block;
+        width: 75%;
+        margin: auto;
+    }
+    
+    #register_pg_bd section .register_btns{
+        padding: 2em 0;
+    }
+    #register_pg_bd section .invite_link h6{
+        margin-left: 0;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    #company_name, #primary_logo{
+        display: none;
+    }
+
+    #secondary_logo{
+        display: block;
+    }
+}
