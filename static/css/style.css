@@ -494,7 +494,7 @@ hr {
   padding: 0; }
 
 #main_nav {
-  z-index: 99999;
+  z-index: 998;
   width: 100%;
   position: fixed;
   top: 0;
@@ -596,19 +596,41 @@ sidebar
 
   #main_nav nav #sign_out_link {
     display: none; } }
-.user-home-content-container {
+#user_home {
   background-image: url("../../images/home/background.jpg");
   background-size: cover;
-  backdrop-filter: blur(100px); }
+  backdrop-filter: blur(100px);
+  margin: 0;
+  padding-left: 15em;
+  padding-right: 5em;
+  height: auto; }
 
-.blur {
-  background-color: rgba(255, 94, 0, 0.17);
-  height: 100%;
-  padding: 2em; }
+#user_home .row {
+  padding-top: 3em; }
 
-.blur h1 {
-  color: #000; }
+#user_home div .btns_container .btn {
+  color: #fff;
+  font-weight: 600;
+  background-color: #ff6000;
+  border: none;
+  box-shadow: 3px 3px rgba(128, 128, 128, 0.26); }
 
+@media screen and (max-width: 600px) {
+  #user_home {
+    margin: 0;
+    padding: 3em; }
+
+  #user_home .row {
+    padding-top: 0em; }
+
+  #user_home .row #user_heading h1 {
+    font-size: 1.5em; }
+
+  #user_home .row #user_heading h3 {
+    font-size: 1em; }
+
+  #user_home .row #user_heading {
+    margin-bottom: 1em; } }
 * {
   margin: 0;
   padding: 0; }
