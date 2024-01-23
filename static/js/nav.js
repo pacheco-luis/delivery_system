@@ -1,41 +1,38 @@
-// Graph
-var ctx = document.getElementById("myChart");
 
-var myChart = new Chart(ctx, {
-  type: "line",
-  data: {
-    labels: [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ],
-    datasets: [
-      {
-        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-        lineTension: 0,
-        backgroundColor: "transparent",
-        borderColor: "#007bff",
-        borderWidth: 4,
-        pointBackgroundColor: "#007bff",
-      },
-    ],
-  },
-  options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: false,
-          },
-        },
-      ],
-    },
-    legend: {
-      display: false,
-    },
-  },
-});
+function show_menu(){
+  var sidebar = document.getElementById("sidebar");
+  var close_ele = document.getElementById("close_menu");
+
+  if (sidebar) {
+    var currentDisplay = window.getComputedStyle(sidebar).getPropertyValue('display');
+    sidebar.style.display = 'block';
+  }
+
+  if( close_ele ){
+    var menu = document.getElementById("menu");
+    if( menu ){
+      menu.style.display = 'none';
+    }
+
+    close_ele.style.display = 'block';
+  }
+}
+
+function close_menu(){
+  var sidebar = document.getElementById("sidebar");
+  var menu_btn = document.getElementById("menu");
+
+  if (sidebar) {
+    var currentDisplay = window.getComputedStyle(sidebar).getPropertyValue('display');
+    sidebar.style.display = 'none';
+  }
+
+  if( menu_btn ){
+    var close_menu = document.getElementById("close_menu");
+    if( close_menu ){
+      close_menu.style.display = 'none';
+    }
+
+    menu_btn.style.display = 'block';
+  }
+}
