@@ -17,7 +17,7 @@
     }
 
     .LP_header .brand{
-        color: #fff;
+        color: $color-main-orange;
         font-size: 2em;
         font-weight: 700;
         text-transform: uppercase;
@@ -335,3 +335,169 @@
         }
 
     }
+
+#home_page header nav{
+    padding: 0.1em 3em;
+    background-color: #454545;
+    text-transform: uppercase;
+    text-shadow: #fff;
+    font-weight: 600;
+}
+
+#home_page header nav #sign_up_link{
+    border: none;
+    font-size: medium;
+    background-color: $color-secondary-orange;
+    color: black;
+    margin-right: 0;
+    margin-left: auto;
+    
+}
+
+#home_page header nav #nav_logo img{
+    height: 2em;
+}
+#home_page #homepage_first_section {
+    background-image: url("../../images/landing_page/packing_car.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding: 2em 2em 2em 2em;
+    position: relative;
+
+    #main_title{
+        color: white;
+        font-weight: bold;
+    }
+    .homepage_btns{
+        gap: 2em;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .btn{
+        width: 25%;
+        border: none;
+        padding: 1.5em;
+        font-size: 1em;
+        font-weight: 500;
+    }
+    #login_customer{
+        color: #000;
+        background-color: $color-tertiary-orange;
+    }
+    #login_driver{
+        color: #000;
+        background-color: $color-secondary-orange;
+    }
+    #extra_info{
+        color: white;
+        font-size: 25px;
+        font-weight: lighter;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    #extra_info_anchor{
+        color: orangered;
+        text-decoration: underline;
+    }
+    
+}
+
+#home_page #homepage_second_section{
+    background-color: $color-secondary-orange;
+    padding: 2em;
+
+    .company_description{
+        margin: 0 auto;
+        width: 60%;
+        font-weight: lighter;
+    }
+    #company_description_title{
+        color: $color-main-orange;
+        font-weight: bold;
+    }
+}
+
+#home_page #homepage_third_section{
+    background-color: $color-tertiary-orange;
+    padding: 2em;
+
+    .mission_description{
+        margin: 0 auto;
+        width: 60%;
+        font-weight: lighter;
+    }
+    #mission_description_title{
+        color: $color-main-orange;
+        font-weight: bold;
+    }
+}
+
+#home_page footer{
+    padding: 3em 0;
+    color: #fff;
+    background-color: #000;
+}
+
+#home_page footer ul{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+#home_page footer ul li{
+    font-size: 0.75em;
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0;
+}
+
+#home_page footer ul li a{
+    color: #fff;
+    text-decoration: wavy;
+}
+
+@media screen and (max-width: 870px) {
+
+    #home_page p{
+        font-size: 0.7em;
+    }
+   
+    #home_page #homepage_first_section .homepage_btns{
+        display: flex;
+        align-items: center;
+    }
+    #home_page #homepage_first_section .btn{
+        width: 60%;
+    }
+    #home_page #homepage_first_section .homepage_btns a {
+        gap: 1em;
+        font-size: 0.7em;
+    }
+
+    #home_page #homepage_first_section #extra_info{
+        font-size: 0.7em;
+        align-items: center;
+    }
+
+    #home_page section .register_btns{
+        padding: 2em 0;
+    }
+    #home_page section .invite_link h6{
+        margin-left: 0;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    #company_name, #primary_logo{
+        display: none;
+    }
+
+    #secondary_logo{
+        display: block;
+    }
+}
