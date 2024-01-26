@@ -20,7 +20,9 @@
     
   </head>
 
-  <body style = "background-color: rgb(99.2%, 93.3%, 85.9%);">
+  <body>
+    <img id="body_bg" src="{% static '/images/base/faded_defined_4.png' %}" alt="">
+    <img id="body_bg_2" src="{% static '/images/base/faded_defined.png' %}" alt="">
     {# Display django.contrib.messages as Bootstrap alerts #}
     <div style="position: absolute; left: 40%; z-index: 9999; "> 
       {% bootstrap_messages %}
@@ -40,8 +42,8 @@
       {% endif %} 
     {% endcomment %}
 
-    <main style="margin-top: 56px">
-      <div class="min-vh-100" style="background-color: rgb(99.2%, 93.3%, 85.9%);">
+    <main id="main_content" style="margin-top: 56px">
+      <div class="min-vh-100">
         {% block content %}{% endblock content %}
       </div>
       {% include 'footer.html' %}

@@ -3,9 +3,10 @@
     padding: 5em 5em 5em 10em;
 }
 
-#new_request_body #request_layer .package_form button{
+#new_request_body #request_layer form .package_form button{
     background-color: $color-main-orange;
     border: $color-border;
+    margin-top: 1em;
 }
 
 #new_request_body #request_layer .package_form p{

@@ -12,10 +12,27 @@ html {
 }
 
 body {
+    // background-image: url( ../../images/base/faded_defined_4.png );
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    background-color: transparent;
     font-family: $font-base;
     font-size: $font-size-base;
     font-weight: $font-regular;
     line-height: 1.6;
+}
+
+#body_bg{
+    position: absolute;
+    z-index: -990;
+    top: 3em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#body_bg_2{
+    display: none;
 }
 
 ul {
@@ -24,4 +41,19 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+@media screen and ( max-width: 600px) {
+    #body_bg{
+        display: none;
+    }
+
+    #body_bg_2{
+        display: block;
+        position: absolute;
+        z-index: -990;
+        top: 3em;
+        left: 0;
+        width: 100%;
+    }
 }
