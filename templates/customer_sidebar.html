@@ -1,0 +1,51 @@
+{% load bootstrap5 %} 
+{% bootstrap_css %} 
+{% bootstrap_javascript %}
+{% load static %}
+
+<div id="sidebar">
+    <ul>
+      <li>
+        <a href="#" 
+          id="" 
+          class="sidebar_btns btn btn-secondary btn-lg" 
+          role="button" 
+          aria-pressed="true"
+          >something</a>
+      </li>
+      <li>
+        <a href="#" 
+          id="" 
+          class="sidebar_btns btn btn-secondary btn-lg" 
+          role="button" 
+          aria-pressed="true"
+          >something</a>
+      </li>
+      <li>
+        <a href="#" 
+          id="" 
+          class="sidebar_btns btn btn-secondary btn-lg" 
+          role="button" 
+          aria-pressed="true"
+          >something</a>
+      </li>
+      <li>
+        <a href="#" 
+          id="" 
+          class="sidebar_btns btn btn-secondary btn-lg" 
+          role="button" 
+          aria-pressed="true"
+          >something</a>
+      </li>
+      <li>
+        <a 
+        id="sidebar_log_out" 
+        href="{% url 'users:logout-customer'%}" 
+        class="btn btn-secondary btn-lg"
+        role="button" aria-pressed="true">
+        <span style="position:relative; top: 0.2em; line-height: 0;" class="material-symbols-outlined">logout</span> 
+        Log-out
+      </a>
+      </li>
+    </ul>
+  </div>

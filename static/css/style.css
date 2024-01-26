@@ -892,4 +892,47 @@ sidebar
   background-color: #454545;
   z-index: 998; }
 
+#sign_in_container {
+  background-image: url("../../images/login/taipei.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%; }
+
+#sign_in_form {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: fit-content;
+  height: fit-content;
+  padding: 2em;
+  background-color: #ffffff75;
+  border-radius: 20% 10% 40% 0%; }
+
+#sign_in_container #sign_in_form div small {
+  font-style: italic; }
+
+#sign_in_container #sign_in_form button {
+  background-color: #FF6000;
+  border: #f3f3f3; }
+
+#sign_in_container #sign_in_form div a {
+  color: #FF6000; }
+
+@media screen and (max-width: 600px) {
+  #sign_in_form {
+    width: 60%;
+    padding: 2em;
+    margin: auto; } }
+@media screen and (max-width: 470px) {
+  #sign_in_form {
+    width: 80%;
+    padding: 2em;
+    margin: auto; } }
+@media screen and (max-width: 400px) {
+  #sign_in_form {
+    width: 90%;
+    padding: 2em;
+    margin: auto; } }
+
 /*# sourceMappingURL=style.css.map */
