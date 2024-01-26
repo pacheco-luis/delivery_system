@@ -1,24 +1,26 @@
 
 {% extends 'base.html' %}
-{% block title %}1/3Make a delivery request{% endblock title %}
+{% block title %}1/3: Make a delivery request{% endblock title %}
 
 {% block content %}
-    <div class="request_body">
-        <h1>To deliver the package, please verify or enter your information:</h1>
-        <br/>
-        <form action="{% url 'package_request_app:request_form_1_of_3' %}" method="post">
-            <div class="package_form" style="position: relative; left: 20%; width: 60%;" >
-                <P style="font-style: italic; color:rgb(85, 85, 85)">NOTE: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</P>
-                {% csrf_token %}
-                {% if form.name.errors %}
-                {% endif %}
-                {{ sender_form.as_p }}
-                
-                <button type="submit" class="save btn btn-default">Save</button>
-                {{ sender_form.media }}
-            </div>
-
-        </form>
+    <div id="new_request_body">
+        <div id="request_layer">
+            <h2>Please verify or enter your information:</h2>
+            <br/>
+             <form action="{% url 'package_request_app:request_form_1_of_3' %}" method="post">
+                <div class="package_form">
+                    <P style="font-style: italic; color:rgb(85, 85, 85)">NOTE: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</P>
+                        {% csrf_token %}
+                        {% if form.name.errors %}
+                        {% endif %}
+                        {{ sender_form.as_p }}
+                        
+                        <button type="submit" value="submit" class="btn btn-primary">Next</button>
+                        {{ sender_form.media }}
+                    </div>
+        
+                </form>
+        </div>
     </div>
 
 {% endblock content %} 

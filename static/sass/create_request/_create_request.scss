@@ -1,0 +1,54 @@
+#new_request_body{
+    height: 100%;
+    padding: 5em 5em 5em 10em;
+}
+
+#new_request_body #request_layer .package_form button{
+    background-color: $color-main-orange;
+    border: $color-border;
+}
+
+#new_request_body #request_layer .package_form p{
+    padding: 0;
+    margin: 0;
+}
+
+#request_layer{
+    width: fit-content;
+    margin: auto;
+}
+
+#id_sender_phone,
+#id_sender_address_0,
+#id_recipient_name,
+#id_recipient_phone,
+#id_recipient_address_0,
+#id_package_description,
+#id_estimate_package_weight
+{
+    display: block;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+#id_sender_address_1,
+#id_sender_address_2,
+#id_recipient_address_1,
+#id_recipient_address_2  {      // latitude and longitude
+    display: none;
+}
+
+#id_fragile{
+    width: auto;
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    #new_request_body{
+        padding: 2em;
+    }
+}

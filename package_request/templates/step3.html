@@ -3,20 +3,22 @@
 {% block title %}3/3: Make a delivery request{% endblock title %}
 
 {% block content %}
-    <div class="request_body">
-        <h1>Please enter the package information bellow:</h1>
-        <br/>
-        <form action="{% url 'package_request_app:request_form_3_of_3' %}" method="post" >
-            <div class="package_form" style="position: relative; left: 20%; width: 60%;" >
-                {% csrf_token %}
-                {% if form.name.errors %}
-                {% endif %}
-                {{ package_form.as_p }}
-                
-                <button type="submit" class="save btn btn-default">Save</button>
-                {{ package_form.media }}
-            </div>
-        </form>
+    <div id="new_request_body">
+        <div id="request_layer">
+            <h2>Please enter the package information bellow:</h2>
+            <br/>
+            <form action="{% url 'package_request_app:request_form_3_of_3' %}" method="post" >
+                <div class="package_form">
+                    {% csrf_token %}
+                    {% if form.name.errors %}
+                    {% endif %}
+                    {{ package_form.as_p }}
+                    
+                    <button type="submit" value="submit" class="btn btn-primary">Save</button>
+                    {{ receiver_form.media }}
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock content %} 
