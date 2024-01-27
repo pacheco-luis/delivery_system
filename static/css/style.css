@@ -11,20 +11,53 @@ html {
 }
 
 body {
+  background-color: transparent;
   font-family: "Space Grotesk", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.6;
 }
 
+#body_bg {
+  position: absolute;
+  z-index: -990;
+  top: 3em;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+#body_bg_2 {
+  display: none; }
+
+#body_bg {
+  position: absolute;
+  z-index: -990;
+  top: 3em;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+#body_bg_2 {
+  display: none; }
+
 ul {
   list-style: none;
 }
 
 a {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
+@media screen and (max-width: 600px) {
+  #body_bg {
+    display: none; }
+
+  #body_bg_2 {
+    display: block;
+    position: absolute;
+    z-index: -990;
+    top: 3em;
+    left: 0;
+    width: 100%; } }
 .alert-wrapper {
   position: fixed;
   top: 6.8rem;
@@ -571,9 +604,7 @@ header .navigation .navigation-items a:hover:before {
   font-family: "Space Grotesk", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
-  line-height: 1.6;
-  background-color: rgb(253, 238, 219);
-}
+  line-height: 1.6; }
 
 .pack-list-table {
   border-collapse: collapse;
@@ -1045,11 +1076,10 @@ sidebar #primary_logo,
   background-image: url("../../images/login/taipei.png");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
-}
+  height: 100vh; }
 
 #sign_in_form {
-  position: absolute;
+  position: relative;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
@@ -1099,10 +1129,10 @@ sidebar #primary_logo,
   padding: 5em 5em 5em 10em;
 }
 
-#new_request_body #request_layer .package_form button {
+#new_request_body #request_layer form .package_form button {
   background-color: #FF6000;
   border: #f3f3f3;
-}
+  margin-top: 1em; }
 
 #new_request_body #request_layer .package_form p {
   padding: 0;
