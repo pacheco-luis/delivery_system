@@ -167,3 +167,6 @@ def editDriverAccount(request):
 
 def register(request):
     return render(request, 'register.html')
+  
+def viewCompanyInformation(request):
+    return render(request, 'company_info.html')

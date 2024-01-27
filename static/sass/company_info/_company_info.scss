@@ -1,0 +1,43 @@
+#company_about_page{
+  background-color: $color-tertiary-orange;
+  margin: 0;
+  padding: 0;
+}
+
+#company_about_page header nav{
+  padding: 0.1em 3em;
+  background-color: #454545;
+  text-transform: uppercase;
+  text-shadow: #fff;
+  font-weight: 600;
+}
+
+#nav_logo{
+  font-family: 'RoundslabSerif', sans-serif;
+  color: #fff;                                     
+}
+#primary_logo, #secondary_logo{
+  margin-right: 0.5em;
+}
+
+#company_about_page header nav #nav_logo img{
+  height: 2em;
+}
+
+#company_about_page header nav #sign_up_link{
+  font-size: medium;
+  background-color: #ff6000;
+  color: #fff;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+section {
+  padding: 2em;
+}
+
+@media screen and (max-width: 600px){
+  section .about-company-text{
+    font-size: 0.75em;
+  }
+}

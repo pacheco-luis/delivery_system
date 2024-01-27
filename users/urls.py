@@ -26,4 +26,7 @@ urlpatterns = [
     path('account/driver/', views.driverAccount, name='driver-account'),
     path('edit-customer-account/', views.editCustomerAccount, name='edit-customer-account'),
     path('edit-driver-account/', views.editDriverAccount, name='edit-driver-account'),
+    
+    # company contact information and about info
+    path('company-info/', views.viewCompanyInformation, name="view-company-info")
 ]

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Info</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <link href="https://fonts.cdnfonts.com/css/roundslabserif" rel="stylesheet">
+</head>
+<body id="company_about_page">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a id="nav_logo" class="navbar-brand" href="{% url "package_request_app:landing_page"%}">
+            <img id="primary_logo" src="{% static 'images/logo/swift-1000.png' %}" alt="logo">
+            <img id="secondary_logo" src="{% static 'images/logo/swift-logo-white-1000.png' %}" alt="logo">
+            <span id="company_name">swift courier</span>
+        </a>
+        <a href="{% url "package_request_app:landing_page"%}" id="sign_up_link" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Home Page</a>
+    </nav>
+</header>
+<section>
+  <div id="concern_info">
+    <div class="about_company_text">
+      <p>If you feel that we may have done something wrong, or if you have
+        suggestions on how we could improve our service, then please contact us 
+        at 999-999-STUFF
+      </p>
+    </div>
+  </div>
+  <div id ="contact_info">
+    <div class="about_company_text">
+      <p>
+        Do you wish to talk to an advisor or a manager? <br> Try these here: someone@something.com
+      </p>
+    </div>
+  </div>
+  <div id="future_plans">
+    <div class="about_company_text">
+      <p> We hope to improve our services in the future and keep being your preferred 
+        choice of delivery service.
+      </p>
+    </div>
+  </div>
+  <div id="terms_of_use">
+    <div class="about_company_text">
+      <p>
+        By using our services, you agree to trusting us with your inforation and location.
+        We will not be held responsible for any property lost that is outside of our control. 
+        Thank you for understanding. 
+      </p>
+    </div>
+  </div>
+  <div id="privacy_policy">
+    <div class="about_company_text">
+      <p>
+        Stuff regarding the privacy policy of the company..
+      </p>
+    </div>
+  </div>
+</section>
+  
+</body>
+</html>

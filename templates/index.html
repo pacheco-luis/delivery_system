@@ -23,18 +23,18 @@
                 <img id="secondary_logo" src="{% static 'images/logo/swift-logo-white-1000.png' %}" alt="logo">
                 <span id="company_name">swift courier</span>
             </a>
-            <a href="#" id="sign_up_link" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Sign up</a>
+            <a href="{% url "users:register"%}" id="sign_up_link" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Sign up</a>
         </nav>
     </header>
 
     <section id="homepage_first_section">
         <h2 id="main_title" >Delivery Made Simple</h2>
         <div class="homepage_btns">
-            <a href="#" id="login_customer" class="btn btn-secondary btn-lg" role="button"> Log in as Customer</a>
-            <a href="#" id="login_driver" class="btn btn-secondary btn-lg" role="button"> Log in as Driver</a>
+            <a href="{% url "users:login-customer"%}" id="login_customer" class="btn btn-secondary btn-lg" role="button"> Log in as Customer</a>
+            <a href="{% url "users:login-driver"%}" id="login_driver" class="btn btn-secondary btn-lg" role="button"> Log in as Driver</a>
         </div>
         <div id="extra_info">
-            <p>Don't have an account? <a id="extra_info_anchor"href="#">Create One!</a></p>
+            <p>Don't have an account? <a id="extra_info_anchor"href="{% url "users:register"%}">Create One!</a></p>
         </div>
     </section>
     <section id="homepage_second_section">
@@ -63,11 +63,11 @@
     </section>
     <footer>
         <ul>
-            <li><a href="#">Have a concern?</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Our Future Plans</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="{% url "users:view-company-info"%}">Have a concern?</a></li>
+            <li><a href="{% url "users:view-company-info"%}">Contact Us</a></li>
+            <li><a href="{% url "users:view-company-info"%}">Our Future Plans</a></li>
+            <li><a href="{% url "users:view-company-info"%}">Terms of Use</a></li>
+            <li><a href="{% url "users:view-company-info"%}">Privacy Policy</a></li>
         </ul>
 
     </footer>
