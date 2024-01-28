@@ -6,12 +6,28 @@
 <div id="sidebar">
     <ul>
       <li>
-        <a href="#" 
+        <a href="{% url 'package_request_app:home'%}" 
           id="" 
           class="sidebar_btns btn btn-secondary btn-lg" 
           role="button" 
           aria-pressed="true"
-          >something</a>
+          >
+          <span class="material-symbols-outlined">
+            home
+            </span>
+            Home</a>
+      </li>
+      <li>
+        <a href="{% url 'package_request_app:package_list'%}"
+          id="" 
+          class="sidebar_btns btn btn-secondary btn-lg" 
+          role="button" 
+          aria-pressed="true"
+          >
+          <span class="material-symbols-outlined">
+            hourglass
+            </span>
+          Active requests</a>
       </li>
       <li>
         <a href="#" 
@@ -19,23 +35,23 @@
           class="sidebar_btns btn btn-secondary btn-lg" 
           role="button" 
           aria-pressed="true"
-          >something</a>
+          >
+          <span class="material-symbols-outlined">
+            history
+            </span>
+          History</a>
       </li>
       <li>
-        <a href="#" 
+        <a href="{% url 'users:customer-account'%}"
           id="" 
           class="sidebar_btns btn btn-secondary btn-lg" 
           role="button" 
           aria-pressed="true"
-          >something</a>
-      </li>
-      <li>
-        <a href="#" 
-          id="" 
-          class="sidebar_btns btn btn-secondary btn-lg" 
-          role="button" 
-          aria-pressed="true"
-          >something</a>
+          >
+          <span class="material-symbols-outlined">
+            settings
+            </span>
+          Settings</a>
       </li>
       <li>
         <a 

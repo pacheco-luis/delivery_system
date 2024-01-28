@@ -23,7 +23,6 @@
 
 #main_nav #sidebar ul{
     padding: 0;
-    background-color: #45454559;
 }
 
 #main_nav #sidebar ul li .btn {
@@ -62,6 +61,22 @@
     margin-left: auto;
 }
 
+.material-symbols-outlined,
+#main_nav nav #sidebar ul li a span{
+    position: relative;
+    top: 0.2em;
+    line-height: 0;
+}
+
+#main_nav nav #sidebar ul li a{
+    text-align: left;
+    width: 100%;
+}
+
+#main_nav nav #sidebar ul li{
+    margin-bottom: 0.5em;
+}
+
 #main_nav nav #sign_out_link,
 #main_nav nav #sidebar ul li #sidebar_log_out,
 #main_nav nav #sidebar ul li .sidebar_btns{
@@ -71,14 +86,15 @@
 #main_nav nav #menu,
 #main_nav nav #close_menu{
     display: none;
-    text-align: center;
     padding: 0.2em 0.75em;
+    text-align: center;
     vertical-align: center;
 }
 
 #main_nav nav button span{
-    padding: 0;
-    margin-top: 0.2em;
+    position: relative;
+    top: 0.25em;
+    line-height: 0;
 }
 .button_orange{
     background-color: #ff6000;
@@ -94,18 +110,16 @@
     display: none;
 }
 
-@media screen and (max-width: 600px) {
-    #main_nav nav #menu,
-    #main_nav nav #close_menu{
-        display: none;
-    }
-}
 
 @media screen and (max-width: 600px) {
     #company_name, 
     #primary_logo,
     #main_nav nav #sidebar{
         display: none;
+    }
+
+    #main_nav nav #sidebar ul li{
+
     }
 
     #secondary_logo,
