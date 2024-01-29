@@ -343,3 +343,8 @@ def api_all_jobs(request):
         'success': True,
         'jobs': jobs,
     })
+    
+@login_required(login_url='users:login-driver')
+def cluster_route(request):
+    ### after integrating the algorithm get a route and render
+    return render(request, 'cluster_route.html')

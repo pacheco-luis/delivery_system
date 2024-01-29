@@ -1,0 +1,49 @@
+
+#cluster_map_body{
+    padding: 0 5em 0 20em;
+    margin: 0;
+}
+
+#cluster_map_body h3{
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+#cluster_map_container{
+    border-radius: 2em;
+    height: 40em;
+    overflow: hidden;
+    background-color: rgba(255, 0, 0, 0.13);
+    padding: 1em;
+}
+
+#cluster_map_container div{
+    width: 100%;
+    height: 90%;
+    padding: auto;
+    background-color: #818181;
+}
+#cluster_map_container a{
+    margin-top: 1em;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    #cluster_map_body{
+        padding: 0 2em 0 17em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #cluster_map_body h3{
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+    }
+
+    #cluster_map_body{
+        padding: 0 1em;
+    }
+    #cluster_map_container{
+        background-color: red;
+        height: 80vh;
+    }
+}
