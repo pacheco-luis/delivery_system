@@ -29,7 +29,7 @@
 {% endif %} -->
 
 
-<section class="vh-100" style="background-color: #f4f5f7;">
+<section class="vh-100">
     <div class=" py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-6 mb-4 mb-lg-0">
@@ -95,12 +95,12 @@
                     {% if request.user.is_customer %}
                       <a href="{% url 'users:edit-customer-account' %}"
                           class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          style="border-color: orange;"
+                          style="width: 100%; border-color: orange; background-color: #ff6000;"
                           ><i class="far fa-edit"></i> Edit</a>
                     {% else %}
                       <a href="{% url 'users:edit-driver-account' %}"
                           class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          style="border-color: orange;"
+                          style="width: 100%; border-color: orange; background-color: #ff6000;"
                           >Edit</a>
                     {% endif %}
                   </div>
