@@ -239,8 +239,9 @@ def all_packages(request):
     import json
     
     package_list = Package.objects.filter( customer=request.user.customer )
-        
-    return render(request, 'package_list.html', {'package_list' : package_list})
+    package_request_count = Package.objects.filter(customer=request.user.customer).count()
+    return render(request, 'package_list.html', {'package_list': package_list, 'package_request_count': package_request_count})
+
 
 @login_required(login_url='users:login-customer')
 def delete_request(request, id):

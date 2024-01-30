@@ -636,6 +636,22 @@ hr {
   clear: both;
   display: table; }
 
+.no-pack-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; }
+
+.no-pack-div img {
+  width: 390px;
+  height: auto;
+  max-width: 100%; }
+
+@media screen and (max-width: 700px) {
+  .no-pack-div img {
+    width: 100px;
+    height: 100px; } }
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
   .ps_cancelbtn, .ps_deletebtn {
