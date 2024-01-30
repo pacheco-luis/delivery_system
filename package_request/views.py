@@ -348,3 +348,7 @@ def api_all_jobs(request):
 def cluster_route(request):
     ### after integrating the algorithm get a route and render
     return render(request, 'cluster_route.html')
+
+@login_required(login_url='users:login-customer')
+def package_history(request):
+    return render(request, 'package_history.html')
