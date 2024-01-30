@@ -6,30 +6,66 @@
 
 {% block content %}
 <style>
+    @media only screen and (min-width: 1000px) {
+        .format {
+            padding-left: 5em;
+            padding-right: 0em;
+        }
+        .custom-input {
+            width: 200px; 
+            height: 35px;
+        }
+    }
+    @media only screen and (max-width: 1000px) {
+        .format {
+            padding-left: 22em;
+            padding-right: 10em;
+        }
+    }
+    @media only screen and (max-width: 900px) {
+        .format {
+            padding-left: 20em;
+            padding-right: 10em;
+        }
+    }
     @media only screen and (max-width: 800px) {
         .format {
-            font-size: 16px;
             padding-left: 20em;
             padding-right: 20em;
         }
     }
     @media only screen and (max-width: 700px) {
         .format {
-            font-size: 14px;
+            font-size: 16px;
+            padding-left: 15em;
+            padding-right: 15em;
+        }
+    }
+    @media only screen and (max-width: 600px) {
+        .format {
+            font-size: 16px;
             padding-left: 0em;
             padding-right: 0em;
         }
-        .cont{
-            padding-left: 5em;
-            padding-right: 5em;
+    }
+    @media only screen and (max-width: 500px) {
+        .custom-input {
+            width: 200px; 
+            height: 30px;
             padding: 1em;
         }
-        .container {
-            margin-bottom: 2em;
-            padding-top: 2em;
-            margin-top: 2em;
+    }
+    @media only screen and (max-width: 400px) {
+        .format {
+            font-size: 14px;
+            padding-left: 1.5em;
+            padding-right: 1em;
         }
-}
+        .custom-input {
+            width: 200px; 
+            height: 30px;
+        }
+    }
 
 </style>
 <section class="format">
@@ -40,15 +76,15 @@
                 <div class="card-body " style= "padding: 10em 5em 5 10em;">
                 <div class="row" style="padding: 1em;">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
-                        <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4">Edit Account:</p>
+                        <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4" style="text-align: center; width: 300px;">Edit Account:</p>
     
                         <form class="input mx-md-4" action="" method="POST">
                             {% csrf_token %}
 
                             {% for field in form %}
                             <div class=" d-flex flex-row align-items-center mb-4">
-                                <div class=" form-outline flex-fill mb-0" >
-                                    <label for="">{{ field.label }}</label><br>
+                                <div class="acct-div form-outline flex-fill mb-0" >
+                                    <label for="{{ field.id_for_label }}" class="text-right">{{ field.label }} </label><br>
                                     {{ field }}
                                     <br>
                                     {% for error in field.errors %}
