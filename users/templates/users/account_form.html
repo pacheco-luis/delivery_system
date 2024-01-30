@@ -6,23 +6,43 @@
 
 {% block content %}
 <style>
-    @media only screen and (max-width: 600px) {
-    section {
-        font-size: 13px;
+    @media only screen and (max-width: 800px) {
+        .format {
+            font-size: 16px;
+            padding-left: 20em;
+            padding-right: 20em;
+        }
     }
+    @media only screen and (max-width: 700px) {
+        .format {
+            font-size: 14px;
+            padding-left: 0em;
+            padding-right: 0em;
+        }
+        .cont{
+            padding-left: 5em;
+            padding-right: 5em;
+            padding: 1em;
+        }
+        .container {
+            margin-bottom: 2em;
+            padding-top: 2em;
+            margin-top: 2em;
+        }
 }
+
 </style>
-<section>
-    <div class="container" style="margin-bottom: 5vh; padding-top: 5vh; margin-top: 5vh;">
-        <div class=" d-flex justify-content-center align-items-center" style="padding-left: 10vh; padding-right: 10vh;">
+<section class="format">
+    <div class="container">
+        <div class=" cont d-flex justify-content-center align-items-center" style="padding-left: 10em; padding-right: 10em;">
             <div class="" >
             <div class="card text-black" style=" font-family: Space Grotesk, sans-serif;">
-                <div class="card-body " style= "padding: 10 5em 5 10em;">
-                <div class="row">
+                <div class="card-body " style= "padding: 10em 5em 5 10em;">
+                <div class="row" style="padding: 1em;">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
                         <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4">Edit Account:</p>
     
-                        <form class=" mx-md-4" action="" method="POST">
+                        <form class="input mx-md-4" action="" method="POST">
                             {% csrf_token %}
 
                             {% for field in form %}
