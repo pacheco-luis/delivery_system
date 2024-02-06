@@ -8,7 +8,7 @@
 #sign_in_form{
     position: relative;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 40%;
     left: 50%;
     width: fit-content;
     height: fit-content;
@@ -34,7 +34,6 @@
     #sign_in_form{
         width: 60%;
         padding: 2em;
-        margin: auto;
     }
 }
 
@@ -42,7 +41,6 @@
     #sign_in_form{
         width: 80%;
         padding: 2em;
-        margin: auto;
     }
 }
 
@@ -51,6 +49,5 @@
     #sign_in_form{
         width: 90%;
         padding: 2em;
-        margin: auto;
     }
 }

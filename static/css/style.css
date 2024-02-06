@@ -948,7 +948,7 @@ sidebar
 #sign_in_form {
   position: relative;
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 40%;
   left: 50%;
   width: fit-content;
   height: fit-content;
@@ -969,18 +969,15 @@ sidebar
 @media screen and (max-width: 600px) {
   #sign_in_form {
     width: 60%;
-    padding: 2em;
-    margin: auto; } }
+    padding: 2em; } }
 @media screen and (max-width: 470px) {
   #sign_in_form {
     width: 80%;
-    padding: 2em;
-    margin: auto; } }
+    padding: 2em; } }
 @media screen and (max-width: 400px) {
   #sign_in_form {
     width: 90%;
-    padding: 2em;
-    margin: auto; } }
+    padding: 2em; } }
 #new_request_body {
   height: 100%;
   padding: 5em 5em 5em 10em; }
