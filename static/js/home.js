@@ -1,4 +1,3 @@
 window.onload = function() {
-    document.getElementById('home-tab').classList.add("active");
-    document.getElementById('home-tab').classList.add("gradient-custom-2");
+    document.getElementById('sidebar_home_btn').classList.add("active_tab");
 };

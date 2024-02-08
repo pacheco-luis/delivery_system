@@ -119,3 +119,11 @@
 </section>
 
 {% endblock content %}
+
+{% block script_files %}
+    <script>
+      window.onload = function() {
+        document.getElementById('sidebar_settings_btn').classList.add("active_tab");
+    };
+    </script>
+{% endblock script_files %}

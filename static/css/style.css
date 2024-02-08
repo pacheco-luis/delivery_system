@@ -667,25 +667,10 @@ hr {
   top: 0;
   left: 0; }
 
-#main_nav #sidebar {
-  background-color: #ffffff83;
-  height: 95%;
-  width: fit-content;
-  position: fixed;
-  top: 4em;
-  left: 0;
-  padding: 1em; }
-
-#main_nav #sidebar ul {
-  padding: 0; }
-
-#main_nav #sidebar ul li .btn {
-  background-color: #ff6000; }
-
 #main_nav nav {
   padding: 0.2em 5em;
   background-color: #454545;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-shadow: #fff;
   font-weight: 600; }
 
@@ -693,40 +678,106 @@ hr {
   font-family: 'RoundslabSerif', sans-serif;
   color: #fff; }
 
-sidebar
 #primary_logo, #secondary_logo {
   margin-right: 0.5em; }
 
 #secondary_logo {
   display: none; }
 
+#sign_out_link span {
+  position: relative;
+  top: 0.12em; }
+
+#sign_out_link svg {
+  width: 1.25rem;
+  height: 1.25rem; }
+
+#sidebar {
+  background-color: #ffffff83;
+  box-shadow: 10px 10px 20px rgba(157, 157, 157, 0.62);
+  height: 95%;
+  width: fit-content;
+  position: fixed;
+  top: 4em;
+  left: 0;
+  padding: 1em; }
+
+#buton_container {
+  margin-bottom: 1rem;
+  width: fit-content;
+  height: fit-content;
+  margin-right: -25px;
+  margin-left: auto;
+  display: flex;
+  align-self: end;
+  border-radius: 100%;
+  padding: 3px;
+  background-color: #e2e2e2b5;
+  border: 0.5px solid #fff; }
+
+#buton_container * {
+  color: #000000; }
+
+#expand_sidebar {
+  height: 1rem;
+  width: 1rem;
+  display: block; }
+
+#colapse_sidebar {
+  overflow: visible;
+  display: none; }
+
+#sidebar ul {
+  color: #000;
+  padding: 0;
+  width: fit-content; }
+
+#sign_out_link,
+#sidebar ul li a {
+  font-size: 0.9rem;
+  font-weight: 500; }
+
+#sidebar ul li .sidebar_btns {
+  color: #000;
+  background-color: transparent;
+  border: none; }
+
+.sidebar_list_text {
+  margin-left: 0.5rem;
+  display: none; }
+
 #main_nav nav #sign_out_link,
 #main_nav nav #sidebar ul li #sidebar_log_out,
-#main_nav nav #sidebar ul li .sidebar_btns,
 #main_nav nav #menu,
 #main_nav nav #close_menu {
-  font-size: medium;
-  color: #fff;
   margin-right: 0;
   margin-left: auto; }
 
+#main_nav nav #sign_out_link {
+  background-color: #ff6000; }
+
 .material-symbols-outlined,
-#main_nav nav #sidebar ul li a span {
+#sidebar ul li a span {
   position: relative;
-  top: 0.2em;
+  top: 0.12em;
   line-height: 0; }
 
-#main_nav nav #sidebar ul li a {
+#sidebar ul li a {
   text-align: left;
   width: 100%; }
 
-#main_nav nav #sidebar ul li {
-  margin-bottom: 0.5em; }
+#sidebar ul li .active_tab {
+  background-color: #454545;
+  color: #fff; }
 
-#main_nav nav #sign_out_link,
-#main_nav nav #sidebar ul li #sidebar_log_out,
-#main_nav nav #sidebar ul li .sidebar_btns {
-  background-color: #ff6000; }
+#sidebar ul li a:hover {
+  background-color: #454545;
+  color: #fff; }
+
+#sidebar ul li {
+  margin-bottom: 1.25rem;
+  border-radius: 0;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.057); }
 
 #main_nav nav #menu,
 #main_nav nav #close_menu {
@@ -747,30 +798,43 @@ sidebar
 #main_nav nav #nav_logo img {
   height: 2em; }
 
-#main_nav nav #sidebar ul li #sidebar_log_out {
-  display: none; }
-
+@media screen and (min-width: 600px) {
+  #log_out_container {
+    display: none; } }
 @media screen and (max-width: 600px) {
   #company_name,
   #primary_logo,
   #main_nav nav #sidebar {
     display: none; }
 
+  #buton_container {
+    display: none; }
+
+  .sidebar_list_text {
+    display: inline; }
+
+  #sidebar ul {
+    padding: 0;
+    margin: 0;
+    width: 100%; }
+
   #secondary_logo,
   #main_nav nav #menu,
-  #main_nav nav #sidebar ul li .sidebar_btns,
-  #main_nav nav #sidebar ul li #sidebar_log_out {
+  #sidebar ul li .sidebar_btns,
+  #sidebar_log_out {
     display: block; }
 
   #main_nav nav {
     padding: 0.2em 2em; }
 
-  #main_nav nav #sidebar {
+  #sidebar {
     background-color: #fff;
     width: 100%;
-    top: 3.5em; }
+    top: 3.5rem;
+    padding: 2rem;
+    overflow-y: scroll; }
 
-  #main_nav nav #sign_out_link {
+  #sign_out_link {
     display: none; } }
 #user_home {
   background-image: url("../../images/home/background.jpg");
