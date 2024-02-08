@@ -10,6 +10,7 @@ urlpatterns = [
     path('delivery-request/step3/', views.package_form_handler, name='request_form_3_of_3'),
     path('successful/', views.sucess, name='successful'),
     path('package_list/', views.all_packages, name = 'package_list'),
+    path('package_history/', views.package_history, name = 'package_history'),
     path('job_list/', views.all_jobs, name = 'job_list'),
     path('job_list/<id>/', views.job_detail, name = 'job_detail'),
     path('job_current/', views.current_job, name = 'job_current'),
@@ -17,5 +18,4 @@ urlpatterns = [
     path('api/job_list/', views.api_all_jobs, name = 'api_job_list'),
     path('delete_request/<id>/', views.delete_request, name = 'delete_request'),
     path('cluster_route/', views.cluster_route, name = 'cluster_route'),
-    path('package_history/', views.package_history, name = 'package_history'),
 ]
