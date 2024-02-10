@@ -12,7 +12,7 @@ from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 # def home(request):
 #     return render(request, 'users/home.html')
 
-def loginCustomer(request):
+def login_user(request):
     page = 'customer'
     if request.user.is_authenticated:
         return redirect('package_request_app:home')
@@ -21,45 +21,34 @@ def loginCustomer(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        try:
-            user = User.objects.get(email=email, is_customer=True)
-            user = authenticate(request, email=email, password=password)
-        except:
-            messages.error(request, 'Email does not exist')
-            return redirect('users:login-customer')
+        if( 'customer' in request.POST ):
+            try:
+                user = User.objects.get(email=email, is_customer=True)
+                user = authenticate(request, email=email, password=password)
+            except:
+                messages.error(request, 'Email not registered as customer.')
+                return redirect('users:login')
 
-        if user is not None:
-            login(request, user)
-            return redirect('package_request_app:home')
-        else:
-            messages.error(request, 'Username and password do not match')
-            return redirect('users:login-customer')
+            if user is not None:
+                login(request, user)
+                return redirect('package_request_app:home')
+            else:
+                messages.error(request, 'Username and password do not match')
+                return redirect('users:login')
+        elif( 'driver' in request.POST ):
+            try:
+                user = User.objects.get(email=email, is_driver=True)
+                user = authenticate(request, email=email, password=password)
+            except:
+                messages.error(request, 'Email not registered as driver.')
+                return redirect('users:login')
 
-    context = {'page': page}
-    return render(request, 'sign-in.html', context)
-
-def loginDriver(request):
-    page = 'driver'
-    if request.user.is_authenticated:
-        return redirect('package_request_app:home')
-
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-
-        try:
-            user = User.objects.get(email=email, is_driver=True)
-            user = authenticate(request, email=email, password=password)
-        except:
-            messages.error(request, 'Email does not exist')
-            return redirect('users:login-driver')
-
-        if user is not None:
-            login(request, user)
-            return redirect('package_request_app:home')
-        else:
-            messages.error(request, 'Username and password do not match')
-            return redirect('users:login-driver')
+            if user is not None:
+                login(request, user)
+                return redirect('package_request_app:home')
+            else:
+                messages.error(request, 'Username and password do not match')
+                return redirect('users:login')
 
     context = {'page': page}
     return render(request, 'sign-in.html', context)
@@ -67,7 +56,7 @@ def loginDriver(request):
 def logoutCustomer(request):
     logout(request)
     messages.info(request, 'You have been logged out')
-    return redirect('users:login-customer')
+    return redirect('users:login')
 
 def logoutDriver(request):
     logout(request)

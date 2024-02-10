@@ -7,8 +7,7 @@ from . import views
 app_name = 'users'
 urlpatterns = [
     # authentication urls
-    path('login/customer/', views.loginCustomer, name='login-customer'),
-    path('login/driver/', views.loginDriver, name='login-driver'),
+    path('login/', views.login_user, name='login'),
     path('logout/customer/', views.logoutCustomer, name='logout-customer'),
     path('logout/driver/', views.logoutDriver, name='logout-driver'),
     path('register/', views.register, name='register'),
