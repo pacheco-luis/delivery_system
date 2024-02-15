@@ -1,9 +1,9 @@
-{% extends 'regbase.html' %}
+{% extends 'base.html' %}
 {% load bootstrap5 %}
 {% block title %}Sign Up{% endblock title %}
 
 {% block content %}
-<section class="vh-100" style="background-color: #eee;">
+<section class="" style="background-color: #eee; min-width:fit-content; min-height: 100vh; margin:0; padding: 2rem 0;">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
@@ -31,15 +31,11 @@
                                     {% endfor %}
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <input class="btn btn-primary btn-lg" type="submit" value="Register User">
+                                        <input class="btn btn-primary btn-lg" type="submit" value="Register">
                                     </div>
                                     <p>
                                         Already have an account?
-                                        {% if page == 'customer' %}
-                                        <a href="{% url 'users:login-customer' %}">Sign In</a>
-                                        {% elif page == 'driver' %}
-                                        <a href="{% url 'users:login-driver' %}">Sign In</a>
-                                        {% endif %}
+                                        <a href="{% url 'users:login' %}">Sign In</a>
                                     </p>
                                 </form>
                             </div>

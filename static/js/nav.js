@@ -14,12 +14,14 @@ window.onresize = function() {
     }
     else{
       menu_open_btn.style.display="block";
-      // menu_sidebar.style.display = "none";
+      menu_sidebar.style.display = "none";
       // log_out_container.style.display = "block";
     }
     menu_close_btn.style.display="none";
   }
 };
+
+
 
 // Get the container element
 var ul = document.getElementById("list_container");
@@ -111,5 +113,3 @@ function assign_active( btn_id ){
   // document.getElementById( btn_id ).className  += " active_tab";
 
 }
-
-

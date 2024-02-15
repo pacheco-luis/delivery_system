@@ -23,11 +23,7 @@
         <div id="links" class="form-group">
             <p>
                 Don't have an account?
-                {% if page == 'customer' %}
-                <a href="{% url 'users:register-customer' %}">Sign Up</a>
-                {% elif page == 'driver' %}
-                <a href="{% url 'users:register-driver' %}">Sign Up</a>
-                {% endif %}
+                <a href="{% url 'users:register' %}">Sign Up</a>
             </p>
             <p>
                 Forgot password?
@@ -40,7 +36,6 @@
         <div>
             <button type="submit" name="driver" value="Login" class="log_in_btns btn btn-primary">Log-in as driver</button>
         </div>
-        
     </form>
 </div>
 {% endblock content %}
