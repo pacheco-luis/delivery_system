@@ -13,7 +13,6 @@ from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 #     return render(request, 'users/home.html')
 
 def login_user(request):
-    page = 'customer'
     if request.user.is_authenticated:
         return redirect('package_request_app:home')
 
@@ -31,6 +30,7 @@ def login_user(request):
 
             if user is not None:
                 login(request, user)
+                request.session['sname'] = email
                 return redirect('package_request_app:home')
             else:
                 messages.error(request, 'Username and password do not match')
@@ -45,13 +45,13 @@ def login_user(request):
 
             if user is not None:
                 login(request, user)
+                request.session['sname'] = email
                 return redirect('package_request_app:home')
             else:
                 messages.error(request, 'Username and password do not match')
                 return redirect('users:login')
-
-    context = {'page': page}
-    return render(request, 'sign-in.html', context)
+            
+    return render(request, 'sign-in.html')
 
 def logoutCustomer(request):
     logout(request)

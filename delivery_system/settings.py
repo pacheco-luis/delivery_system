@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'delivery_system.urls'
@@ -167,3 +169,11 @@ PLACES_MAPS_API_KEY= "wGzwRFkoP4UW_AcThqIC"           # enable maps JavaScript a
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
+
+
+# Django session Configurations
+SESSION_EXPIRE_SECONDS = 172800                         # 48 hours = 172800
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True               # session will expire after last activity
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60    # grouping by minutes
+SESSION_COOKIE_AGE = 60*30                              # 30 minutes         
+SESSION_TIMEOUT_REDIRECT = '/login/'                    # route to login if timeout is detected

@@ -7,13 +7,13 @@ Django==4.2.3
 django-bootstrap-v5==1.0.11
 django-pdb==0.6.2
 django-phonenumber-field==7.1.0
+django-session-timeout==0.1.0
 idna==3.4
 phonenumberslite==8.13.19
 Pillow==10.0.0
 requests==2.31.0
-setuptools==68.2.2
+six==1.16.0
 soupsieve==2.5
 sqlparse==0.4.4
 typing_extensions==4.7.1
 urllib3==2.0.4
-wheel==0.42.0
