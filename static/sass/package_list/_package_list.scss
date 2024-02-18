@@ -3,10 +3,14 @@
     font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.6;
+    margin: 1 auto;
 }
 .pack-list-table {
     border-collapse: collapse;
     width: 100%;
+}
+.pack-list-h2 {
+    text-align: center;
 }
 .pack-list-table th{
     background-color:  rgb(89%, 54.5%, 16.1%);
@@ -98,7 +102,6 @@
 /* Modal Content/Box */
 .ps_modal-content {
     margin: 0 auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
-    // border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
     
@@ -142,15 +145,29 @@ hr {
     height: auto; 
     max-width: 100%; 
 }
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 700px) {
+    #pack-list-body {
+        margin-left: 3em;
+    }
     .no-pack-div img{
         width: 100px;
         height: 100px; 
     }
+
+}
+@media screen and (max-width: 400px) {
+    #pack-list-body {
+        font-size: 15.5px;
+    }
+    .pack-list-h2 h2 {
+        text-align: center;
+    }
+   
 }
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
     .ps_cancelbtn, .ps_deletebtn {
         width: 100%;
+        text-align: center;
     }
 }

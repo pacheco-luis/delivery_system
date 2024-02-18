@@ -514,11 +514,15 @@ header .navigation .navigation-items a:hover:before {
   font-family: "Space Grotesk", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
-  line-height: 1.6; }
+  line-height: 1.6;
+  margin: 1 auto; }
 
 .pack-list-table {
   border-collapse: collapse;
   width: 100%; }
+
+.pack-list-h2 {
+  text-align: center; }
 
 .pack-list-table th {
   background-color: #e38b29; }
@@ -648,14 +652,24 @@ hr {
   height: auto;
   max-width: 100%; }
 
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 700px) {
+  #pack-list-body {
+    margin-left: 3em; }
+
   .no-pack-div img {
     width: 100px;
     height: 100px; } }
+@media screen and (max-width: 400px) {
+  #pack-list-body {
+    font-size: 15.5px; }
+
+  .pack-list-h2 h2 {
+    text-align: center; } }
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
   .ps_cancelbtn, .ps_deletebtn {
-    width: 100%; } }
+    width: 100%;
+    text-align: center; } }
 * {
   margin: 0;
   padding: 0; }
