@@ -83,7 +83,7 @@ def haversine(coord1: object, coord2: object):
 
     return km
 
-@login_required(login_url='users:login-customer')
+@login_required(login_url='users:login')
 def sender_form_handler(request):
     import json
 
@@ -129,7 +129,7 @@ def sender_form_handler(request):
     
     return render(request,"step1.html", context=context)
 
-@login_required(login_url='users:login-customer')
+@login_required(login_url='users:login')
 def receiver_form_handler(request):
     import json
     
@@ -172,7 +172,7 @@ def receiver_form_handler(request):
     return render(request,"step2.html", context=context)
 
 
-@login_required(login_url='users:login-customer')
+@login_required(login_url='users:login')
 def package_form_handler(request):
     import json
     dollar_per_kilometer = 10 # NTD
@@ -234,7 +234,7 @@ def package_form_handler(request):
         
     return render( request, "step3.html", {'package_form': PACKAGE_FORM()})
 
-@login_required(login_url='users:login-customer')
+@login_required(login_url='users:login')
 def all_packages(request):
     import json
     
@@ -258,16 +258,24 @@ def landing_page( request ):
     return render( request, "../templates/index.html" )
 
 # HERE BE DRAGONS
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def all_jobs(request):
+    
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
     context = {
-        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+    'GOOGLE_MAPS_API_KEY': google_maps_api_key,
     }
     return render(request, 'job_list.html', context)
+    
 
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def job_detail(request, id):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
     job = Package.objects.get(pk=id)
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
 
@@ -288,8 +296,12 @@ def job_detail(request, id):
     }
     return render(request, 'job_detail.html', context)
 
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def current_job(request):
+    
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
     driver = request.user.driver
     job = Package.objects.filter(
@@ -325,12 +337,15 @@ def current_job(request):
     }
     return render(request, 'current_job.html', context)
 
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def completed_job(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
     return render(request, 'completed_job.html')
 
 @csrf_exempt
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def api_all_jobs(request):
     jobs = list(Package.objects.filter(status=Package.STATUS_PENDING).values())
     for job in jobs:
@@ -345,11 +360,18 @@ def api_all_jobs(request):
         'jobs': jobs,
     })
     
-@login_required(login_url='users:login-driver')
+@login_required(login_url='users:login')
 def cluster_route(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
     ### after integrating the algorithm get a route and render
     return render(request, 'cluster_route.html')
 
-@login_required(login_url='users:login-customer')
+@login_required(login_url='users:login')
 def package_history(request):
+    if request.user.is_customer is not True :
+        return render(request, '401.html')
     return render(request, 'package_history.html')
+
+def unauthorized(request):
+    return render(request, '401.html')

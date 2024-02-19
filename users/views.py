@@ -61,7 +61,7 @@ def logoutCustomer(request):
 def logoutDriver(request):
     logout(request)
     messages.info(request, 'You have been logged out')
-    return redirect('users:login-driver')
+    return redirect('users:login')
 
 def registerCustomer(request):
     page = 'customer'
