@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 18:04+0800\n"
+"POT-Creation-Date: 2024-02-21 23:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,22 @@ msgstr ""
 #: delivery_system/settings.py:136
 msgid "Chinese"
 msgstr "中文"
+
+#: package_request/templates/cluster_route.html:6
+msgid "This is the map of the route you must take to complete all requests."
+msgstr ""
+
+#: package_request/templates/cluster_route.html:8
+msgid "map"
+msgstr ""
+
+#: package_request/templates/cluster_route.html:9
+msgid "Undo"
+msgstr ""
+
+#: package_request/templates/cluster_route.html:9
+msgid "Return"
+msgstr ""
 
 #: package_request/templates/home.html:10
 msgid "Welcome home"
@@ -50,63 +66,100 @@ msgstr ""
 msgid "Current Jobs"
 msgstr ""
 
-#: package_request/templates/package_list.html:10
-msgid "Viewing current active requests"
+#: package_request/templates/package_history.html:9
+msgid "These are the past requests you have made: "
 msgstr ""
 
+#: package_request/templates/package_history.html:22
 #: package_request/templates/package_list.html:23
 msgid "Sender:"
 msgstr ""
 
+#: package_request/templates/package_history.html:23
 #: package_request/templates/package_list.html:24
 #: package_request/templates/package_list.html:61
 msgid "Receiver:"
 msgstr ""
 
+#: package_request/templates/package_history.html:24
 #: package_request/templates/package_list.html:25
 msgid "Date:"
 msgstr ""
 
+#: package_request/templates/package_history.html:25
+#: package_request/templates/package_history.html:61
 #: package_request/templates/package_list.html:26
 #: package_request/templates/package_list.html:62
 msgid "Destination:"
 msgstr ""
 
+#: package_request/templates/package_history.html:26
+#: package_request/templates/package_history.html:62
 #: package_request/templates/package_list.html:27
 #: package_request/templates/package_list.html:63
 msgid "Item Description:"
 msgstr ""
 
+#: package_request/templates/package_history.html:27
 #: package_request/templates/package_list.html:28
 msgid "Driver:"
 msgstr ""
 
+#: package_request/templates/package_history.html:38
 #: package_request/templates/package_list.html:39
 msgid "Delete Request"
 msgstr ""
 
+#: package_request/templates/package_history.html:39
 #: package_request/templates/package_list.html:40
 msgid "View Request"
 msgstr ""
 
+#: package_request/templates/package_history.html:44
 #: package_request/templates/package_list.html:45
 msgid "You are about to delete a request"
 msgstr ""
 
+#: package_request/templates/package_history.html:45
 #: package_request/templates/package_list.html:46
 msgid "Are you sure you want to delete this request?"
 msgstr ""
 
+#: package_request/templates/package_history.html:47
+#: package_request/templates/package_list.html:48
+msgid "Cancel"
+msgstr ""
+
+#: package_request/templates/package_history.html:48
+#: package_request/templates/package_list.html:49
+msgid "Delete"
+msgstr ""
+
+#: package_request/templates/package_history.html:57
 #: package_request/templates/package_list.html:58
 msgid "This is the information of your active request: "
 msgstr ""
 
+#: package_request/templates/package_history.html:58
 #: package_request/templates/package_list.html:59
 msgid "Date and Time:"
 msgstr ""
 
+#: package_request/templates/package_history.html:59
 #: package_request/templates/package_list.html:60
 msgid "Package ID:"
+msgstr ""
+
+#: package_request/templates/package_history.html:60
+msgid "Receiver: "
+msgstr ""
+
+#: package_request/templates/package_history.html:74
+msgid "You currently do not have any previous package requests on record."
+msgstr ""
+
+#: package_request/templates/package_list.html:10
+msgid "Viewing current active requests"
 msgstr ""
 
 #: package_request/templates/package_list.html:75
@@ -131,11 +184,11 @@ msgid "Please enter the receiver's information:"
 msgstr ""
 
 #: package_request/templates/step3.html:7
-msgid "Please enter the package information below:"
+msgid "Please enter the package description below:"
 msgstr ""
 
 #: package_request/templates/step3.html:17
-msgid "Save"
+msgid "Confirm Order"
 msgstr ""
 
 #: package_request/templates/successful_request.html:7
@@ -148,24 +201,40 @@ msgid ""
 "entered. Thank you for your patience!"
 msgstr ""
 
-#: package_request/templates/successful_request.html:9
+#: package_request/templates/successful_request.html:9 templates/401.html:25
 msgid "Return to homepage"
 msgstr ""
 
-#: templates/driver_sidebar.html:33
+#: templates/401.html:9
+msgid "401 - Unauthorized:"
+msgstr ""
+
+#: templates/401.html:21
+msgid "You do not have permission to view this resource."
+msgstr ""
+
+#: templates/customer_sidebar.html:28 templates/driver_sidebar.html:33
 msgid "Home"
+msgstr ""
+
+#: templates/customer_sidebar.html:42
+msgid "Parcels"
+msgstr ""
+
+#: templates/customer_sidebar.html:57 templates/driver_sidebar.html:74
+msgid "History"
+msgstr ""
+
+#: templates/customer_sidebar.html:70 templates/driver_sidebar.html:87
+msgid "Settings"
+msgstr ""
+
+#: templates/customer_sidebar.html:83 templates/navbar.html:45
+msgid "Log-out"
 msgstr ""
 
 #: templates/driver_sidebar.html:59
 msgid "Completed"
-msgstr ""
-
-#: templates/driver_sidebar.html:74
-msgid "History"
-msgstr ""
-
-#: templates/driver_sidebar.html:87
-msgid "Settings"
 msgstr ""
 
 #: templates/driver_sidebar.html:96
@@ -234,10 +303,6 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/navbar.html:45
-msgid "Log-out"
-msgstr ""
-
 #: templates/register.html:27
 msgid "Log-in"
 msgstr ""
@@ -263,6 +328,96 @@ msgstr ""
 
 #: templates/register.html:47
 msgid "Don't have an account? <br>Create one!"
+msgstr ""
+
+#: users/templates/customer/account.html:9
+msgid "User Profile:"
+msgstr ""
+
+#: users/templates/customer/account.html:11
+msgid "First Name:"
+msgstr ""
+
+#: users/templates/customer/account.html:12
+msgid "Last Name:"
+msgstr ""
+
+#: users/templates/customer/account.html:13
+msgid "Username:"
+msgstr ""
+
+#: users/templates/customer/account.html:14
+msgid "Email: "
+msgstr ""
+
+#: users/templates/customer/account.html:15
+msgid "Phone: "
+msgstr ""
+
+#: users/templates/customer/account.html:16
+msgid "Address: "
+msgstr ""
+
+#: users/templates/customer/account.html:18
+msgid "Profile Image: "
+msgstr ""
+
+#: users/templates/customer/account.html:24
+#: users/templates/customer/account_form.html:7
+msgid "Edit Account"
+msgstr ""
+
+#: users/templates/reset_password.html:11
+msgid "Password reset"
+msgstr ""
+
+#: users/templates/reset_password.html:12
+msgid ""
+"Enter your email address below, and we will email instructions for setting a "
+"new one."
+msgstr ""
+
+#: users/templates/reset_password.html:14
+msgid "Email Address"
+msgstr ""
+
+#: users/templates/reset_password.html:18
+msgid "Reset Password"
+msgstr ""
+
+#: users/templates/reset_password_complete.html:7
+msgid "Password reset complete"
+msgstr ""
+
+#: users/templates/reset_password_complete.html:10
+msgid "Your password has been reset successfully. You may log in again now."
+msgstr ""
+
+#: users/templates/reset_password_complete.html:13
+msgid "Go to login page"
+msgstr ""
+
+#: users/templates/reset_password_sent.html:9
+msgid "Password reset sent"
+msgstr ""
+
+#: users/templates/reset_password_sent.html:13
+msgid ""
+"\n"
+"                We have emailed you instructions for setting your password,\n"
+"                if an account exists with the email you entered.\n"
+"                You should receive them shortly.\n"
+"                <br>\n"
+"                <br>\n"
+"                If you do not receive an email,\n"
+"                please make sure you have entered the address you registered "
+"with,\n"
+"                and check your spam folder.\n"
+"                "
+msgstr ""
+
+#: users/templates/reset_password_sent.html:26
+msgid "Return to login"
 msgstr ""
 
 #: users/templates/sign-in.html:11

@@ -4,7 +4,7 @@
 {% block content %}
     <div id="new_request_body">
         <div id="request_layer">
-            <h2>{% trans "Please enter the package information below:"%}</h2>
+            <h2>{% trans "Please enter the package description below:"%}</h2>
             <br/>
             <form action="{% url 'package_request_app:request_form_3_of_3' %}" method="post" >
                 <div class="package_form">
@@ -13,7 +13,7 @@
                     {% endif %}
                     {{ package_form.as_p }}
                     {% comment %} Would it be a good idea to insert a cancel button here? {% endcomment %}
-                    <button type="submit" value="submit" class="btn btn-primary">{% trans "Save"%}</button>
+                    <button type="submit" value="submit" class="btn btn-primary">{% trans "Confirm Order"%}</button>
                     {{ receiver_form.media }}
                 </div>
             </form>

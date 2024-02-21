@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %}Packages{% endblock title %}
 
 {% block content %}
@@ -45,8 +45,8 @@
                                         <h1>{% trans "You are about to delete a request"%}</h1>
                                         <p>{% trans "Are you sure you want to delete this request?"%}</p>
                                         <div class="clearfix">
-                                            <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="ps_cancelbtn ps_del_button">Cancel</button>
-                                            <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="ps_deletebtn ps_del_button">Delete</button></a>
+                                            <button type="button" onclick="document.getElementById('deleteModal{{ package_obj.package_id }}').style.display='none'" class="ps_cancelbtn ps_del_button">{% trans "Cancel"%}</button>
+                                            <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="ps_deletebtn ps_del_button">{% trans "Delete"%}</button></a>
                                         </div>
                                         </div>
                                     </div>

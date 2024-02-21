@@ -3,10 +3,10 @@
 {% block title %}Route{% endblock title %}
 {% block content %}
 <div id="cluster_map_body" class="row">
-    <h3>This is the map of the route you must take to complete all requests.</h3>
+    <h3>{% trans "This is the map of the route you must take to complete all requests."%}</h3>
     <div id="cluster_map_container" class="col">
-        <div>map</div>
-        <a href="#" class="btn btn-secondary btn-lg" role="button" aria-pressed="true"><span class="material-symbols-outlined">undo</span> go back</a>
+        <div>{% trans "map"%}</div>
+        <a href="#" class="btn btn-secondary btn-lg" role="button" aria-pressed="true"><span class="material-symbols-outlined">{% trans "Undo"%}</span> {% trans "Return"%}</a>
     </div>
 
 </div>
