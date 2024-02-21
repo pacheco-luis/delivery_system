@@ -1,3 +1,14 @@
-<h2>Successfuly submited a request! </h2>
-<p>Please hang-on to your package while we send our agents to pick it up from your given address. </p>
-<a href="{% url 'package_request_app:home'%}"><button>Go back to home</button></a>
+{% extends "base.html" %}
+{% block title %} Request Submitted {% endblock title %}
+
+{% load i18n %}
+
+{% block content %}
+  <h2>{% trans "Successfuly submited a request! "%}</h2>
+  <p>{% trans "An employee will pass by to pick up the package from the address you entered. Thank you for your patience!"%} </p>
+  <a href="{% url 'package_request_app:home'%}"><button>{% trans "Return to homepage"%}</button></a>
+{% endblock content %}
+
+
+
+

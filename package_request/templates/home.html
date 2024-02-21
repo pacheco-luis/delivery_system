@@ -1,32 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %}Home{% endblock title %}
 {% block content %}
 
 <section id="user_home" class="vh-100 user-home-content-container" style="background-color: #f4f5f7;">
     <div class="row">
         <div id="user_heading" class="col-sm">
-            <h1>Welcome home <span style="text-transform: uppercase;"> {{ user.username }}</span>!</h1>
-            <h3>What would you like to do today? </h3>
+            <h1>{% trans "Welcome home"%} <span style="text-transform: uppercase;"> {{ user.username }}</span>!</h1>
+            <h3>{% trans "What would you like to do today?"%} </h3>
         </div>
         {% if request.user.is_customer %}
         <div class="btns_container col-sm">
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; padding: 1em;"
-                href="{% url 'package_request_app:request_form_1_of_3' %}">Create a Request</a>
+                href="{% url 'package_request_app:request_form_1_of_3' %}">{% trans "Create a Request"%}</a>
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; margin-top: 3em; padding: 1em;"
-                href="{% url 'package_request_app:package_list' %}">View progress</a>
+                href="{% url 'package_request_app:package_list' %}">{% trans "View progress"%}</a>
         </div>
         {% else %}
         <div class="btns_container col-sm">
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; padding: 1em;"
-                href="{% url 'package_request_app:job_list' %}">Jobs</a>
+                href="{% url 'package_request_app:job_list' %}">{% trans "Jobs"%}</a>
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; margin-top: 3em; padding: 1em;"
-                href="{% url 'package_request_app:job_current' %}">Current Jobs</a>
+                href="{% url 'package_request_app:job_current' %}">{% trans "Current Jobs"%}</a>
         </div>
         {% endif %}
     </div>

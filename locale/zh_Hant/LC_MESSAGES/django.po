@@ -1,0 +1,191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-21 01:50+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: delivery_system/settings.py:135
+msgid "English"
+msgstr "en"
+
+#: delivery_system/settings.py:136
+msgid "Chinese"
+msgstr "cn"
+
+#: package_request/templates/home.html:10
+msgid "Welcome home"
+msgstr ""
+
+#: package_request/templates/home.html:11
+msgid "What would you like to do today?"
+msgstr ""
+
+#: package_request/templates/home.html:17
+msgid "Create a Request"
+msgstr ""
+
+#: package_request/templates/home.html:20
+msgid "View progress"
+msgstr ""
+
+#: package_request/templates/home.html:26
+msgid "Jobs"
+msgstr ""
+
+#: package_request/templates/home.html:29 templates/driver_sidebar.html:46
+msgid "Current Jobs"
+msgstr ""
+
+#: templates/driver_sidebar.html:33
+msgid "Home"
+msgstr ""
+
+#: templates/driver_sidebar.html:59
+msgid "Completed"
+msgstr ""
+
+#: templates/driver_sidebar.html:74
+msgid "History"
+msgstr ""
+
+#: templates/driver_sidebar.html:87
+msgid "Settings"
+msgstr ""
+
+#: templates/driver_sidebar.html:96
+msgid "logout"
+msgstr ""
+
+#: templates/index.html:27
+msgid "Sign up"
+msgstr "註冊"
+
+#: templates/index.html:32
+msgid "Delivery Made Simple"
+msgstr "配送可以這麼簡單"
+
+#: templates/index.html:34
+msgid "Log in"
+msgstr ""
+
+#: templates/index.html:37 users/templates/sign-in.html:25
+msgid "Don't have an account?"
+msgstr "還沒有帳戶嗎？"
+
+#: templates/index.html:37
+msgid "Create One!"
+msgstr "趕快來建立吧！"
+
+#: templates/index.html:43
+msgid "What we do:"
+msgstr "我們的服務："
+
+#: templates/index.html:46
+msgid ""
+"We connect drivers with other users that wish to deliver packages.\n"
+"            Currently, our services are only offered between and within "
+"Taipei and Hualien."
+msgstr ""
+"我們為駕駛與需要寄送包裹的使用者建立橋樑。\n"
+"現階段，我們的服務範圍為台北市與花蓮縣之內與之間的往返配送。"
+
+#: templates/index.html:54
+msgid "Our Mission:"
+msgstr "我們的使命："
+
+#: templates/index.html:57
+msgid ""
+"We aim to make package deliveries as simple and as convenient as possible\n"
+"                while ensuring that the packages arrive safely at their "
+"destination."
+msgstr "我們致力於提升包裹配送之效率與便利性，同時確保包裹能安穩地抵達目的地。"
+
+#: templates/index.html:65 templates/register.html:55
+msgid "Have a concern?"
+msgstr "有其他疑問？"
+
+#: templates/index.html:66 templates/register.html:56
+msgid "Contact Us"
+msgstr "歡迎與我們聯繫。"
+
+#: templates/index.html:67 templates/register.html:57
+msgid "Our Future Plans"
+msgstr "我們的藍圖"
+
+#: templates/index.html:68 templates/register.html:58
+msgid "Terms of Use"
+msgstr "服務條款"
+
+#: templates/index.html:69 templates/register.html:59
+msgid "Privacy Policy"
+msgstr "隱私政策"
+
+#: templates/register.html:27
+msgid "Log-in"
+msgstr ""
+
+#: templates/register.html:33
+msgid ""
+"\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
+"to start sending packages between Hualien and Taipei.</p>\n"
+"            <br>\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">driver</span> "
+"to join our team and start delivering packages for users.</p>\n"
+"            "
+msgstr ""
+
+#: templates/register.html:47
+#, fuzzy
+#| msgid "Don't have an account?"
+msgid "Don't have an account? <br>Create one!"
+msgstr "還沒有帳戶嗎？"
+
+#: users/templates/sign-in.html:11
+msgid "Email address"
+msgstr "電子郵件地址:"
+
+#: users/templates/sign-in.html:13
+msgid "We'll keep your information safe."
+msgstr ""
+
+#: users/templates/sign-in.html:16
+msgid "Password"
+msgstr "密碼:"
+
+#: users/templates/sign-in.html:21
+msgid "Show Password"
+msgstr ""
+
+#: users/templates/sign-in.html:26
+msgid "Sign Up"
+msgstr "註冊"
+
+#: users/templates/sign-in.html:29
+msgid " Forgot password?"
+msgstr ""
+
+#: users/templates/sign-in.html:30
+msgid "Reset it here"
+msgstr ""
+
+#: users/templates/sign-in.html:34
+msgid "Log in as customer"
+msgstr "我是顧客"
+
+#: users/templates/sign-in.html:37
+msgid "Log in as driver"
+msgstr "我是駕駛"

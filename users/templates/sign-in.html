@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %}Sign In{% endblock title %}
 
 {% block content %}
@@ -8,33 +8,33 @@
     <form id="sign_in_form" action="" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <label for="log-in_email">Email address</label>
+            <label for="log-in_email">{% trans "Email address"%}</label>
             <input name="email" type="email" class="form-control" id="log-in_email" aria-describedby="emailHelp" placeholder="Enter your email" autocomplete="email">
-            <small id="emailHelp" class="form-text text-muted">We'll keep your information safe.</small>
+            <small id="emailHelp" class="form-text text-muted">{% trans "We'll keep your information safe."%}</small>
         </div>
         <div class="form-group">
-            <label for="password_input">Password</label>
+            <label for="password_input">{% trans "Password"%}</label>
             <input name="password" type="password" class="form-control" id="password_input" placeholder="Password">
         </div>
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="show_pwd_check_box" onclick="show_pwd()">
-            <label class="form-check-label" for="show_pwd_check_box">Show Password</label>
+            <label class="form-check-label" for="show_pwd_check_box">{% trans "Show Password"%}</label>
         </div>
         <div id="links" class="form-group">
             <p>
-                Don't have an account?
-                <a href="{% url 'users:register' %}">Sign Up</a>
+                {% trans "Don't have an account?"%}
+                <a href="{% url 'users:register' %}">{% trans "Sign Up"%}</a>
             </p>
             <p>
-                Forgot password?
-                <a href="{% url 'users:reset_password' %}">Reset it here</a>
+               {% trans " Forgot password?"%}
+                <a href="{% url 'users:reset_password' %}">{% trans "Reset it here"%}</a>
             </p>
         </div>
         <div>
-            <button id="customer_submit_btn" type="submit" name="customer" value="Login" class="log_in_btns btn btn-primary">Log-in as customer</button>
+            <button id="customer_submit_btn" type="submit" name="customer" value="Login" class="log_in_btns btn btn-primary">{% trans "Log in as customer"%}</button>
         </div>
         <div>
-            <button type="submit" name="driver" value="Login" class="log_in_btns btn btn-primary">Log-in as driver</button>
+            <button type="submit" name="driver" value="Login" class="log_in_btns btn btn-primary">{% trans "Log in as driver"%}</button>
         </div>
     </form>
 </div>

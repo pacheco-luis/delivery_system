@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-21 01:50+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: delivery_system/settings.py:135
+msgid "English"
+msgstr ""
+
+#: delivery_system/settings.py:136
+msgid "Chinese"
+msgstr "中文"
+
+#: package_request/templates/home.html:10
+msgid "Welcome home"
+msgstr ""
+
+#: package_request/templates/home.html:11
+msgid "What would you like to do today?"
+msgstr ""
+
+#: package_request/templates/home.html:17
+msgid "Create a Request"
+msgstr ""
+
+#: package_request/templates/home.html:20
+msgid "View progress"
+msgstr ""
+
+#: package_request/templates/home.html:26
+msgid "Jobs"
+msgstr ""
+
+#: package_request/templates/home.html:29 templates/driver_sidebar.html:46
+msgid "Current Jobs"
+msgstr ""
+
+#: templates/driver_sidebar.html:33
+msgid "Home"
+msgstr ""
+
+#: templates/driver_sidebar.html:59
+msgid "Completed"
+msgstr ""
+
+#: templates/driver_sidebar.html:74
+msgid "History"
+msgstr ""
+
+#: templates/driver_sidebar.html:87
+msgid "Settings"
+msgstr ""
+
+#: templates/driver_sidebar.html:96
+msgid "logout"
+msgstr ""
+
+#: templates/index.html:27
+msgid "Sign up"
+msgstr ""
+
+#: templates/index.html:32
+msgid "Delivery Made Simple"
+msgstr ""
+
+#: templates/index.html:34
+msgid "Log in"
+msgstr ""
+
+#: templates/index.html:37 users/templates/sign-in.html:25
+msgid "Don't have an account?"
+msgstr ""
+
+#: templates/index.html:37
+msgid "Create One!"
+msgstr ""
+
+#: templates/index.html:43
+msgid "What we do:"
+msgstr ""
+
+#: templates/index.html:46
+msgid ""
+"We connect drivers with other users that wish to deliver packages.\n"
+"            Currently, our services are only offered between and within "
+"Taipei and Hualien."
+msgstr ""
+
+#: templates/index.html:54
+msgid "Our Mission:"
+msgstr ""
+
+#: templates/index.html:57
+msgid ""
+"We aim to make package deliveries as simple and as convenient as possible\n"
+"                while ensuring that the packages arrive safely at their "
+"destination."
+msgstr ""
+
+#: templates/index.html:65 templates/register.html:55
+msgid "Have a concern?"
+msgstr ""
+
+#: templates/index.html:66 templates/register.html:56
+msgid "Contact Us"
+msgstr ""
+
+#: templates/index.html:67 templates/register.html:57
+msgid "Our Future Plans"
+msgstr ""
+
+#: templates/index.html:68 templates/register.html:58
+msgid "Terms of Use"
+msgstr ""
+
+#: templates/index.html:69 templates/register.html:59
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/register.html:27
+msgid "Log-in"
+msgstr ""
+
+#: templates/register.html:33
+msgid ""
+"\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
+"to start sending packages between Hualien and Taipei.</p>\n"
+"            <br>\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">driver</span> "
+"to join our team and start delivering packages for users.</p>\n"
+"            "
+msgstr ""
+
+#: templates/register.html:47
+msgid "Don't have an account? <br>Create one!"
+msgstr ""
+
+#: users/templates/sign-in.html:11
+msgid "Email address"
+msgstr ""
+
+#: users/templates/sign-in.html:13
+msgid "We'll keep your information safe."
+msgstr ""
+
+#: users/templates/sign-in.html:16
+msgid "Password"
+msgstr ""
+
+#: users/templates/sign-in.html:21
+msgid "Show Password"
+msgstr ""
+
+#: users/templates/sign-in.html:26
+msgid "Sign Up"
+msgstr ""
+
+#: users/templates/sign-in.html:29
+msgid " Forgot password?"
+msgstr ""
+
+#: users/templates/sign-in.html:30
+msgid "Reset it here"
+msgstr ""
+
+#: users/templates/sign-in.html:34
+msgid "Log in as customer"
+msgstr ""
+
+#: users/templates/sign-in.html:37
+msgid "Log in as driver"
+msgstr ""
