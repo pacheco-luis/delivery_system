@@ -19,6 +19,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+static/images/profiles/customer*
+static/images/profiles/driver*
 
 # Dependency directories
 node_modules/

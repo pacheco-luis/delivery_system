@@ -78,7 +78,7 @@
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
                         <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4" style="text-align: center; width: 300px;">Edit Account:</p>
     
-                        <form class="input mx-md-4" action="" method="POST">
+                        <form class="input mx-md-4" action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
 
                             {% for field in form %}
@@ -100,17 +100,9 @@
                                 value="Save">
                         </form> 
                     </div>
-                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
-                            {% if account.profile_image %}
-                                <img src="{{ account.profile_image.url }}" 
-                                    alt="user profile image" 
-                                    class="img-fluid" />
-                            {% else %}
-                                <img src="{% static 'images/user-default.png' %}" 
-                                    alt="profile image" 
-                                    class="img-fluid" />
-                            {% endif %}
-                        </div>
+                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
+                        <img src="{{ profile_img_url }}" alt="user profile image" class="img-fluid" />
+                    </div>
                     </div>
                 </div>
             </div>

@@ -42,11 +42,11 @@
                 {% else %}
                     <img src="{% static 'images/user-default.png' %}" , alt="user profile image" class="img-fluid my-5" style="width: 100px;" />
                 {% endif %}
-                <h5>{{ account.first_name }} {{ account.last_name }}</h5>
+                <h5 style="color: #6C757d;">{{ account.first_name }} {{ account.last_name }}</h5>
                 {% if user.is_customer %}
-                    <p>Customer</p>
+                    <p style="color:#212529;">Customer</p>
                 {% else %}
-                    <p>Driver</p>
+                    <p style="color:#212529;">Driver</p>
                 {% endif %}
                 
               </div>

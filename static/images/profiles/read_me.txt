@@ -1,0 +1,1 @@
+this directory is meant to store user's profile pictures

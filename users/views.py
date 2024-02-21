@@ -138,7 +138,12 @@ def editCustomerAccount(request):
             form.save()
             messages.success(request, 'Account was updated')
             return redirect('users:customer-account')
-    context = {'form': form}
+        
+    profile_img_url =  customer.profile_image.url if customer.profile_image else '/static/images/user-default.png'
+    context = {
+                'form': form,
+                'profile_img_url': profile_img_url,               
+               }
     return render(request, 'users/account_form.html', context)
 
 @login_required(login_url='users:login')
@@ -151,7 +156,12 @@ def editDriverAccount(request):
             form.save()
             messages.success(request, 'Account was updated')
             return redirect('users:driver-account')
-    context = {'form': form}
+        
+    profile_img_url =  driver.profile_image.url if driver.profile_image else '/static/images/user-default.png'
+    context = {
+                'form': form,
+                'profile_img_url': profile_img_url,               
+               }
     return render(request, 'users/account_form.html', context)
 
 def register(request):
