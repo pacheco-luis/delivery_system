@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 01:50+0800\n"
+"POT-Creation-Date: 2024-02-21 18:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,6 +47,108 @@ msgstr ""
 
 #: package_request/templates/home.html:29 templates/driver_sidebar.html:46
 msgid "Current Jobs"
+msgstr ""
+
+#: package_request/templates/package_list.html:10
+msgid "Viewing current active requests"
+msgstr ""
+
+#: package_request/templates/package_list.html:23
+msgid "Sender:"
+msgstr ""
+
+#: package_request/templates/package_list.html:24
+#: package_request/templates/package_list.html:61
+msgid "Receiver:"
+msgstr ""
+
+#: package_request/templates/package_list.html:25
+msgid "Date:"
+msgstr ""
+
+#: package_request/templates/package_list.html:26
+#: package_request/templates/package_list.html:62
+msgid "Destination:"
+msgstr ""
+
+#: package_request/templates/package_list.html:27
+#: package_request/templates/package_list.html:63
+msgid "Item Description:"
+msgstr ""
+
+#: package_request/templates/package_list.html:28
+msgid "Driver:"
+msgstr ""
+
+#: package_request/templates/package_list.html:39
+msgid "Delete Request"
+msgstr ""
+
+#: package_request/templates/package_list.html:40
+msgid "View Request"
+msgstr ""
+
+#: package_request/templates/package_list.html:45
+msgid "You are about to delete a request"
+msgstr ""
+
+#: package_request/templates/package_list.html:46
+msgid "Are you sure you want to delete this request?"
+msgstr ""
+
+#: package_request/templates/package_list.html:58
+msgid "This is the information of your active request: "
+msgstr ""
+
+#: package_request/templates/package_list.html:59
+msgid "Date and Time:"
+msgstr ""
+
+#: package_request/templates/package_list.html:60
+msgid "Package ID:"
+msgstr ""
+
+#: package_request/templates/package_list.html:75
+msgid "You have no package requests made."
+msgstr ""
+
+#: package_request/templates/step1.html:9
+msgid "Enter the necessary information to send a package:"
+msgstr ""
+
+#: package_request/templates/step1.html:13
+msgid "NOTE: Please ensure the information is true"
+msgstr ""
+
+#: package_request/templates/step1.html:19
+#: package_request/templates/step2.html:16
+msgid "Next"
+msgstr ""
+
+#: package_request/templates/step2.html:7
+msgid "Please enter the receiver's information:"
+msgstr ""
+
+#: package_request/templates/step3.html:7
+msgid "Please enter the package information below:"
+msgstr ""
+
+#: package_request/templates/step3.html:17
+msgid "Save"
+msgstr ""
+
+#: package_request/templates/successful_request.html:7
+msgid "Successfuly submited a request! "
+msgstr ""
+
+#: package_request/templates/successful_request.html:8
+msgid ""
+"An employee will pass by to pick up the package from the address you "
+"entered. Thank you for your patience!"
+msgstr ""
+
+#: package_request/templates/successful_request.html:9
+msgid "Return to homepage"
 msgstr ""
 
 #: templates/driver_sidebar.html:33
@@ -133,6 +235,10 @@ msgstr "服務條款"
 msgid "Privacy Policy"
 msgstr "隱私政策"
 
+#: templates/navbar.html:45
+msgid "Log-out"
+msgstr ""
+
 #: templates/register.html:27
 msgid "Log-in"
 msgstr ""
@@ -147,6 +253,18 @@ msgid ""
 "to join our team and start delivering packages for users.</p>\n"
 "            "
 msgstr ""
+
+#: templates/register.html:40
+#, fuzzy
+#| msgid "Log in as customer"
+msgid "Register as a customer"
+msgstr "我是顧客"
+
+#: templates/register.html:42
+#, fuzzy
+#| msgid "Log in as driver"
+msgid "Register as a driver"
+msgstr "我是駕駛"
 
 #: templates/register.html:47
 #, fuzzy
