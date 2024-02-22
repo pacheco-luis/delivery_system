@@ -2,11 +2,7 @@
 {% bootstrap_css %} 
 {% bootstrap_javascript %}
 {% load static %}
-
-{% load bootstrap5 %} 
-{% bootstrap_css %} 
-{% bootstrap_javascript %}
-{% load static %}
+{% load i18n %}
 
 <div id="sidebar">
   <button id="buton_container" type="button" class="btn btn-secondary" onclick="expandSidebar()">
@@ -94,7 +90,7 @@
         class="sidebar_btns btn btn-secondary btn-lg"
         role="button" aria-pressed="true">
         <span style="position:relative; top: 0.2em; line-height: 0;" class="material-symbols-outlined">{% trans "logout"%}</span> 
-        <span class="sidebar_list_text">{%trans"Log-out"%}</span>
+        <span class="sidebar_list_text">{%trans "Log-out"%}</span>
       </a>
       </li>
 
