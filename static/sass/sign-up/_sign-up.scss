@@ -1,0 +1,13 @@
+#sign-up_form div div #id_first_name,
+#sign-up_form div div #id_last_name,
+#sign-up_form div div #id_username,
+#sign-up_form div div #id_email,
+#sign-up_form div div #id_password1,
+#sign-up_form div div #id_password2
+{
+    width: 100%;
+}
+
+.not_dragable {
+    pointer-events: none;
+}
