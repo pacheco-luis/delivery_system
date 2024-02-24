@@ -373,7 +373,9 @@ def cluster_route(request):
 def package_history(request):
     if request.user.is_customer is not True :
         return render(request, '401.html')
-    return render(request, 'package_history.html')
+    customer = request.user.customer
+    package_history = Package.objects.filter(customer=customer, status=Package.STATUS_COMPLETED)
+    return render(request, 'package_history.html', {'package_history': package_history})
 
 def unauthorized(request):
     return render(request, '401.html')

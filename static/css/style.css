@@ -512,7 +512,7 @@ header .navigation .navigation-items a:hover:before {
     display: block; } }
 #pack-list-body {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 1.6rem;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
   margin: 1 auto; }
@@ -532,33 +532,35 @@ header .navigation .navigation-items a:hover:before {
   padding: 8px; }
 
 .pack-list-table tr:nth-child(even) {
-  background-color: #fbcd9b; }
+  background-color: #fce7d2; }
 
 .pack-list-table tr:nth-child(odd) {
-  background-color: #fce7d2; }
+  background-color: #fbcd9b; }
 
 * {
   box-sizing: border-box; }
 
 .ps_del_button {
-  background-color: #a91d04;
+  background-color: #c15e48;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 0.5em;
+  margin: 5px 0;
   border: none;
   cursor: pointer;
   width: 100%;
-  opacity: 0.9; }
+  opacity: 0.9;
+  border-radius: 20px; }
 
 .ps_view_button {
-  background-color: #04a920;
+  background-color: #0283ff;
   color: white;
-  padding: 14px 20px;
+  padding: 0.5em;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
-  opacity: 0.9; }
+  opacity: 0.9;
+  border-radius: 20px; }
 
 .ps_del_button:hover {
   opacity: 1; }
@@ -652,16 +654,18 @@ hr {
   height: auto;
   max-width: 100%; }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 600px) {
   #pack-list-body {
-    margin-left: 3em; }
+    margin-left: 3em;
+    margin-bottom: 1em; }
 
   .no-pack-div img {
     width: 100px;
     height: 100px; } }
 @media screen and (max-width: 400px) {
   #pack-list-body {
-    font-size: 15.5px; }
+    font-size: 15.5px;
+    margin-bottom: 0.5em; }
 
   .pack-list-h2 h2 {
     text-align: center; } }
