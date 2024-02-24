@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Create Routes{% endblock title %}
+{% block content %}
+
+<div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="submit" value="Create Routes">
+        </div>
+    </form>
+
+    <h3>Route List</h3>
+    <ul>
+        {% for route in routes %}
+        <li>Route: {{ route }}</li><br>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

@@ -30,80 +30,80 @@
 
 
 <section class="acc-sect" style=" font-family: Space Grotesk, sans-serif;">
-    <div class=" py-5 h-100">
-      <div class="acc-div row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-6 mb-4 mb-lg-0">
-          <div class="card mb-3" style="border-radius: .5rem;">
-            <div class="row g-0">
-              <div class=" col-md-4 gradient-custom-2 text-center text-white"
-                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                {% if account.profile_image %}
-                    <img src="{{ account.profile_image.url }}" , alt="user profile image" class="img-fluid my-5" style="width: 100px;" />
-                {% else %}
-                    <img src="{% static 'images/user-default.png' %}" , alt="user profile image" class="img-fluid my-5" style="width: 100px;" />
-                {% endif %}
-                <h5 style="color: #6C757d;">{{ account.first_name }} {{ account.last_name }}</h5>
-                {% if user.is_customer %}
-                    <p style="color:#212529;">Customer</p>
-                {% else %}
-                    <p style="color:#212529;">Driver</p>
-                {% endif %}
-                
-              </div>
-              <div class="col-md-8">
-                <div class="acc-card card-body p-4">
-                  <h6>Identification</h6>
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>First Name</h6>
-                      <p class="text-muted">{{ account.first_name }}</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>Last Name</h6>
-                      <p class="text-muted">{{ account.first_name }}</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>Username</h6>
-                      <p class="text-muted">{{ account.username }}</p>
-                    </div>
-                  </div>
+  <div class=" py-5 h-100">
+    <div class="acc-div row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class=" col-md-4 gradient-custom-2 text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              {% if account.profile_image %}
+              <img src="{{ account.profile_image.url }}" , alt="user profile image" class="img-fluid my-5"
+                style="width: 100px;" />
+              {% else %}
+              <img src="{% static 'images/user-default.png' %}" , alt="user profile image" class="img-fluid my-5"
+                style="width: 100px;" />
+              {% endif %}
+              <h5 style="color: #6C757d;">{{ account.first_name }} {{ account.last_name }}</h5>
+              {% if user.is_customer %}
+              <p style="color:#212529;">Customer</p>
+              {% else %}
+              <p style="color:#212529;">Driver</p>
+              {% endif %}
 
-                  <h6>Contact</h6>
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Email</h6>
-                      <p class="text-muted">{{ account.email }}</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>Phone</h6>
-                      <p class="text-muted">{{ account.phone_number }}</p>
-                    </div>
+            </div>
+            <div class="col-md-8">
+              <div class="acc-card card-body p-4">
+                <h6>Identification</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>First Name</h6>
+                    <p class="text-muted">{{ account.first_name }}</p>
                   </div>
+                  <div class="col-6 mb-3">
+                    <h6>Last Name</h6>
+                    <p class="text-muted">{{ account.last_name }}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Username</h6>
+                    <p class="text-muted">{{ account.username }}</p>
+                  </div>
+                </div>
 
-                  <h6>Location</h6>
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Address</h6>
-                      <p class="text-muted">{{ account.address }}</p>
-                    </div>
+                <h6>Contact</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{ account.email }}</p>
                   </div>
-                  <div class="d-flex justify-content-start">
-                    <!-- <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Login">Log in</button> -->
-                    {% if request.user.is_customer %}
-                      <a href="{% url 'users:edit-customer-account' %}"
-                          class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          style="width: 100%; border-color: orange; background-color: #ff6000;"
-                          ><i class="far fa-edit"></i> Edit</a>
-                    {% else %}
-                      <a href="{% url 'users:edit-driver-account' %}"
-                          class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          style="width: 100%; border-color: orange; background-color: #ff6000;"
-                          >Edit</a>
-                    {% endif %}
+                  <div class="col-6 mb-3">
+                    <h6>Phone</h6>
+                    <p class="text-muted">{{ account.phone_number }}</p>
                   </div>
+                </div>
+
+                <h6>Location</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Address</h6>
+                    <p class="text-muted">{{ account.address }}</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <!-- <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Login">Log in</button> -->
+                  {% if request.user.is_customer %}
+                  <a href="{% url 'users:edit-customer-account' %}"
+                    class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                    style="width: 100%; border-color: orange; background-color: #ff6000;"><i class="far fa-edit"></i>
+                    Edit</a>
+                  {% else %}
+                  <a href="{% url 'users:edit-driver-account' %}"
+                    class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                    style="width: 100%; border-color: orange; background-color: #ff6000;">Edit</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -111,14 +111,15 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 {% endblock content %}
 {% block script_files %}
-    <script>
-      window.onload = function() {
-        document.getElementById('sidebar_settings_btn').classList.add("active_tab");
-    };
-    </script>
+<script>
+  window.onload = function () {
+    document.getElementById('sidebar_settings_btn').classList.add("active_tab");
+  };
+</script>
 {% endblock script_files %}

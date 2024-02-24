@@ -26,4 +26,5 @@ static/images/profiles/driver*
 node_modules/
 db.sqlite3
 
-.sass-chache/
+.sass-cache/
+.env

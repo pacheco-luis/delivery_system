@@ -27,7 +27,14 @@
 <body class="del-body">
     <h1>Jobs</h1>
 
-    <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
+    <ul>
+        {% for route in routes %}
+        <li>Route: {{ route }}</li><br>
+        <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>
+        {% endfor %}
+    </ul>
+
+    <!-- <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
 
     <div class="job-details">
         <h2 class="job-name"></h2>
@@ -36,9 +43,9 @@
         <p class="job-price"></p>
         <p class="job-pickup-address"></p>
         <p class="job-delivery-address"></p>
-    </div>
+    </div> -->
 
-    <script>
+    <!-- <script>
         function initMap() {
             const taiwan = {
                 lat: 23.69781,
@@ -109,6 +116,6 @@
                 window.location.href = "/job_list/" + job.package_id + "/";
             });
         }
-    </script>
+    </script> -->
 </body>
 {% endblock content %}

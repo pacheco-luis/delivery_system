@@ -15,6 +15,7 @@ class User(AbstractUser):
     is_superuser = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -53,6 +54,20 @@ class Driver(models.Model):
     id_card = models.CharField(max_length=255, null=True, blank=True)
     driver_license = models.CharField(max_length=255, null=True, blank=True)
     profile_image = models.ImageField(upload_to='profiles/driver/', null=True, blank=True)
+
+    def __str__(self):
+        return str(self.username)
+
+# Manager models
+class Manager(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    manager_id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
+    username = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(max_length=255, null=True, blank=True)
+    profile_image = models.ImageField(upload_to='profiles/manager/', null=True, blank=True)
 
     def __str__(self):
         return str(self.username)

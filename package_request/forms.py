@@ -34,7 +34,7 @@ class PACKAGE_FORM(forms.ModelForm):
     
     class Meta:
         model = Package
-        fields = [ 'package_description', 'estimate_package_weight', 'fragile' ]
+        fields = ['package_description', 'estimate_package_weight', 'fragile', 'width', 'height', 'depth', 'estimate_package_weight_value']
         
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
