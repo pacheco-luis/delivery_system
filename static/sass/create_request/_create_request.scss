@@ -6,7 +6,15 @@
 #new_request_body #request_layer form .package_form button{
     background-color: $color-main-orange;
     border: $color-border;
-    margin-top: 1em;
+}
+#new_request_body #request_layer form .package_form a,
+#new_request_body #request_layer form .package_form button{
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+#new_request_body #request_layer form .package_form a{
+    font-size: 0.9rem;
 }
 
 #new_request_body #request_layer .package_form p{
@@ -15,7 +23,7 @@
 }
 
 #request_layer{
-    width: fit-content;
+    max-width: 100vh;
     margin: auto;
 }
 
@@ -28,7 +36,7 @@
 #id_estimate_package_weight
 {
     display: block;
-    width: 100%;
+    width: 50%;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -50,6 +58,17 @@
 
 @media screen and (max-width: 600px) {
     #new_request_body{
-        padding: 2em;
+        padding: 0.5rem;
+    }
+
+    #id_sender_phone,
+    #id_sender_address_0,
+    #id_recipient_name,
+    #id_recipient_phone,
+    #id_recipient_address_0,
+    #id_package_description,
+    #id_estimate_package_weight
+    {
+        width: 100%;
     }
 }

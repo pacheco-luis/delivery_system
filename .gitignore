@@ -28,7 +28,7 @@ db.sqlite3
 
 
 ### SASS
-.sass-chache/
+.sass-cache/
 
 
 ### pipenv dependency

@@ -16,12 +16,21 @@
                         {% endif %}
                         {{ sender_form.as_p }}
                         
-                        <button type="submit" value="submit" class="btn btn-primary">{% trans "Next"%}</button>
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary">{% trans "Next"%}</button>
+                        <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">Cancel</a>
                         {{ sender_form.media }}
-                    </div>
+                </div>
         
                 </form>
         </div>
     </div>
 
 {% endblock content %} 
+
+{% block script_files %}
+    <script>
+      window.onload = function() {
+        document.getElementById('sidebar_new_request_btn').classList.add("active_tab");
+    };
+    </script>
+{% endblock script_files %}
