@@ -3,6 +3,7 @@ from users.models import Customer, Driver
 from phonenumber_field.modelfields import PhoneNumberField
 from places.fields import PlacesField
 import uuid
+from django.utils.translation import gettext_lazy as _, gettext
 
 # Create your models here.
 class Package(models.Model):
@@ -28,12 +29,12 @@ class Package(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, null=True, blank=True, on_delete=models.CASCADE)
     sender_phone = PhoneNumberField(region='TW', blank=False)
-    sender_address = PlacesField(blank = True)
+    sender_address = PlacesField(blank = True, verbose_name=_("sender address"))
     recipient_name = models.CharField(max_length=200, blank=False)
-    recipient_phone = PhoneNumberField(region='TW' , blank=False)
-    recipient_address = PlacesField(blank=True)
-    package_description = models.CharField(max_length=200  , blank=False)
-    fragile = models.BooleanField()
+    recipient_phone = PhoneNumberField(region='TW' , blank=False, verbose_name=_("recipient phone"))
+    recipient_address = PlacesField(blank=True, verbose_name=_("recipient address"))
+    package_description = models.CharField(max_length=200  , blank=False, verbose_name=_("package description"))
+    fragile = models.BooleanField(verbose_name=_("fragile?"))
     estimate_package_weight = models.CharField( max_length=5, choices=WEIGHT_CHOICES )
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUSES, default=STATUS_PENDING)

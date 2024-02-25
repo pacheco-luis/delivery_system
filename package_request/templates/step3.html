@@ -13,8 +13,8 @@
                     {% endif %}
                     {{ package_form.as_p }}
                     {% comment %} Would it be a good idea to insert a cancel button here? {% endcomment %}
-                    <button type="submit" value="submit" class="btn btn-primary">{% trans "Confirm request"%}</button>
-                    <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">Cancel</a>
+                    <button type="submit" value="submit" class="btn btn-primary">{% trans "Confirm order"%}</button>
+                    <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">{% trans "Cancel"%}</a>
                     {{ receiver_form.media }}
                 </div>
             </form>

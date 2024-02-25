@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 23:48+0800\n"
+"POT-Creation-Date: 2024-02-25 16:38+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,19 +26,55 @@ msgstr ""
 msgid "Chinese"
 msgstr "中文"
 
-#: package_request/templates/cluster_route.html:6
+#: package_request/forms.py:8
+msgid "Sender phone:"
+msgstr ""
+
+#: package_request/forms.py:25
+msgid "Recipient name:"
+msgstr ""
+
+#: package_request/forms.py:42
+msgid "Package description"
+msgstr ""
+
+#: package_request/forms.py:47
+msgid "Estimated package weight:"
+msgstr ""
+
+#: package_request/models.py:32
+msgid "sender address"
+msgstr ""
+
+#: package_request/models.py:34
+msgid "recipient phone"
+msgstr ""
+
+#: package_request/models.py:35
+msgid "recipient address"
+msgstr ""
+
+#: package_request/models.py:36
+msgid "package description"
+msgstr ""
+
+#: package_request/models.py:37
+msgid "fragile?"
+msgstr ""
+
+#: package_request/templates/cluster_route.html:7
 msgid "This is the map of the route you must take to complete all requests."
 msgstr ""
 
-#: package_request/templates/cluster_route.html:8
+#: package_request/templates/cluster_route.html:9
 msgid "map"
 msgstr ""
 
-#: package_request/templates/cluster_route.html:9
+#: package_request/templates/cluster_route.html:10
 msgid "Undo"
 msgstr ""
 
-#: package_request/templates/cluster_route.html:9
+#: package_request/templates/cluster_route.html:10
 msgid "Return"
 msgstr ""
 
@@ -62,7 +98,7 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
-#: package_request/templates/home.html:29 templates/driver_sidebar.html:46
+#: package_request/templates/home.html:29 templates/driver_sidebar.html:42
 msgid "Current Jobs"
 msgstr ""
 
@@ -87,14 +123,14 @@ msgid "Date:"
 msgstr ""
 
 #: package_request/templates/package_history.html:25
-#: package_request/templates/package_history.html:61
+#: package_request/templates/package_history.html:45
 #: package_request/templates/package_list.html:26
 #: package_request/templates/package_list.html:62
 msgid "Destination:"
 msgstr ""
 
 #: package_request/templates/package_history.html:26
-#: package_request/templates/package_history.html:62
+#: package_request/templates/package_history.html:46
 #: package_request/templates/package_list.html:27
 #: package_request/templates/package_list.html:63
 msgid "Item Description:"
@@ -105,61 +141,61 @@ msgstr ""
 msgid "Driver:"
 msgstr ""
 
-#: package_request/templates/package_history.html:38
-#: package_request/templates/package_list.html:39
-msgid "Delete Request"
+#: package_request/templates/package_history.html:41
+msgid "This is the information of your past request: "
 msgstr ""
 
-#: package_request/templates/package_history.html:39
-#: package_request/templates/package_list.html:40
-msgid "View Request"
-msgstr ""
-
-#: package_request/templates/package_history.html:44
-#: package_request/templates/package_list.html:45
-msgid "You are about to delete a request"
-msgstr ""
-
-#: package_request/templates/package_history.html:45
-#: package_request/templates/package_list.html:46
-msgid "Are you sure you want to delete this request?"
-msgstr ""
-
-#: package_request/templates/package_history.html:47
-#: package_request/templates/package_list.html:48
-msgid "Cancel"
-msgstr ""
-
-#: package_request/templates/package_history.html:48
-#: package_request/templates/package_list.html:49
-msgid "Delete"
-msgstr ""
-
-#: package_request/templates/package_history.html:57
-#: package_request/templates/package_list.html:58
-msgid "This is the information of your active request: "
-msgstr ""
-
-#: package_request/templates/package_history.html:58
+#: package_request/templates/package_history.html:42
 #: package_request/templates/package_list.html:59
 msgid "Date and Time:"
 msgstr ""
 
-#: package_request/templates/package_history.html:59
+#: package_request/templates/package_history.html:43
 #: package_request/templates/package_list.html:60
 msgid "Package ID:"
 msgstr ""
 
-#: package_request/templates/package_history.html:60
+#: package_request/templates/package_history.html:44
 msgid "Receiver: "
 msgstr ""
 
-#: package_request/templates/package_history.html:74
+#: package_request/templates/package_history.html:57
 msgid "You currently do not have any previous package requests on record."
 msgstr ""
 
 #: package_request/templates/package_list.html:10
 msgid "Viewing current active requests"
+msgstr ""
+
+#: package_request/templates/package_list.html:39
+msgid "Delete Request"
+msgstr ""
+
+#: package_request/templates/package_list.html:40
+msgid "View Request"
+msgstr ""
+
+#: package_request/templates/package_list.html:45
+msgid "You are about to delete a request"
+msgstr ""
+
+#: package_request/templates/package_list.html:46
+msgid "Are you sure you want to delete this request?"
+msgstr ""
+
+#: package_request/templates/package_list.html:48
+#: package_request/templates/step1.html:20
+#: package_request/templates/step2.html:17
+#: package_request/templates/step3.html:18
+msgid "Cancel"
+msgstr ""
+
+#: package_request/templates/package_list.html:49
+msgid "Delete"
+msgstr ""
+
+#: package_request/templates/package_list.html:58
+msgid "This is the information of your active request: "
 msgstr ""
 
 #: package_request/templates/package_list.html:75
@@ -188,7 +224,7 @@ msgid "Please enter the package description below:"
 msgstr ""
 
 #: package_request/templates/step3.html:17
-msgid "Confirm Order"
+msgid "Confirm order"
 msgstr ""
 
 #: package_request/templates/successful_request.html:7
@@ -213,32 +249,41 @@ msgstr ""
 msgid "You do not have permission to view this resource."
 msgstr ""
 
-#: templates/customer_sidebar.html:28 templates/driver_sidebar.html:33
+#: templates/customer_sidebar.html:28 templates/driver_sidebar.html:29
 msgid "Home"
 msgstr ""
 
 #: templates/customer_sidebar.html:42
-msgid "Parcels"
+msgid "Arrange Delivery"
 msgstr ""
 
-#: templates/customer_sidebar.html:57 templates/driver_sidebar.html:74
+#: templates/customer_sidebar.html:56
+msgid "View Progress"
+msgstr ""
+
+#: templates/customer_sidebar.html:71 templates/driver_sidebar.html:70
 msgid "History"
 msgstr ""
 
-#: templates/customer_sidebar.html:70 templates/driver_sidebar.html:87
+#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:83
 msgid "Settings"
 msgstr ""
 
-#: templates/customer_sidebar.html:83 templates/navbar.html:45
+#: templates/customer_sidebar.html:97
 msgid "Log-out"
 msgstr ""
 
-#: templates/driver_sidebar.html:59
+#: templates/driver_sidebar.html:55
 msgid "Completed"
 msgstr ""
 
-#: templates/driver_sidebar.html:96
+#: templates/driver_sidebar.html:92
 msgid "logout"
+msgstr ""
+
+#: templates/driver_sidebar.html:93 templates/navbar.html:21
+#: templates/navbar.html:32
+msgid "Log out"
 msgstr ""
 
 #: templates/index.html:27

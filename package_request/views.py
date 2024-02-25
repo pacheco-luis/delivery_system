@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import requests
-
+from django.utils.translation import get_language, gettext
 
 
 # !!!!!!!!!!!! GLOBAL VARIABLES !!!!!!!!!!!!!!!!
@@ -87,6 +87,9 @@ def haversine(coord1: object, coord2: object):
 def sender_form_handler(request):
     import json
 
+    #print("Current language:", get_language())
+    #print("Translation of 'senderphone':", gettext("senderphone"))
+
     if request.method == 'POST':
         form = SENDER_FORM(request.POST)
 
@@ -105,7 +108,7 @@ def sender_form_handler(request):
             
             if addr_stat[0] == False:
                 messages.error(request, "Your address must be wihin 10 km of station: " + stations_addr[1] )
-                return render(request,"step1.html", {'sender_form': SENDER_FORM(request.POST)} )
+                return render(request, "step1.html", {'sender_form': SENDER_FORM(request.POST)} )
             
             # print( form.cleaned_data )
             request.session['sender_data'] = json.dumps(raw, default=str)

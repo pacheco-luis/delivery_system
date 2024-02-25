@@ -14,7 +14,7 @@
                     {{ receiver_form.as_p }}
                     
                     <button type="submit" value="submit" class="btn btn-primary">{% trans "Next"%}</button>
-                    <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">Cancel</a>
+                    <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">{% trans "Cancel"%}</a>
                     {{ receiver_form.media }}
                 </div>
             </form>
