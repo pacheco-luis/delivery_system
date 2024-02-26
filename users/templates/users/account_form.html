@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% load static %}
+{% load i18n %}
+
+{% comment %} Main Account Editing Page for Driver and Customer {% endcomment %}
 
 {% block title %}Edit Account{% endblock %}
 
@@ -76,7 +79,7 @@
                 <div class="card-body " style= "padding: 10em 5em 5 10em;">
                 <div class="row" style="padding: 1em;">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
-                        <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4" style="text-align: center; width: 300px;">Edit Account:</p>
+                        <p class="text-center h1 fw-bold mb-5 mx-md-4 mt-4" style="text-align: center; width: 300px;">{% trans "Editing Account:"%}</p>
     
                         <form class="input mx-md-4" action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -97,7 +100,7 @@
                                 class="btn btn-primary btn-block fa-lg"
                                 type="submit"
                                 style="border-color: orange; background-color: #ff6000;"
-                                value="Save">
+                                value= {% trans "Save"%}>
                         </form> 
                     </div>
                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">

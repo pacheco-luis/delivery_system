@@ -1,33 +1,13 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block title %}Account{% endblock title %}
 
 {% block content %}
 
-<!-- <h1>User Profile</h1>
-
-<h3>First Name: </h3> {{ account.first_name }}
-<h3>Last Name: </h3> {{ account.last_name }}
-<h3>Username: </h3> {{ account.username }}
-<h3>Email: </h3> {{ account.email }}
-<h3>Phone: </h3> {{ account.phone_number }}
-<h3>Address: </h3> {{ account.address }}
-{% if account.profile_image %}
-<h3>Profile Image: </h3>
-<img src="{{ account.profile_image.url }} ">
-{% else %}
-<img src="{% static 'images/user-default.png' %}" , alt="user profile image">
-<br>
-{% endif %}
-
-{% if request.user.is_customer %}
-<a href="{% url 'users:edit-customer-account' %}">Edit</a>
-{% else %}
-<a href="{% url 'users:edit-driver-account' %}">Edit</a>
-{% endif %} -->
-
+{% comment %} Main Account Page for Customer and Driver{% endcomment %}
 
 <section class="acc-sect" style=" font-family: Space Grotesk, sans-serif;">
     <div class=" py-5 h-100">
@@ -44,49 +24,49 @@
                 {% endif %}
                 <h5 style="color: #6C757d;">{{ account.first_name }} {{ account.last_name }}</h5>
                 {% if user.is_customer %}
-                    <p style="color:#212529;">Customer</p>
+                    <p style="color:#212529;">{% trans "Customer"%}</p>
                 {% else %}
-                    <p style="color:#212529;">Driver</p>
+                    <p style="color:#212529;">{% trans "Driver"%}</p>
                 {% endif %}
                 
               </div>
               <div class="col-md-8">
                 <div class="acc-card card-body p-4">
-                  <h6>Identification</h6>
+                  <h6>{% trans "Identification"%}</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
-                      <h6>First Name</h6>
+                      <h6>{% trans "First Name"%}</h6>
                       <p class="text-muted">{{ account.first_name }}</p>
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Last Name</h6>
+                      <h6>{% trans "Last Name"%}</h6>
                       <p class="text-muted">{{ account.last_name }}</p>
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Username</h6>
+                      <h6>{% trans "Username"%}</h6>
                       <p class="text-muted">{{ account.username }}</p>
                     </div>
                   </div>
 
-                  <h6>Contact</h6>
+                  <h6>{% trans "Contact"%}</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
-                      <h6>Email</h6>
+                      <h6>{% trans "Email"%}</h6>
                       <p class="text-muted">{{ account.email }}</p>
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Phone</h6>
+                      <h6>{% trans "Phone"%}</h6>
                       <p class="text-muted">{{ account.phone_number }}</p>
                     </div>
                   </div>
 
-                  <h6>Location</h6>
+                  <h6>{% trans "Location"%}</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
-                      <h6>Address</h6>
+                      <h6>{% trans "Address"%}</h6>
                       <p class="text-muted">{{ account.address }}</p>
                     </div>
                   </div>
@@ -96,12 +76,12 @@
                       <a href="{% url 'users:edit-customer-account' %}"
                           class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           style="width: 100%; border-color: orange; background-color: #ff6000;"
-                          ><i class="far fa-edit"></i> Edit</a>
+                          ><i class="far fa-edit"></i> {% trans "Edit"%}</a>
                     {% else %}
                       <a href="{% url 'users:edit-driver-account' %}"
                           class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           style="width: 100%; border-color: orange; background-color: #ff6000;"
-                          >Edit</a>
+                          >{% trans "Edit"%}</a>
                     {% endif %}
                   </div>
                 </div>

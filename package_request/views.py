@@ -162,7 +162,7 @@ def receiver_form_handler(request):
                 return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
             
             request.session['receiver_data'] = json.dumps(r_raw, default=str)
-            del request.session['sender_addr_stat']
+            #del request.session['sender_addr_stat']
             
             return redirect('package_request_app:request_form_3_of_3')
 
