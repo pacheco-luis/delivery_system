@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from package_request.forms import SENDER_FORM, RECEIVER_FORM, PACKAGE_FORM
 from django.contrib import messages
 from users.models import Customer
-from package_request.models import Package
+from package_request.models import Package, Route
 from django.contrib.auth.decorators import login_required
 from places import Places
 from decimal import Decimal
@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import requests
 from django.utils.translation import get_language, gettext
+from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
+
 
 
 # !!!!!!!!!!!! GLOBAL VARIABLES !!!!!!!!!!!!!!!!
@@ -213,10 +215,8 @@ def package_form_handler(request):
                 res = req.json()
                 print(res['rows'])
 
-                # distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
-                # duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
-                distance = 1
-                duration = 1
+                distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
+                duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
                 
                 package_obj.distance = round(distance / 1000, 2) # kilometers
                 package_obj.duration = int(duration / 60) # minutes
@@ -269,9 +269,12 @@ def all_jobs(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
     
-    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    routes = Route.objects.all()
+    
+    # google_maps_api_key = settings.PLACES_MAPS_API_KEY
     context = {
-    'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        # 'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        'routes': routes,
     }
     return render(request, 'job_list.html', context)
     
@@ -382,3 +385,148 @@ def package_history(request):
 
 def unauthorized(request):
     return render(request, '401.html')
+
+@login_required(login_url='users:login')
+def create_routes(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+
+    routes = Route.objects.all()
+    if request.method == 'POST':
+        # Coordinates of the depot
+        depot = [25.048848712153227, 121.51374971086004]
+
+        # Check if there are any existing routes
+        # If there are, delete them
+        if Route.objects.exists():
+            Route.objects.all().delete()
+
+        # Get all the parcels
+        parcels = Package.objects.filter(status=Package.STATUS_PENDING)
+
+        # Get the coordinates of the parcels
+        # Add the depot as the first coordinate
+        coordinates = [
+            [float(str(parcel.sender_address).split(', ')[-2]),
+            float(str(parcel.sender_address).split(', ')[-1])]
+            for parcel in parcels
+        ]
+        coordinates.insert(0, depot)
+
+        # Set the capacity of the couriers
+        capacity = [17, 14, 17, 100]
+
+        # Set the dimensions and weight of the parcels
+        items = [
+            [float(parcel.width),
+            float(parcel.height),
+            float(parcel.depth),
+            float(parcel.estimate_package_weight_value)]
+            for parcel in parcels
+        ]
+
+        # Get the distance and duration matrix
+        distance_matrix = []
+
+        # Google Maps API configuration
+        API_key=settings.PLACES_MAPS_API_KEY
+        base_url = 'https://maps.googleapis.com/maps/api/distancematrix/json'
+        origins = [[f'{coordinates[i][0]},{coordinates[i][1]}'] for i in range(len(coordinates))]
+        destinations = origins.copy()
+
+        # Get the distance and duration matrix
+        for i in range(0, len(origins), 25):
+            chunk_origins = origins[i:i+25]
+
+            for i in range(0, len(destinations), 25):
+                chunk_destinations = destinations[i:i+25]
+
+                params = {
+                    'origins': '|'.join([','.join(origin) for origin in chunk_origins]),
+                    'destinations': '|'.join([','.join(destination) for destination in chunk_destinations]),
+                    'key': API_key
+                }
+
+                response = requests.get(url=base_url, params=params)
+                data = response.json()
+                
+                for k, _ in enumerate(chunk_origins):
+                    distance_matrix.append([])
+
+                    for l, _ in enumerate(chunk_destinations):
+                        status = data['rows'][k]['elements'][l]['status']
+
+                        if status == 'OK':
+                            distance = data['rows'][k]['elements'][l]['distance']['value']
+
+                            distance_matrix[-1].append(distance)
+                        else:
+                            distance_matrix[-1].append(-1)
+    
+        vrp = VRP(coordinates, distance=distance_matrix)
+        packer = Packer(capacity, items, n_decimals=3)
+        aco = ACO(vrp, packer, n_ants=1, max_iter=1,
+                alpha=1.0, beta=3.0, rho=0.1,
+                pheromone=1.0, phe_deposit_weight=1.0)
+
+        best_tour, best_distance = aco.ACS()
+
+        print('Here is the best tour:')
+        print(best_tour)
+        print(best_distance)
+
+        # Delete all existing routes
+        # Route.objects.all().delete()
+
+        # Initialize a list to store created route instances
+        routes = []
+
+        # Iterate through the best_tour
+        for _, location in enumerate(best_tour):
+            if location == 0:
+                # Create a new route instance for each depot
+                route = Route.objects.create()
+                routes.append(route)  # Add the route to the list
+            else:
+                # Retrieve the parcel associated with the current location
+                parcel = parcels[location - 1]
+
+                # Associate the parcel with the last created route (assuming the first route is already created)
+                routes[-1].parcels.add(parcel)
+
+        # Save all route instances after adding parcels
+        for route in routes:
+            route.save()
+    
+    context = {
+        'routes': routes
+    }
+
+    return render(request, 'create_routes.html', context)
+
+@login_required(login_url='users:login')
+def job_details(request, id):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
+    # job = Package.objects.get(pk=id)
+    route = Route.objects.get(pk=id)
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+
+    # if not job:
+    #     messages.error(request, 'Job is no longer available')
+    #     return redirect('package_request_app:job_list')
+    
+    # if request.method == 'POST':
+    #     job.driver = request.user.driver
+    #     job.status = Package.STATUS_PICKING
+    #     job.save()
+    #     messages.success(request, 'Job is successfully taken')
+    #     return redirect('package_request_app:job_current')
+
+    context = {
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        # 'job': job,
+        'route': route,
+    }
+    return render(request, 'job_details.html', context)

@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 # from django.contrib.auth.models import User
-from .models import User, Customer, Driver
+from .models import User, Customer, Driver, Manager
 
 # Authentication signals
 def createCustomer(sender, instance, created, **kwargs):
@@ -20,6 +20,14 @@ def createCustomer(sender, instance, created, **kwargs):
         )
     if created and user.is_driver:
         account = Driver.objects.create(
+            user=user,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            username=user.username,
+            email=user.email,
+        )
+    if created and user.is_manager:
+        account = Manager.objects.create(
             user=user,
             first_name=user.first_name,
             last_name=user.last_name,
@@ -54,7 +62,11 @@ def deleteAccount(sender, instance, **kwargs):
     user.delete()
 
 post_save.connect(createCustomer, sender=User)
+
 post_save.connect(updateAccount, sender=Customer)
 post_save.connect(updateAccount, sender=Driver)
+post_save.connect(updateAccount, sender=Manager)
+
 post_delete.connect(deleteAccount, sender=Customer)
 post_delete.connect(deleteAccount, sender=Driver)
+post_delete.connect(deleteAccount, sender=Manager)

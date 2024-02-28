@@ -44,24 +44,26 @@
 
 <div id="pack-list-body" style="padding: 0 3em; width: 100; margin-top: 1em;">
     <h1>Jobs</h1>
-    <p>These are the current open requests. Click on the marker to see more information.</p>
-    <div id="map" style="width: 100%; height: 500px; padding: 5em;"></div>
-    <br>
-    
 
-    <div class="job-details card">
-        <div class = container>
-            <b><h2 class="job-name"></h2></b>
-            <p class="job-distance"></p>
-            <p class="job-duration"></p>
-            <p class="job-price"></p>
-            <p class="job-pickup-address"></p>
-            <p class="job-delivery-address"></p>
-            <button class="ps_view_button" onclick="View()">View</button>
-        </div>
-    </div>
+    <ul>
+        {% for route in routes %}
+        <li>Route: {{ route }}</li><br>
+        <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>
+        {% endfor %}
+    </ul>
 
-    <script>
+    <!-- <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
+
+    <div class="job-details">
+        <h2 class="job-name"></h2>
+        <p class="job-distance"></p>
+        <p class="job-duration"></p>
+        <p class="job-price"></p>
+        <p class="job-pickup-address"></p>
+        <p class="job-delivery-address"></p>
+    </div> -->
+
+    <!-- <script>
         function initMap() {
             const taiwan = {
                 lat: 23.69781,
@@ -147,6 +149,6 @@
             document.getElementById('sidebar_job_list_btn').classList.add("active_tab");
         };
 
-    </script>
+    </script> -->
 </div>
 {% endblock content %}

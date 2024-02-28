@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Route Details{% endblock title %}
+{% block content %}
+
+{% block head %}
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
+    async></script>
+{% endblock head %}
+
+<div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
+    <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
+</div>
+
+<script>
+    function initMap() {
+        const taiwan = {
+            lat: 23.69781,
+            lng: 120.960515
+        };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 7,
+            center: taiwan,
+        });
+
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        const waypts = [];
+
+        // split and get all the address except the last two of each string
+        const route = "{{ route }}".split(";").map((point) => point.split(",").slice(0, -2).join(","));
+        for (let i = 0; i < route.length; i++) {
+            waypts.push({
+                location: route[i],
+                stopover: true
+            });
+        }
+        console.log(route);
+
+        directionsService.route({
+            origin: 'No. 100, Guolian 1st Rd, Hualien City, Hualien County, 970',
+            destination: 'No. 100, Guolian 1st Rd, Hualien City, Hualien County, 970',
+            waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+        }, (response, status) => {
+            if (status === "OK") {
+                directionsRenderer.setDirections(response);
+            } else {
+                window.alert("Directions request failed due to " + status);
+            }
+        });
+    }
+
+    window.initMap = initMap;
+</script>
+
+{% endblock content %}

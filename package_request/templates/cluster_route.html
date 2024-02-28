@@ -4,15 +4,16 @@
 {% block title %}Route{% endblock title %}
 {% block content %}
 <div id="cluster_map_body" class="row">
-    <h3>{% trans "This is the map of the route you must take to complete all requests."%}</h3>
+    <h3>{% trans "This is the map of the route you must take to complete all requests." %}</h3>
     <div id="cluster_map_container" class="col">
         <div>{% trans "map"%}</div>
-        <a href="#" class="btn btn-secondary btn-lg" role="button" aria-pressed="true"><span class="material-symbols-outlined">{% trans "Undo"%}</span> {% trans "Return"%}</a>
+        <a href="#" class="btn btn-secondary btn-lg" role="button" aria-pressed="true"><span
+                class="material-symbols-outlined">{% trans "Undo"%}</span> {% trans "Return"%}</a>
     </div>
 
 </div>
 {% endblock content %}
 
 {% block script_files %}
-    <script src="{% static 'js/package_list.js' %}"></script>
+<script src="{% static 'js/package_list.js' %}"></script>
 {% endblock script_files %}
