@@ -11,6 +11,23 @@
       <img id="secondary_logo" src="{% static 'images/logo/swift-logo-white-1000.png' %}" alt="logo"/>
       <span id="company_name">swift courier</span>
     </a>
+    <form action="{% url 'set_language' %}" method="post" class="my-2"> 
+      {% csrf_token %}
+      <input name="next" type="hidden" value="{{ redirect_to }}">
+      <div class="input-group">
+          <select class="form-select w-auto" id="languageSelect" name="language">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                      {{ language.name_local }}
+                  </option>
+              {% endfor %}
+          </select>
+          <button type="submit" class="btn btn-primary ms-2">{% trans "Change"%}</button>
+      </div>
+    </form>
     {% if request.user.is_authenticated %}
       {% if request.user.is_customer %}
         <a href="{% url 'users:logout-customer'%}" 

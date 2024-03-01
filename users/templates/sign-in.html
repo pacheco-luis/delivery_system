@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+
 {% block title %}Sign In{% endblock title %}
 
 {% comment %} Main Sign-in Page for Customer and Driver {% endcomment %}
@@ -26,6 +27,7 @@
             <p>
                 {% trans "Don't have an account?"%}
                 <a href="{% url 'users:register' %}">{% trans "Sign Up"%}</a>
+                {% comment %} {{request.path}} {% endcomment %}
             </p>
             <p>
                {% trans " Forgot password?"%}
@@ -43,5 +45,6 @@
 {% endblock content %}
 
 {% block script_files %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="{% static 'js/sign-in.js' %}"></script>
 {% endblock script_files %}

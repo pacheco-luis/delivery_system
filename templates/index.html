@@ -24,6 +24,24 @@
                 <img id="secondary_logo" src="{% static 'images/logo/swift-logo-white-1000.png' %}" alt="logo">
                 <span id="company_name">swift courier</span>
             </a>
+            <form action="{% url 'set_language' %}" method="post" class="my-2"> 
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+
+                <div class="input-group">
+                    <select class="form-select w-auto" id="languageSelect" name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ language.name_local }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary ms-2">{% trans "Change Language"%}</button>
+                </div>
+            </form>
             <a href="{% url "users:register"%}" id="sign_up_link" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">{%trans "Sign up"%}</a>
         </nav>
     </header>
@@ -46,6 +64,7 @@
             {% blocktrans %}We connect drivers with other users that wish to deliver packages.
             Currently, our services are only offered between and within Taipei and Hualien.{% endblocktrans %}
         </p>
+        
     </div>
     </section>
     <section id="homepage_third_section">

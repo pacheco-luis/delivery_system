@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-25 16:38+0800\n"
+"POT-Creation-Date: 2024-03-02 03:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: delivery_system/settings.py:135
+#: delivery_system/settings.py:136
 msgid "English"
 msgstr ""
 
-#: delivery_system/settings.py:136
+#: delivery_system/settings.py:137
 msgid "Chinese"
 msgstr "中文"
 
@@ -95,11 +95,55 @@ msgid "View progress"
 msgstr ""
 
 #: package_request/templates/home.html:26
+#: package_request/templates/job_list.html:46
 msgid "Jobs"
 msgstr ""
 
 #: package_request/templates/home.html:29 templates/driver_sidebar.html:42
 msgid "Current Jobs"
+msgstr ""
+
+#: package_request/templates/job_detail.html:29
+msgid "Back to jobs"
+msgstr ""
+
+#: package_request/templates/job_detail.html:31
+msgid "Job"
+msgstr ""
+
+#: package_request/templates/job_detail.html:32
+msgid "Description:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:33
+msgid "Price:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:34
+msgid "Distance:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:35
+msgid "Pickup:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:36
+msgid "Deliver:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:38
+#: users/templates/users/account.html:28
+msgid "Customer"
+msgstr ""
+
+#: package_request/templates/job_list.html:47
+msgid ""
+"These are the current open requests. Click on the marker to see more "
+"information."
+msgstr ""
+
+#: package_request/templates/job_list.html:60
+msgid "View"
 msgstr ""
 
 #: package_request/templates/package_history.html:9
@@ -281,78 +325,86 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: templates/driver_sidebar.html:93 templates/navbar.html:21
-#: templates/navbar.html:32
+#: templates/driver_sidebar.html:93 templates/navbar.html:38
+#: templates/navbar.html:49
 msgid "Log out"
 msgstr ""
 
-#: templates/index.html:27
+#: templates/index.html:42 templates/register.html:43
+msgid "Change Language"
+msgstr ""
+
+#: templates/index.html:45 users/templates/sign-up.html:18
 msgid "Sign up"
 msgstr ""
 
-#: templates/index.html:32
+#: templates/index.html:50
 msgid "Delivery Made Simple"
 msgstr ""
 
-#: templates/index.html:34
+#: templates/index.html:52 users/templates/sign-up.html:43
 msgid "Log in"
 msgstr ""
 
-#: templates/index.html:37 users/templates/sign-in.html:25
+#: templates/index.html:55 users/templates/sign-in.html:29
 msgid "Don't have an account?"
 msgstr ""
 
-#: templates/index.html:37
+#: templates/index.html:55
 msgid "Create One!"
 msgstr ""
 
-#: templates/index.html:43
+#: templates/index.html:61
 msgid "What we do:"
 msgstr ""
 
-#: templates/index.html:46
+#: templates/index.html:64
 msgid ""
 "We connect drivers with other users that wish to deliver packages.\n"
 "            Currently, our services are only offered between and within "
 "Taipei and Hualien."
 msgstr ""
 
-#: templates/index.html:54
+#: templates/index.html:73
 msgid "Our Mission:"
 msgstr ""
 
-#: templates/index.html:57
+#: templates/index.html:76
 msgid ""
 "We aim to make package deliveries as simple and as convenient as possible\n"
 "                while ensuring that the packages arrive safely at their "
 "destination."
 msgstr ""
 
-#: templates/index.html:65 templates/register.html:55
+#: templates/index.html:84 templates/register.html:74
 msgid "Have a concern?"
 msgstr ""
 
-#: templates/index.html:66 templates/register.html:56
+#: templates/index.html:85 templates/register.html:75
 msgid "Contact Us"
 msgstr ""
 
-#: templates/index.html:67 templates/register.html:57
+#: templates/index.html:86 templates/register.html:76
 msgid "Our Future Plans"
 msgstr ""
 
-#: templates/index.html:68 templates/register.html:58
+#: templates/index.html:87 templates/register.html:77
 msgid "Terms of Use"
 msgstr ""
 
-#: templates/index.html:69 templates/register.html:59
+#: templates/index.html:88 templates/register.html:78
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/register.html:27
+#: templates/navbar.html:28
+msgid "Change"
+msgstr ""
+
+#: templates/register.html:46
 msgid "Log-in"
 msgstr ""
 
-#: templates/register.html:33
+#: templates/register.html:52
 msgid ""
 "\n"
 "            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
@@ -363,53 +415,56 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/register.html:40
+#: templates/register.html:59
 msgid "Register as a customer"
 msgstr ""
 
-#: templates/register.html:42
+#: templates/register.html:61
 msgid "Register as a driver"
 msgstr ""
 
-#: templates/register.html:47
+#: templates/register.html:66
 msgid "Don't have an account? <br>Create one!"
 msgstr ""
 
-#: users/templates/customer/account.html:9
-msgid "User Profile:"
+#: users/models.py:9 users/models.py:31 users/models.py:47
+msgid "first name"
 msgstr ""
 
-#: users/templates/customer/account.html:11
-msgid "First Name:"
+#: users/models.py:10 users/models.py:32 users/models.py:48
+msgid "last name"
 msgstr ""
 
-#: users/templates/customer/account.html:12
-msgid "Last Name:"
+#: users/models.py:11 users/models.py:33 users/models.py:49
+msgid "username"
 msgstr ""
 
-#: users/templates/customer/account.html:13
-msgid "Username:"
+#: users/models.py:12 users/models.py:34 users/models.py:51
+msgid "email"
 msgstr ""
 
-#: users/templates/customer/account.html:14
-msgid "Email: "
+#: users/models.py:35 users/models.py:52
+msgid "phone number"
 msgstr ""
 
-#: users/templates/customer/account.html:15
-msgid "Phone: "
+#: users/models.py:36 users/models.py:53
+msgid "address"
 msgstr ""
 
-#: users/templates/customer/account.html:16
-msgid "Address: "
+#: users/models.py:37 users/models.py:56
+msgid "profile picture"
 msgstr ""
 
-#: users/templates/customer/account.html:18
-msgid "Profile Image: "
+#: users/models.py:50
+msgid "date of birth"
 msgstr ""
 
-#: users/templates/customer/account.html:24
-#: users/templates/customer/account_form.html:7
-msgid "Edit Account"
+#: users/models.py:54
+msgid "identification card"
+msgstr ""
+
+#: users/models.py:55
+msgid "driving license"
 msgstr ""
 
 #: users/templates/reset_password.html:11
@@ -465,38 +520,98 @@ msgstr ""
 msgid "Return to login"
 msgstr ""
 
-#: users/templates/sign-in.html:11
+#: users/templates/sign-in.html:15
 msgid "Email address"
 msgstr ""
 
-#: users/templates/sign-in.html:13
+#: users/templates/sign-in.html:17
 msgid "We'll keep your information safe."
 msgstr ""
 
-#: users/templates/sign-in.html:16
+#: users/templates/sign-in.html:20
 msgid "Password"
 msgstr ""
 
-#: users/templates/sign-in.html:21
+#: users/templates/sign-in.html:25
 msgid "Show Password"
 msgstr ""
 
-#: users/templates/sign-in.html:26
+#: users/templates/sign-in.html:30
 msgid "Sign Up"
 msgstr ""
 
-#: users/templates/sign-in.html:29
+#: users/templates/sign-in.html:35
 msgid " Forgot password?"
 msgstr ""
 
-#: users/templates/sign-in.html:30
+#: users/templates/sign-in.html:36
 msgid "Reset it here"
 msgstr ""
 
-#: users/templates/sign-in.html:34
+#: users/templates/sign-in.html:40
 msgid "Log in as customer"
 msgstr ""
 
-#: users/templates/sign-in.html:37
+#: users/templates/sign-in.html:43
 msgid "Log in as driver"
+msgstr ""
+
+#: users/templates/sign-up.html:37
+msgid "Register"
+msgstr ""
+
+#: users/templates/sign-up.html:42
+msgid "Already have an account?"
+msgstr ""
+
+#: users/templates/users/account.html:30
+msgid "Driver"
+msgstr ""
+
+#: users/templates/users/account.html:36
+msgid "Identification"
+msgstr ""
+
+#: users/templates/users/account.html:40
+msgid "First Name"
+msgstr ""
+
+#: users/templates/users/account.html:44
+msgid "Last Name"
+msgstr ""
+
+#: users/templates/users/account.html:48
+msgid "Username"
+msgstr ""
+
+#: users/templates/users/account.html:53
+msgid "Contact"
+msgstr ""
+
+#: users/templates/users/account.html:57
+msgid "Email"
+msgstr ""
+
+#: users/templates/users/account.html:61
+msgid "Phone"
+msgstr ""
+
+#: users/templates/users/account.html:66
+msgid "Location"
+msgstr ""
+
+#: users/templates/users/account.html:70
+msgid "Address"
+msgstr ""
+
+#: users/templates/users/account.html:80 users/templates/users/account.html:85
+msgid "Edit"
+msgstr ""
+
+#: users/templates/users/account_form.html:83
+msgid "Editing Account:"
+msgstr ""
+
+#: users/templates/users/account_form.html:104
+msgid "Save"
 msgstr ""
