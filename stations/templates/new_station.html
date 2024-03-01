@@ -1,0 +1,17 @@
+{% load static %}
+{% load bootstrap %}
+
+{% block content %}
+
+
+<section>
+    <h2 class="text-center">Add a new station</h2>
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button type="button" class="btn btn-primary">Primary</button>
+    </form>
+</section>
+
+
+{% endblock content %}

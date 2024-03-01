@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     # 'parcels.apps.ParcelsConfig',
     'package_request',
+    'stations',
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
     'places',                               #   https://pypi.org/project/dj-places/
     # 'django_pdb'
@@ -190,5 +191,6 @@ PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
 SESSION_EXPIRE_SECONDS = 172800                         # 48 hours = 172800
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True               # session will expire after last activity
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60    # grouping by minutes
-SESSION_COOKIE_AGE = 60*30                              # 30 minutes         
+# SESSION_COOKIE_AGE = 60*30                              # 30 minutes         
 SESSION_TIMEOUT_REDIRECT = '/login/'                    # route to login if timeout is detected
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

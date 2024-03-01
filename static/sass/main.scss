@@ -16,3 +16,7 @@
 @import "company_info/company_info";
 @import "cluster_route/cluster_route";
 @import "account/account";
+
+// for admin stite
+@import "admin_sites/admin_base.scss";
+@import "admin_sites/dashboard.scss";

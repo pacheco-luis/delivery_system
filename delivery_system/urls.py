@@ -25,6 +25,7 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('', include('package_request.urls')),
+    path('', include('stations.urls')),
     path('rosetta/', include ('rosetta.urls'))    
     # path('package_request/', include('package_request.urls'), name='package_request'),
     # path('driver-sign-up', include('driver.urls')),
