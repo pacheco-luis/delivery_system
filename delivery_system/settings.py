@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     # 'parcels.apps.ParcelsConfig',
     'package_request',
+    'stations',
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
     'places',                               #   https://pypi.org/project/dj-places/
     # 'django_pdb'
@@ -179,8 +181,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 
-# add by Sam for dj-places
-PLACES_MAPS_API_KEY= "wGzwRFkoP4UW_AcThqIC"           # enable maps JavaScript and Places google APIs,
+# Google Maps API Settings
+PLACES_MAPS_API_KEY=config('PLACES_MAPS_API_KEY')
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
@@ -190,5 +192,6 @@ PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
 SESSION_EXPIRE_SECONDS = 172800                         # 48 hours = 172800
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True               # session will expire after last activity
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60    # grouping by minutes
-SESSION_COOKIE_AGE = 60*30                              # 30 minutes         
+# SESSION_COOKIE_AGE = 60*30                              # 30 minutes         
 SESSION_TIMEOUT_REDIRECT = '/login/'                    # route to login if timeout is detected
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

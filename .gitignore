@@ -26,10 +26,8 @@ static/images/profiles/driver*
 node_modules/
 db.sqlite3
 
-
-### SASS
 .sass-cache/
-
+.env
 
 ### pipenv dependency
 Pipfile.*

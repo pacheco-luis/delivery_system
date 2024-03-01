@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery System | {% block title %}{% endblock title %}</title>
+  <link rel="icon" href="{% static 'images/logo/swift-1000.png' %}">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/roundslabserif" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  {% block head %}{% endblock head %}
+</head>
+
+<body id="admin_base_body">
+  {# Display django.contrib.messages as Bootstrap alerts #}
+  <div style="position: absolute; z-index: 9999; transform: translate(-50%, -50%); top: 6rem; left: 50%;">
+    {% bootstrap_messages %}
+  </div>
+
+  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between">
+    <button id="admin_nav_menu_btn" type="button" class="btn btn-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>
+    </button>
+    <a class="navbar-brand" href="{% url 'stations:admin_dashboard'%}" >
+      <img src="{% static 'images/logo/swift-1000.png' %}" class="admin_logo" alt="logo">
+      <span>Swift Delivery Admin</span>
+    </a>
+  </nav>
+  {% include 'admin_sidebar.html' %}
+  {% block content %}
+  {% endblock content %}
+    
+
+
+  <script>
+    document.getElementById("admin_nav_menu_btn").addEventListener("click", function() {
+                                                                                      window.scrollTo(0, 0);
+                                                                                      document.getElementById("admin_sidebar").style.display='block';
+                                                                                      document.getElementById("sidebar_blocker").style.display='block';
+                                                                                      document.getElementById("admin_base_body").style.overflow='hidden';
+                                                                                    }
+                                                                  );
+    document.getElementById("sidebar_blocker").addEventListener("click", function() {
+                                                                                      document.getElementById("admin_sidebar").style.display='none';
+                                                                                      document.getElementById("sidebar_blocker").style.display='none';
+                                                                                      document.getElementById("admin_base_body").style.overflow='auto';
+                                                                                    }
+                                                                  );          
+    document.getElementById("close_admin_sidebar_btn").addEventListener("click", function() {
+                                                                                      document.getElementById("admin_sidebar").style.display='none';
+                                                                                      document.getElementById("sidebar_blocker").style.display='none';
+                                                                                      document.getElementById("admin_base_body").style.overflow='auto';
+                                                                                    }
+                                                                  );                                                              
+  </script>
+  {% block script_files %}{% endblock script_files %}
+</body>
+
+</html>
