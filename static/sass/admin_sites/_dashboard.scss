@@ -4,7 +4,8 @@
 }
 
 
-#dashboard_content .row .col-sm{
+#dashboard_content .row .col-md-8,
+#dashboard_content .row .col-md{
     border-radius: 5px;
     background-color: #272a2e9c;
     border: 1px solid #ffffff2f;
@@ -17,4 +18,10 @@
     padding: 0.1rem  0.5rem 0.3rem  0.4rem;
     background-color: transparent;
     border: 1px solid #ffffff7c;
+}
+
+
+#visits_card{
+    background-image: url('../../images/admin-sites/dashboard/pexels-klub-boks-9940152.jpg');
+    background-size: cover;
 }
