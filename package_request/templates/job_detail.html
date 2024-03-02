@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,16 +26,16 @@
 </head>
 
 <body class="del-body">
-    <a href="{% url 'package_request_app:job_list' %}">Back to jobs</a>
+    <a href="{% url 'package_request_app:job_list' %}">{% trans "Back to jobs"%}</a>
 
-    <h1>Job</h1>
-    <h2>Description: {{ job.package_description }}</h2>
-    <p>Price: ${{ job.price }} NTD</p>
-    <p>Distance: {{ job.distance }} km</p>
-    <p>Pickup: {{ job.sender_address }}</p>
-    <p>Deliver: {{ job.recipient_address }}</p>
+    <h1>{% trans "Job"%}</h1>
+    <h2>{% trans "Description:"%} {{ job.package_description }}</h2>
+    <p>{% trans "Price:"%} ${{ job.price }} NTD</p>
+    <p>{% trans "Distance:"%} {{ job.distance }} km</p>
+    <p>{% trans "Pickup:"%} {{ job.sender_address }}</p>
+    <p>{% trans "Deliver:"%} {{ job.recipient_address }}</p>
 
-    <h1>Customer</h1>
+    <h1>{% trans "Customer"%}</h1>
     <p>{{ job.customer.first_name }} {{ job.customer.last_name }}</p>
     <p>{{ job.customer.email }}</p>
 

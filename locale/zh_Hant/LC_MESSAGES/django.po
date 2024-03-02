@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-25 16:41+0800\n"
-"PO-Revision-Date: 2024-02-24 21:14+0800\n"
-"Last-Translator: None None <testing@testing.com>\n"
+"POT-Creation-Date: 2024-03-02 03:17+0800\n"
+"PO-Revision-Date: 2024-03-02 01:11+0800\n"
+"Last-Translator: None None <superuser@superuser.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: delivery_system/settings.py:135
+#: delivery_system/settings.py:136
 msgid "English"
 msgstr "英文"
 
-#: delivery_system/settings.py:136
+#: delivery_system/settings.py:137
 msgid "Chinese"
 msgstr "中文"
 
@@ -95,16 +95,66 @@ msgid "View progress"
 msgstr "查詢進度"
 
 #: package_request/templates/home.html:26
+#: package_request/templates/job_list.html:46
 msgid "Jobs"
-msgstr ""
+msgstr "任務"
 
 #: package_request/templates/home.html:29 templates/driver_sidebar.html:42
 msgid "Current Jobs"
+msgstr " 目前任務"
+
+#: package_request/templates/job_detail.html:29
+msgid "Back to jobs"
+msgstr ""
+
+#: package_request/templates/job_detail.html:31
+#, fuzzy
+#| msgid "Jobs"
+msgid "Job"
+msgstr "任務"
+
+#: package_request/templates/job_detail.html:32
+#, fuzzy
+#| msgid "Item Description:"
+msgid "Description:"
+msgstr "包裹外觀:"
+
+#: package_request/templates/job_detail.html:33
+msgid "Price:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:34
+msgid "Distance:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:35
+msgid "Pickup:"
+msgstr ""
+
+#: package_request/templates/job_detail.html:36
+#, fuzzy
+#| msgid "Driver:"
+msgid "Deliver:"
+msgstr "駕駛:"
+
+#: package_request/templates/job_detail.html:38
+#: users/templates/users/account.html:28
+msgid "Customer"
+msgstr "顧客"
+
+#: package_request/templates/job_list.html:47
+msgid ""
+"These are the current open requests. Click on the marker to see more "
+"information."
+msgstr ""
+
+#: package_request/templates/job_list.html:60
+msgid "View"
 msgstr ""
 
 #: package_request/templates/package_history.html:9
 msgid "These are the past requests you have made: "
-msgstr ""
+msgstr "以下為您的申請紀錄"
 
 #: package_request/templates/package_history.html:22
 #: package_request/templates/package_list.html:23
@@ -161,11 +211,11 @@ msgstr "收件人:"
 
 #: package_request/templates/package_history.html:57
 msgid "You currently do not have any previous package requests on record."
-msgstr ""
+msgstr "您目前沒有任何申請紀錄 "
 
 #: package_request/templates/package_list.html:10
 msgid "Viewing current active requests"
-msgstr ""
+msgstr "目前的申請"
 
 #: package_request/templates/package_list.html:39
 msgid "Delete Request"
@@ -281,36 +331,40 @@ msgstr "已完成"
 msgid "logout"
 msgstr "登出"
 
-#: templates/driver_sidebar.html:93 templates/navbar.html:21
-#: templates/navbar.html:32
+#: templates/driver_sidebar.html:93 templates/navbar.html:38
+#: templates/navbar.html:49
 msgid "Log out"
 msgstr "登出"
 
-#: templates/index.html:27
+#: templates/index.html:42 templates/register.html:43
+msgid "Change Language"
+msgstr "語言"
+
+#: templates/index.html:45 users/templates/sign-up.html:18
 msgid "Sign up"
 msgstr "註冊"
 
-#: templates/index.html:32
+#: templates/index.html:50
 msgid "Delivery Made Simple"
 msgstr "配送可以這麼簡單"
 
-#: templates/index.html:34
+#: templates/index.html:52 users/templates/sign-up.html:43
 msgid "Log in"
 msgstr "登入"
 
-#: templates/index.html:37 users/templates/sign-in.html:25
+#: templates/index.html:55 users/templates/sign-in.html:29
 msgid "Don't have an account?"
 msgstr "還沒有帳戶嗎？"
 
-#: templates/index.html:37
+#: templates/index.html:55
 msgid "Create One!"
 msgstr "趕快來建立吧！"
 
-#: templates/index.html:43
+#: templates/index.html:61
 msgid "What we do:"
 msgstr "我們的服務："
 
-#: templates/index.html:46
+#: templates/index.html:64
 msgid ""
 "We connect drivers with other users that wish to deliver packages.\n"
 "            Currently, our services are only offered between and within "
@@ -319,42 +373,46 @@ msgstr ""
 "我們為駕駛與需要寄送包裹的使用者建立橋樑。\n"
 "現階段，我們的服務範圍為台北市與花蓮縣之內與之間的往返配送。"
 
-#: templates/index.html:54
+#: templates/index.html:73
 msgid "Our Mission:"
 msgstr "我們的使命："
 
-#: templates/index.html:57
+#: templates/index.html:76
 msgid ""
 "We aim to make package deliveries as simple and as convenient as possible\n"
 "                while ensuring that the packages arrive safely at their "
 "destination."
 msgstr "我們致力於提升包裹配送之效率與便利性，同時確保包裹能安穩地抵達目的地。"
 
-#: templates/index.html:65 templates/register.html:55
+#: templates/index.html:84 templates/register.html:74
 msgid "Have a concern?"
 msgstr "有其他疑問？"
 
-#: templates/index.html:66 templates/register.html:56
+#: templates/index.html:85 templates/register.html:75
 msgid "Contact Us"
 msgstr "歡迎與我們聯繫。"
 
-#: templates/index.html:67 templates/register.html:57
+#: templates/index.html:86 templates/register.html:76
 msgid "Our Future Plans"
 msgstr "我們的藍圖"
 
-#: templates/index.html:68 templates/register.html:58
+#: templates/index.html:87 templates/register.html:77
 msgid "Terms of Use"
 msgstr "服務條款"
 
-#: templates/index.html:69 templates/register.html:59
+#: templates/index.html:88 templates/register.html:78
 msgid "Privacy Policy"
 msgstr "隱私政策"
 
-#: templates/register.html:27
+#: templates/navbar.html:28
+msgid "Change"
+msgstr "語言"
+
+#: templates/register.html:46
 msgid "Log-in"
 msgstr "登入"
 
-#: templates/register.html:33
+#: templates/register.html:52
 msgid ""
 "\n"
 "            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
@@ -364,95 +422,96 @@ msgid ""
 "to join our team and start delivering packages for users.</p>\n"
 "            "
 msgstr ""
+"\n"
+"<p> 以顧客身份註冊，並開始在台北與花蓮之間寄送包裹。</p>\n"
+"<br>\n"
+"<p>註冊加入我們的駕駛團隊，並開始配送包裹。</p>"
 
-#: templates/register.html:40
+#: templates/register.html:59
 msgid "Register as a customer"
 msgstr "我是顧客"
 
-#: templates/register.html:42
+#: templates/register.html:61
 msgid "Register as a driver"
 msgstr "我是駕駛"
 
-#: templates/register.html:47
+#: templates/register.html:66
 msgid "Don't have an account? <br>Create one!"
 msgstr "還沒有帳戶嗎？"
 
-#: users/templates/customer/account.html:9
-msgid "User Profile:"
-msgstr ""
+#: users/models.py:9 users/models.py:31 users/models.py:47
+msgid "first name"
+msgstr "名字"
 
-#: users/templates/customer/account.html:11
-msgid "First Name:"
-msgstr ""
+#: users/models.py:10 users/models.py:32 users/models.py:48
+msgid "last name"
+msgstr "姓氏"
 
-#: users/templates/customer/account.html:12
-msgid "Last Name:"
-msgstr ""
+#: users/models.py:11 users/models.py:33 users/models.py:49
+msgid "username"
+msgstr "帳號"
 
-#: users/templates/customer/account.html:13
-msgid "Username:"
-msgstr ""
+#: users/models.py:12 users/models.py:34 users/models.py:51
+msgid "email"
+msgstr "email"
 
-#: users/templates/customer/account.html:14
-#, fuzzy
-#| msgid "Email address"
-msgid "Email: "
-msgstr "電子郵件地址:"
+#: users/models.py:35 users/models.py:52
+msgid "phone number"
+msgstr "電話號碼"
 
-#: users/templates/customer/account.html:15
-msgid "Phone: "
-msgstr "電話號碼："
+#: users/models.py:36 users/models.py:53
+msgid "address"
+msgstr "地址:"
 
-#: users/templates/customer/account.html:16
-msgid "Address: "
-msgstr "地址"
+#: users/models.py:37 users/models.py:56
+msgid "profile picture"
+msgstr "頭貼"
 
-#: users/templates/customer/account.html:18
-msgid "Profile Image: "
-msgstr ""
+#: users/models.py:50
+msgid "date of birth"
+msgstr " 生日"
 
-#: users/templates/customer/account.html:24
-#: users/templates/customer/account_form.html:7
-msgid "Edit Account"
-msgstr "編輯"
+#: users/models.py:54
+msgid "identification card"
+msgstr "身分證"
+
+#: users/models.py:55
+msgid "driving license"
+msgstr "駕照"
 
 #: users/templates/reset_password.html:11
-#, fuzzy
-#| msgid "Password"
 msgid "Password reset"
-msgstr " "
+msgstr " 變更密碼"
 
 #: users/templates/reset_password.html:12
 msgid ""
 "Enter your email address below, and we will email instructions for setting a "
 "new one."
-msgstr ""
+msgstr "請輸入您的email信箱已進行密碼變更"
 
 #: users/templates/reset_password.html:14
 msgid "Email Address"
 msgstr "電子郵件地址:"
 
 #: users/templates/reset_password.html:18
-#, fuzzy
-#| msgid "Password"
 msgid "Reset Password"
-msgstr " "
+msgstr " 變更密碼"
 
 #: users/templates/reset_password_complete.html:7
 msgid "Password reset complete"
-msgstr ""
+msgstr "您已成功變更密碼"
 
 #: users/templates/reset_password_complete.html:10
 msgid "Your password has been reset successfully. You may log in again now."
-msgstr ""
+msgstr "您已成功變更密碼"
 
 #: users/templates/reset_password_complete.html:13
 msgid "Go to login page"
-msgstr ""
+msgstr "回到登入頁面"
 
 #: users/templates/reset_password_sent.html:9
 msgid "Password reset sent"
-msgstr ""
+msgstr "已傳送變更密碼連結"
 
 #: users/templates/reset_password_sent.html:13
 msgid ""
@@ -468,46 +527,118 @@ msgid ""
 "                and check your spam folder.\n"
 "                "
 msgstr ""
+"\n"
+"您將在幾分鐘內收到重新設定密碼的郵件，若您仍沒有收到，請查看您的垃圾郵件。"
 
 #: users/templates/reset_password_sent.html:26
 msgid "Return to login"
-msgstr ""
+msgstr "回到登入頁面"
 
-#: users/templates/sign-in.html:11
+#: users/templates/sign-in.html:15
 msgid "Email address"
 msgstr "電子郵件地址:"
 
-#: users/templates/sign-in.html:13
+#: users/templates/sign-in.html:17
 msgid "We'll keep your information safe."
 msgstr "您所填入的資訊將會受到安全保障"
 
-#: users/templates/sign-in.html:16
+#: users/templates/sign-in.html:20
 msgid "Password"
 msgstr "密碼:"
 
-#: users/templates/sign-in.html:21
+#: users/templates/sign-in.html:25
 msgid "Show Password"
 msgstr "顯示密碼"
 
-#: users/templates/sign-in.html:26
+#: users/templates/sign-in.html:30
 msgid "Sign Up"
 msgstr "註冊"
 
-#: users/templates/sign-in.html:29
+#: users/templates/sign-in.html:35
 msgid " Forgot password?"
 msgstr "忘記密碼？"
 
-#: users/templates/sign-in.html:30
+#: users/templates/sign-in.html:36
 msgid "Reset it here"
 msgstr "重新設定密碼 "
 
-#: users/templates/sign-in.html:34
+#: users/templates/sign-in.html:40
 msgid "Log in as customer"
 msgstr "我是顧客"
 
-#: users/templates/sign-in.html:37
+#: users/templates/sign-in.html:43
 msgid "Log in as driver"
 msgstr "我是駕駛"
 
-#~ msgid "Save"
-#~ msgstr "確認"
+#: users/templates/sign-up.html:37
+msgid "Register"
+msgstr "註冊"
+
+#: users/templates/sign-up.html:42
+msgid "Already have an account?"
+msgstr "有帳戶嗎?"
+
+#: users/templates/users/account.html:30
+msgid "Driver"
+msgstr "駕駛:"
+
+#: users/templates/users/account.html:36
+msgid "Identification"
+msgstr "身分資訊:"
+
+#: users/templates/users/account.html:40
+msgid "First Name"
+msgstr "名字"
+
+#: users/templates/users/account.html:44
+msgid "Last Name"
+msgstr "姓氏"
+
+#: users/templates/users/account.html:48
+msgid "Username"
+msgstr "帳號"
+
+#: users/templates/users/account.html:53
+msgid "Contact"
+msgstr "聯絡資訊"
+
+#: users/templates/users/account.html:57
+msgid "Email"
+msgstr "email:"
+
+#: users/templates/users/account.html:61
+msgid "Phone"
+msgstr "電話號碼:"
+
+#: users/templates/users/account.html:66
+msgid "Location"
+msgstr "地點"
+
+#: users/templates/users/account.html:70
+msgid "Address"
+msgstr "地址:"
+
+#: users/templates/users/account.html:80 users/templates/users/account.html:85
+msgid "Edit"
+msgstr "編輯帳號"
+
+#: users/templates/users/account_form.html:83
+msgid "Editing Account:"
+msgstr "編輯帳號:"
+
+#: users/templates/users/account_form.html:104
+msgid "Save"
+msgstr "確認"
+
+#~ msgid "Log In"
+#~ msgstr "登入"
+
+#~ msgid "Sign In"
+#~ msgstr "登入"
+
+#~ msgid "first_name"
+#~ msgstr "名字"
+
+#~| msgid "last name"
+#~ msgid "last_name"
+#~ msgstr "姓氏"

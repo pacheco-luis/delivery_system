@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    first_name = models.CharField(max_length=150, null=True, blank=True)
-    last_name = models.CharField(max_length=150, null=True, blank=True)
-    username = models.CharField(max_length=150, unique=True, null=True, blank=True)
-    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
+    first_name = models.CharField(max_length=150, null=True, blank=True, verbose_name=_("first name"))
+    last_name = models.CharField(max_length=150, null=True, blank=True, verbose_name=_("last name"))
+    username = models.CharField(max_length=150, unique=True, null=True, blank=True, verbose_name=_("username"))
+    email = models.EmailField(max_length=255, unique=True, null=True, blank=True, verbose_name=_("email"))
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

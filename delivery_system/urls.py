@@ -18,7 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.i18n import i18n_patterns, set_language
+#from django.views.i18n import set_language
+
+
+# urlpatterns = [
+#   path('i18n/', set_language, name='set_language'),
+# ]
 
 #i18n_patterns adds the ending tag for language (/en/, /tw/)
 urlpatterns = i18n_patterns(
@@ -26,9 +32,11 @@ urlpatterns = i18n_patterns(
     path('', include('users.urls')),
     path('', include('package_request.urls')),
     path('', include('stations.urls')),
-    path('rosetta/', include ('rosetta.urls'))    
+    path('rosetta/', include ('rosetta.urls')),
+    path('i18n/', set_language, name='set_language')    
     # path('package_request/', include('package_request.urls'), name='package_request'),
     # path('driver-sign-up', include('driver.urls')),
 )
 
 urlpatterns += static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
+
