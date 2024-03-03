@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     # 'parcels.apps.ParcelsConfig',
     'package_request',
     'stations',
+    'management',
+    
+    
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
     'places',                               #   https://pypi.org/project/dj-places/
     # 'django_pdb'

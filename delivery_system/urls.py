@@ -31,7 +31,8 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('', include('package_request.urls')),
-    path('', include('stations.urls')),
+    # path('', include('stations.urls')),
+    path('', include('management.urls')),
     path('rosetta/', include ('rosetta.urls')),
     path('i18n/', set_language, name='set_language')    
     # path('package_request/', include('package_request.urls'), name='package_request'),
