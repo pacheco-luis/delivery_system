@@ -19,7 +19,7 @@ class Package(models.Model):
         (STATUS_COMPLETED, 'Completed'),
         (STATUS_CANCELED, 'Canceled'),
     )
-
+    #remove
     WEIGHT_CHOICES = [ ('<2', '<2'), ('2-5', '2-5'), 
                       ('5-10', '5-10'), ('>10', '>10'),
                       ]
@@ -42,19 +42,21 @@ class Package(models.Model):
     distance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
 
-    width = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
-    height = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
-    depth = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
-    estimate_package_weight_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
+    width = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("width"))
+    height = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("height"))
+    depth = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("depth"))
+    estimate_package_weight_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("estimated package weight"))
     
     class Meta:
         db_table = "Packages"
         
     def __str__(self):
         return f"{self.recipient_name}, {self.recipient_phone}"
+    
 class Route(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     parcels = models.ManyToManyField(Package, related_name='route', blank=True)
+
 
     def __str__(self):
         return f'{self.get_formatted_route()}'

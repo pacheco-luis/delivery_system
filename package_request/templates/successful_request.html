@@ -4,9 +4,15 @@
 {% load i18n %}
 
 {% block content %}
+<div class="container">
   <h2>{% trans "Successfuly submited a request! "%}</h2>
   <p>{% trans "An employee will pass by to pick up the package from the address you entered. Thank you for your patience!"%} </p>
-  <a href="{% url 'package_request_app:home'%}"><button>{% trans "Return to homepage"%}</button></a>
+  <a href="{% url 'package_request_app:home'%}"> 
+    <button class="btn btn-success">
+      {% trans "Return to homepage"%}
+    </button>
+  </a>
+</div>
 {% endblock content %}
 
 

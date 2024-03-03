@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 03:17+0800\n"
+"POT-Creation-Date: 2024-03-04 00:37+0800\n"
 "PO-Revision-Date: 2024-03-02 01:11+0800\n"
 "Last-Translator: None None <superuser@superuser.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: delivery_system/settings.py:136
+#: delivery_system/settings.py:138
 msgid "English"
 msgstr "英文"
 
-#: delivery_system/settings.py:137
+#: delivery_system/settings.py:139
 msgid "Chinese"
 msgstr "中文"
 
@@ -62,6 +62,24 @@ msgstr "包裹外觀:"
 msgid "fragile?"
 msgstr "是否為易碎品？"
 
+#: package_request/models.py:45
+msgid "width"
+msgstr ""
+
+#: package_request/models.py:46
+msgid "height"
+msgstr ""
+
+#: package_request/models.py:47
+msgid "depth"
+msgstr ""
+
+#: package_request/models.py:48
+#, fuzzy
+#| msgid "Estimated package weight:"
+msgid "estimated package weight"
+msgstr "重量:"
+
 #: package_request/templates/cluster_route.html:7
 msgid "This is the map of the route you must take to complete all requests."
 msgstr "配送所有訂單的路線"
@@ -70,11 +88,11 @@ msgstr "配送所有訂單的路線"
 msgid "map"
 msgstr "地圖"
 
-#: package_request/templates/cluster_route.html:10
+#: package_request/templates/cluster_route.html:11
 msgid "Undo"
 msgstr "撤銷"
 
-#: package_request/templates/cluster_route.html:10
+#: package_request/templates/cluster_route.html:11
 msgid "Return"
 msgstr "返回"
 
@@ -95,7 +113,6 @@ msgid "View progress"
 msgstr "查詢進度"
 
 #: package_request/templates/home.html:26
-#: package_request/templates/job_list.html:46
 msgid "Jobs"
 msgstr "任務"
 
@@ -141,16 +158,6 @@ msgstr "駕駛:"
 #: users/templates/users/account.html:28
 msgid "Customer"
 msgstr "顧客"
-
-#: package_request/templates/job_list.html:47
-msgid ""
-"These are the current open requests. Click on the marker to see more "
-"information."
-msgstr ""
-
-#: package_request/templates/job_list.html:60
-msgid "View"
-msgstr ""
 
 #: package_request/templates/package_history.html:9
 msgid "These are the past requests you have made: "
@@ -277,17 +284,17 @@ msgstr "請輸入包裹內容物"
 msgid "Confirm order"
 msgstr "確認"
 
-#: package_request/templates/successful_request.html:7
-msgid "Successfuly submited a request! "
-msgstr "您已成功建立遞送申請！ "
-
 #: package_request/templates/successful_request.html:8
+msgid "Successfuly submited a request! "
+msgstr "您已成功送出遞送申請！ "
+
+#: package_request/templates/successful_request.html:9
 msgid ""
 "An employee will pass by to pick up the package from the address you "
 "entered. Thank you for your patience!"
 msgstr "我們的服務人員將會盡速向您領取所要寄送的包裹，謝謝您耐心等候。"
 
-#: package_request/templates/successful_request.html:9 templates/401.html:25
+#: package_request/templates/successful_request.html:12 templates/401.html:25
 msgid "Return to homepage"
 msgstr "回到首頁"
 
@@ -338,7 +345,7 @@ msgstr "登出"
 
 #: templates/index.html:42 templates/register.html:43
 msgid "Change Language"
-msgstr "語言"
+msgstr "變更語言"
 
 #: templates/index.html:45 users/templates/sign-up.html:18
 msgid "Sign up"
@@ -439,43 +446,43 @@ msgstr "我是駕駛"
 msgid "Don't have an account? <br>Create one!"
 msgstr "還沒有帳戶嗎？"
 
-#: users/models.py:9 users/models.py:31 users/models.py:47
+#: users/models.py:9 users/models.py:32 users/models.py:48
 msgid "first name"
 msgstr "名字"
 
-#: users/models.py:10 users/models.py:32 users/models.py:48
+#: users/models.py:10 users/models.py:33 users/models.py:49
 msgid "last name"
 msgstr "姓氏"
 
-#: users/models.py:11 users/models.py:33 users/models.py:49
+#: users/models.py:11 users/models.py:34 users/models.py:50
 msgid "username"
 msgstr "帳號"
 
-#: users/models.py:12 users/models.py:34 users/models.py:51
+#: users/models.py:12 users/models.py:35 users/models.py:52
 msgid "email"
 msgstr "email"
 
-#: users/models.py:35 users/models.py:52
+#: users/models.py:36 users/models.py:53
 msgid "phone number"
 msgstr "電話號碼"
 
-#: users/models.py:36 users/models.py:53
+#: users/models.py:37 users/models.py:54
 msgid "address"
 msgstr "地址:"
 
-#: users/models.py:37 users/models.py:56
+#: users/models.py:38 users/models.py:57
 msgid "profile picture"
 msgstr "頭貼"
 
-#: users/models.py:50
+#: users/models.py:51
 msgid "date of birth"
 msgstr " 生日"
 
-#: users/models.py:54
+#: users/models.py:55
 msgid "identification card"
 msgstr "身分證"
 
-#: users/models.py:55
+#: users/models.py:56
 msgid "driving license"
 msgstr "駕照"
 

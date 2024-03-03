@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 03:17+0800\n"
+"POT-Creation-Date: 2024-03-04 00:37+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: delivery_system/settings.py:136
+#: delivery_system/settings.py:138
 msgid "English"
 msgstr ""
 
-#: delivery_system/settings.py:137
+#: delivery_system/settings.py:139
 msgid "Chinese"
 msgstr "中文"
 
@@ -62,6 +62,22 @@ msgstr ""
 msgid "fragile?"
 msgstr ""
 
+#: package_request/models.py:45
+msgid "width"
+msgstr ""
+
+#: package_request/models.py:46
+msgid "height"
+msgstr ""
+
+#: package_request/models.py:47
+msgid "depth"
+msgstr ""
+
+#: package_request/models.py:48
+msgid "estimated package weight"
+msgstr ""
+
 #: package_request/templates/cluster_route.html:7
 msgid "This is the map of the route you must take to complete all requests."
 msgstr ""
@@ -70,11 +86,11 @@ msgstr ""
 msgid "map"
 msgstr ""
 
-#: package_request/templates/cluster_route.html:10
+#: package_request/templates/cluster_route.html:11
 msgid "Undo"
 msgstr ""
 
-#: package_request/templates/cluster_route.html:10
+#: package_request/templates/cluster_route.html:11
 msgid "Return"
 msgstr ""
 
@@ -95,7 +111,6 @@ msgid "View progress"
 msgstr ""
 
 #: package_request/templates/home.html:26
-#: package_request/templates/job_list.html:46
 msgid "Jobs"
 msgstr ""
 
@@ -134,16 +149,6 @@ msgstr ""
 #: package_request/templates/job_detail.html:38
 #: users/templates/users/account.html:28
 msgid "Customer"
-msgstr ""
-
-#: package_request/templates/job_list.html:47
-msgid ""
-"These are the current open requests. Click on the marker to see more "
-"information."
-msgstr ""
-
-#: package_request/templates/job_list.html:60
-msgid "View"
 msgstr ""
 
 #: package_request/templates/package_history.html:9
@@ -271,17 +276,17 @@ msgstr ""
 msgid "Confirm order"
 msgstr ""
 
-#: package_request/templates/successful_request.html:7
+#: package_request/templates/successful_request.html:8
 msgid "Successfuly submited a request! "
 msgstr ""
 
-#: package_request/templates/successful_request.html:8
+#: package_request/templates/successful_request.html:9
 msgid ""
 "An employee will pass by to pick up the package from the address you "
 "entered. Thank you for your patience!"
 msgstr ""
 
-#: package_request/templates/successful_request.html:9 templates/401.html:25
+#: package_request/templates/successful_request.html:12 templates/401.html:25
 msgid "Return to homepage"
 msgstr ""
 
@@ -427,43 +432,43 @@ msgstr ""
 msgid "Don't have an account? <br>Create one!"
 msgstr ""
 
-#: users/models.py:9 users/models.py:31 users/models.py:47
+#: users/models.py:9 users/models.py:32 users/models.py:48
 msgid "first name"
 msgstr ""
 
-#: users/models.py:10 users/models.py:32 users/models.py:48
+#: users/models.py:10 users/models.py:33 users/models.py:49
 msgid "last name"
 msgstr ""
 
-#: users/models.py:11 users/models.py:33 users/models.py:49
+#: users/models.py:11 users/models.py:34 users/models.py:50
 msgid "username"
 msgstr ""
 
-#: users/models.py:12 users/models.py:34 users/models.py:51
+#: users/models.py:12 users/models.py:35 users/models.py:52
 msgid "email"
 msgstr ""
 
-#: users/models.py:35 users/models.py:52
+#: users/models.py:36 users/models.py:53
 msgid "phone number"
 msgstr ""
 
-#: users/models.py:36 users/models.py:53
+#: users/models.py:37 users/models.py:54
 msgid "address"
 msgstr ""
 
-#: users/models.py:37 users/models.py:56
+#: users/models.py:38 users/models.py:57
 msgid "profile picture"
 msgstr ""
 
-#: users/models.py:50
+#: users/models.py:51
 msgid "date of birth"
 msgstr ""
 
-#: users/models.py:54
+#: users/models.py:55
 msgid "identification card"
 msgstr ""
 
-#: users/models.py:55
+#: users/models.py:56
 msgid "driving license"
 msgstr ""
 
