@@ -4,6 +4,7 @@ from package_request.models import Package, Route
 from stations.models import Station
 from datetime import datetime, timedelta
 from delivery_system.settings import TIME_ZONE
+from django.utils import timezone
 
 # Create your views here.
 
@@ -30,13 +31,18 @@ def admin_dashboard(request):
     # for stations card
     all_stations = Station.objects.all().count()
     
+    
+    pack = Package.objects.filter( status=Package.STATUS_PENDING )
+    print( len(pack) )
+    for p in pack:
+        print( p.order_date )
     # top 5 drivers by number of delivered packages
-    print( Package.objects.filter(
-                                    status=Package.STATUS_COMPLETED,
-                                    order_date__lte=datetime.now(),
-                                    order_date__gt=datetime.now()-timedelta(days=30)
-                                 )
-        )
+    print( timezone.now()-timezone.timedelta(days=30) )
+    
+    active_drivers = Driver.objects.filter( user__is_driver=True, user__is_active=True )
+    drivers_stats = [ ( d.driver_id, d.username, Package.objects.filter( status=Package.STATUS_COMPLETED, order_date__gt= (  timezone.now()-timezone.timedelta(days=30) ), driver=d).count()) for d in active_drivers ]
+    drivers_stats.sort( key=lambda drivers_stats: drivers_stats[2], reverse=True )
+    drivers_stats = drivers_stats[:5]
     
     
     
@@ -54,6 +60,10 @@ def admin_dashboard(request):
         'cancelled_p': cancelled_p,
         'all_clusters': all_clusters,
         'all_stations': all_stations,
+        'top_5_drivers': drivers_stats,
     }
     
     return render(request, 'admin_dashboard.html', context=context)
+
+def clusters(request):  
+    return render( request, "clusters.html" )

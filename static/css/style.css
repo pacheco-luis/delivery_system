@@ -1262,7 +1262,7 @@ section {
 
 #admin_base_body {
   min-height: 100vh;
-  background-color: #131314; }
+  background-image: radial-gradient(#131314, #1c1c27, #1e1e35); }
 
 #admin_navbar {
   position: sticky;
@@ -1270,7 +1270,7 @@ section {
   padding: 0.5rem 1rem; }
 
 #sidebar_blocker {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -1288,7 +1288,7 @@ section {
 #admin_sidebar {
   border-radius: 0 2rem 0 0;
   width: fit-content;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: none; }

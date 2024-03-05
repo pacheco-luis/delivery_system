@@ -6,9 +6,9 @@
 {% block content %}
 <div class="container">
   <h2>{% trans "Successfuly submited a request! "%}</h2>
-  <p>{% trans "An employee will pass by to pick up the package from the address you entered. Thank you for your patience!"%} </p>
+  <p>{% trans "Please hang onto your package while we send our agents to pick it up from your given address. Thank you for your patience!"%} </p>
   <a href="{% url 'package_request_app:home'%}"> 
-    <button class="btn btn-success">
+    <button class="btn btn-secondary">
       {% trans "Return to homepage"%}
     </button>
   </a>

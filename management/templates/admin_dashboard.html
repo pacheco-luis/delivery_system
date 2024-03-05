@@ -246,36 +246,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                            <td>112-31lw;3'a</td>
-                            <td>Zeus</td>
-                            <td>91</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                            <td>2oi3u2po4-0</td>
-                            <td>Goku</td>
-                            <td>90</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                            <td>l;123k4;'l134'</td>
-                            <td>Wang</td>
-                            <td>89</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                            <td>akjsdfiup2p34;l</td>
-                            <td>Perry</td>
-                            <td>88</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                            <td>po12i3po1pmkpad</td>
-                            <td>Amphebian</td>
-                            <td>87</td>
-                    </tr>
+                    {% for x in top_5_drivers %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                                <td>{{x.0}}</td>
+                                <td>{{x.1}}</td>
+                                <td>{{x.2}}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

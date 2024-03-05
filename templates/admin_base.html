@@ -29,7 +29,7 @@
     {% bootstrap_messages %}
   </div>
 
-  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between" style="position: relative;">
+  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between">
     <button id="admin_nav_menu_btn" type="button" class="btn btn-secondary">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
@@ -48,7 +48,6 @@
 
   <script>
     document.getElementById("admin_nav_menu_btn").addEventListener("click", function() {
-                                                                                      window.scrollTo(0, 0);
                                                                                       document.getElementById("admin_sidebar").style.display='block';
                                                                                       document.getElementById("sidebar_blocker").style.display='block';
                                                                                       document.getElementById("admin_base_body").style.overflow='hidden';

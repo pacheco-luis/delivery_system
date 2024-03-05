@@ -16,7 +16,7 @@
 }
 
 #sidebar_blocker{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -37,7 +37,7 @@
 #admin_sidebar{    
     border-radius: 0 2rem 0 0;
     width: fit-content;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: none;

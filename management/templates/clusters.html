@@ -1,0 +1,32 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title %}
+{% endblock title %}
+{% block content  %}
+<div id="dashboard_content" class="container-fluid">
+    <!-- Second Row -->
+    <div class="row">
+        <!-- dummy text -->
+        <div>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, rerum cumque? Unde, quisquam quia ipsam porro ratione est veritatis animi hic facilis saepe nihil non illum ducimus sunt blanditiis quod?
+        </div>
+    </div>
+</div>
+
+<div id="clusters_content" class="container-fluid">
+    
+</div>
+
+
+{% endblock content%}
+
+{% block script_files %}
+<script>
+    document.getElementById("admin_clusters_tab").style.borderLeft='3px solid #ff6000';
+</script>
+{% endblock script_files %}
