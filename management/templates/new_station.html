@@ -5,11 +5,11 @@
 
 
 <section>
-    <h2 class="text-center">Add a new station</h2>
+    <h2 class="text-center">{% trans "Add a new station"%}</h2>
     <!-- Form -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-primary">{% trans "Primary"%}</button>
     </form>
 </section>
 
