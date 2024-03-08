@@ -515,7 +515,10 @@ header .navigation .navigation-items a:hover:before {
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
-  margin: 1 auto; }
+  margin: 1 auto;
+  padding-left: 6em;
+  padding-right: 3em;
+  width: 100; }
 
 .pack-list-table {
   border-collapse: collapse;
@@ -529,7 +532,7 @@ header .navigation .navigation-items a:hover:before {
 
 .pack-list-table td, .pack-list-table th {
   text-align: left;
-  padding: 8px; }
+  padding: 6px; }
 
 .pack-list-table tr:nth-child(even) {
   background-color: #fce7d2; }
@@ -548,8 +551,7 @@ header .navigation .navigation-items a:hover:before {
   border: none;
   cursor: pointer;
   width: 100%;
-  opacity: 0.9;
-  border-radius: 20px; }
+  opacity: 0.9; }
 
 .ps_view_button {
   background-color: #0283ff;
@@ -559,8 +561,7 @@ header .navigation .navigation-items a:hover:before {
   border: none;
   cursor: pointer;
   width: 100%;
-  opacity: 0.9;
-  border-radius: 20px; }
+  opacity: 0.9; }
 
 .ps_del_button:hover {
   opacity: 1; }
@@ -662,15 +663,32 @@ hr {
   .no-pack-div img {
     width: 100px;
     height: 100px; } }
+@media screen and (max-width: 600px) {
+  #pack-list-body {
+    font-size: 15.5px;
+    margin-bottom: 0.5em;
+    padding: 0 1em; }
+
+  .pack-list-h2 h2 {
+    text-align: center; } }
+@media screen and (max-width: 500px) {
+  #pack-list-body {
+    font-size: 15.5px;
+    margin-bottom: 0.5em;
+    padding: 0 1em; }
+
+  .pack-list-h2 h2 {
+    text-align: center; } }
 @media screen and (max-width: 400px) {
   #pack-list-body {
     font-size: 15.5px;
-    margin-bottom: 0.5em; }
+    margin-bottom: 0.5em;
+    padding: 0 1em; }
 
   .pack-list-h2 h2 {
     text-align: center; } }
 /* Change styles for cancel button and delete button on extra small screens */
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 400px) {
   .ps_cancelbtn, .ps_deletebtn {
     width: 100%;
     text-align: center; } }
