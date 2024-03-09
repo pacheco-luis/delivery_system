@@ -1,0 +1,21 @@
+.clusters_Mh{
+    height: 90vh;
+}
+
+
+#clusters_content * .btn-outline-warning{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: none;
+    border-color: $color-main-orange;
+}
+
+#clusters_content * .btn-outline-warning:hover{
+    background-color: $color-main-orange;
+}
+
+
+.assign_form_input{
+    color: #000 !important;
+}

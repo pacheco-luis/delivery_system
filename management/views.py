@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from users.models import User, Customer, Driver
 from package_request.models import Package, Route
 from stations.models import Station
@@ -67,3 +67,18 @@ def admin_dashboard(request):
 
 def clusters(request):  
     return render( request, "clusters.html" )
+
+
+def assign_cluster( request, route_id, driver_username ):
+    route=Route.objects.get( id=route_id )
+    driver=Driver.objects.get(user__username=driver_username)
+    if route and driver is not None:
+        for parcel in route.parcels:
+            parcel( status=Package.STATUSES.STATUS_PICKING, driver=driver )
+    
+    # error
+    # return to  the previous page (routes or cluster's details)
+            
+    
+    return redirect('package_request_app:route_list')
+    

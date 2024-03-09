@@ -56,10 +56,11 @@ class Package(models.Model):
 class Route(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     parcels = models.ManyToManyField(Package, related_name='route', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
 
     def __str__(self):
-        return f'{self.get_formatted_route()}'
+        return f'{self.id}'
     
     def get_formatted_route(self):
         formatted_route = ''
@@ -70,3 +71,18 @@ class Route(models.Model):
                 formatted_route += " -> "
 
         return formatted_route.strip()
+    
+    def get_formatted_items(self):
+        formatted_route = ''
+
+        for parcel in self.parcels.all():
+            formatted_route += f"{parcel.package_description}"
+            if parcel != self.parcels.all().last():
+                formatted_route += ", "
+        return formatted_route.strip()
+    
+    def get_created_date(self):
+        return f'{self.created_at}'
+    
+    def get_size(self):
+        return f'{self.parcels.all().count()}'

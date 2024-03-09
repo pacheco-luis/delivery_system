@@ -41,9 +41,11 @@
     </a>
   </nav>
   {% include 'admin_sidebar.html' %}
-  {% block content %}
-  {% endblock content %}
-    
+  <div id="admin_base_body">
+    {% block content %}
+    {% endblock content %}
+  </div>
+  {% include 'admin_footer.html' %}
 
 
   <script>

@@ -1275,12 +1275,15 @@ section {
     margin-bottom: 5em; } }
 #admin_base_body,
 #admin_base_body * {
-  color: #fff;
-  margin: 0; }
+  color: #fff; }
 
 #admin_base_body {
-  min-height: 100vh;
   background-image: radial-gradient(#131314, #1c1c27, #1e1e35); }
+
+#admin_base-content {
+  margin: 0;
+  padding: 0;
+  height: auto; }
 
 #admin_navbar {
   position: sticky;
@@ -1382,19 +1385,33 @@ section {
 .general-table {
   overflow-x: auto; }
 
-#dashboard_content {
-  min-height: 100vh;
-  background-color: transparent; }
-
-#dashboard_content .row .col-md-8,
-#dashboard_content .row .col-md {
+.bdr_shdw {
   border-radius: 5px;
   background-color: #272a2e9c;
   border: 1px solid #ffffff2f;
-  margin: 0.5rem 0.25rem;
   box-shadow: 0 4px 8px -4px rgba(255, 255, 255, 0.267);
-  padding-top: 1rem;
-  padding-bottom: 1rem; }
+  margin: 0.5rem; }
+
+.mvh_100 {
+  min-height: 100vh; }
+
+.height_100 {
+  height: 100% !important; }
+
+.row {
+  padding: 0.5rem; }
+
+.col,
+.col-lg-8,
+.col-lg {
+  padding-bottom: 0.5rem; }
+
+.ovfy_auto {
+  overflow-y: auto; }
+
+#dashboard_content {
+  min-height: 100vh;
+  background-color: transparent; }
 
 #dashboard_content * .dash_board_links {
   padding: 0.1rem  0.5rem 0.3rem  0.4rem;
@@ -1404,5 +1421,21 @@ section {
 #visits_card {
   background-image: url("../../images/admin-sites/dashboard/pexels-klub-boks-9940152.jpg");
   background-size: cover; }
+
+.clusters_Mh {
+  height: 90vh; }
+
+#clusters_content * .btn-outline-warning {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none;
+  border-color: #FF6000; }
+
+#clusters_content * .btn-outline-warning:hover {
+  background-color: #FF6000; }
+
+.assign_form_input {
+  color: #000 !important; }
 
 /*# sourceMappingURL=style.css.map */

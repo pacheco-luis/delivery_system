@@ -1,14 +1,18 @@
 #admin_base_body, 
 #admin_base_body *{
     color: #fff;
-    margin: 0;
+    // margin: 0;
 }
 #admin_base_body{
-    min-height: 100vh;
     background-image: radial-gradient(#131314, #1c1c27, #1e1e35);
     // background-color: #131314;
 }
 
+#admin_base-content{
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
 #admin_navbar{
     position: sticky;
     top: 0;
@@ -127,4 +131,35 @@
 
 .general-table{
     overflow-x: auto;
+}
+
+
+.bdr_shdw{
+    border-radius: 5px;
+    background-color: #272a2e9c;
+    border: 1px solid #ffffff2f;
+    box-shadow: 0 4px 8px -4px rgba(255, 255, 255, 0.267);
+    margin: 0.5rem;
+}
+
+
+.mvh_100{
+    min-height: 100vh;
+}
+.height_100{
+    height: 100% !important;
+}
+
+.row{
+    padding: 0.5rem;
+}
+
+.col,
+.col-lg-8,
+.col-lg{
+    padding-bottom: 0.5rem;
+}
+
+.ovfy_auto{
+    overflow-y: auto;
 }

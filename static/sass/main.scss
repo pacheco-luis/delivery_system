@@ -18,5 +18,6 @@
 @import "account/account";
 
 // for admin stite
-@import "admin_sites/admin_base.scss";
-@import "admin_sites/dashboard.scss";
+@import "admin_sites/admin_base";
+@import "admin_sites/dashboard";
+@import "admin_sites/clusters";

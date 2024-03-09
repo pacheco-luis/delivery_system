@@ -8,25 +8,145 @@
 {% block title %}
 {% endblock title %}
 {% block content  %}
-<div id="dashboard_content" class="container-fluid">
-    <!-- Second Row -->
+<div id="clusters_content" class="container-fluid">
+    <!-- first Row -->
     <div class="row">
-        <!-- dummy text -->
-        <div>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, rerum cumque? Unde, quisquam quia ipsam porro ratione est veritatis animi hic facilis saepe nihil non illum ducimus sunt blanditiis quod?
+        <div class="col-lg">
+            <div class="row bdr_shdw ">
+                <div class="col">
+                    <h5>Clusters</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- second Row -->
+    <div class="row">
+        <!-- unassigned and active clusters -->
+        <div id="" class="col-lg-8">
+            <div class="row bdr_shdw">
+                <div class="col clusters_Mh" style="overflow: auto auto;">
+                    <h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bounding-box" viewBox="0 0 16 16">
+                            <path d="M5 2V0H0v5h2v6H0v5h5v-2h6v2h5v-5h-2V5h2V0h-5v2zm6 1v2h2v6h-2v2H5v-2H3V5h2V3zm1-2h3v3h-3zm3 11v3h-3v-3zM4 15H1v-3h3zM1 4V1h3v3z"/>
+                        </svg>
+                        Current existing and unassigned routes:
+                    </h5>
+                    <table class="table general-table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Parcels</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if route_count %}
+                                {% for route in routes %}
+                                    <tr>
+                                        <th scope="row-md" style="width: 2rem;">
+                                            <button id="{{route.id}}" type="button" class="btn btn-outline-warning" onclick="auto_fill_form(this.id)">{{forloop.counter}}.</button>
+                                        </th>
+                                            <td>{{route.id}}</td>
+                                            <td>{{route.created_at}}</td>
+                                            <td>{{route.parcels|length}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+        
+                    {% if route_count == 0 %}
+                        <div class="row container">
+                            <div class="row">
+                                <div class="col-lg" style="text-align: center; font-style: italic; color: rgb(125, 125, 125); border: none; box-shadow: none; background: none;">nothing to display here</div>
+                            </div>
+                            <div class="row justify-content-md-center">
+                                <img class="col-lg-8" src="{% static 'images/package_listing/empty_package.png' %}" alt="there are no current routes"/>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Something else -->
+        <div class="col height_100">
+            <div class="row bdr_shdw height_100">
+                <div class="col clusters_Mh">
+                    <h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                          </svg>
+                        Route details: 
+
+                        <div class="row">
+                            <form action="" method="POST" style="display: inline; margin-right:0;">
+                                {% csrf_token %}
+                                <button type="submit" name="create_routes" class="btn btn-secondary">Create Routes</button>
+                            </form>
+                        </div>
+                    </h5>
+                    <div id="assign_box" class="row">
+                        <div class="row"> 
+                            <h6 class="p-0 col"> 
+                                <form id="assign_form" name="assign_form" action="" method="post" style="display: none;">
+                                    {% csrf_token %}
+
+                                    <div class="container">
+                                        {% for field in assign_form %}
+                                            <div class="row-lg">
+                                                <label for="cluster_id">{{field.label}}:</label>
+                                                <br>
+                                                {{field}}
+                                                <br>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="row-lg">
+                                            <button type="submit" name="assign_cluster" id="send_username" class="btn btn-secondary" style="display: block; width:100%">Assign</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- <form id="assign_form" name="assign_form" action="" method="POST" style="display: none; margin-right:0;"> 
+                                    {% csrf_token %} 
+                                    <div class="container">
+                                        <div class="col-lg">
+                                            <div class="row-lg">
+                                                <label for="cluster_id">Cluster ID:</label>
+                                                <input id="cluster_id" disabled type="text" name="cluster_id" style="color: #000;" class="form-control" placeholder="cluster id" aria-label="cluster id" aria-describedby="basic-addon1"> 
+                                            </div>
+                                            <br>
+                                            <div class="row-lg">
+                                                <label for="driver_username">Driver username:</label>
+                                                <input id="driver_username"  type="text" name="driver_username" style="color: #000;" class="form-control" placeholder="driver username" aria-label="Username" aria-describedby="basic-addon1"> 
+                                            </div>
+                                            <br>
+                                            <div class="row-lg">
+                                                <a id="send_username" name="assign_cluster" type="submit" class="btn btn-secondary" style="display: block;">Assign</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>  -->
+                            </h6> 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<div id="clusters_content" class="container-fluid">
-    
-</div>
-
 
 {% endblock content%}
 
 {% block script_files %}
 <script>
     document.getElementById("admin_clusters_tab").style.borderLeft='3px solid #ff6000';
+
+    function auto_fill_form( id ){
+        document.getElementById("assign_form").style.display = "block";
+        document.forms.assign_form.cluster_id.value = id;
+    }
+    
 </script>
 {% endblock script_files %}
