@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %}Jobs{% endblock title %}
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
 
+
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <title>Job List</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
         async defer></script>
@@ -17,14 +14,13 @@
         .gm-ui-hover-effect {
             display: none !important;
         }
-
         .job-details {
             display: none;
         }
     </style>
 </head>
 
-<body class="del-body">
+<div>
     <h1>Jobs</h1>
 
     {% if job %}
@@ -184,5 +180,5 @@
 
         window.initMap = initMap;
     </script>
-</body>
+</div>
 {% endblock content %}

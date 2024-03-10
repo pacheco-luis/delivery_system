@@ -46,10 +46,18 @@
     <h1>Jobs</h1>
 
     <ul>
-        {% for route in routes %}
-        <li>Route: {{ route }}</li><br>
-        <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>
-        {% endfor %}
+        {% comment %} Check if the routes are populated. {% endcomment %}
+        {% if route %}
+            {% for route in routes %}
+            <li>Route: {{ route }}</li><br>
+            <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>
+            {% endfor %}
+        
+        {% comment %} If no routes are assigned, display a text {% endcomment %}
+        {% else %}
+            <p> You have not been assigned a route as of yet! </p>
+        {% endif %}
+        
     </ul>
 
     <!-- <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>

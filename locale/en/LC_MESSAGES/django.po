@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-04 00:37+0800\n"
+"POT-Creation-Date: 2024-03-10 18:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: delivery_system/settings.py:138
+#: delivery_system/settings.py:141
 msgid "English"
 msgstr ""
 
-#: delivery_system/settings.py:139
+#: delivery_system/settings.py:142
 msgid "Chinese"
 msgstr "中文"
+
+#: management/templates/admin_dashboard.html:18
+#: management/templates/admin_sidebar.html:23
+msgid "Dashboard"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:35
+msgid "Visits:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:40
+msgid "Today:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:45
+msgid "Past 7 days:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:50
+msgid "Past  30 days:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:55
+#: management/templates/admin_dashboard.html:80
+#: management/templates/admin_dashboard.html:138
+#: management/templates/admin_dashboard.html:216
+#: management/templates/admin_dashboard.html:244
+msgid "Total:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:70
+msgid "Users:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:90
+#: management/templates/admin_dashboard.html:314
+msgid "Active:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:100
+#: management/templates/admin_dashboard.html:324
+msgid "Customers:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:110
+#: management/templates/admin_dashboard.html:329
+msgid "Drivers:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:128
+msgid "Packages: "
+msgstr ""
+
+#: management/templates/admin_dashboard.html:148
+msgid "Pending:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:158
+msgid "Picking:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:168
+msgid "Delivering:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:178
+msgid "Completed:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:188
+msgid "Cancelled:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:206
+msgid "Clusters:"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:234
+msgid "Stations: "
+msgstr ""
+
+#: management/templates/admin_dashboard.html:266
+msgid "Top 5 active drivers (in the last 30 days):"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:272
+msgid "Driver ID"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:273
+#: users/templates/users/account.html:48
+msgid "Username"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:274
+msgid "Completed"
+msgstr ""
+
+#: management/templates/admin_dashboard.html:309
+msgid "Total: "
+msgstr ""
+
+#: management/templates/admin_dashboard.html:319
+msgid "Inactive:"
+msgstr ""
+
+#: management/templates/new_station.html:8
+msgid "Add a new station"
+msgstr ""
+
+#: management/templates/new_station.html:12
+msgid "Primary"
+msgstr ""
 
 #: package_request/forms.py:8
 msgid "Sender phone:"
@@ -156,37 +269,36 @@ msgid "These are the past requests you have made: "
 msgstr ""
 
 #: package_request/templates/package_history.html:22
-#: package_request/templates/package_list.html:23
+#: package_request/templates/package_list.html:25
 msgid "Sender:"
 msgstr ""
 
 #: package_request/templates/package_history.html:23
-#: package_request/templates/package_list.html:24
-#: package_request/templates/package_list.html:61
+#: package_request/templates/package_list.html:26
+#: package_request/templates/package_list.html:81
 msgid "Receiver:"
 msgstr ""
 
 #: package_request/templates/package_history.html:24
-#: package_request/templates/package_list.html:25
+#: package_request/templates/package_list.html:27
 msgid "Date:"
 msgstr ""
 
 #: package_request/templates/package_history.html:25
 #: package_request/templates/package_history.html:45
-#: package_request/templates/package_list.html:26
-#: package_request/templates/package_list.html:62
+#: package_request/templates/package_list.html:28
+#: package_request/templates/package_list.html:82
 msgid "Destination:"
 msgstr ""
 
 #: package_request/templates/package_history.html:26
 #: package_request/templates/package_history.html:46
-#: package_request/templates/package_list.html:27
-#: package_request/templates/package_list.html:63
+#: package_request/templates/package_list.html:29
+#: package_request/templates/package_list.html:83
 msgid "Item Description:"
 msgstr ""
 
 #: package_request/templates/package_history.html:27
-#: package_request/templates/package_list.html:28
 msgid "Driver:"
 msgstr ""
 
@@ -195,12 +307,12 @@ msgid "This is the information of your past request: "
 msgstr ""
 
 #: package_request/templates/package_history.html:42
-#: package_request/templates/package_list.html:59
+#: package_request/templates/package_list.html:80
 msgid "Date and Time:"
 msgstr ""
 
 #: package_request/templates/package_history.html:43
-#: package_request/templates/package_list.html:60
+#: package_request/templates/package_list.html:79
 msgid "Package ID:"
 msgstr ""
 
@@ -212,42 +324,41 @@ msgstr ""
 msgid "You currently do not have any previous package requests on record."
 msgstr ""
 
-#: package_request/templates/package_list.html:10
+#: package_request/templates/package_list.html:11
 msgid "Viewing current active requests"
 msgstr ""
 
-#: package_request/templates/package_list.html:39
-msgid "Delete Request"
+#: package_request/templates/package_list.html:30
+msgid "Status:"
 msgstr ""
 
-#: package_request/templates/package_list.html:40
-msgid "View Request"
-msgstr ""
-
-#: package_request/templates/package_list.html:45
-msgid "You are about to delete a request"
-msgstr ""
-
-#: package_request/templates/package_list.html:46
-msgid "Are you sure you want to delete this request?"
-msgstr ""
-
-#: package_request/templates/package_list.html:48
-#: package_request/templates/step1.html:20
-#: package_request/templates/step2.html:17
-#: package_request/templates/step3.html:18
-msgid "Cancel"
-msgstr ""
-
-#: package_request/templates/package_list.html:49
+#: package_request/templates/package_list.html:51
+#: package_request/templates/package_list.html:64
 msgid "Delete"
 msgstr ""
 
-#: package_request/templates/package_list.html:58
-msgid "This is the information of your active request: "
+#: package_request/templates/package_list.html:56
+msgid "You are about to delete a request"
+msgstr ""
+
+#: package_request/templates/package_list.html:60
+msgid "Are you sure you want to delete this request?"
+msgstr ""
+
+#: package_request/templates/package_list.html:63
+#: package_request/templates/package_list.html:86
+msgid "Close"
+msgstr ""
+
+#: package_request/templates/package_list.html:70
+msgid "View"
 msgstr ""
 
 #: package_request/templates/package_list.html:75
+msgid "This is the information of your active request "
+msgstr ""
+
+#: package_request/templates/package_list.html:100
 msgid "You have no package requests made."
 msgstr ""
 
@@ -262,6 +373,12 @@ msgstr ""
 #: package_request/templates/step1.html:19
 #: package_request/templates/step2.html:16
 msgid "Next"
+msgstr ""
+
+#: package_request/templates/step1.html:20
+#: package_request/templates/step2.html:17
+#: package_request/templates/step3.html:18
+msgid "Cancel"
 msgstr ""
 
 #: package_request/templates/step2.html:7
@@ -282,8 +399,8 @@ msgstr ""
 
 #: package_request/templates/successful_request.html:9
 msgid ""
-"An employee will pass by to pick up the package from the address you "
-"entered. Thank you for your patience!"
+"Please hang onto your package while we send our agents to pick it up from "
+"your given address. Thank you for your patience!"
 msgstr ""
 
 #: package_request/templates/successful_request.html:12 templates/401.html:25
@@ -310,11 +427,11 @@ msgstr ""
 msgid "View Progress"
 msgstr ""
 
-#: templates/customer_sidebar.html:71 templates/driver_sidebar.html:70
+#: templates/customer_sidebar.html:71 templates/driver_sidebar.html:57
 msgid "History"
 msgstr ""
 
-#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:83
+#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:70
 msgid "Settings"
 msgstr ""
 
@@ -322,94 +439,82 @@ msgstr ""
 msgid "Log-out"
 msgstr ""
 
-#: templates/driver_sidebar.html:55
-msgid "Completed"
-msgstr ""
-
-#: templates/driver_sidebar.html:92
+#: templates/driver_sidebar.html:79
 msgid "logout"
 msgstr ""
 
-#: templates/driver_sidebar.html:93 templates/navbar.html:38
+#: templates/driver_sidebar.html:80 templates/navbar.html:38
 #: templates/navbar.html:49
 msgid "Log out"
 msgstr ""
 
-#: templates/index.html:42 templates/register.html:43
-msgid "Change Language"
-msgstr ""
-
-#: templates/index.html:45 users/templates/sign-up.html:18
+#: templates/index.html:44 users/templates/sign-up.html:18
 msgid "Sign up"
 msgstr ""
 
-#: templates/index.html:50
+#: templates/index.html:51
 msgid "Delivery Made Simple"
 msgstr ""
 
-#: templates/index.html:52 users/templates/sign-up.html:43
+#: templates/index.html:53 users/templates/sign-up.html:43
 msgid "Log in"
 msgstr ""
 
-#: templates/index.html:55 users/templates/sign-in.html:29
+#: templates/index.html:56 users/templates/sign-in.html:29
 msgid "Don't have an account?"
 msgstr ""
 
-#: templates/index.html:55
+#: templates/index.html:56
 msgid "Create One!"
 msgstr ""
 
-#: templates/index.html:61
+#: templates/index.html:62
 msgid "What we do:"
 msgstr ""
 
-#: templates/index.html:64
+#: templates/index.html:65
 msgid ""
 "We connect drivers with other users that wish to deliver packages.\n"
 "            Currently, our services are only offered between and within "
 "Taipei and Hualien."
 msgstr ""
 
-#: templates/index.html:73
+#: templates/index.html:74
 msgid "Our Mission:"
 msgstr ""
 
-#: templates/index.html:76
+#: templates/index.html:77
 msgid ""
 "We aim to make package deliveries as simple and as convenient as possible\n"
 "                while ensuring that the packages arrive safely at their "
 "destination."
 msgstr ""
 
-#: templates/index.html:84 templates/register.html:74
+#: templates/index.html:85 templates/register.html:70
 msgid "Have a concern?"
 msgstr ""
 
-#: templates/index.html:85 templates/register.html:75
+#: templates/index.html:86 templates/register.html:71
 msgid "Contact Us"
 msgstr ""
 
-#: templates/index.html:86 templates/register.html:76
+#: templates/index.html:87 templates/register.html:72
 msgid "Our Future Plans"
 msgstr ""
 
-#: templates/index.html:87 templates/register.html:77
+#: templates/index.html:88 templates/register.html:73
 msgid "Terms of Use"
 msgstr ""
 
-#: templates/index.html:88 templates/register.html:78
+#: templates/index.html:89 templates/register.html:74
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/navbar.html:28
-msgid "Change"
-msgstr ""
-
-#: templates/register.html:46
+#: templates/register.html:42
 msgid "Log-in"
 msgstr ""
 
-#: templates/register.html:52
+#: templates/register.html:48
 msgid ""
 "\n"
 "            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
@@ -420,15 +525,15 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/register.html:59
+#: templates/register.html:55
 msgid "Register as a customer"
 msgstr ""
 
-#: templates/register.html:61
+#: templates/register.html:57
 msgid "Register as a driver"
 msgstr ""
 
-#: templates/register.html:66
+#: templates/register.html:62
 msgid "Don't have an account? <br>Create one!"
 msgstr ""
 
@@ -583,10 +688,6 @@ msgstr ""
 
 #: users/templates/users/account.html:44
 msgid "Last Name"
-msgstr ""
-
-#: users/templates/users/account.html:48
-msgid "Username"
 msgstr ""
 
 #: users/templates/users/account.html:53
