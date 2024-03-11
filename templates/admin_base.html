@@ -29,33 +29,41 @@
     {% bootstrap_messages %}
   </div>
 
-  <nav id="admin_navbar" class="navbar navbar-dark bg-dark justify-content-between">
-    <button id="admin_nav_menu_btn" type="button" class="btn btn-secondary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-      </svg>
-    </button>
-    
-    <a class="navbar-brand" href="{% url 'management:admin_dashboard'%}" >
-      <img src="{% static 'images/logo/swift-1000.png' %}" class="admin_logo" alt="logo">
-      <span>Swift Courier Admin</span>
-    </a>
-    <form id="languageForm" method="post" action="{% url 'set_language' %}">
-      {% csrf_token %}
-      <select class="form-select-sm bg-black" name="language" id="language" onchange="languageSwitch(this.value)">
-          {% get_current_language as LANGUAGE_CODE %}
-          {% get_available_languages as LANGUAGES %}
-          {% get_language_info_list for LANGUAGES as languages %}
-          {% for language in languages %}
-              <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                  {{ language.name_local }}
-              </option>
-          {% endfor %}
-      </select>
-    </form>
-    
-    
+
+  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <button id="admin_nav_menu_btn" type="button" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+          </button>
+          <a class="navbar-brand" href="{% url 'management:admin_dashboard'%}" >
+            <img src="{% static 'images/logo/swift-1000.png' %}" class="admin_logo" alt="logo">
+            <span>Swift Courier Admin</span>
+          </a>
+        </div>
+        <div class="col" style="position: relative;">
+          <form id="languageForm" method="post" action="{% url 'set_language' %}" style="position: absolute; right:0">
+            {% csrf_token %}
+            <select class="form-select-sm bg-black" name="language" id="language" onchange="languageSwitch(this.value)" style="height:100%;">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ language.name_local }}
+                    </option>
+                {% endfor %}
+            </select>
+          </form>
+      
+        </div>
+      </div>
+    </div>
   </nav>
+
   {% include 'admin_sidebar.html' %}
   <div id="admin_base_body">
     {% block content %}

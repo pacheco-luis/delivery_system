@@ -8,31 +8,36 @@ from django.utils import timezone
 
 # Create your views here.
 
+
+# try except helper
+def exception_handler( object_queryset ) -> int:
+    return  object_queryset.count() if object_queryset is not None  else int(0)
+
 def admin_dashboard(request):
-    
     # for users card
-    all_users = User.objects.all().count()
-    active = User.objects.filter(is_active=True ).count()
-    inactive = User.objects.filter(is_active=False ).count()
-    customers = Customer.objects.all().count()
-    drivers = Driver.objects.all().count()
+    all_users = exception_handler( User.objects.all() )
+    active = exception_handler( User.objects.filter(is_active=True ) )
+    inactive = exception_handler( User.objects.filter(is_active=False ) )
+    customers = exception_handler( Customer.objects.all() )
+    drivers = exception_handler( Driver.objects.all() )
     
     # for packages card
-    all_p = Package.objects.all().count()
-    pending_p = Package.objects.filter( status=Package.STATUS_PENDING).count()
-    picking_p = Package.objects.filter( status=Package.STATUS_PICKING).count()
-    delivering_p = Package.objects.filter( status=Package.STATUS_DELIVERING).count()
-    completed_p = Package.objects.filter( status=Package.STATUS_COMPLETED).count()
-    cancelled_p = Package.objects.filter( status=Package.STATUS_CANCELED).count()
+    all_p = exception_handler( Package.objects.all() )
+    pending_p = exception_handler( Package.objects.filter( status=Package.STATUS_PENDING) )
+    picking_p = exception_handler( Package.objects.filter( status=Package.STATUS_PICKING) )
+    delivering_p = exception_handler( Package.objects.filter( status=Package.STATUS_DELIVERING) )
+    completed_p = exception_handler( Package.objects.filter( status=Package.STATUS_COMPLETED) )
+    cancelled_p = exception_handler( Package.objects.filter( status=Package.STATUS_CANCELED) )
     
     # for cluster card
-    all_clusters = Route.objects.all().count()
+    all_clusters = exception_handler( Route.objects.all() )
     
     # for stations card
-    all_stations = Station.objects.all().count()
+    all_stations = exception_handler( Station.objects.all() )
     
     
     pack = Package.objects.filter( status=Package.STATUS_PENDING )
+    
     print( len(pack) )
     for p in pack:
         print( p.order_date )
@@ -40,11 +45,9 @@ def admin_dashboard(request):
     print( timezone.now()-timezone.timedelta(days=30) )
     
     active_drivers = Driver.objects.filter( user__is_driver=True, user__is_active=True )
-    drivers_stats = [ ( d.driver_id, d.username, Package.objects.filter( status=Package.STATUS_COMPLETED, order_date__gt= (  timezone.now()-timezone.timedelta(days=30) ), driver=d).count()) for d in active_drivers ]
+    drivers_stats = [ ( d.driver_id, d.username, exception_handler(Package.objects.filter( status=Package.STATUS_COMPLETED, order_date__gt= (  timezone.now()-timezone.timedelta(days=30) ), driver=d)) ) for d in active_drivers ]
     drivers_stats.sort( key=lambda drivers_stats: drivers_stats[2], reverse=True )
     drivers_stats = drivers_stats[:5]
-    
-    
     
     context = {
         'total_users': all_users,  
