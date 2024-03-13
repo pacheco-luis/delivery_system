@@ -32,11 +32,14 @@
                         <td scope="row">{{ package_obj.recipient_address.place }}</td>
                         <td scope="row">{{ package_obj.package_description }}</td>
                         <td scope="row">{% if package_obj.status == 'pending' %}
-                                <strong style="color: #FFA758;">Request Pending</strong>
-                            {% elif package.obj.status == 'picking'%}
-                                <strong style="color:#5aa5b9;">Packaged has been picked up.</strong>
-                            {% elif package.obj.status == 'delivering'%}
-                                <strong>Package is being delivered.{% endif %}</strong>
+                                <strong style="color: #FFA758;"> Package Pending </strong>
+                                {% endif %}
+                            {% if package_obj.status == 'picking' %}
+                                <strong style="color:#5aa5b9;"> Picking Up.</strong>
+                                {% endif %}
+                            {% if package_obj.status == 'delivering' %}
+                                <strong> Being Delivered.</strong>
+                                {% endif %}
                         </td>
                         <td scope="row">
                                 <button type="button" class="ps_del_button btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal{{ package_obj.package_id }}">{% trans "Delete" %}</button>
