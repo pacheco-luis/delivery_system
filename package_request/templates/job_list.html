@@ -47,7 +47,7 @@
 
     <ul>
         {% comment %} Check if the routes are populated. {% endcomment %}
-        {% if route %}
+        {% if routes %}
             {% for route in routes %}
             <li>Route: {{ route }}</li><br>
             <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>

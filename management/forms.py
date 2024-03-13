@@ -3,7 +3,8 @@ from django import forms
 class ASSIGN_CLUSTER_FORM(forms.Form):
     cluster_id = forms.CharField( max_length=50, required=True, widget=forms.TextInput(attrs={
         'id':'cluster_id',
-        'disabled': '',
+        'text':'text',
+        # 'disabled': '',
         'class':'form-control assign_form_input',
         'placeholder':'cluster id',
         'aria-label':'cluster id',

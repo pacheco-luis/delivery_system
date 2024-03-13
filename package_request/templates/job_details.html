@@ -32,9 +32,11 @@
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         const waypts = [];
-
         // split and get all the address except the last two of each string
-        const route = "{{ route }}".split(";").map((point) => point.split(",").slice(0, -2).join(","));
+        const route = "{{ route.get_formatted_route }}".split(";").map((point) => point.split(",").slice(0, -2).join(","));
+        // const route = "{{ route.get_formatted_route }}"
+        console.log("hello")
+        console.log(route)
         for (let i = 0; i < route.length; i++) {
             waypts.push({
                 location: route[i],
