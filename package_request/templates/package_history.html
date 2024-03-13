@@ -4,29 +4,24 @@
 {% block title %}History{% endblock title %}
 
 {% block content %}
-<div id="pack-list-body" style="padding: 0 2em; width: 100;">
+<div id="pack-list-body">
     <div>
         <h2 style="padding: 0.5em; ">{% trans "These are the past requests you have made: "%}</h2>
     </div>
     <div style="overflow-x:auto;">
-        <table class="pack-list-table" style="width:100%;">
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 15%;">
-                <col style="width: 20%;">
-                <col style="width: 25%;">
-                <col style="width: 15%;">
-            </colgroup>
-            <tr>
-                <th>{% trans "Sender:"%}</th>
-                <th>{% trans "Receiver:"%}</th>
-                <th>{% trans "Date:"%}</th>
-                <th>{% trans "Destination:"%}</th>
-                <th>{% trans "Item Description:"%}</th>
-                <th>{% trans "Driver:"%}</th>
+        <table class="table table-hover table-responsive pack-list-table" style="width:100%;">
+            <tr style="background-color: #FFA758;">
+                <th scope="col">{% trans "Sender:"%}</th>
+                <th scope="col">{% trans "Receiver:"%}</th>
+                <th scope="col">{% trans "Date:"%}</th>
+                <th scope="col">{% trans "Destination:"%}</th>
+                <th scope="col">{% trans "Item Description:"%}</th>
+                <th scope="col">{% trans "Status:"%}</th>
+                {% if package_list %}
+                    <th scope="col"> </th>
+                {% endif %}
             </tr>
-            {% if package_list %}
+            {% if package_history%}
                 {% for package_obj in package_history %}
                     <tr>
                         <td>{{ user.first_name }}</td>
@@ -34,16 +29,32 @@
                         <td>{{ package_obj.order_date}}</td>
                         <td>{{ package_obj.recipient_address }}</td>
                         <td>{{ package_obj.package_description }}</td>
+                        <td scope="row">{% if package_obj.status == 'completed' %}
+                            <strong style="color: #359e64;">{% trans "The package has been delivered." %}</strong>
+                        {% elif package_obj.status == 'canceled' %}
+                            <strong style="color: #fc4b0b;">{% trans "Request Canceled" %}</strong>
+                        {% endif %}
+                        </td>
                         <td>
-                            <div id="viewModal{{ package_obj.package_id}}" class = "ps_modal" >
-                                <div class="ps_view_cont"> 
-                                    <span onclick="document.getElementById('viewModal{{ package_obj.package_id }}').style.display='none'" class="ps_close" title="Close">×</span>
-                                    <h2>{% trans "This is the information of your past request: "%}</h2><br>
-                                    <p><b>{% trans "Date and Time:"%} </b> {{ package_obj.order_date }}</p><br>
-                                    <p><b>{% trans "Package ID:"%} </b> {{ package_obj.package_id }}</p><br>
-                                    <p><b>{% trans "Receiver: "%}</b> {{ package_obj.recipient_name }}</p><br>
-                                    <p><b>{% trans "Destination:"%} </b> {{ package_obj.recipient_address}}</p><br>
-                                    <p><b>{% trans "Item Description:"%} </b> {{ package_obj.package_description}}</p><br>
+                            <button type="button" class="ps_view_button btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ package_obj.package_id }}">{% trans "View" %}</button>
+                            <div class="modal fade" id="viewModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of your active request "%}</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><b>{% trans "Package ID:" %} </b> {{ package_obj.package_id }}</p><br>
+                                            <p><b>{% trans "Date and Time:" %} </b> {{ package_obj.order_date }}</p><br>
+                                            <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
+                                            <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
+                                            <p><b>{% trans "Item Description:" %} </b> {{ package_obj.package_description }}</p><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </td>

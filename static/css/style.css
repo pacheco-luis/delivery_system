@@ -511,7 +511,6 @@ header .navigation .navigation-items a:hover:before {
   #secondary_logo {
     display: block; } }
 #pack-list-body {
-  font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
@@ -525,7 +524,7 @@ header .navigation .navigation-items a:hover:before {
   width: 100%; }
 
 .pack-list-h2 {
-  text-align: center; }
+  margin-top: 1em; }
 
 .pack-list-table th {
   background-color: #e38b29; }
@@ -538,7 +537,7 @@ header .navigation .navigation-items a:hover:before {
   background-color: #fce7d2; }
 
 .pack-list-table tr:nth-child(odd) {
-  background-color: #fbcd9b; }
+  background-color: #fce7d2; }
 
 * {
   box-sizing: border-box; }
@@ -661,8 +660,8 @@ hr {
     margin-bottom: 1em; }
 
   .no-pack-div img {
-    width: 100px;
-    height: 100px; } }
+    width: 300px;
+    height: 250px; } }
 @media screen and (max-width: 600px) {
   #pack-list-body {
     font-size: 15.5px;
@@ -686,7 +685,11 @@ hr {
     padding: 0 1em; }
 
   .pack-list-h2 h2 {
-    text-align: center; } }
+    text-align: center; }
+
+  .no-pack-div img {
+    width: 150px;
+    height: 100px; } }
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 400px) {
   .ps_cancelbtn, .ps_deletebtn {

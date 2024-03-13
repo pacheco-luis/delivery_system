@@ -8,66 +8,57 @@
 
 <div id="pack-list-body">
     <div>
-        <h1 style="padding: 0.5em;">{% trans "Viewing current active requests"%}</h1>
+        <h2 style="padding: 0.5em;">{% trans "Viewing current active requests"%}</h2>
     </div>
     <div style="overflow-x:auto;">
-        <table class="pack-list-table" style="width:100%;">
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 25%;">
-                <col style="width: 20%;">
-                <col style="width: 15%;">
-                <col style="width: 15%;">
-            </colgroup>
-            <tr>
-                <th>{% trans "Sender:"%}</th>
-                <th>{% trans "Receiver:"%}</th>
-                <th>{% trans "Date:"%}</th>
-                <th>{% trans "Destination:"%}</th>
-                <th>{% trans "Item Description:"%}</th>
-                <th>{% trans "Status:" %}</th>
-                <th> </th>
+        <table class="table table-hover table-responsive pack-list-table" style="width:100%;"> 
+            <tr style="background-color: #FFA758;">
+                <th scope="col">{% trans "Sender:"%}</th>
+                <th scope="col">{% trans "Receiver:"%}</th>
+                <th scope="col">{% trans "Date:"%}</th>
+                <th scope="col">{% trans "Destination:"%}</th>
+                <th scope="col">{% trans "Item Description:"%}</th>
+                <th scope="col">{% trans "Status:" %}</th>
+                {% if package_list %}
+                    <th scope="col"> </th>
+                {% endif %}
             </tr>
             {% if package_list %}
                 {% for package_obj in package_list %}
                     <tr>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ package_obj.recipient_name }}</td>
-                        <td>{{ package_obj.order_date }}</td>
-                        <td>{{ package_obj.recipient_address.place }}</td>
-                        <td>{{ package_obj.package_description }}</td>
-                        <td>{% if package_obj.status == 'pending' %}
-                                <strong style="color: orange;">Request Pending</strong>
+                        <td scope="row">{{ user.first_name }}</td>
+                        <td scope="row">{{ package_obj.recipient_name }}</td>
+                        <td scope="row">{{ package_obj.order_date }}</td>
+                        <td scope="row">{{ package_obj.recipient_address.place }}</td>
+                        <td scope="row">{{ package_obj.package_description }}</td>
+                        <td scope="row">{% if package_obj.status == 'pending' %}
+                                <strong style="color: #FFA758;">Request Pending</strong>
                             {% elif package.obj.status == 'picking'%}
-                                <strong style="color:blue">Packaged has been picked up.</strong>
+                                <strong style="color:#5aa5b9;">Packaged has been picked up.</strong>
                             {% elif package.obj.status == 'delivering'%}
-                                Package is being delivered.
-                            {% elif package_obj.status == 'completed' %}
-                                <strong style="color: green; ">Recipient has received the package</strong>
-                            {% else %}<strong style="color: red;">Request Canceled</strong>{% endif %}</td>
-                        <td>
-                            <button type="button" class="ps_del_button btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal{{ package_obj.package_id }}">{% trans "Delete" %}</button>
-                            <div class="modal fade" id="deleteModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="staticBackdropLabel">{% trans "You are about to delete a request"%}</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                           <p>{% trans "Are you sure you want to delete this request?"%}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>
-                                            <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="btn btn-secondary">{% trans "Delete"%}</button></a>
+                                <strong>Package is being delivered.{% endif %}</strong>
+                        </td>
+                        <td scope="row">
+                                <button type="button" class="ps_del_button btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal{{ package_obj.package_id }}">{% trans "Delete" %}</button>
+                                <div class="modal fade" id="deleteModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="staticBackdropLabel">{% trans "You are about to delete a request"%}</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <p>{% trans "Are you sure you want to delete this request?"%}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                                                <a href="{% url 'package_request_app:delete_request' id=package_obj.package_id %}"><button type="button" class="btn btn-secondary">{% trans "Delete"%}</button></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             
-                            <button type="button" class="ps_view_button btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ package_obj.package_id }}">{% trans "View" %}</button>
+                            <button style="--bs-text-opacity: .5;" type="button" class="ps_view_button btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ package_obj.package_id }}">{% trans "View" %}</button>
                             <div class="modal fade" id="viewModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

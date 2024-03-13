@@ -1,5 +1,4 @@
 #pack-list-body {
-    font-family: "Space Grotesk", sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 1.6;
@@ -12,14 +11,14 @@
     border-collapse: collapse;
     width: 100%;
 }
+
 .pack-list-h2 {
-    text-align: center;
+    margin-top: 1em;
 }
 .pack-list-table th{
     background-color:  rgb(89%, 54.5%, 16.1%);
 } 
 .pack-list-table td, .pack-list-table th {
-    
     text-align: left;
     padding: 6px;
 }
@@ -28,7 +27,7 @@
 }
 .pack-list-table tr:nth-child(odd){
     
-    background-color: rgb(98.4%, 80.4%, 60.8%);
+    background-color: rgb(98.8%, 90.6%, 82.4%);
 }
   
 * {box-sizing: border-box;}
@@ -155,8 +154,8 @@ hr {
         margin-bottom: 1em;
     }
     .no-pack-div img{
-        width: 100px;
-        height: 100px; 
+        width: 300px;
+        height: 250px; 
     }
 }
 
@@ -190,6 +189,10 @@ hr {
     }
     .pack-list-h2 h2 {
         text-align: center;
+    }
+    .no-pack-div img{
+        width: 150px;
+        height: 100px; 
     }
    
 }

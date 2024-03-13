@@ -249,17 +249,22 @@ def package_form_handler(request):
 def all_packages(request):
     import json
     
-    package_list = Package.objects.filter( customer=request.user.customer )
+    package_list = Package.objects.filter(customer=request.user.customer, status__in=[Package.STATUS_PENDING, Package.STATUS_PICKING, Package.STATUS_DELIVERING])
     package_request_count = Package.objects.filter(customer=request.user.customer).count()
     return render(request, 'package_list.html', {'package_list': package_list, 'package_request_count': package_request_count})
 
 
 @login_required(login_url='users:login-customer')
 def delete_request(request, id):
-    delete_obj = Package.objects.get( pk=id )
-    delete_obj.delete()
-   
-    return redirect ('package_request_app:package_list')
+    try:
+        package = Package.objects.get(pk=id)
+        package.status = Package.STATUS_CANCELED
+        package.save()
+        package.delete()
+    except Package.DoesNotExist:
+        pass
+    
+    return redirect('package_request_app:package_list')
 
 @login_required(login_url='users:login')
 def home( request ):
@@ -383,10 +388,11 @@ def cluster_route(request):
 
 @login_required(login_url='users:login')
 def package_history(request):
+    import json
     if request.user.is_customer is not True :
         return render(request, '401.html')
     customer = request.user.customer
-    package_history = Package.objects.filter(customer=customer, status=Package.STATUS_COMPLETED)
+    package_history = Package.objects.filter(customer=customer, status__in=[Package.STATUS_COMPLETED,Package.STATUS_CANCELED])
     return render(request, 'package_history.html', {'package_history': package_history})
 
 def unauthorized(request):
