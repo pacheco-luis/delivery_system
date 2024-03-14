@@ -423,7 +423,7 @@ def create_routes(request):
                 except  Exception as e:
                     messages.error( request, "Route does not exist. It might be deleted already. Please try again." )
                 try:
-                    driver = get_object_or_404(Driver, username=form['driver_username'])
+                    driver = get_object_or_404(Driver, username=form.cleaned_data['driver_username'])
                 except Exception as e:
                     messages.error( request, "Driver username does not match any active driver. Please check your input.")
                 
@@ -431,7 +431,9 @@ def create_routes(request):
                 if cluster or driver is not None:
                     # if the input given is okay assign each parcel to the driver indicated
                     for parcel in cluster.parcels.all():
-                        parcel.update( status = Package.STATUS_PICKING, driver=driver)
+                        # parcel.update( status = Package.STATUS_PICKING, driver=driver)
+                        Package.objects.filter(package_id = parcel.package_id).update(status = Package.STATUS_PICKING, driver=driver)
+
             else:
                 # if input form is invalid  then show error message
                 messages.error( request, "Invalid input format. Please check your data and submit again." )
