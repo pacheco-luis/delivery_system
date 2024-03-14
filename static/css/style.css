@@ -1445,4 +1445,8 @@ section {
 .assign_form_input {
   color: #000 !important; }
 
+#assign_form * option {
+  color: grey;
+  font-style: italic; }
+
 /*# sourceMappingURL=style.css.map */

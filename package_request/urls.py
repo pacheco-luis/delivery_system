@@ -20,6 +20,6 @@ urlpatterns = [
     path('cluster_route/', views.cluster_route, name = 'cluster_route'),
     path('unauthorized/', views.unauthorized, name = '401'),
 
-    path('route_list/', views.create_routes, name = 'route_list'),
-    path('route_list/<id>/', views.job_details, name = 'job_details'),
+    # path('route_list/', views.create_routes, name = 'route_list'),
+    # path('route_list/<id>/', views.job_details, name = 'job_details'),
 ]

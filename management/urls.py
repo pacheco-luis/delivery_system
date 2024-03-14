@@ -8,5 +8,5 @@ app_name = 'management'
 urlpatterns = [
     # authentication urls
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    path('admin_routes/details/', views.clusters, name='clusters'),
+    path('admin_routes/create/assign/', views.create_assign_routes, name='routes'),
 ]

@@ -85,4 +85,8 @@ class Route(models.Model):
         return f'{self.created_at}'
     
     def get_size(self):
-        return f'{self.parcels.all().count()}'
+        try:
+            return self.parcels.all().count()
+        except Exception as e:
+            pass
+        return 0

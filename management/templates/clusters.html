@@ -49,7 +49,7 @@
                                         </th>
                                             <td>{{route.id}}</td>
                                             <td>{{route.created_at}}</td>
-                                            <td>{{route.parcels|length}}</td>
+                                            <td>{{route.get_size}}</td>
                                     </tr>
                                 {% endfor %}
                             {% endif %}
