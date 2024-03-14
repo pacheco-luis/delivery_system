@@ -43,20 +43,42 @@
 </head>
 
 <div id="pack-list-body" style="padding: 0 3em; width: 100; margin-top: 1em;">
-    <h1>Jobs</h1>
-
+    <h1 style="padding: 0.5em;">Jobs</h1>
     <ul>
         {% comment %} Check if the routes are populated. {% endcomment %}
+        <table class = "table table-hover table-responsive pack-list-table">
+            <tr style="background-color: #FFA758;">
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Date </th>
+                
+                {% if routes %}
+                    <th scope="col"> </th>
+                {% endif %}
+            </tr>
         {% if routes %}
             {% for route in routes %}
-            <li>Route: {{ route }}</li><br>
-            <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}">View</a>
-            {% endfor %}
-        
+                <tr>
+                    <td scope="row">{{forloop.counter}}</td>
+                    <td scope="row">{{route.id}}</td>
+                    <td scope="row">{{ route.created_at }}</td>
+                    <td scope="row"> <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}"><button type="button" class="btn btn-primary">View</button></a></td>
+                </tr>
+                {% endfor %}
         {% comment %} If no routes are assigned, display a text {% endcomment %}
         {% else %}
-            <p> You have not been assigned a route as of yet! </p>
+            <tr>
+                <p> You have not been assigned a route as of yet! </p>
+                    <td colspan="3" style="background-color: antiquewhite;">
+                        <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                            <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                            <p> You have not been assigned a route as of yet! </p>
+                        </div>
+                    </td>
+            </tr>
         {% endif %}
+        </table>
+        
         
     </ul>
 

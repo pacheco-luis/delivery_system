@@ -222,7 +222,7 @@ def package_form_handler(request):
                 # distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
                 # duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
                 distance = 1
-                duration = 1                
+                duration = 1              
                 
                 package_obj.distance = round(distance / 1000, 2) # kilometers
                 package_obj.duration = int(duration / 60) # minutes
@@ -280,6 +280,12 @@ def all_jobs(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
     
+    
+    # print( Route.objects.all().count() )
+    # if Route.objects.all().count() == 0:
+    #     for i in range(0, 10):
+    #         Route().save()
+        
     routes = Route.objects.all()
     
     # google_maps_api_key = settings.PLACES_MAPS_API_KEY
