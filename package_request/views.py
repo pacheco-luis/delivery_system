@@ -479,11 +479,11 @@ def create_routes(request):
             destinations = origins.copy()
 
             # Get the distance and duration matrix
-            for i in range(0, len(origins), 25):
-                chunk_origins = origins[i:i+25]
+            for i in range(0, len(origins), 6):
+                chunk_origins = origins[i:i+6]
 
-                for i in range(0, len(destinations), 25):
-                    chunk_destinations = destinations[i:i+25]
+                for i in range(0, len(destinations), 6):
+                    chunk_destinations = destinations[i:i+6]
 
                     params = {
                         'origins': '|'.join([','.join(origin) for origin in chunk_origins]),
@@ -507,7 +507,7 @@ def create_routes(request):
                             else:
                                 distance_matrix[-1].append(-1)
         
-            vrp = VRP(coordinates, distance=distance_matrix)
+            vrp = VRP(coordinates, distance=None)
             packer = Packer(capacity, items, n_decimals=3)
             aco = ACO(vrp, packer, n_ants=1, max_iter=1,
                     alpha=1.0, beta=3.0, rho=0.1,
@@ -541,9 +541,16 @@ def create_routes(request):
             # Save all route instances after adding parcels
             for route in routes:
                 route.save()
+        return redirect('package_request_app:route_list')
+    
+    try:
+        route_count = routes.count()
+    except Exception as e:
+        route_count = 0
+
     context = {
         'routes': routes,
-        'route_count': routes.count(),
+        'route_count': route_count,
         'assign_form': ASSIGN_CLUSTER_FORM()
     }
 
