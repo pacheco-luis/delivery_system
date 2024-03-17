@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _, gettext
 class Package(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_PICKING = 'picking'
+    #Add in awaiting delivery state
     STATUS_DELIVERING = 'delivering'
     STATUS_COMPLETED = 'completed'
     STATUS_CANCELED = 'canceled'
@@ -37,6 +38,7 @@ class Package(models.Model):
     fragile = models.BooleanField(verbose_name=_("fragile?"))
     estimate_package_weight = models.CharField(max_length=5, choices=WEIGHT_CHOICES, default='<2')
     order_date = models.DateTimeField(auto_now_add=True)
+    #Add temperature option (frozen or warm)
     status = models.CharField(max_length=10, choices=STATUSES, default=STATUS_PENDING)
     duration = models.IntegerField(null=True, blank=True, default=0)
     distance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
@@ -55,6 +57,7 @@ class Package(models.Model):
     
 class Route(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #Add status state (Unassigned, Assigned, Completed)
     parcels = models.ManyToManyField(Package, related_name='route', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 

@@ -7,6 +7,7 @@ from .models import User, Customer, Driver
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
+        #add phone number to fields
         fields = ['first_name', 'last_name', 'username', 'email', 'password1','password2']
     
     def __init__(self, *args, **kwargs):
