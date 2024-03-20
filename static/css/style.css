@@ -1277,7 +1277,7 @@ section {
   .acc-sect {
     margin-bottom: 5em; } }
 #admin_base_body,
-#admin_base_body * {
+#admin_base_body {
   color: #fff; }
 
 #admin_base_body {
@@ -1289,6 +1289,7 @@ section {
   height: auto; }
 
 #admin_navbar {
+  color: #fff !important;
   position: sticky;
   top: 0;
   padding: 0.5rem 1rem;
@@ -1306,6 +1307,7 @@ section {
 
 #admin_sidebar,
 #admin_sidebar * {
+  color: #fff !important;
   margin: 0;
   padding: 0;
   font-size: 0.75rem; }
@@ -1416,7 +1418,11 @@ section {
 .admin_footer {
   border-top: 1px solid #fff; }
 
+#dashboard_content * {
+  color: #fff !important; }
+
 #dashboard_content {
+  color: #fff !important;
   min-height: 100vh;
   background-color: transparent; }
 
@@ -1429,6 +1435,9 @@ section {
   background-image: url("../../images/admin-sites/dashboard/pexels-klub-boks-9940152.jpg");
   background-size: cover; }
 
+#clusters_content * {
+  color: #fff !important; }
+
 .clusters_Mh {
   height: 90vh; }
 
@@ -1437,10 +1446,12 @@ section {
   border-right: none;
   border-top: none;
   border-radius: none;
-  border-color: #FF6000; }
+  border-color: #FF6000;
+  color: #FF6000; }
 
 #clusters_content * .btn-outline-warning:hover {
-  background-color: #FF6000; }
+  background-color: #FF6000;
+  color: #000; }
 
 .assign_form_input {
   color: #000 !important; }
@@ -1448,5 +1459,29 @@ section {
 #assign_form * option {
   color: grey;
   font-style: italic; }
+
+#edit_box,
+#edit_box * div {
+  padding: 0;
+  margin: 0; }
+
+#id_address_0,
+.width-100 {
+  width: 100%; }
+
+#stations_content * .btn-outline-warning {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none;
+  border-color: #FF6000;
+  color: #FF6000; }
+
+#stations_content * .btn-outline-warning:hover {
+  background-color: #FF6000;
+  color: #000; }
+
+#form_container * input {
+  margin: 5px 0; }
 
 /*# sourceMappingURL=style.css.map */

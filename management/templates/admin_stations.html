@@ -1,0 +1,153 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title %}
+{% endblock title %}
+{% block content  %}
+<div id="stations_content" class="container-fluid">
+    <!-- first Row -->
+    <div class="row">
+        <div class="col-lg">
+            <div class="row bdr_shdw ">
+                <div class="col">
+                    <h5>Stations</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- second Row -->
+    <div class="row">
+        <!-- unassigned and active clusters -->
+        <div id="" class="col-lg-8">
+            <div class="row bdr_shdw">
+                <div class="col clusters_Mh" style="overflow: auto auto;">
+                    <h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bounding-box" viewBox="0 0 16 16">
+                            <path d="M5 2V0H0v5h2v6H0v5h5v-2h6v2h5v-5h-2V5h2V0h-5v2zm6 1v2h2v6h-2v2H5v-2H3V5h2V3zm1-2h3v3h-3zm3 11v3h-3v-3zM4 15H1v-3h3zM1 4V1h3v3z"/>
+                        </svg>
+                        Current stations:
+                    </h5>
+                    <table class="table general-table" style="color:#fff;">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Alias</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Coordinates</th>
+                            <th scope="col">Radius</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if stations_count %}
+                                {% for station in stations %}
+                                    <tr id="{{station.id}}">
+                                        <th scope="row-md" style="width: 2rem;">
+                                            <button id="{{station.id}}" type="button" class="btn btn-outline-warning" onclick="auto_fill_edit_station_form(this.id)">{{forloop.counter}}.</button>
+                                        </th>
+                                            <td>{{station.alias}}</td>
+                                            <td>{{station.address.place}}</td>
+                                            <td>{{station.address.latitude}}, {{station.address.longitude}}</td>
+                                            <td>{{station.radius}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+        
+                    {% if route_count == 0 %}
+                        <div class="row container">
+                            <div class="row">
+                                <div class="col-lg" style="text-align: center; font-style: italic; color: rgb(125, 125, 125); border: none; box-shadow: none; background: none;">nothing to display here</div>
+                            </div>
+                            <div class="row justify-content-md-center">
+                                <img class="col-lg-8" src="{% static 'images/package_listing/empty_package.png' %}" alt="there are no current routes"/>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Something else -->
+        <div class="col height_100">
+            <div id="form_container" class="row bdr_shdw height_100" style="overflow-y: auto;">
+                <div class="col clusters_Mh">
+                    <h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                          </svg>
+                          Stations Details:
+                          <button id="new_station_triger" onclick="show_new_station_form()" type="submit" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add a station">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                          </button>
+                    </h5>
+                    <div id="edit_box" class="row">
+                        <div class="row"> 
+                            <h6 class="p-0 col"> 
+                                <form id="station_form" name="station_form" action="" method="post" style="display: none;">
+                                    <div class="container" >
+                                        {% csrf_token %}
+                                        {{ station_form.as_p }}
+                                        <div class="row-lg">
+                                            <button id="edit_station" type="submit" name="edit_station" class="btn btn-secondary" style="display: none; width:100%">Edit Station</button>
+                                        </div>
+                                        <div class="row-lg">
+                                            <button id="add_station" type="submit" name="add_station" class="btn btn-secondary" style="display: none; width:100%">Add Station</button>
+                                        </div>
+                                        {{ station_form.media }}
+                                    </div>
+                                </form>
+                            </h6> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
+
+{% block script_files %}
+<script>
+    document.getElementById("admin_stations_tab").style.borderLeft="3px solid #ff6000";
+    
+    let fields = ["alias", "address_0", "address_1", "address_2", "radius","id"];
+    for( let i=0; i <fields.length; i++){
+        document.getElementsByName(fields[i])[0].classList.add("width-100", "form-control");
+    }
+    
+    document.forms.station_form.alias.setAttribute("placeholder", "eg: Hualien")
+
+    function auto_fill_edit_station_form( id ){
+        document.getElementById("station_form").style.display = "block";
+        document.forms.station_form.id.value = id;
+        document.forms.station_form.id.setAttribute("readonly", "");
+        document.forms.station_form.id.style.display = "block";
+        document.forms.station_form.getElementsByTagName("label")[0].style.display="block";
+        document.forms.station_form.alias.value = document.getElementById(id).getElementsByTagName("td")[0].innerHTML;
+        document.getElementById("edit_station").style.display = "block";
+        document.getElementById("add_station").style.display = "none";
+    }
+
+    function show_new_station_form(){
+        document.getElementById("station_form").style.display = "block";
+        document.forms.station_form.id.value = "new";
+        document.forms.station_form.alias.value = "";
+        document.forms.station_form.id.style.display = "none";
+        document.forms.station_form.getElementsByTagName("label")[0].style.display="none";
+        document.getElementById("edit_station").style.display = "none";
+        document.getElementById("add_station").style.display = "block";
+    }
+
+    
+</script>
+{% endblock script_files %}

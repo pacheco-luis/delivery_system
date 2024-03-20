@@ -30,7 +30,7 @@
   </div>
 
 
-  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between">
+  <nav id="admin_navbar" class="navbar-dark bg-dark justify-content-between" style="z-index: 900">
     <div class="container-fluid">
       <div class="row">
         <div class="col">
@@ -45,9 +45,9 @@
           </a>
         </div>
         <div class="col" style="position: relative;">
-          <form id="languageForm" method="post" action="{% url 'set_language' %}" style="position: absolute; right:0">
+          <form id="languageForm" method="post" action="{% url 'set_language' %}" style="position: absolute; right:0;">
             {% csrf_token %}
-            <select class="form-select-sm bg-black" name="language" id="language" onchange="languageSwitch(this.value)" style="height:100%;">
+            <select class="form-select-sm bg-black" name="language" id="language" onchange="languageSwitch(this.value)" style="height:100%;color:#fff;">
                 {% get_current_language as LANGUAGE_CODE %}
                 {% get_available_languages as LANGUAGES %}
                 {% get_language_info_list for LANGUAGES as languages %}

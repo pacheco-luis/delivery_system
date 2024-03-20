@@ -11,6 +11,11 @@ from stations.models import Station
 from datetime import datetime, timedelta
 from delivery_system.settings import TIME_ZONE
 from django.utils import timezone
+from stations.forms import STATIONS_FORM
+from places import Places
+from places.fields import PlacesField 
+from decimal import Decimal
+
 
 # Create your views here.
 
@@ -234,3 +239,49 @@ def create_assign_routes(request):
     }
 
     return render(request, 'clusters.html', context)
+
+
+def admin_stations(request):
+    
+    if request.method == "POST":
+        form = STATIONS_FORM( request.POST )
+        if( form.is_valid() ):
+            # data = form.cleaned_data()
+            if 'edit_station' in request.POST:
+                try:
+                    station = get_object_or_404( Station, id=form.cleaned_data['id'])
+                    station.alias=form.cleaned_data['alias']
+                    station.address=PlacesField().to_python(form.cleaned_data['address'])
+                    station.active=form.cleaned_data['active']
+                    station.radius=radius = form.cleaned_data['radius']
+                    station.save()
+                    messages.success(request, 'Station has been edited successfully.')
+                except Exception as e:
+                    messages.error( request, 'Invalid Station ID. Please check your input and try again.' )
+            elif 'add_station' in request.POST:
+                alias = form.cleaned_data['alias']
+                address = PlacesField().to_python(form.cleaned_data['address'])
+                active = form.cleaned_data['active']
+                radius = form.cleaned_data['radius']
+                try:
+                    Station.objects.create( alias=alias, address=address, active=active, radius=radius ).save()
+                    messages.success(request, 'New station has been added successfully.')
+                except Exception as e:
+                    messages.error( request, 'We encountered an issue while creating the staion. Please try again.' )
+            else:
+                messages.error( request, 'Invalid action. Please Try again.' )
+            
+            return redirect( 'management:admin_stations' )
+        else:
+            messages.error( request, 'Invalid input. Please check your input and try again.' )
+            return redirect( 'management:admin_stations' )
+    
+
+    stations = Station.objects.filter(active=True).union(Station.objects.filter(active=False))
+    context={ 
+        'stations': stations,
+        'stations_count': stations.count(),
+        'station_form': STATIONS_FORM(),
+    }
+    
+    return render( request, 'admin_stations.html', context=context)

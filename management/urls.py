@@ -9,4 +9,5 @@ urlpatterns = [
     # authentication urls
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('admin_routes/create/assign/', views.create_assign_routes, name='routes'),
+    path('admin_stations/', views.admin_stations, name='admin_stations'),
 ]

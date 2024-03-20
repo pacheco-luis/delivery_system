@@ -1,0 +1,31 @@
+
+#edit_box,
+#edit_box * div{
+    padding: 0;
+    margin: 0;
+}
+
+#id_address_0,
+.width-100{
+    width: 100%;
+}
+
+
+
+#stations_content * .btn-outline-warning{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: none;
+    border-color: $color-main-orange;
+    color: $color-main-orange;
+}
+
+#stations_content * .btn-outline-warning:hover{
+    background-color: $color-main-orange;
+    color: #000;
+}
+
+#form_container * input{
+    margin: 5px 0;
+}

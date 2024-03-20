@@ -1,5 +1,5 @@
 #admin_base_body, 
-#admin_base_body *{
+#admin_base_body {
     color: #fff;
     // margin: 0;
 }
@@ -14,6 +14,7 @@
     height: auto;
 }
 #admin_navbar{
+    color: #fff !important;
     position: sticky;
     top: 0;
     padding: 0.5rem 1rem;
@@ -33,6 +34,7 @@
 
 #admin_sidebar,
 #admin_sidebar *{
+    color: #fff !important;
     margin: 0;
     padding: 0;
     font-size: 0.75rem;
