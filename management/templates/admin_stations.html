@@ -14,7 +14,7 @@
         <div class="col-lg">
             <div class="row bdr_shdw ">
                 <div class="col">
-                    <h5>Stations</h5>
+                    <h5>{% trans "Stations"%}</h5>
                 </div>
             </div>
         </div>
@@ -29,16 +29,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bounding-box" viewBox="0 0 16 16">
                             <path d="M5 2V0H0v5h2v6H0v5h5v-2h6v2h5v-5h-2V5h2V0h-5v2zm6 1v2h2v6h-2v2H5v-2H3V5h2V3zm1-2h3v3h-3zm3 11v3h-3v-3zM4 15H1v-3h3zM1 4V1h3v3z"/>
                         </svg>
-                        Current stations:
+                        {% trans "Current stations:"%}
                     </h5>
                     <table class="table general-table" style="color:#fff;">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Alias</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Coordinates</th>
-                            <th scope="col">Radius</th>
+                            <th scope="col">{% trans "Alias"%}</th>
+                            <th scope="col">{% trans "Address"%}</th>
+                            <th scope="col">{% trans "Coordinates"%}</th>
+                            <th scope="col">{% trans "Radius"%}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,8 +81,8 @@
                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
                             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                           </svg>
-                          Stations Details:
-                          <button id="new_station_triger" onclick="show_new_station_form()" type="submit" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add a station">
+                          {% trans "Stations Details:"%}
+                          <button id="new_station_triger" onclick="show_new_station_form()" type="submit" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{% trans 'Add a station'%}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -97,10 +97,10 @@
                                         {% csrf_token %}
                                         {{ station_form.as_p }}
                                         <div class="row-lg">
-                                            <button id="edit_station" type="submit" name="edit_station" class="btn btn-secondary" style="display: none; width:100%">Edit Station</button>
+                                            <button id="edit_station" type="submit" name="edit_station" class="btn btn-secondary" style="display: none; width:100%">{% trans "Edit Station"%}</button>
                                         </div>
                                         <div class="row-lg">
-                                            <button id="add_station" type="submit" name="add_station" class="btn btn-secondary" style="display: none; width:100%">Add Station</button>
+                                            <button id="add_station" type="submit" name="add_station" class="btn btn-secondary" style="display: none; width:100%">{% trans "Add Station"%}</button>
                                         </div>
                                         {{ station_form.media }}
                                     </div>
