@@ -36,6 +36,7 @@ class Package(models.Model):
     recipient_address = PlacesField(blank=True, verbose_name=_("recipient address"))
     package_description = models.CharField(max_length=200  , blank=False, verbose_name=_("package description"))
     fragile = models.BooleanField(verbose_name=_("fragile?"))
+    frozen = models.BooleanField(verbose_name=_("Needs to be cold?"))
     estimate_package_weight = models.CharField(max_length=5, choices=WEIGHT_CHOICES, default='<2')
     order_date = models.DateTimeField(auto_now_add=True)
     #Add temperature option (frozen or warm)
