@@ -1,10 +1,12 @@
+from phonenumber_field.phonenumber import PhoneNumber
+from phonenumber_field.modelfields import PhoneNumberField
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # from django.contrib.auth.models import User
-from .models import User
+from .models import Customer, Driver, User
 from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 
 # Create your views here.
@@ -75,10 +77,15 @@ def registerCustomer(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            user_name = user.username.lower()
+            phone_num = user.phone_number
             user.username = user.username.lower()
             user.email = user.email.lower()
             user.is_customer = True
             user.save()
+            new_customer = Customer.objects.filter( username=user_name )[0]
+            new_customer.phone_number = user.phone_number
+            new_customer.save()
 
             messages.success(request, 'User account was created')
 
@@ -101,10 +108,15 @@ def registerDriver(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            user_name = user.username.lower()
+            phone_num = user.phone_number
             user.username = user.username.lower()
             user.email = user.email.lower()
             user.is_driver = True
             user.save()
+            new_driver = Driver.objects.filter( username=user_name )[0]
+            new_driver.phone_number = user.phone_number
+            new_driver.save()
 
             messages.success(request, 'User account was created')
 
@@ -124,14 +136,20 @@ def driverAccount(request):
 
 @login_required(login_url='users:login')
 def customerAccount(request):
+    request.user.customer.phone_number = request.user.phone_number
+    print( request.user.customer.phone_number )
     account = request.user.customer
     context = {'account': account}
     return render(request, 'users/account.html', context)
 
 @login_required(login_url='users:login')
 def editCustomerAccount(request):
+    print('value')
+    # print( request.user.customer.phone_number )
+    # request.user.customer.phone_number = request.user.phone_number
     customer = request.user.customer
     form = CustomerForm(instance=customer)
+    
     if request.method == 'POST':
         form = CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():

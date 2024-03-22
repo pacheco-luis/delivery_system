@@ -1,20 +1,28 @@
 from django.forms import ModelForm, TextInput, EmailInput
 from django.contrib.auth.forms import UserCreationForm
-
+from phonenumber_field.modelfields import PhoneNumberField
 # from django.contrib.auth.models import User
 from .models import User, Customer, Driver
+from collections import OrderedDict
 
 class CustomUserCreationForm(UserCreationForm):
+    # phone_number = PhoneNumberField(region='TW', blank=False, verbose_name=("phone number") )
+    
     class Meta:
         model = User
         #add phone number to fields
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1','password2']
+        fields = ['first_name', 'last_name', 'username', 'phone_number', 'email', 'password1', 'password2']
     
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        
+
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})
+            field.widget.attrs.update({
+                                        'class': 'input',
+                                        'class': 'form-control',
+                                        'aria-label': f'{field}',
+                                        'aria-describedby': 'basic-addon1',
+                                       })
 
 class CustomerForm(ModelForm):
     class Meta:
