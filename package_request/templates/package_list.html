@@ -19,11 +19,11 @@
                 <th scope="col">{% trans "Destination:"%}</th>
                 <th scope="col">{% trans "Item Description:"%}</th>
                 <th scope="col">{% trans "Status:" %}</th>
-                {% if package_list %}
+                {% if package_count %}
                     <th scope="col"> </th>
                 {% endif %}
             </tr>
-            {% if package_list %}
+            {% if package_count %}
                 {% for package_obj in package_list %}
                     <tr>
                         <td scope="row">{{ user.first_name }}</td>

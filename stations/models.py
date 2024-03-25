@@ -32,3 +32,6 @@ class Station(models.Model):
     
     def get_coordinates(self):
         return f'{self.address.latitude}, {self.address.longitude}'
+    
+    def get_coordinates_as_float(self):
+        return (float(self.address.latitude), float(self.address.longitude))

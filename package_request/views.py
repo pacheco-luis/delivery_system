@@ -1,12 +1,15 @@
+from vincenty import vincenty
 import datetime
 import uuid
 from django.shortcuts import redirect, render
 from package_request.forms import SENDER_FORM, RECEIVER_FORM, PACKAGE_FORM
 from django.contrib import messages
+from stations.models import Station
 from users.models import Customer, User, Driver
 from package_request.models import Package, Route
 from django.contrib.auth.decorators import login_required
 from places import Places
+from places.forms import PlacesField
 from decimal import Decimal
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -22,16 +25,16 @@ from django.shortcuts import get_object_or_404
 # !!!!!!!!!!!! GLOBAL VARIABLES !!!!!!!!!!!!!!!!
 
 # stations addresses
-stations_addr = [
-                "No. 8號, Zhengzhou Rd, Zhongzheng District, Taipei City, 100",             # Taipei main train station
-                "No. 100, Guolian 1st Rd, Hualien City, Hualien County, 970",               # Hualien main train station
-                ]
+# stations_addr = [
+#                 "No. 8號, Zhengzhou Rd, Zhongzheng District, Taipei City, 100",             # Taipei main train station
+#                 "No. 100, Guolian 1st Rd, Hualien City, Hualien County, 970",               # Hualien main train station
+#                 ]
 
 # stations coordinates 
-stations_coo = [
-                (25.049033812357674, 121.51378218301954),
-                (23.993489655177992, 121.60129912114395) 
-                ]
+# stations_coo = [
+#                 (25.049033812357674, 121.51378218301954),
+#                 (23.993489655177992, 121.60129912114395) 
+#                 ]
 
 # radius away from stations in km
 radius = 10        
@@ -49,91 +52,93 @@ def sucess( request ):
 # true if address is within the radius, false otherwise
 # if within radius index points to the station index nearest to the address
 def in_range_of_stations( address ):
-    nearest_station = 0.0
-    index = 0
+    nearest_station = float(10000)
+    station_id = uuid.uuid4()
     
-    for x in stations_coo:
-        dist = haversine(x, address)
-        if dist <= 10.0 :
-            return (True, index )
+    for station in Station.objects.filter( active=True ):
+        # print( station.get_coordinates_as_float() )
+        dist = vincenty(station.get_coordinates_as_float(), address)
+        if dist <= station.radius :
+            # return the station for which the sender is within range of
+            return (True, station.id )
         elif dist < nearest_station:
+            # updating nearest station that does not satisfy station radius
             nearest_station = dist
-        index += 1
+            station_id = station.id
             
-    return ( False, index-1 )
+    # returning the closest station near the senders location but within the nears station and sender's location does not satisfy station radius
+    return ( False, station_id ) 
 
 
-def haversine(coord1: object, coord2: object):
-    # Coordinates in decimal degrees (e.g. 2.89078, 12.79797)
-    import math
-    print( 'haversine' )
-    lon1, lat1 = coord1
-    lon2, lat2 = coord2
-
-    R = 6371000  # radius of earth (m)
-    phi_1 = math.radians(lat1)
-    phi_2 = math.radians(lat2)
-
-    delta_phi = math.radians(lat2 - lat1)
-    delta_lambda = math.radians(lon2 - lon1)
-
-    a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi_1) * math.cos(phi_2) * math.sin(delta_lambda / 2.0) ** 2
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-
-    meters = R * c  # output distance in meters
-    km = meters / 1000.0  # output distance in kilometers
-
-    km = round(km, 3)
+# def haversine(coord1: tuple, coord2: tuple) -> float:
+#     # coordinates in decimal degrees (e.g. 2.89078, 12.79797)
+#     import math
     
-    # print(f"Distance: {km} km")
+#     lon1, lat1 = coord1
+#     lon2, lat2 = coord2
 
-    return km
+#     R = 6371000  # radius of earth (m)
+#     phi_1 = math.radians(lat1)
+#     phi_2 = math.radians(lat2)
+
+#     delta_phi = math.radians(lat2 - lat1)
+#     delta_lambda = math.radians(lon2 - lon1)
+
+#     a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi_1) * math.cos(phi_2) * math.sin(delta_lambda / 2.0) ** 2
+#     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+#     meters = R * c  # output distance in meters
+#     km = meters / 1000.0  # output distance in kilometers
+
+#     # km = round(km, 3)
+    
+#     return km
+
 
 @login_required(login_url='users:login')
 def sender_form_handler(request):
     import json
-
-    #print("Current language:", get_language())
-    #print("Translation of 'senderphone':", gettext("senderphone"))
-
+    
     if request.method == 'POST':
         form = SENDER_FORM(request.POST)
-
+        
+        # if user input is valid validate address within range and save as session for step 3 of 3
         if form.is_valid():
             raw = form.cleaned_data
+            
+            # validating sender address is within range of a station
             addr1 = raw['sender_address']
-            coor = (0.0, 0.0)
-            
-            try:
-                coor = (float(addr1[1]), float(addr1[2]))
-            except IndexError:
-                pass
-            
+            coor = (float(addr1[1]), float(addr1[2]))
             addr_stat = in_range_of_stations( coor )
-            print("validation return:", addr_stat)
             
+            # if not within range of any station indicate what station is near the inputed address and refill form
             if addr_stat[0] == False:
-                messages.error(request, "Your address must be wihin 10 km of station: " + stations_addr[1] )
+                try:
+                    nearest_staiton=Station.objects.filter(id=addr_stat[1])[0]
+                    messages.error(request, f'Your address must be wihin {nearest_staiton.radius}km of station: ' + nearest_staiton.address.place)
+                except Exception as e:
+                    print(e)
+                    messages.error(request, "You must be within our stations' range to send a parcel. Please see our locations page.")
+                
                 return render(request, "step1.html", {'sender_form': SENDER_FORM(request.POST)} )
+                    
             
             # print( form.cleaned_data )
             request.session['sender_data'] = json.dumps(raw, default=str)
-            request.session['sender_addr_stat'] = addr_stat
+            request.session['sender_addr_stat'] = (addr_stat[0], addr_stat[1].hex)
             
             return redirect('package_request_app:request_form_2_of_3')
         
+        # if input is invalid refill the form
         else:
+            messages.error(request, 'Invalid input. Please revise your information.')
             return render(request,"step1.html", {'sender_form': SENDER_FORM(request.POST)} )
     
-    print( Customer.objects.get(user=request.user).address )
-    print(  )
-    sender_form_inst = {
-                    'sender_phone' : Customer.objects.get(user=request.user).phone_number,
-                    'sender_address' : Places( Customer.objects.get(user=request.user).address, 0, 0 )
-                    }
+    # prefilling the customer phone number
+    sender_form_inst = { 'sender_phone' : Customer.objects.get(user=request.user).phone_number }
     
     context = {
-        'sender_form': SENDER_FORM(sender_form_inst),
+        'sender_form': SENDER_FORM(sender_form_inst)
     }
     
     return render(request,"step1.html", context=context)
@@ -145,34 +150,38 @@ def receiver_form_handler(request):
     if request.method == 'POST':
         r_form = RECEIVER_FORM(request.POST)
 
+        # if input is valid save form and move to step 3 of 3
         if r_form.is_valid():
             r_raw = r_form.cleaned_data
-            addr = r_raw['recipient_address']
-            r_coor = (0.0, 0.0)
             
-            try:
-                r_coor = (float(addr[1]), float(addr[2]))
-            except IndexError:
-                pass
-
+            # validating sender address is within range of a station
+            addr = r_raw['recipient_address']
+            r_coor = (float(addr[1]), float(addr[2]))
             r_addr_stat = in_range_of_stations( r_coor )
             temp_stat = request.session['sender_addr_stat']
-            temp_stat2 = json.loads( json.dumps(r_addr_stat) )
+            temp_stat = (temp_stat[0], uuid.UUID(temp_stat[1]))
             
+            # if destination location is out of range of station. sender must fill the form again
             if r_addr_stat[0] == False:
-                messages.error(request, "The receipient's address must be wihin 10 km of the station: " + stations_addr[1] )
+                # showing error indicating the nearest station out of range
+                try:
+                    nearest_staiton=Station.objects.filter(id=r_addr_stat[1])[0]
+                    messages.error(request, f'Sender address must be wihin {nearest_staiton.radius}km of station: ' + nearest_staiton.address.place)
+                except Exception as e:
+                    messages.error(request, "Sender must be within our stations' range to send a parcel. Please see our locations page.")
+            
+                return render(request, "step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
+            # a parcel destionation location must not be within the sender's station range, sender must fill the form again with a valid location for receiver
+            if temp_stat == r_addr_stat:
+                messages.error(request, "Sender and receiver address should not be within the same station range." )
                 return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
             
-            elif temp_stat == temp_stat2:
-                messages.error(request, "Sender address and receiver address are in range of the same station: " + stations_addr[1] )
-                return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
-            
+            # saving receiver's info as session for step 3
             request.session['receiver_data'] = json.dumps(r_raw, default=str)
-            #del request.session['sender_addr_stat']
-            
             return redirect('package_request_app:request_form_3_of_3')
 
         else:
+            messages.error(request, 'Invalid input. Please revise your information.')
             return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
     
     context = {
@@ -188,59 +197,80 @@ def package_form_handler(request):
     
     if request.method == 'POST':
         form = PACKAGE_FORM( request.POST )
+        
+        # create new package if data is valid
         if form.is_valid():
+            # obtaining input from step 1,2, and 3 to combine all
+            p_data = form.cleaned_data
+            s_data = json.loads(request.session['sender_data'])
+            r_data = json.loads(request.session['receiver_data'])
+            s_addr = s_data['sender_address']
+            r_addr = r_data['recipient_address']
             
-            try:
-                p_data = form.cleaned_data
-                s_data = json.loads(request.session['sender_data'])
-                r_data = json.loads(request.session['receiver_data'])
-                s_addr = s_data['sender_address']
-                r_addr = r_data['recipient_address']
-                
-                combined_data = { **s_data, **r_data, **p_data }
-                package_obj = Package.objects.create( **combined_data )
-                package_obj.customer = request.user.customer
-                package_obj.sender_address = Places( s_addr[0], Decimal(s_addr[1]), Decimal(s_addr[2]) )
-                package_obj.recipient_address = Places( r_addr[0], Decimal(r_addr[1]), Decimal(r_addr[2]) )
-                
-                Customer.objects.filter(user=request.user).update(
-                    phone_number=package_obj.sender_phone, 
-                    address=package_obj.sender_address
-                    )
-                print( package_obj.sender_address )
-                print( package_obj.recipient_address )
+            
+            # combinding data 
+            combined_data = { **s_data, **r_data, **p_data }
+            
+            # creating object with combined data and updating addresses immediatly to avoid serialization error: decimalConversion
+            package_obj = Package.objects.create( **combined_data )
+            package_obj.sender_address = Places( s_addr[0], Decimal(s_addr[1]), Decimal(s_addr[2]) )
+            package_obj.recipient_address = Places( r_addr[0], Decimal(r_addr[1]), Decimal(r_addr[2]) )
 
-                # check if the location is inside the radius
+            distance = 1
+            duration = 1             
+            try:
+                # obtaining distance matrix using google distance matrix api
                 req = requests.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins={}&destinations={}&mode=transit&key={}'.format(
                    package_obj.sender_address,
                    package_obj.recipient_address,
                    settings.PLACES_MAPS_API_KEY
                 ))
+                
                 res = req.json()
                 print(res['rows'])
 
-                # distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
-                # duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
-                distance = 1
-                duration = 1              
-                
-                package_obj.distance = round(distance / 1000, 2) # kilometers
-                package_obj.duration = int(duration / 60) # minutes
-                package_obj.price = package_obj.distance * dollar_per_kilometer # NTD                
-                package_obj.status = package_obj.STATUS_PENDING
-
-                package_obj.save()
-                
-                del request.session['sender_data']
-                del request.session['receiver_data']
-                
-                return redirect( 'package_request_app:successful')
+                # obtaining distance and duration
+                distance = res['rows'][0]['elements'][0]['distance']['value'] # meters
+                duration = res['rows'][0]['elements'][0]['duration']['value'] # seconds
             except Exception as e:
+                print(e)
+                # deleting temporary input used to generate a package before going back to step 1
+                try:
+                    del request.session['sender_data']
+                    del request.session['receiver_data']
+                except Exception as e:
+                    pass
                 print(e)
                 messages.error(request, "Something went wrong, please try again")
                 return redirect( 'package_request_app:request_form_1_of_3')
+            
+            print( distance )
+            print( duration )
+            
+            # updating fields for the  new package created
+            package_obj.customer = request.user.customer
+            package_obj.distance = round(distance / 1000, 2) # kilometers
+            package_obj.duration = int(duration / 60) # minutes
+            package_obj.price = package_obj.distance * dollar_per_kilometer # NTD               
+            package_obj.status = package_obj.STATUS_PENDING
+            package_obj.save()
+            
+            # updating customer fields based on the package submited
+            Customer.objects.filter(user=request.user).update( phone_number=package_obj.sender_phone, address=package_obj.sender_address )
+            
+            # deleting temporary input used to generate a package before redirecting
+            try:
+                del request.session['sender_data']
+                del request.session['receiver_data']
+            except Exception as e:
+                pass
+            
+            # redirecting to susccessful page
+            return redirect( 'package_request_app:successful')
         
+        # rendering page again if input was invalid
         else:
+            messages.error(request, 'Invalid input. Please revise your information.')
             return render( request, "step3.html", {'package_form': PACKAGE_FORM(request.POST)})
         
     return render( request, "step3.html", {'package_form': PACKAGE_FORM()})
@@ -250,8 +280,13 @@ def all_packages(request):
     import json
     
     package_list = Package.objects.filter(customer=request.user.customer, status__in=[Package.STATUS_PENDING, Package.STATUS_PICKING, Package.STATUS_DELIVERING])
-    package_request_count = Package.objects.filter(customer=request.user.customer).count()
-    return render(request, 'package_list.html', {'package_list': package_list, 'package_request_count': package_request_count})
+    package_count = Package.objects.filter(customer=request.user.customer).count()
+    print( package_count )
+    
+    for x in package_list:
+        print( x.sender_address )
+        print( x.recipient_address )
+    return render(request, 'package_list.html', {'package_list': package_list, 'package_count': package_count})
 
 
 @login_required(login_url='users:login-customer')
@@ -267,10 +302,32 @@ def delete_request(request, id):
     return redirect('package_request_app:package_list')
 
 @login_required(login_url='users:login')
-def home( request ):
+def home( request ):  
     return render( request, "home.html" )
 
 def landing_page( request ):
+    from django.contrib.auth.hashers import make_password
+
+    # if database has no objects create intiial objects for stations, users, customers, and drivers
+
+    if User.objects.all().count() == 0:
+        # create users
+        domain='@swiftcourier.com'
+
+        for i in range( 0, 5):
+            username=f'customer{i}'
+            email=f'{username}{domain}'
+            new_user = User.objects.create(first_name=username, last_name=username, username=username, email=email, password= make_password('user1234!'), is_customer=True )
+            
+            username=f'driver{i}'
+            email=f'{username}{domain}'
+            new_user = User.objects.create(first_name=username, last_name=username, username=username, email=email, password= make_password('user1234!'), is_driver=True )
+            
+            
+        print( 'New users created:')
+        for x in User.objects.all():
+            print( x )
+        
     return render( request, "../templates/index.html" )
 
 # HERE BE DRAGONS
