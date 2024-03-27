@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-28 00:06+0800\n"
+"POT-Creation-Date: 2024-03-28 00:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -603,35 +603,19 @@ msgstr ""
 msgid "Return to homepage"
 msgstr ""
 
-#: package_request/views.py:117
-msgid "Your address must be wihin 10 km of station: "
-msgstr ""
-
-#: package_request/views.py:164
-msgid "The receipient's address must be wihin 10 km of the station: "
-msgstr ""
-
-#: package_request/views.py:168
-msgid "Sender address and receiver address are in range of the same station: "
-msgstr ""
-
-#: package_request/views.py:241
-msgid "Something went wrong, please try again"
-msgstr ""
-
-#: package_request/views.py:311
+#: package_request/views.py:366
 msgid "Job is no longer available"
 msgstr ""
 
-#: package_request/views.py:318
+#: package_request/views.py:373
 msgid "Job is successfully taken"
 msgstr ""
 
-#: package_request/views.py:353
+#: package_request/views.py:408
 msgid "Job has successfully started!"
 msgstr ""
 
-#: package_request/views.py:358
+#: package_request/views.py:413
 msgid "Job has successfully completed!"
 msgstr ""
 
