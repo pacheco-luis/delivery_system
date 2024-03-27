@@ -37,7 +37,7 @@
                             <th scope="col">{% trans "#" %}</th>
                             <th scope="col">{% trans "ID" %}</th>
                             <th scope="col">{% trans "Created" %}</th>
-                            <th scope="col">{% trans "Parcels" %}</th>
+                            <th scope="col">{% trans "Packages" %}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +59,7 @@
                     {% if route_count == 0 %}
                         <div class="row container">
                             <div class="row">
-                                <div class="col-lg" style="text-align: center; font-style: italic; color: rgb(125, 125, 125); border: none; box-shadow: none; background: none;">nothing to display here</div>
+                                <div class="col-lg" style="text-align: center; font-style: italic; color: rgb(125, 125, 125); border: none; box-shadow: none; background: none;">{% trans "It is empty here" %}</div>
                             </div>
                             <div class="row justify-content-md-center">
                                 <img class="col-lg-8" src="{% static 'images/package_listing/empty_package.png' %}" alt="there are no current routes"/>

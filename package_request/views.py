@@ -19,6 +19,7 @@ from django.utils.translation import get_language, gettext
 from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
 from management.forms import ASSIGN_CLUSTER_FORM
 from django.shortcuts import get_object_or_404
+from django.utils.translation import gettext_lazy as _, gettext
 
 
 
@@ -362,14 +363,14 @@ def job_detail(request, id):
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
 
     if not job:
-        messages.error(request, 'Job is no longer available')
+        messages.error(request, _('Job is no longer available'))
         return redirect('package_request_app:job_list')
     
     if request.method == 'POST':
         job.driver = request.user.driver
         job.status = Package.STATUS_PICKING
         job.save()
-        messages.success(request, 'Job is successfully taken')
+        messages.success(request, _('Job is successfully taken'))
         return redirect('package_request_app:job_current')
 
     context = {
@@ -404,12 +405,12 @@ def current_job(request):
         if job.status == Package.STATUS_PICKING:
             job.status = Package.STATUS_DELIVERING
             job.save()
-            messages.success(request, 'Job is successfully started')
+            messages.success(request, _('Job has successfully started!'))
             return redirect('package_request_app:job_current')
         elif job.status == Package.STATUS_DELIVERING:
             job.status = Package.STATUS_COMPLETED
             job.save()
-            messages.success(request, 'Job is successfully completed')
+            messages.success(request, _('Job has successfully completed!'))
         return redirect('package_request_app:job_completed')
     
     context = {
@@ -488,3 +489,17 @@ def job_details(request, id):
         'route': route,
     }
     return render(request, 'job_details.html', context)
+
+# #section that gives the driver the option to choose
+# #between delivering or picking up packages
+# @login_required(login_url='users:login')
+# def job_type_selection(request):
+#     print(request.session['job_type'])
+
+#     #check if there is a job type
+#     if 'job_type' in request.session:
+#         print("I am here")
+
+#     if request.user.is_driver is not True :
+#         return render(request, '401.html')
+#     return render(request, 'job_type_selection.html')        

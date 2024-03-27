@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,8 +50,8 @@
         <table class = "table table-hover table-responsive pack-list-table">
             <tr style="background-color: #FFA758;">
                 <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">Date </th>
+                <th scope="col">{% trans "ID" %}</th>
+                <th scope="col">{% trans "Date" %} </th>
                 
                 {% if routes %}
                     <th scope="col"> </th>

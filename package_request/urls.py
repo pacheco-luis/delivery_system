@@ -19,7 +19,8 @@ urlpatterns = [
     path('delete_request/<id>/', views.delete_request, name = 'delete_request'),
     path('cluster_route/', views.cluster_route, name = 'cluster_route'),
     path('unauthorized/', views.unauthorized, name = '401'),
-
+    
+    # path('job_type_selection', views.job_type_selection, name = 'job_selector' ),
     # path('route_list/', views.create_routes, name = 'route_list'),
     path('route_list/<id>/', views.job_details, name = 'job_details'),
 ]

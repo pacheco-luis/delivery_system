@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,10 +30,10 @@
         <img src="{% static 'images/complete.gif' %}" alt="">
 
         <p>
-            You have completed the job.
+            {% trans "You have completed the job."%}
         </p>
 
-        <a href="{% url 'package_request_app:job_list' %}">Check available jobs</a>
+        <a href="{% url 'package_request_app:job_list' %}">{% trans "Check available jobs"%}</a>
     </div>
 </body>
 {% endblock content %}
