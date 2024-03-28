@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-28 00:23+0800\n"
+"POT-Creation-Date: 2024-03-28 13:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,10 +250,6 @@ msgstr ""
 msgid "Invalid input format. Please check your data and submit again."
 msgstr ""
 
-#: management/views.py:138
-msgid "Unable to create new Routes. No available Parcels."
-msgstr ""
-
 #: management/views.py:259
 msgid "Station has been edited successfully."
 msgstr ""
@@ -445,18 +441,6 @@ msgstr ""
 
 #: package_request/templates/job_list.html:55
 msgid "Date"
-msgstr ""
-
-#: package_request/templates/job_type_selection.html:11
-msgid "I would like to: "
-msgstr ""
-
-#: package_request/templates/job_type_selection.html:14
-msgid "Deliver Packages"
-msgstr ""
-
-#: package_request/templates/job_type_selection.html:18
-msgid "Pickup Packages"
 msgstr ""
 
 #: package_request/templates/package_history.html:9

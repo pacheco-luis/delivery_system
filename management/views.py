@@ -15,7 +15,7 @@ from stations.forms import STATIONS_FORM
 from places import Places
 from places.fields import PlacesField 
 from decimal import Decimal
-from django.utils.translation import gettext_lazy as _, gettext
+from django.utils.translation import gettext_lazy as _, gettext_noop as _noop
 
 
 # Create your views here.
@@ -135,7 +135,7 @@ def create_assign_routes(request):
             
             # detecting if no packages avalable to cluster
             if parcels.count() == 0 :
-                messages.error( request, _("Unable to create new Routes. No available Parcels."))
+                messages.error( request, "Unable to create new Routes. No available Parcels.")
                 return redirect( 'management:routes' )
 
             # Get the coordinates of the parcels
