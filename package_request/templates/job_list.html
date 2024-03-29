@@ -2,56 +2,22 @@
 {% load static %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
-{% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Job List</title>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
-        async defer></script>
-
-    <style>
-        .gm-ui-hover-effect {
-            display: none !important;
-        }
-        .job-details {
-            display: none;
-
-        }
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            transition: 0.3s;
-            width: 45%;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        }
-
-        .container {
-            padding: 4px 16px;
-        }
-        @media screen and (max-width: 500px) {
-            .card {
-                width: 100%;
-            }
-
-        }
-    </style>
-</head>
-
-<div id="pack-list-body" style="padding: 0 3em; width: 100; margin-top: 1em;">
+<div id="pack-list-body">
     <h1 style="padding: 0.5em;">Jobs</h1>
     <ul>
+        <form action="" method="post">
+            <div class="package_form dropdown">
+                {% csrf_token %}
+                {{query_form}}
+                <button type="submit" name="submit" value="submit" class="btn btn-primary btn-sm">Submit</button>    
+            </div>
+        </form>
         {% comment %} Check if the routes are populated. {% endcomment %}
         <table class = "table table-hover table-responsive pack-list-table">
             <tr style="background-color: #FFA758;">
                 <th scope="col">#</th>
-                <th scope="col">{% trans "ID" %}</th>
-                <th scope="col">{% trans "Date" %} </th>
+                <th scope="col">ID</th>
+                <th scope="col">Date </th>
                 
                 {% if routes %}
                     <th scope="col"> </th>
@@ -82,104 +48,5 @@
         
         
     </ul>
-
-    <!-- <div id="map" style="min-width: 400px; width: 800px; height: 500px;"></div>
-
-    <div class="job-details">
-        <h2 class="job-name"></h2>
-        <p class="job-distance"></p>
-        <p class="job-duration"></p>
-        <p class="job-price"></p>
-        <p class="job-pickup-address"></p>
-        <p class="job-delivery-address"></p>
-    </div> -->
-
-    <!-- <script>
-        function initMap() {
-            const taiwan = {
-                lat: 23.69781,
-                lng: 120.960515
-            };
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 13,
-                center: taiwan,
-            });
-
-            // Get jobs from API
-            fetch("{% url 'package_request_app:api_job_list' %}")
-                .then(response => response.json())
-                .then(data => {
-
-                    if (data.jobs.length === 0) {
-                        const noJobsDiv = document.createElement('div');
-                        noJobsDiv.textContent = "No jobs available at the moment.";
-                        document.getElementById('map').appendChild(noJobsDiv);
-
-                    } else {
-                        // console.log(data);
-    
-                        // Create new bounds object
-                        let bounds = new google.maps.LatLngBounds();
-    
-                        // Get the jobs via the API
-                        for (let i = 0; i < data.jobs.length; i++) {
-                            const job = data.jobs[i];
-                            const position = { lat: job.sender_latitude, lng: job.sender_longitude };
-                            const marker = new google.maps.Marker({
-                                position,
-                                map,
-                                title: job.title,
-                            });
-    
-                            // Extend bounds to include marker
-                            bounds.extend(position);
-    
-                            new google.maps.InfoWindow({
-                                content: `
-                                    <div>
-                                        <h3>${job.package_description}</h3>
-                                        <p>${job.distance} km</p>
-                                    </div>
-                                `
-                            }).open(map, marker);
-    
-                            marker.addListener("click", () => {
-                                showJobDetails(job);
-                            });
-                        }
-                    }
-                });
-        }
-
-        function showJobDetails(job) {
-            const jobDetails = document.querySelector(".job-details");
-            const jobName = document.querySelector(".job-name");
-            const jobDistance = document.querySelector(".job-distance");
-            const jobDuration = document.querySelector(".job-duration");
-            const jobPrice = document.querySelector(".job-price");
-            const jobPickupAddress = document.querySelector(".job-pickup-address");
-            const jobDeliveryAddress = document.querySelector(".job-delivery-address");
-
-            jobDetails.style.display = "block";
-            jobName.innerHTML = job.package_description;
-            jobDistance.innerHTML = job.distance + " km";
-            jobDuration.innerHTML = job.duration + " min";
-            jobPrice.innerHTML = "$" + job.price + " NTD";
-            jobPickupAddress.innerHTML = job.sender_address;
-            jobDeliveryAddress.innerHTML = job.recipient_address;
-
-            // If job card is clicked, redirect to job page
-            jobDetails.addEventListener("click", () => {
-                window.location.href = "/job_list/" + job.package_id + "/";
-            });
-        }
-        function View() {
-            window.location.href = "/job_list/" + job.package_id + "/";
-        }
-        window.onload = function() {
-            document.getElementById('sidebar_job_list_btn').classList.add("active_tab");
-        };
-
-    </script> -->
 </div>
 {% endblock content %}

@@ -1,5 +1,6 @@
 from django import forms
 from package_request.models import Package
+from stations.models import Station
 from places.fields import PlacesField
 from django.utils.translation import gettext_lazy as _
 
@@ -60,3 +61,32 @@ class PACKAGE_FORM(forms.ModelForm):
         # self.fields['recipient_phone'].widget.attrs.update({'placeholder': '0987654321'})
         # self.fields['recipient_address'].widget.attrs.update({'placeholder': 'house NO, street, post code, city, county'})
 
+class DRIVER_FILTER_QUERY_FORM(forms.Form):
+    
+    def __init__(self, *args, **kwargs):
+        super(DRIVER_FILTER_QUERY_FORM, self).__init__(*args, **kwargs)
+        
+        stations = Station.objects.filter(active=True)
+        choices = [(station.alias, station.alias) for station in stations]
+        
+        self.fields['station'] = forms.ChoiceField(
+            choices=[('None', 'Select your station')] + choices,
+            initial='None',  # Set initial value
+            widget=forms.Select(attrs={
+                'class': 'form-control' 'dropdown',
+                'aria-label': 'from_station',
+                'aria-describedby': 'basic-addon1',
+                'style': 'color: #000'
+            })
+        )
+
+        # self.fields['to_station'] = forms.ChoiceField(
+        #     choices=[('None', 'Select a station')] + choices,
+        #     initial='None',  # Set initial value
+        #     widget=forms.Select(attrs={
+        #         'class': 'form-control' 'dropdown',
+        #         'aria-label': 'to_station',
+        #         'aria-describedby': 'basic-addon1',
+        #         'style': 'color: #000'
+        #     })
+        # )

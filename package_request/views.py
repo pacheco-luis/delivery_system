@@ -2,7 +2,7 @@ from vincenty import vincenty
 import datetime
 import uuid
 from django.shortcuts import redirect, render
-from package_request.forms import SENDER_FORM, RECEIVER_FORM, PACKAGE_FORM
+from package_request.forms import SENDER_FORM, RECEIVER_FORM, PACKAGE_FORM, DRIVER_FILTER_QUERY_FORM
 from django.contrib import messages
 from stations.models import Station
 from users.models import Customer, User, Driver
@@ -338,18 +338,33 @@ def all_jobs(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
     
-    
+    routes = Route.objects.all()
     # print( Route.objects.all().count() )
     # if Route.objects.all().count() == 0:
     #     for i in range(0, 10):
     #         Route().save()
-        
-    routes = Route.objects.all()
+  
+    filtered_routes = routes
     
-    # google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    if request.method == 'POST':
+        form = DRIVER_FILTER_QUERY_FORM(request.POST)
+        # print(Package.objects.all().count())
+        # for p in Package.objects.filter(status=Package.STATUS_PENDING):
+        #     print(p.sender_address)
+            
+        if form.is_valid():
+            location = form.cleaned_data['station']
+            print(location)
+            if location != 'None':
+                packages = Package.objects.filter(status=Package.STATUS_PENDING, sender_address__icontains=location)
+                # print(Route.objects.filter(parcels__sender_address__in=location))
+                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=location)
+            if not filtered_routes.exists():
+                messages.error(request, "No routes found based on the selected criteria.")
+
     context = {
-        # 'GOOGLE_MAPS_API_KEY': google_maps_api_key,
-        'routes': routes,
+        'routes': filtered_routes,
+        'query_form': DRIVER_FILTER_QUERY_FORM()
     }
     return render(request, 'job_list.html', context)
     
