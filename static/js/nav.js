@@ -113,3 +113,10 @@ function assign_active( btn_id ){
   // document.getElementById( btn_id ).className  += " active_tab";
 
 }
+
+
+function languageSwitch(languageCode) {
+  const form = document.getElementById('languageForm');
+  form.elements.language.value = languageCode;
+  form.submit();
+}
