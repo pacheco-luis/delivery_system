@@ -9,7 +9,7 @@ from django.contrib import messages
 from .models import Customer, Driver, User
 from .forms import CustomUserCreationForm, CustomerForm, DriverForm
 #necessary for translation. Simply add an underline in front of the text you wish to translate
-from django.utils.translation import gettext_lazy as _, gettext
+from django.utils.translation import gettext
 
 # Create your views here.
 # @login_required(login_url='users:login')
@@ -29,7 +29,7 @@ def login_user(request):
                 user = User.objects.get(email=email, is_customer=True)
                 user = authenticate(request, email=email, password=password)
             except:
-                messages.error(request, _('Email is not registered as customer.'))
+                messages.error(request, gettext('Email is not registered as customer.'))
                 return redirect('users:login')
 
             if user is not None:
@@ -37,14 +37,14 @@ def login_user(request):
                 request.session['sname'] = email
                 return redirect('package_request_app:home')
             else:
-                messages.error(request, _('Username and password do not match.'))
+                messages.error(request, gettext('Username and password do not match.'))
                 return redirect('users:login')
         elif( 'driver' in request.POST ):
             try:
                 user = User.objects.get(email=email, is_driver=True)
                 user = authenticate(request, email=email, password=password)
             except:
-                messages.error(request, _('Email not registered as driver.'))
+                messages.error(request, gettext('Email not registered as driver.'))
                 return redirect('users:login')
 
             if user is not None:
@@ -52,19 +52,19 @@ def login_user(request):
                 request.session['sname'] = email
                 return redirect('package_request_app:home')
             else:
-                messages.error(request, _('Username and password do not match.'))
+                messages.error(request, gettext('Username and password do not match.'))
                 return redirect('users:login')
             
     return render(request, 'sign-in.html')
 
 def logoutCustomer(request):
     logout(request)
-    messages.info(request, _('You have been logged out.'))
+    messages.info(request, gettext('You have been logged out.'))
     return redirect('users:login')
 
 def logoutDriver(request):
     logout(request)
-    messages.info(request, _('You have been logged out.'))
+    messages.info(request, gettext('You have been logged out.'))
     return redirect('users:login')
 
 def registerCustomer(request):
@@ -89,7 +89,7 @@ def registerCustomer(request):
             new_customer.phone_number = user.phone_number
             new_customer.save()
 
-            messages.success(request, _('User account was created successfully'))
+            messages.success(request, gettext('User account was created successfully'))
 
             login(request, user)
             return redirect('package_request_app:home')
@@ -120,7 +120,7 @@ def registerDriver(request):
             new_driver.phone_number = user.phone_number
             new_driver.save()
 
-            messages.success(request, _('Driver account was created successfully'))
+            messages.success(request, gettext('Driver account was created successfully'))
 
             login(request, user)
             return redirect('package_request_app:home')
@@ -156,7 +156,7 @@ def editCustomerAccount(request):
         form = CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():
             form.save()
-            messages.success(request, _('Account details updated successfully.'))
+            messages.success(request, gettext('Account details updated successfully.'))
             return redirect('users:customer-account')
         
     profile_img_url =  customer.profile_image.url if customer.profile_image else '/static/images/user-default.png'
@@ -174,7 +174,7 @@ def editDriverAccount(request):
         form = DriverForm(request.POST, request.FILES, instance=driver)
         if form.is_valid():
             form.save()
-            messages.success(request, _('Account details updated successfully.'))
+            messages.success(request, gettext('Account details updated successfully.'))
             return redirect('users:driver-account')
         
     profile_img_url =  driver.profile_image.url if driver.profile_image else '/static/images/user-default.png'

@@ -19,7 +19,7 @@ from django.utils.translation import get_language, gettext
 from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
 from management.forms import ASSIGN_CLUSTER_FORM
 from django.shortcuts import get_object_or_404
-from django.utils.translation import gettext_lazy as _, gettext
+from django.utils.translation import gettext
 
 
 
@@ -119,7 +119,7 @@ def sender_form_handler(request):
                     messages.error(request, f'Your address must be wihin {nearest_staiton.radius}km of station: ' + nearest_staiton.address.place)
                 except Exception as e:
                     print(e)
-                    messages.error(request, "You must be within our stations' range to send a parcel. Please see our locations page.")
+                    messages.error(request, gettext("You must be within our stations' range to send a parcel. Please see our locations page."))
                 
                 return render(request, "step1.html", {'sender_form': SENDER_FORM(request.POST)} )
                     
@@ -132,7 +132,7 @@ def sender_form_handler(request):
         
         # if input is invalid refill the form
         else:
-            messages.error(request, 'Invalid input. Please revise your information.')
+            messages.error(request, gettext('Invalid input. Please check your input and try again.'))
             return render(request,"step1.html", {'sender_form': SENDER_FORM(request.POST)} )
     
     # prefilling the customer phone number
@@ -169,12 +169,12 @@ def receiver_form_handler(request):
                     nearest_staiton=Station.objects.filter(id=r_addr_stat[1])[0]
                     messages.error(request, f'Sender address must be wihin {nearest_staiton.radius}km of station: ' + nearest_staiton.address.place)
                 except Exception as e:
-                    messages.error(request, "Sender must be within our stations' range to send a parcel. Please see our locations page.")
+                    messages.error(request, gettext("Sender must be within our stations' range to send a package. Please see our locations page."))
             
                 return render(request, "step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
             # a parcel destionation location must not be within the sender's station range, sender must fill the form again with a valid location for receiver
             if temp_stat == r_addr_stat:
-                messages.error(request, "Sender and receiver address should not be within the same station range." )
+                messages.error(request, gettext("Sender and receiver address should not be within the same station range.") )
                 return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
             
             # saving receiver's info as session for step 3
@@ -182,7 +182,7 @@ def receiver_form_handler(request):
             return redirect('package_request_app:request_form_3_of_3')
 
         else:
-            messages.error(request, 'Invalid input. Please revise your information.')
+            messages.error(request, gettext('Invalid input. Please check your input and try again.'))
             return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
     
     context = {
@@ -242,7 +242,7 @@ def package_form_handler(request):
                 except Exception as e:
                     pass
                 print(e)
-                messages.error(request, "Something went wrong, please try again")
+                messages.error(request, gettext("Something went wrong. Please try again."))
                 return redirect( 'package_request_app:request_form_1_of_3')
             
             print( distance )
@@ -271,7 +271,7 @@ def package_form_handler(request):
         
         # rendering page again if input was invalid
         else:
-            messages.error(request, 'Invalid input. Please revise your information.')
+            messages.error(request, gettext('Invalid input. Please check your input and try again.'))
             return render( request, "step3.html", {'package_form': PACKAGE_FORM(request.POST)})
         
     return render( request, "step3.html", {'package_form': PACKAGE_FORM()})
@@ -363,14 +363,14 @@ def job_detail(request, id):
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
 
     if not job:
-        messages.error(request, _('Job is no longer available'))
+        messages.error(request, gettext('Job is no longer available.'))
         return redirect('package_request_app:job_list')
     
     if request.method == 'POST':
         job.driver = request.user.driver
         job.status = Package.STATUS_PICKING
         job.save()
-        messages.success(request, _('Job is successfully taken'))
+        messages.success(request, gettext('Job is successfully taken.'))
         return redirect('package_request_app:job_current')
 
     context = {
@@ -405,12 +405,12 @@ def current_job(request):
         if job.status == Package.STATUS_PICKING:
             job.status = Package.STATUS_DELIVERING
             job.save()
-            messages.success(request, _('Job has successfully started!'))
+            messages.success(request, gettext('Job has successfully started!'))
             return redirect('package_request_app:job_current')
         elif job.status == Package.STATUS_DELIVERING:
             job.status = Package.STATUS_COMPLETED
             job.save()
-            messages.success(request, _('Job has successfully completed!'))
+            messages.success(request, gettext('Job has successfully completed!'))
         return redirect('package_request_app:job_completed')
     
     context = {

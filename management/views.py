@@ -15,7 +15,7 @@ from stations.forms import STATIONS_FORM
 from places import Places
 from places.fields import PlacesField 
 from decimal import Decimal
-from django.utils.translation import gettext_lazy as _, gettext_noop as _noop
+from django.utils.translation import gettext
 
 
 # Create your views here.
@@ -98,12 +98,12 @@ def create_assign_routes(request):
                 try:
                     clstr = uuid.UUID(form.cleaned_data['cluster_id'])
                     cluster = get_object_or_404(Route, id=clstr)
-                except  Exception as e:
-                    messages.error( request, _("Route does not exist. It might be deleted already. Please try again.") )
+                except Exception as e:
+                    messages.error( request, gettext("Route does not exist. It might be deleted already. Please try again.") )
                 try:
                     driver = get_object_or_404(Driver, username=form.cleaned_data['driver_username'])
                 except Exception as e:
-                    messages.error( request, _("Driver username does not match any active driver. Please check your input."))
+                    messages.error( request, gettext("Driver username does not match any active driver. Please check your input."))
                 
                 
                 if cluster and driver is not None:
@@ -117,7 +117,7 @@ def create_assign_routes(request):
 
             else:
                 # if input form is invalid  then show error message
-                messages.error( request, _("Invalid input format. Please check your data and submit again.") )
+                messages.error( request, gettext("Invalid input format. Please check your data and submit again.") )
                 
         elif 'create_routes' in request.POST:
             print('attempting to create routes')
@@ -135,7 +135,7 @@ def create_assign_routes(request):
             
             # detecting if no packages avalable to cluster
             if parcels.count() == 0 :
-                messages.error( request, "Unable to create new Routes. No available Parcels.")
+                messages.error( request, gettext("Unable to create new Routes. No available Parcels."))
                 return redirect( 'management:routes' )
 
             # Get the coordinates of the parcels
@@ -256,9 +256,9 @@ def admin_stations(request):
                     station.active=form.cleaned_data['active']
                     station.radius=radius = form.cleaned_data['radius']
                     station.save()
-                    messages.success(request, _('Station has been edited successfully.'))
+                    messages.success(request, gettext('Station has been edited successfully.'))
                 except Exception as e:
-                    messages.error( request, _('Invalid Station ID. Please check your input and try again.') )
+                    messages.error( request, gettext('Invalid Station ID. Please check your input and try again.') )
             elif 'add_station' in request.POST:
                 alias = form.cleaned_data['alias']
                 address = PlacesField().to_python(form.cleaned_data['address'])
@@ -266,15 +266,15 @@ def admin_stations(request):
                 radius = form.cleaned_data['radius']
                 try:
                     Station.objects.create( alias=alias, address=address, active=active, radius=radius ).save()
-                    messages.success(request, _('New station has been added successfully.'))
+                    messages.success(request, gettext('New station has been added successfully.'))
                 except Exception as e:
-                    messages.error( request, _('We encountered an issue while creating the staion. Please try again.') )
+                    messages.error( request, gettext('We encountered an issue while creating the staion. Please try again.') )
             else:
-                messages.error( request, _('Invalid action. Please Try again.') )
+                messages.error( request, gettext('Invalid action. Please Try again.') )
             
             return redirect( 'management:admin_stations' )
         else:
-            messages.error( request, _('Invalid input. Please check your input and try again.') )
+            messages.error( request, gettext('Invalid input. Please check your input and try again.') )
             return redirect( 'management:admin_stations' )
     
 

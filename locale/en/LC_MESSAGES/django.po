@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-28 13:30+0800\n"
+"POT-Creation-Date: 2024-03-29 11:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,6 +250,10 @@ msgstr ""
 msgid "Invalid input format. Please check your data and submit again."
 msgstr ""
 
+#: management/views.py:138
+msgid "Unable to create new Routes. No available Parcels."
+msgstr ""
+
 #: management/views.py:259
 msgid "Station has been edited successfully."
 msgstr ""
@@ -270,7 +274,8 @@ msgstr ""
 msgid "Invalid action. Please Try again."
 msgstr ""
 
-#: management/views.py:277
+#: management/views.py:277 package_request/views.py:135
+#: package_request/views.py:185 package_request/views.py:274
 msgid "Invalid input. Please check your input and try again."
 msgstr ""
 
@@ -587,12 +592,33 @@ msgstr ""
 msgid "Return to homepage"
 msgstr ""
 
+#: package_request/views.py:122
+msgid ""
+"You must be within our stations' range to send a parcel. Please see our "
+"locations page."
+msgstr ""
+
+#: package_request/views.py:172
+msgid ""
+"Sender must be within our stations' range to send a package. Please see our "
+"locations page."
+msgstr ""
+
+#: package_request/views.py:177
+msgid ""
+"Sender and receiver address should not be within the same station range."
+msgstr ""
+
+#: package_request/views.py:245
+msgid "Something went wrong. Please try again."
+msgstr ""
+
 #: package_request/views.py:366
-msgid "Job is no longer available"
+msgid "Job is no longer available."
 msgstr ""
 
 #: package_request/views.py:373
-msgid "Job is successfully taken"
+msgid "Job is successfully taken."
 msgstr ""
 
 #: package_request/views.py:408
