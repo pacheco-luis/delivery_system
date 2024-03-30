@@ -334,40 +334,45 @@ def landing_page( request ):
 # HERE BE DRAGONS
 @login_required(login_url='users:login')
 def all_jobs(request):
-    
-    if request.user.is_driver is not True :
+    if request.user.is_driver is not True:
         return render(request, '401.html')
     
-    routes = Route.objects.all()
-    # print( Route.objects.all().count() )
-    # if Route.objects.all().count() == 0:
-    #     for i in range(0, 10):
-    #         Route().save()
-  
-    filtered_routes = routes
+    driver = Driver.objects.get(user=request.user)
+
+    if driver.address is not None:
+            for station in Station.objects.all():
+                if station.alias in driver.address:
+                    driver_location = station.alias
+            filtered_routes = Route.objects.filter(parcels__sender_address__icontains=driver_location)
+    else:
+        filtered_routes = Route.objects.all()
     
     if request.method == 'POST':
         form = DRIVER_FILTER_QUERY_FORM(request.POST)
-        # print(Package.objects.all().count())
-        # for p in Package.objects.filter(status=Package.STATUS_PENDING):
-        #     print(p.sender_address)
-            
+        
         if form.is_valid():
             location = form.cleaned_data['station']
-            print(location)
+            
             if location != 'None':
-                packages = Package.objects.filter(status=Package.STATUS_PENDING, sender_address__icontains=location)
-                # print(Route.objects.filter(parcels__sender_address__in=location))
+                if driver.address is None:
+                    try:
+                        driver.address = get_object_or_404(Station, alias=location).address
+                        driver.save()
+                    except:
+                        pass
+    
                 filtered_routes = Route.objects.filter(parcels__sender_address__icontains=location)
-            if not filtered_routes.exists():
-                messages.error(request, "No routes found based on the selected criteria.")
+                
+                if not filtered_routes.exists():
+                    messages.error(request, "No routes found based on the selected criteria.")
 
+    
     context = {
         'routes': filtered_routes,
         'query_form': DRIVER_FILTER_QUERY_FORM()
     }
     return render(request, 'job_list.html', context)
-    
+
 
 @login_required(login_url='users:login')
 def job_detail(request, id):
