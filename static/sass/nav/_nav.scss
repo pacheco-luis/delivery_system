@@ -56,6 +56,7 @@
 
 #sidebar:hover * .sidebar_list_text{
     display: inline;
+    transition: visibility 0s, opacity 0.5s linear;
 }
 
 

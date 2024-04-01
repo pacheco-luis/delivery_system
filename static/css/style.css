@@ -742,7 +742,8 @@ hr {
   padding: 1em; }
 
 #sidebar:hover * .sidebar_list_text {
-  display: inline; }
+  display: inline;
+  transition: visibility 0s, opacity 0.5s linear; }
 
 #buton_container {
   margin-bottom: 1rem;
@@ -1452,8 +1453,8 @@ section {
   background-image: url("../../images/admin-sites/dashboard/pexels-klub-boks-9940152.jpg");
   background-size: cover; }
 
-#clusters_content * {
-  color: #fff !important; }
+#clusters_content * table * {
+  color: #fff; }
 
 .clusters_Mh {
   height: 90vh; }
@@ -1500,5 +1501,9 @@ section {
 
 #form_container * input {
   margin: 5px 0; }
+
+#station_form * option {
+  color: grey;
+  font-style: italic; }
 
 /*# sourceMappingURL=style.css.map */

@@ -232,10 +232,10 @@ def create_assign_routes(request):
                 route.save()
         return redirect('management:routes')
     
-    
+    print( 'routes:',routes.count() )
     context = {
         'routes': routes,
-        'route_count': len(routes),
+        'route_count': routes.count(),
         'assign_form': ASSIGN_CLUSTER_FORM()
     }
 
@@ -279,6 +279,7 @@ def admin_stations(request):
     
 
     stations = Station.objects.filter(active=True).union(Station.objects.filter(active=False))
+    print( 'stations:', stations.count() )
     context={ 
         'stations': stations,
         'stations_count': stations.count(),
