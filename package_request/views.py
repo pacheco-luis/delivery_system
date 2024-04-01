@@ -312,10 +312,11 @@ def landing_page( request ):
     # if database has no objects create intiial objects for stations, users, customers, and drivers
 
     if User.objects.all().count() == 0:
+        User.objects.create(first_name='admin', last_name='admin', username='admin', email='admin@admin.com', password= make_password('admin'), is_superuser=True, is_staff=True)
         # create users
         domain='@swiftcourier.com'
 
-        for i in range( 0, 5):
+        for i in range( 0, 3):
             username=f'customer{i}'
             email=f'{username}{domain}'
             new_user = User.objects.create(first_name=username, last_name=username, username=username, email=email, password= make_password('user1234!'), is_customer=True )
