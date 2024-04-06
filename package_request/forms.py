@@ -2,13 +2,13 @@ from django import forms
 from package_request.models import Package
 from stations.models import Station
 from places.fields import PlacesField
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 
 class SENDER_FORM(forms.ModelForm):
     sender_phone = forms.CharField( 
-        label = _("Sender phone:"),
+        label = gettext("Sender phone:"),
         required=False,
-        widget = forms.TextInput( attrs={'required': 'True'})
+        widget = forms.TextInput( attrs={'required': 'True', 'class' : 'form-control', 'placeholder' : '0901234567'})
     )
     
     class Meta:
@@ -17,15 +17,15 @@ class SENDER_FORM(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['sender_phone'].widget.attrs.update({'placeholder': '0987654321'})
-        self.fields['sender_address'].widget.attrs.update({'required': 'true'})
+        #self.fields['sender_phone'].widget.attrs.update({'placeholder': '0987654321'})
+        self.fields['sender_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control'})
         
 
 class RECEIVER_FORM(forms.ModelForm):
     recipient_name = forms.CharField(
-        label = _("Recipient name:"),
+        label = gettext("Recipient name:"),
         required=False,
-        widget = forms.TextInput( attrs={'required': 'True'} )
+        widget = forms.TextInput( attrs={'required': 'True', 'placeholder': 'John Doe', 'class' : 'form-control'} )
         )
     
     class Meta:
@@ -34,26 +34,34 @@ class RECEIVER_FORM(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['recipient_name'].widget.attrs.update({'placeholder': 'John Doe'})
-        self.fields['recipient_phone'].widget.attrs.update({'placeholder': '0987654321'})
-        self.fields['recipient_address'].widget.attrs.update({'required': 'true'})
+        #self.fields['recipient_name'].widget.attrs.update({'placeholder': 'John Doe'})
+        self.fields['recipient_phone'].widget.attrs.update({'placeholder': '0987654321', 'class' : 'form-control'})
+        self.fields['recipient_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control'})
         
 class PACKAGE_FORM(forms.ModelForm):
     package_description = forms.CharField(
-        label=_("Package description"),
+        label=gettext("Package description"),
         required=False,
-        widget = forms.TextInput( attrs={'required': 'True'} ) 
+        widget = forms.TextInput( attrs={'required': 'True',  'class' : 'form-control'} ) 
         )
-    estimate_package_weight = forms.ChoiceField ( 
-        label=_("Estimated package weight:"),
-        required=False, 
-        widget = forms.Select( attrs={'required': 'True'} ),
-        choices=Package.WEIGHT_CHOICES 
+    # estimate_package_weight = forms.ChoiceField ( 
+    #     label=_("Estimated package weight:"),
+    #     required=False, 
+    #     widget = forms.Select( attrs={'required': 'True'} ),
+    #     choices=Package.WEIGHT_CHOICES 
+    # )
+
+    fragile = forms.BooleanField(
+        label = gettext("is the item fragile?"),
+        required=False,
+        widget=forms.CheckboxInput(attrs={'class': ''})
     )
     
     class Meta:
         model = Package
-        fields = ['package_description', 'estimate_package_weight', 'fragile', 'frozen', 'width', 'height', 'depth', 'estimate_package_weight_value']
+        #fields = ['package_description', 'estimate_package_weight', 'fragile', 'frozen', 'width', 'height', 'depth', 'estimate_package_weight_value']
+        fields = ['package_description','fragile', 'frozen', 'width', 'preferred_time', 'height', 'depth', 'estimate_package_weight_value']
+
         
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -70,8 +78,8 @@ class DRIVER_FILTER_QUERY_FORM(forms.Form):
         choices = [(station.alias, station.alias) for station in stations]
         
         self.fields['station'] = forms.ChoiceField(
-            choices=[('None', 'Select your station')] + choices,
-            initial='None',  # Set initial value
+            choices=[(gettext('None'), gettext('Select your station'))] + choices,
+            initial= 'None',  # Set initial value
             widget=forms.Select(attrs={
                 'class': 'form-control' 'dropdown',
                 'aria-label': 'from_station',

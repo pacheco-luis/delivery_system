@@ -87,18 +87,9 @@
             <li><a href="{% url "users:view-company-info"%}"> {% trans "Terms of Use" %} </a></li>
             <li><a href="{% url "users:view-company-info"%}"> {% trans "Privacy Policy" %} </a></li>
         </ul>
+    </footer> 
 
-    </footer>
-
-    <script src="{% static 'js/landing_page.js' %}"></script>
-    <script>
-        function languageSwitch(languageCode) {
-          const form = document.getElementById('languageForm');
-          form.elements.language.value = languageCode;
-          form.submit();
-        }
-      </script>
-
+    <script src="{% static 'js/landing_page.js' %}"> </script>
 </body>
 
 </html>

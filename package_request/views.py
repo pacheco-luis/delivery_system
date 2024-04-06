@@ -338,13 +338,21 @@ def all_jobs(request):
     if request.user.is_driver is not True:
         return render(request, '401.html')
     
+    filtered_routes = Route.objects.all()
     driver = Driver.objects.get(user=request.user)
 
     if driver.address is not None:
-            for station in Station.objects.all():
-                if station.alias in driver.address:
-                    driver_location = station.alias
-            filtered_routes = Route.objects.filter(parcels__sender_address__icontains=driver_location)
+        # for station in Station.objects.all():
+
+        #     if station.alias in driver.address:
+        #         driver_location = station.alias
+        # filtered_routes = Route.objects.filter(parcels__sender_address__icontains=driver_location)
+        filtered_routes = Route.objects.all()
+        for station in Station.objects.all():
+            if station.dist((float(driver.address.latitude), float(driver.address.longitude))) <= station.radius:
+                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=station)
+                driver_location = station.alias
+                #if station.alias in driver.address:
     else:
         filtered_routes = Route.objects.all()
     

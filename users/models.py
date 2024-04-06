@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+from places.fields import PlacesField
 
 # Create your models here.
 class User(AbstractUser):
@@ -36,7 +37,9 @@ class Customer(models.Model):
     username = models.CharField(max_length=50, null=True, blank=True, verbose_name=_("username"))
     email = models.EmailField(max_length=255, null=True, blank=True, verbose_name=_("email"))
     phone_number = PhoneNumberField(region='TW' , null=True, blank=True, verbose_name=_("phone number"))
-    address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
+    #address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
+    address = PlacesField(blank=False, verbose_name=_("customer address"))
+
     profile_image = models.ImageField(upload_to='profiles/customer/', null=True, blank=True, verbose_name=_("profile picture"))
 
     def __str__(self):
@@ -53,7 +56,8 @@ class Driver(models.Model):
     date_of_birth = models.DateField(null=True, blank=True, verbose_name=_("date of birth"))
     email = models.EmailField(max_length=255, null=True, blank=True, verbose_name=_("email"))
     phone_number = PhoneNumberField(region='TW' , null=True, blank=True, verbose_name=_("phone number"))
-    address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
+    #address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
+    address = PlacesField(blank=False, verbose_name=_("driver address"))
     id_card = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("identification card"))
     driver_license = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("driving license"))
     profile_image = models.ImageField(upload_to='profiles/driver/', null=True, blank=True, verbose_name=_("profile picture"))

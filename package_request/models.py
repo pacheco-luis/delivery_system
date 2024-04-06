@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _, gettext
 class Package(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_PICKING = 'picking'
+    STATUS_TRANSIT = 'transiting'
     #Add in awaiting delivery state
     STATUS_DELIVERING = 'delivering'
     STATUS_COMPLETED = 'completed'
@@ -21,9 +22,14 @@ class Package(models.Model):
         (STATUS_CANCELED, 'Canceled'),
     )
     #remove
-    WEIGHT_CHOICES = [ ('<2', '<2'), ('2-5', '2-5'), 
-                      ('5-10', '5-10'), ('>10', '>10'),
-                      ]
+    # WEIGHT_CHOICES = [ ('<2', '<2'), ('2-5', '2-5'), 
+    #                   ('5-10', '5-10'), ('>10', '>10'),
+    #                   ]
+    TIME_SLOTS = (
+        (0, '8:00 - 12:00'),
+        (1, '13:00 - 18:00'),
+        (2, _('no preference'))
+    )
 
     package_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # sender_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
@@ -36,15 +42,14 @@ class Package(models.Model):
     recipient_address = PlacesField(blank=True, verbose_name=_("recipient address"))
     package_description = models.CharField(max_length=200  , blank=False, verbose_name=_("package description"))
     fragile = models.BooleanField(verbose_name=_("fragile?"))
-    frozen = models.BooleanField(verbose_name=_("Needs to be cold?"))
-    estimate_package_weight = models.CharField(max_length=5, choices=WEIGHT_CHOICES, default='<2')
+    preferred_time = models.IntegerField(choices = TIME_SLOTS, default = 2, verbose_name = _("preferred time window"))
+    frozen = models.BooleanField(verbose_name=_("does the package need to be refrigerated?"))
+    #estimate_package_weight = models.CharField(max_length=5, choices=WEIGHT_CHOICES, default='<2')
     order_date = models.DateTimeField(auto_now_add=True)
-    #Add temperature option (frozen or warm)
     status = models.CharField(max_length=10, choices=STATUSES, default=STATUS_PENDING)
     duration = models.IntegerField(null=True, blank=True, default=0)
     distance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
-
     width = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("width"))
     height = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("height"))
     depth = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("depth"))

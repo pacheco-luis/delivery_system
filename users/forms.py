@@ -41,3 +41,7 @@ class DriverForm(ModelForm):
     class Meta:
         model = Driver
         fields = ['first_name', 'last_name', 'username', 'email', 'address', 'phone_number', 'profile_image']
+        #modify widget for address and let it be able to set to empty
+        # widgets = {
+        #     'address' : 
+        # }

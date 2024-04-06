@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from places.fields import PlacesField
 from django.core.validators import MinValueValidator
+from vincenty import vincenty
 
 # Create your models here.
 
@@ -35,3 +36,7 @@ class Station(models.Model):
     
     def get_coordinates_as_float(self):
         return (float(self.address.latitude), float(self.address.longitude))
+    
+    def dist(self, other_address):
+        return vincenty(self.get_coordinates_as_float(), other_address)
+
