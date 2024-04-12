@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Jobs{% endblock title %}
+{% block title %}Routes{% endblock title %}
 {% block content %}
+
 <div id="pack-list-body">
-    <h1 style="padding: 0.5em;">Jobs</h1>
-    <ul>
+    <h1 style="padding: 0.5em;">Routes</h1>
+
+    <ul class="ul-job-list card">
+        <ul class="nav nav-tabs tab">
+            <li class="nav-item">
+                <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" href="{% url 'package_request_app:select_packages' %}">Packages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_tab == 'routes' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:job_list' %}">Routes</a>
+            </li>
+        </ul>
+        <br>
         <form action="" method="post">
             <div class="package_form dropdown">
                 {% csrf_token %}
@@ -44,9 +55,7 @@
                     </td>
             </tr>
         {% endif %}
-        </table>
-        
-        
+        </table>   
     </ul>
 </div>
 {% endblock content %}

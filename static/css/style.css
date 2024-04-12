@@ -1506,4 +1506,9 @@ section {
   color: grey;
   font-style: italic; }
 
+.ul-job-list {
+  background-color: white;
+  padding: 1em;
+  border-radius: 18px; }
+
 /*# sourceMappingURL=style.css.map */

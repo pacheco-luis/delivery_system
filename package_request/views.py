@@ -378,10 +378,22 @@ def all_jobs(request):
     
     context = {
         'routes': filtered_routes,
-        'query_form': DRIVER_FILTER_QUERY_FORM()
+        'query_form': DRIVER_FILTER_QUERY_FORM(),
+        'active_tab' : 'routes'
     }
     return render(request, 'job_list.html', context)
 
+@login_required(login_url='users:login')
+def select_packages(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+     
+    ### 
+    
+    context = {
+        'active_tab' : 'individual'
+    }
+    return render(request, 'select_packages.html', context)
 
 @login_required(login_url='users:login')
 def job_detail(request, id):
