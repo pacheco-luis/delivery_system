@@ -13,7 +13,8 @@ class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True, null=True, blank=True, verbose_name=_("username"))
     email = models.EmailField(max_length=255, unique=True, null=True, blank=True, verbose_name=_("email"))
     phone_number = PhoneNumberField(region='TW' , null=True, blank=True, verbose_name=_("phone number"))
-
+    date_joined = models.DateTimeField(auto_now_add=True)
+    
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
