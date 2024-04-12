@@ -338,7 +338,6 @@ def admin_all_users(request):
                     edit_user_form.initial['joined'] = queried_user.date_joined.fromisoformat(queried_user.date_joined.__str__()).strftime("%B %d, %Y, %I:%M %p")
 
                 except Exception as e:
-                    print(e)
                     messages.error( request, gettext('User not found.') )
             else:
                 messages.error( request, gettext('Invalid input. Please try again.') )

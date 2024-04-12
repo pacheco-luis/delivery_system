@@ -1310,7 +1310,7 @@ section {
   color: #fff !important;
   position: sticky;
   top: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   border-bottom: 1px solid #fff; }
 
 #sidebar_blocker {
@@ -1441,6 +1441,20 @@ section {
   padding: 5px 10px;
   border: none; }
 
+@media screen and (min-width: 450px) {
+  #desktop_logo,
+  #desktop_company_name {
+    display: inline; }
+
+  #mobile_logo {
+    display: none; } }
+@media screen and (max-width: 451px) {
+  #desktop_logo,
+  #desktop_company_name {
+    display: none; }
+
+  #mobile_logo {
+    display: inline; } }
 #dashboard_content * {
   color: #fff !important; }
 
