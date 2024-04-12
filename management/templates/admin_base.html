@@ -39,11 +39,12 @@
             </svg>
           </button>
           <a class="navbar-brand" href="{% url 'management:admin_dashboard'%}" >
-            <img src="{% static 'images/logo/swift-1000.png' %}" class="admin_logo" alt="logo">
-            <span>Swift Courier Admin</span>
+            <img id="desktop_logo" src="{% static 'images/logo/swift-1000.png' %}" class="admin_logo" alt="logo">
+            <img id="mobile_logo" src="{% static 'images/logo/logo_white.png' %}" class="admin_logo" alt="logo">
+            <span id="desktop_company_name" >Swift Courier Admin</span>
           </a>
         </div>
-        <div class="col" style="position: relative;">
+        <div class="col-3" style="position: relative;">
           <form id="languageForm" method="post" action="{% url 'set_language' %}" style="position: absolute; right:0;">
             {% csrf_token %}
             <select class="form-select-sm bg-black" name="language" id="language" onchange="languageSwitch(this.value)" style="height:100%;color:#fff;">
@@ -72,6 +73,9 @@
 
 
   <script>
+
+    
+
     document.getElementById("admin_nav_menu_btn").addEventListener("click", function() {
                                                                                       document.getElementById("admin_sidebar").style.display='block';
                                                                                       document.getElementById("sidebar_blocker").style.display='block';
@@ -94,7 +98,8 @@
       const form = document.getElementById('languageForm');
       form.elements.language.value = languageCode;
       form.submit();
-    };                                                              
+    };
+  
   </script>
   {% block script_files %}{% endblock script_files %}
 </body>

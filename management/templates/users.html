@@ -146,18 +146,12 @@
 <script>
     document.getElementById("admin_clusters_tab").style.borderLeft='3px solid #ff6000';
     var string = document.getElementById("username").value
-    console.log( ">" )
-    console.log( string )
-    console.log( "<" )
     if (string!=""){
         document.getElementById("edit_user_form").style.display = "block";
     }
 
-
     function show_user_details( id ){
         user_row = document.getElementById(id+id).getElementsByTagName("td");
-        
-        console.log(user_row[2].textContent);
         document.forms.edit_user_form.username.value = user_row[0].textContent;
         document.forms.edit_user_form.role.value = user_row[1].textContent;
         document.forms.edit_user_form.active.checked = (user_row[2].textContent == "active") ? true: false;
