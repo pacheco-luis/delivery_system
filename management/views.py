@@ -3,19 +3,16 @@ import uuid
 from django.shortcuts import get_object_or_404, redirect, render
 from django.conf import settings
 import requests
-from management.forms import ASSIGN_CLUSTER_FORM
+from management.forms import ASSIGN_CLUSTER_FORM, SEARCH_USER_FORM, USERS_QUERY_FILTER, EDIT_USER_FORM
 from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
 from users.models import User, Customer, Driver
 from package_request.models import Package, Route
 from stations.models import Station
-from datetime import datetime, timedelta
-from delivery_system.settings import TIME_ZONE
 from django.utils import timezone
 from stations.forms import STATIONS_FORM
-from places import Places
 from places.fields import PlacesField 
-from decimal import Decimal
 from django.utils.translation import gettext
+from django.db.models import Q
 
 
 # Create your views here.
@@ -243,7 +240,6 @@ def create_assign_routes(request):
 
 
 def admin_stations(request):
-    
     if request.method == "POST":
         form = STATIONS_FORM( request.POST )
         if( form.is_valid() ):
@@ -287,3 +283,89 @@ def admin_stations(request):
     }
     
     return render( request, 'admin_stations.html', context=context)
+
+
+# function to display all users in management template
+def admin_all_users(request):
+    
+    # class to extract and send only required fields from users to users page in management
+    class temp_user():
+        # initializing the object with an instance of User model
+        def __init__(self, user : User) -> None:
+            role = ''
+            if user.is_customer: role = 'Customer'
+            elif user.is_driver: role = 'Driver'
+            elif user.is_superuser: role = 'Admin'
+            elif user.is_manager: role='Manager'
+            elif user.is_staff: role='Staff'
+                
+            self.username = user.username
+            self.role = role
+            self.status = 'active' if user.is_active else  'inactive'
+            self.date_joined = user.date_joined
+    
+    # variables and forms that will me filled if necessary depending on the method by user
+    all_users = User.objects.all()
+    users = list()
+    user_filter_form = USERS_QUERY_FILTER()
+    edit_user_form = EDIT_USER_FORM()
+    
+    # detecting if request is get 
+    if request.method == 'GET':
+        # detecting if request is to get users based on filter form
+        if 'get_users' in request.GET:
+            form = USERS_QUERY_FILTER( request.GET )
+            if form.is_valid() :
+                user_type = form.cleaned_data['Users']
+                # querying based on the filter value from the form
+                if user_type != 'All Users' :
+                    q_object = Q(**{user_type:True})
+                    all_users = User.objects.filter( q_object  )
+            else:
+                messages.error( request, gettext('Invalid query. Please try again.') )
+        
+        # detecting if user is searching by username
+        elif 'search_user' in request.GET:
+            form = SEARCH_USER_FORM(request.GET)
+            if form.is_valid():
+                # attempting to obtain user (IF USER EXISTS) and values to render into edit form in template
+                try:
+                    queried_user = get_object_or_404( User, username=form.cleaned_data['username_search'])
+                    queried_user = temp_user(queried_user)
+                    edit_user_form.initial['username'] = queried_user.username
+                    edit_user_form.initial['role'] = queried_user.role
+                    edit_user_form.initial['active'] = queried_user.status
+                    edit_user_form.initial['joined'] = queried_user.date_joined.fromisoformat(queried_user.date_joined.__str__()).strftime("%B %d, %Y, %I:%M %p")
+
+                except Exception as e:
+                    print(e)
+                    messages.error( request, gettext('User not found.') )
+            else:
+                messages.error( request, gettext('Invalid input. Please try again.') )
+    
+    # detecting if request is to post
+    elif request.method == 'POST':
+        if 'edit_user' in request.POST:
+            edit_form = EDIT_USER_FORM(request.POST)
+            if edit_form.is_valid():
+                # attempting to search and edit the user by username in post request
+                try:
+                    updated_user = get_object_or_404( User, username = edit_form.cleaned_data['username'] )
+                    updated_user.is_active = True if edit_form.cleaned_data['active'] else False
+                    updated_user.save()
+                    
+                except Exception as e:
+                    messages.error( request, gettext('We encountered an issue while editing the user. Please try again.') )
+    
+    # converting all users into temp_user object to limit the data rendered in template
+    for user in all_users:
+        users.append( temp_user(user) )
+
+    context = {
+        'filter_form': user_filter_form,
+        'users': users,
+        'edit_user_form': edit_user_form,
+        'search_user_form': SEARCH_USER_FORM()
+    }
+    
+    return render( request, 'users.html', context=context )

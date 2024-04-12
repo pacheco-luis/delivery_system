@@ -1,0 +1,169 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title %}
+{% endblock title %}
+{% block content  %}
+<div id="users_content" class="container-fluid">
+    <!-- first Row -->
+    <div class="row">
+        <div class="col-lg">
+            <div class="row bdr_shdw ">
+                <div class="col">
+                    <h5>{% trans "Users" %}</h5>
+                </div>
+                <div class="col-md-4" style="display: flex; justify-content: end; padding: 0;">
+                    <div id="search_container" class="container">
+                        <form class="form-inline" name="seach_user" method="GET">
+                            {% csrf_token %}
+                            {{search_user_form.username_search}}
+                            <!-- <input class="form-control" type="search" placeholder="{% trans 'Search by username' %}" aria-label="Search"> -->
+                            <button class="btn btn-outline-primary" name="search_user" type="submit">Search</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- second Row -->
+    <div class="row">
+        <!-- unassigned and active clusters -->
+        <div id="" class="col-lg-8">
+            <div class="row bdr_shdw">
+                <div class="col clusters_Mh" style="overflow: auto auto;">
+                    <h5>
+                        <div class="row">
+                            <div class="col">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                                </svg>
+                                {% trans "All users:" %}
+                            </div>
+                            <div id="" class="col-sm-6">
+                                <form action="" name="get_users" method="GET">
+                                    {% csrf_token %}
+                                    <div id="user_filter_container">
+                                        {% for field in filter_form %}
+                                        {{field}}
+                                        {% endfor %}
+                                        <button type="submit" name="get_users" value="get_users" class="btn btn-secondary">{% trans "Get" %}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </h5>
+                    <table class="table general-table">
+                        <thead>
+                            <tr>
+                            <th scope="col">{% trans "#" %}</th>
+                            <th scope="col">{% trans "Username" %}</th>
+                            <th scope="col">{% trans "Role" %}</th>
+                            <th scope="col">{% trans "Status" %}</th>
+                            <th scope="col">{% trans "Joined" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if users %}
+                                {% for user in users %}
+                                    <tr id="{{user.username}}{{user.username}}">
+                                        <th scope="row-md" style="width: 2rem;">
+                                            <button id="{{user.username}}" type="button" class="btn btn-outline-warning" onclick="show_user_details(this.id)">{{forloop.counter}}.</button>
+                                        </th>
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.role}}</td>
+                                            <td>{{user.status}}</td>
+                                            <td>{{user.date_joined}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+        
+                    {% if route_count == 0 %}
+                        <div class="row container">
+                            <div class="row">
+                                <div class="col-lg" style="text-align: center; font-style: italic; color: rgb(125, 125, 125); border: none; box-shadow: none; background: none;">{% trans "It is empty here" %}</div>
+                            </div>
+                            <div class="row justify-content-md-center">
+                                <img class="col-lg-8" src="{% static 'images/package_listing/empty_package.png' %}" alt="there are no current routes"/>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Something else -->
+        <div class="col height_100">
+            <div class="row bdr_shdw height_100">
+                <div class="col clusters_Mh">
+                    <h5>
+                        <button type="button" class="round_tooltip btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="{% trans 'Select a user to show their summary' %}">
+                            <svg data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg>
+                        </button>
+                          
+                          {% trans "User summary:" %}
+                    </h5>
+                    <div id="assign_box" class="row">
+                        <div class="row"> 
+                            <h6 class="p-0 col"> 
+                                <form id="edit_user_form" name="edit_user_form" action="" method="POST" style="display: none;">
+                                    {% csrf_token %}
+
+                                    <div class="container">
+                                        {% for field in edit_user_form %}
+                                            <div class="row-lg">
+                                                <label for="cluster_id">{{field.label}}:</label>
+                                                <br>
+                                                {{field}}
+                                                <br>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="row-lg">
+                                            <button type="submit" name="edit_user" id="send_username" class="btn btn-secondary" style="display: block; width:100%">{% trans "Submit" %}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </h6> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
+
+{% block script_files %}
+<script>
+    document.getElementById("admin_clusters_tab").style.borderLeft='3px solid #ff6000';
+    var string = document.getElementById("username").value
+    console.log( ">" )
+    console.log( string )
+    console.log( "<" )
+    if (string!=""){
+        document.getElementById("edit_user_form").style.display = "block";
+    }
+
+
+    function show_user_details( id ){
+        user_row = document.getElementById(id+id).getElementsByTagName("td");
+        
+        console.log(user_row[2].textContent);
+        document.forms.edit_user_form.username.value = user_row[0].textContent;
+        document.forms.edit_user_form.role.value = user_row[1].textContent;
+        document.forms.edit_user_form.active.checked = (user_row[2].textContent == "active") ? true: false;
+        document.forms.edit_user_form.joined.value = user_row[3].textContent;
+        document.getElementById("edit_user_form").style.display = "block";
+    }
+    
+</script>
+{% endblock script_files %}

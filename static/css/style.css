@@ -1436,6 +1436,11 @@ section {
 .admin_footer {
   border-top: 1px solid #fff; }
 
+.round_tooltip {
+  border-radius: 30rem;
+  padding: 5px 10px;
+  border: none; }
+
 #dashboard_content * {
   color: #fff !important; }
 
@@ -1478,16 +1483,13 @@ section {
   color: grey;
   font-style: italic; }
 
-#edit_box,
-#edit_box * div {
-  padding: 0;
-  margin: 0; }
+#clusters_content * table * {
+  color: #fff; }
 
-#id_address_0,
-.width-100 {
-  width: 100%; }
+.clusters_Mh {
+  height: 90vh; }
 
-#stations_content * .btn-outline-warning {
+#clusters_content * .btn-outline-warning {
   border-left: none;
   border-right: none;
   border-top: none;
@@ -1495,15 +1497,66 @@ section {
   border-color: #FF6000;
   color: #FF6000; }
 
-#stations_content * .btn-outline-warning:hover {
+#clusters_content * .btn-outline-warning:hover {
   background-color: #FF6000;
   color: #000; }
 
-#form_container * input {
-  margin: 5px 0; }
+.assign_form_input {
+  color: #000 !important; }
 
-#station_form * option {
+#assign_form * option {
   color: grey;
   font-style: italic; }
+
+#user_filter_container {
+  display: flex;
+  align-items: center;
+  justify-content: end; }
+
+#user_filter_container button {
+  margin: auto 0.25rem; }
+
+#search_container {
+  padding: 0.5rem 1rem; }
+
+#search_container form {
+  display: flex;
+  justify-content: end; }
+
+#search_container * input,
+#search_container * button {
+  display: inline-flex; }
+
+#search_container * input {
+  width: 80%; }
+
+#search_container * button {
+  margin: auto 0.25rem; }
+
+#users_content * table * {
+  color: #fff; }
+
+.clusters_Mh {
+  height: 90vh; }
+
+#users_content * .btn-outline-warning {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none;
+  border-color: #FF6000;
+  color: #FF6000; }
+
+#users_content * .btn-outline-warning:hover {
+  background-color: #FF6000;
+  color: #000; }
+
+@media screen and (max-width: 576px) {
+  #user_filter_container select {
+    width: 80%; }
+
+  #search_container form {
+    display: flex;
+    justify-content: start; } }
 
 /*# sourceMappingURL=style.css.map */
