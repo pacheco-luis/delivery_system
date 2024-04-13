@@ -22,7 +22,7 @@
                             {% csrf_token %}
                             {{search_user_form.username_search}}
                             <!-- <input class="form-control" type="search" placeholder="{% trans 'Search by username' %}" aria-label="Search"> -->
-                            <button class="btn btn-outline-primary" name="search_user" type="submit">Search</button>
+                            <button class="btn btn-outline-primary" name="search_user" type="submit">{% trans "Search"%}</button>
                           </form>
                     </div>
                 </div>
