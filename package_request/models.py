@@ -5,6 +5,11 @@ from places.fields import PlacesField
 import uuid
 from django.utils.translation import gettext_lazy as _, gettext
 from django.core.validators import MinValueValidator
+import qrcode
+from qrcode.image.styledpil import StyledPilImage
+from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer
+from io import BytesIO
+from django.core.files.base import ContentFile
 
 # Create your models here.
 class Package(models.Model):
@@ -55,12 +60,39 @@ class Package(models.Model):
     height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("height: (cm)"))
     depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("depth: (cm)"))
     estimate_package_weight_value = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("package weight: (kg)"))
+    qrcode = models.ImageField(upload_to='jobs/qrcode/', blank=True)
     
     class Meta:
         db_table = "Packages"
         
     def __str__(self):
         return f"{self.recipient_name}, {self.recipient_phone}"
+    
+    @property
+    def create_qrcode(self):
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_H,
+            box_size=10,
+            border=2,
+        )
+        qr.add_data(str(self.package_id))
+        qr.make(fit=True)
+        img = qr.make_image(
+            image_factory=StyledPilImage,
+            module_drawer=RoundedModuleDrawer()
+        )
+        # Save the QR code image to the model's qrcode field
+        # Generate a file name for the image
+        filename = f'{self.package_id}.png'
+        # Create a BytesIO object to hold the image data
+        buffer = BytesIO()
+        # Save the image to the BytesIO buffer
+        img.save(buffer, format='PNG')
+        # Create a ContentFile object from the BytesIO buffer
+        file_buffer = ContentFile(buffer.getvalue())
+        # Assign the ContentFile to the model's ImageField
+        self.qrcode.save(filename, file_buffer, save=True)
     
 class Route(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

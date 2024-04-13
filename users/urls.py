@@ -15,10 +15,22 @@ urlpatterns = [
     path('register/driver/', views.registerDriver, name='register-driver'),
 
     # reset password urls
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html", success_url = reverse_lazy('users:password_reset_done')), name='reset_password'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"), name='password_reset_confirm'),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"), name='password_reset_complete'),
+    path('reset_password/',
+         auth_views.PasswordResetView.as_view(template_name="reset_password.html",
+                                              email_template_name='reset_password_email.html',
+                                              subject_template_name='reset_password_subject.txt',
+                                              success_url=reverse_lazy('users:password_reset_done')),
+         name='reset_password'),
+    path('reset_password_sent/',
+         auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name="reset.html",
+                                                    success_url=reverse_lazy('users:password_reset_complete')),
+         name='password_reset_confirm'),
+    path('reset_password_complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),
+         name='password_reset_complete'),
 
     # customer urls
     path('account/customer/', views.customerAccount, name='customer-account'),
