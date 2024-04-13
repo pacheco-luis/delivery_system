@@ -74,6 +74,13 @@
 
   <script>
 
+    function trigger_tooltip( tooltip_parent ){
+      let tooltip = tooltip_parent.getElementsByTagName("div")[0];
+      tooltip.style.visibility = "visible";
+      setTimeout(()=>{tooltip.style.visibility = "hidden"}, 4000);
+    }
+
+    
     
 
     document.getElementById("admin_nav_menu_btn").addEventListener("click", function() {

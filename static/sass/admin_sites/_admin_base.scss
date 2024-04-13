@@ -177,6 +177,30 @@
     border: none;
 }
 
+.tooltip_box{
+    position: absolute;
+    font-size: 13px;
+    color: #fff;
+    background-color: rgb(29, 29, 29);
+    width:250px;
+    border: solid #fff 1px;
+    visibility: hidden;
+}
+
+#stations_content * .btn-outline-warning{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: none;
+    border-color: $color-main-orange;
+    color: $color-main-orange;
+}
+
+#stations_content * .btn-outline-warning:hover{
+    background-color: $color-main-orange;
+    color: #000;
+}
+
 @media screen and ( min-width: 450px) {
     #desktop_logo,
     #desktop_company_name{

@@ -1441,6 +1441,27 @@ section {
   padding: 5px 10px;
   border: none; }
 
+.tooltip_box {
+  position: absolute;
+  font-size: 13px;
+  color: #fff;
+  background-color: #1d1d1d;
+  width: 250px;
+  border: solid #fff 1px;
+  visibility: hidden; }
+
+#stations_content * .btn-outline-warning {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none;
+  border-color: #FF6000;
+  color: #FF6000; }
+
+#stations_content * .btn-outline-warning:hover {
+  background-color: #FF6000;
+  color: #000; }
+
 @media screen and (min-width: 450px) {
   #desktop_logo,
   #desktop_company_name {
@@ -1572,7 +1593,6 @@ section {
   #search_container form {
     display: flex;
     justify-content: start; } }
-
 .ul-job-list {
   background-color: white;
   padding: 1em;
