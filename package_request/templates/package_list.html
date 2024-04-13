@@ -64,7 +64,6 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="staticBackdropLabel">{% trans "You are about to delete a request"%}</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <p>{% trans "Are you sure you want to delete this request?"%}</p>
@@ -82,12 +81,12 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of your active request "%}</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of your active request" %}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <p><b>{% trans "Package ID:" %} </b> {{ package_obj.package_id }}</p><br>
-                                            <p><b>{% trans "Date and Time:" %} </b> {{ package_obj.order_date }}</p><br>
+                                            <p><b> Pickup Address: </b> {{ package_obj.sender_address }}</p><br>
+                                            <p><b> Package Created: </b> {{ package_obj.order_date }}</p><br>
                                             <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
                                             <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
                                             <p><b>{% trans "Item Description:" %} </b> {{ package_obj.package_description }}</p><br>
