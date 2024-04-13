@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-06 15:30+0800\n"
+"POT-Creation-Date: 2024-04-13 15:43+0800\n"
 "PO-Revision-Date: 2024-03-29 11:55+0800\n"
 "Last-Translator: None None <superuser@superuser.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,64 +291,64 @@ msgid "Package description"
 msgstr "包裹外觀:"
 
 #: package_request/forms.py:55
-msgid "is the item fragile?"
-msgstr "是否為易碎品："
+msgid "Fragile Item?"
+msgstr "是否為易碎品？"
 
-#: package_request/forms.py:80
+#: package_request/forms.py:106
 msgid "None"
 msgstr ""
 
-#: package_request/forms.py:80
+#: package_request/forms.py:106
 msgid "Select your station"
 msgstr ""
 
-#: package_request/models.py:31
-msgid "no preference"
+#: package_request/models.py:32
+msgid "No Preference"
 msgstr "沒有"
 
-#: package_request/models.py:39
+#: package_request/models.py:40
 msgid "sender address"
-msgstr "取件地址"
-
-#: package_request/models.py:41
-msgid "recipient phone"
-msgstr "收件人手機號碼"
+msgstr "取件地址:"
 
 #: package_request/models.py:42
-msgid "recipient address"
-msgstr "配送地址"
+msgid "recipient phone:"
+msgstr "收件人手機號碼:"
 
 #: package_request/models.py:43
-msgid "package description"
-msgstr "包裹外觀:"
+msgid "recipient address"
+msgstr "配送地址:"
 
 #: package_request/models.py:44
+msgid "package description:"
+msgstr "包裹外觀:"
+
+#: package_request/models.py:45
 msgid "fragile?"
 msgstr "是否為易碎品？"
 
-#: package_request/models.py:45
-msgid "preferred time window"
-msgstr "取貨時間"
-
 #: package_request/models.py:46
+msgid "preferred delivery time:"
+msgstr "取貨時間:"
+
+#: package_request/models.py:47
 msgid "does the package need to be refrigerated?"
 msgstr "此包裹需要低溫配送嗎？"
 
-#: package_request/models.py:53
-msgid "width"
+#: package_request/models.py:54
+msgid "width: (cm)"
 msgstr "寬度"
 
-#: package_request/models.py:54
-msgid "height"
-msgstr "高度"
-
 #: package_request/models.py:55
-msgid "depth"
-msgstr "長度"
+msgid "height: (cm)"
+msgstr "高度: (cm)"
 
 #: package_request/models.py:56
-msgid "estimated package weight"
-msgstr "重量:"
+msgid "depth: (cm)"
+msgstr "長度: (cm)"
+
+#: package_request/models.py:57
+msgid "package weight: (kg)"
+msgstr "重量: (cm)"
 
 #: package_request/templates/cluster_route.html:7
 msgid "This is the map of the route you must take to complete all requests."
@@ -379,6 +379,7 @@ msgid "Route List"
 msgstr ""
 
 #: package_request/templates/current_job.html:24
+#: package_request/templates/job_list.html:7
 msgid "Jobs"
 msgstr "任務"
 
@@ -415,8 +416,10 @@ msgid "View progress"
 msgstr "查詢進度"
 
 #: package_request/templates/home.html:26
-msgid "View Individual Requests"
-msgstr ""
+#, fuzzy
+#| msgid "Delete Request"
+msgid "View Requests"
+msgstr "取消遞送申請"
 
 #: package_request/templates/home.html:30 templates/driver_sidebar.html:42
 msgid "Current Jobs"
@@ -454,6 +457,16 @@ msgstr "配送地點:"
 #: users/templates/users/account.html:28
 msgid "Customer"
 msgstr "顧客"
+
+#: package_request/templates/job_list.html:13
+msgid "Submit"
+msgstr ""
+
+#: package_request/templates/job_list.html:34
+#: package_request/templates/package_history.html:49
+#: package_request/templates/package_list.html:80
+msgid "View"
+msgstr "檢視"
 
 #: package_request/templates/package_history.html:9
 msgid "These are the past requests you have made: "
@@ -505,11 +518,6 @@ msgstr "已完成"
 msgid "Request Canceled"
 msgstr "取消"
 
-#: package_request/templates/package_history.html:49
-#: package_request/templates/package_list.html:80
-msgid "View"
-msgstr "檢視"
-
 #: package_request/templates/package_history.html:54
 #: package_request/templates/package_list.html:85
 msgid "This is the information of your active request "
@@ -539,6 +547,22 @@ msgstr "您目前沒有任何申請紀錄 "
 msgid "Viewing current active requests"
 msgstr "目前的申請"
 
+#: package_request/templates/package_list.html:47
+#, fuzzy
+msgid "Package Pending"
+msgstr "包裹外觀:"
+
+#: package_request/templates/package_list.html:50
+#, fuzzy
+#| msgid "Picking:"
+msgid "Picking Up"
+msgstr "即將取貨"
+
+#: package_request/templates/package_list.html:53
+#, fuzzy
+msgid "Being Delivered"
+msgstr "配送包裹"
+
 #: package_request/templates/package_list.html:58
 #: package_request/templates/package_list.html:60
 #: package_request/templates/package_list.html:74
@@ -557,48 +581,48 @@ msgstr "請確認是否要取消遞送申請"
 msgid "You have no package requests made."
 msgstr "目前尚未建立申請"
 
-#: package_request/templates/step1.html:9
+#: package_request/templates/step1.html:10
 msgid "Enter the necessary information to send a package:"
 msgstr "輸入包裹配送資料"
 
-#: package_request/templates/step1.html:13
+#: package_request/templates/step1.html:11
 msgid "NOTE: Please ensure the information is true"
 msgstr "注意：請再次確認您輸入的資訊是否正確"
 
-#: package_request/templates/step1.html:24
-#: package_request/templates/step2.html:22
+#: package_request/templates/step1.html:26
+#: package_request/templates/step2.html:25
 msgid "Next"
 msgstr "繼續"
 
-#: package_request/templates/step1.html:25
-#: package_request/templates/step2.html:23
-#: package_request/templates/step3.html:21
+#: package_request/templates/step1.html:27
+#: package_request/templates/step2.html:26
+#: package_request/templates/step3.html:27
 msgid "Cancel"
 msgstr "取消"
 
-#: package_request/templates/step2.html:7
+#: package_request/templates/step2.html:8
 msgid "Please enter the receiver's information:"
 msgstr "請輸入收件人資料"
 
-#: package_request/templates/step3.html:7
+#: package_request/templates/step3.html:8
 msgid "Please enter the package description below:"
 msgstr "請輸入包裹內容物"
 
-#: package_request/templates/step3.html:20
+#: package_request/templates/step3.html:26
 msgid "Confirm order"
 msgstr "確認"
 
-#: package_request/templates/successful_request.html:8
+#: package_request/templates/successful_request.html:20
 msgid "Successfully submited a request! "
 msgstr "您已成功送出遞送申請！ "
 
-#: package_request/templates/successful_request.html:9
+#: package_request/templates/successful_request.html:21
 msgid ""
 "Please hang onto your package while we send our agents to pick it up from "
 "your given address. Thank you for your patience!"
 msgstr "我們的服務人員將會盡速向您領取所要寄送的包裹，謝謝您耐心等候。"
 
-#: package_request/templates/successful_request.html:12 templates/401.html:25
+#: package_request/templates/successful_request.html:22 templates/401.html:25
 msgid "Return to homepage"
 msgstr "回到首頁"
 
@@ -625,19 +649,19 @@ msgstr "寄件與收件人不能位於同一個集貨範圍之中"
 msgid "Something went wrong. Please try again."
 msgstr "無效輸入，請重新嘗試。"
 
-#: package_request/views.py:387
+#: package_request/views.py:395
 msgid "Job is no longer available."
 msgstr "無法領取此任務"
 
-#: package_request/views.py:394
+#: package_request/views.py:402
 msgid "Job is successfully taken."
 msgstr "已成功領取任務"
 
-#: package_request/views.py:429
+#: package_request/views.py:437
 msgid "Job has successfully started!"
 msgstr "已開始執行任務"
 
-#: package_request/views.py:434
+#: package_request/views.py:442
 msgid "Job has successfully completed!"
 msgstr ""
 
@@ -797,43 +821,51 @@ msgstr "我是駕駛"
 msgid "Don't have an account? <br>Create one!"
 msgstr "還沒有帳戶嗎？"
 
-#: users/models.py:10 users/models.py:34 users/models.py:50
+#: users/models.py:11 users/models.py:35 users/models.py:53
 msgid "first name"
 msgstr "名字"
 
-#: users/models.py:11 users/models.py:35 users/models.py:51
+#: users/models.py:12 users/models.py:36 users/models.py:54
 msgid "last name"
 msgstr "姓氏"
 
-#: users/models.py:12 users/models.py:36 users/models.py:52
+#: users/models.py:13 users/models.py:37 users/models.py:55
 msgid "username"
 msgstr "帳號"
 
-#: users/models.py:13 users/models.py:37 users/models.py:54
+#: users/models.py:14 users/models.py:38 users/models.py:57
 msgid "email"
 msgstr "email"
 
-#: users/models.py:14 users/models.py:38 users/models.py:55
+#: users/models.py:15 users/models.py:39 users/models.py:58
 msgid "phone number"
 msgstr "電話號碼"
 
-#: users/models.py:39 users/models.py:56
-msgid "address"
-msgstr "地址:"
+#: users/models.py:41
+#, fuzzy
+#| msgid "sender address"
+msgid "customer address"
+msgstr "取件地址"
 
-#: users/models.py:40 users/models.py:59
+#: users/models.py:43 users/models.py:63
 msgid "profile picture"
 msgstr "頭貼"
 
-#: users/models.py:53
+#: users/models.py:56
 msgid "date of birth"
 msgstr " 生日"
 
-#: users/models.py:57
+#: users/models.py:60
+#, fuzzy
+#| msgid "sender address"
+msgid "driver address"
+msgstr "取件地址"
+
+#: users/models.py:61
 msgid "identification card"
 msgstr "身分證"
 
-#: users/models.py:58
+#: users/models.py:62
 msgid "driving license"
 msgstr "駕照"
 
@@ -972,11 +1004,11 @@ msgstr "地點"
 msgid "Edit"
 msgstr "編輯帳號"
 
-#: users/templates/users/account_form.html:83
+#: users/templates/users/account_form.html:21
 msgid "Editing Account:"
 msgstr "編輯帳號:"
 
-#: users/templates/users/account_form.html:104
+#: users/templates/users/account_form.html:44
 msgid "Save"
 msgstr "確認"
 
@@ -1008,8 +1040,14 @@ msgstr "已完成"
 msgid "Account details updated successfully."
 msgstr "已完成編輯"
 
-#~ msgid "Estimated package weight:"
+#~ msgid "estimated package weight"
 #~ msgstr "重量:"
+
+#~ msgid "is the item fragile?"
+#~ msgstr "是否為易碎品："
+
+#~ msgid "address"
+#~ msgstr "地址:"
 
 #~ msgid "Date"
 #~ msgstr "日期:"
@@ -1025,14 +1063,6 @@ msgstr "已完成編輯"
 #, fuzzy
 #~ msgid "I would like to: "
 #~ msgstr "今天您想做什麼呢？"
-
-#, fuzzy
-#~ msgid "Package Pending"
-#~ msgstr "包裹外觀:"
-
-#, fuzzy
-#~ msgid "Being Delivered"
-#~ msgstr "配送包裹"
 
 #~ msgid "Driver:"
 #~ msgstr "駕駛:"
@@ -1121,9 +1151,6 @@ msgstr "已完成編輯"
 #~ msgctxt "alt. month"
 #~ msgid "November"
 #~ msgstr "電話號碼"
-
-#~ msgid "Delete Request"
-#~ msgstr "取消遞送申請"
 
 #~ msgid "Log In"
 #~ msgstr "登入"

@@ -1,6 +1,33 @@
 #new_request_body{
     height: 100%;
     padding: 5em 5em 5em 10em;
+    //display: flex;
+}
+
+#new_request_body #request_layer .request_layer_banner{
+    //display: flex;
+    text-align: center;
+    p{
+        font-style: italic;
+        color: rgb(85, 85, 85);
+
+    }
+}
+
+#new_request_body #request_layer form .package_form .step3_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#new_request_body #request_layer form .package_form .step3_wrapper .step3_form_el{
+    width: 50%;
+}
+
+#new_request_body #request_layer form .package_form .lower_button_group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #new_request_body #request_layer form .package_form button{
@@ -9,7 +36,7 @@
 }
 #new_request_body #request_layer form .package_form a,
 #new_request_body #request_layer form .package_form button{
-    margin-top: 1rem;
+    margin: 1rem;
     font-size: 1rem;
 }
 
@@ -28,29 +55,52 @@
 }
 
 #id_sender_phone,
-#id_sender_address_0,
 #id_recipient_name,
-#id_recipient_phone,
-#id_recipient_address_0,
-#id_package_description,
-#id_estimate_package_weight
+#id_recipient_phone
 {
     display: block;
     width: 50%;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    //margin-top: 0.5em;
+    //margin-bottom: 0.5em;
 }
 
+#id_sender_address_0,
+#id_recipient_address_0{
+    display: block;
+    width: 100%;
 
+}
+
+//hide the latitude and longitude labels
+//in the request form
 #id_sender_address_1,
 #id_sender_address_2,
 #id_recipient_address_1,
-#id_recipient_address_2  {      // latitude and longitude
+#id_recipient_address_2  {      
     display: none;
 }
 
-#id_fragile{
-    width: auto;
+#id_fragile,
+#id_frozen{
+    //display: block;
+    width: 100%;
+}
+
+#id_package_description,
+#id_preferred_time,
+#id_width,
+#id_height,
+#id_depth,
+#id_estimate_package_weight_value{
+        display: block;
+        width: 100%;
+}
+
+
+
+
+.form_label_text {
+    font-size: 1.1rem;
 }
 
 
@@ -58,7 +108,7 @@
 
 @media screen and (max-width: 600px) {
     #new_request_body{
-        padding: 0.5rem;
+        padding: 3rem 0.5rem;
     }
 
     #id_sender_phone,

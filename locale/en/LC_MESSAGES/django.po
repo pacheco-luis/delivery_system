@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-06 15:30+0800\n"
+"POT-Creation-Date: 2024-04-13 15:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,63 +291,63 @@ msgid "Package description"
 msgstr ""
 
 #: package_request/forms.py:55
-msgid "is the item fragile?"
+msgid "Fragile Item?"
 msgstr ""
 
-#: package_request/forms.py:80
+#: package_request/forms.py:106
 msgid "None"
 msgstr ""
 
-#: package_request/forms.py:80
+#: package_request/forms.py:106
 msgid "Select your station"
 msgstr ""
 
-#: package_request/models.py:31
-msgid "no preference"
+#: package_request/models.py:32
+msgid "No Preference"
 msgstr ""
 
-#: package_request/models.py:39
+#: package_request/models.py:40
 msgid "sender address"
 msgstr ""
 
-#: package_request/models.py:41
-msgid "recipient phone"
-msgstr ""
-
 #: package_request/models.py:42
-msgid "recipient address"
+msgid "recipient phone:"
 msgstr ""
 
 #: package_request/models.py:43
-msgid "package description"
+msgid "recipient address"
 msgstr ""
 
 #: package_request/models.py:44
-msgid "fragile?"
+msgid "package description:"
 msgstr ""
 
 #: package_request/models.py:45
-msgid "preferred time window"
+msgid "fragile?"
 msgstr ""
 
 #: package_request/models.py:46
+msgid "preferred delivery time:"
+msgstr ""
+
+#: package_request/models.py:47
 msgid "does the package need to be refrigerated?"
 msgstr ""
 
-#: package_request/models.py:53
-msgid "width"
-msgstr ""
-
 #: package_request/models.py:54
-msgid "height"
+msgid "width: (cm)"
 msgstr ""
 
 #: package_request/models.py:55
-msgid "depth"
+msgid "height: (cm)"
 msgstr ""
 
 #: package_request/models.py:56
-msgid "estimated package weight"
+msgid "depth: (cm)"
+msgstr ""
+
+#: package_request/models.py:57
+msgid "package weight: (kg)"
 msgstr ""
 
 #: package_request/templates/cluster_route.html:7
@@ -379,6 +379,7 @@ msgid "Route List"
 msgstr ""
 
 #: package_request/templates/current_job.html:24
+#: package_request/templates/job_list.html:7
 msgid "Jobs"
 msgstr ""
 
@@ -415,7 +416,7 @@ msgid "View progress"
 msgstr ""
 
 #: package_request/templates/home.html:26
-msgid "View Individual Requests"
+msgid "View Requests"
 msgstr ""
 
 #: package_request/templates/home.html:30 templates/driver_sidebar.html:42
@@ -453,6 +454,16 @@ msgstr ""
 #: package_request/templates/job_detail.html:38
 #: users/templates/users/account.html:28
 msgid "Customer"
+msgstr ""
+
+#: package_request/templates/job_list.html:13
+msgid "Submit"
+msgstr ""
+
+#: package_request/templates/job_list.html:34
+#: package_request/templates/package_history.html:49
+#: package_request/templates/package_list.html:80
+msgid "View"
 msgstr ""
 
 #: package_request/templates/package_history.html:9
@@ -503,11 +514,6 @@ msgstr ""
 msgid "Request Canceled"
 msgstr ""
 
-#: package_request/templates/package_history.html:49
-#: package_request/templates/package_list.html:80
-msgid "View"
-msgstr ""
-
 #: package_request/templates/package_history.html:54
 #: package_request/templates/package_list.html:85
 msgid "This is the information of your active request "
@@ -537,6 +543,18 @@ msgstr ""
 msgid "Viewing current active requests"
 msgstr ""
 
+#: package_request/templates/package_list.html:47
+msgid "Package Pending"
+msgstr ""
+
+#: package_request/templates/package_list.html:50
+msgid "Picking Up"
+msgstr ""
+
+#: package_request/templates/package_list.html:53
+msgid "Being Delivered"
+msgstr ""
+
 #: package_request/templates/package_list.html:58
 #: package_request/templates/package_list.html:60
 #: package_request/templates/package_list.html:74
@@ -555,48 +573,48 @@ msgstr ""
 msgid "You have no package requests made."
 msgstr ""
 
-#: package_request/templates/step1.html:9
+#: package_request/templates/step1.html:10
 msgid "Enter the necessary information to send a package:"
 msgstr ""
 
-#: package_request/templates/step1.html:13
+#: package_request/templates/step1.html:11
 msgid "NOTE: Please ensure the information is true"
 msgstr ""
 
-#: package_request/templates/step1.html:24
-#: package_request/templates/step2.html:22
+#: package_request/templates/step1.html:26
+#: package_request/templates/step2.html:25
 msgid "Next"
 msgstr ""
 
-#: package_request/templates/step1.html:25
-#: package_request/templates/step2.html:23
-#: package_request/templates/step3.html:21
+#: package_request/templates/step1.html:27
+#: package_request/templates/step2.html:26
+#: package_request/templates/step3.html:27
 msgid "Cancel"
 msgstr ""
 
-#: package_request/templates/step2.html:7
+#: package_request/templates/step2.html:8
 msgid "Please enter the receiver's information:"
 msgstr ""
 
-#: package_request/templates/step3.html:7
+#: package_request/templates/step3.html:8
 msgid "Please enter the package description below:"
 msgstr ""
 
-#: package_request/templates/step3.html:20
+#: package_request/templates/step3.html:26
 msgid "Confirm order"
 msgstr ""
 
-#: package_request/templates/successful_request.html:8
+#: package_request/templates/successful_request.html:20
 msgid "Successfully submited a request! "
 msgstr ""
 
-#: package_request/templates/successful_request.html:9
+#: package_request/templates/successful_request.html:21
 msgid ""
 "Please hang onto your package while we send our agents to pick it up from "
 "your given address. Thank you for your patience!"
 msgstr ""
 
-#: package_request/templates/successful_request.html:12 templates/401.html:25
+#: package_request/templates/successful_request.html:22 templates/401.html:25
 msgid "Return to homepage"
 msgstr ""
 
@@ -621,19 +639,19 @@ msgstr ""
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: package_request/views.py:387
+#: package_request/views.py:395
 msgid "Job is no longer available."
 msgstr ""
 
-#: package_request/views.py:394
+#: package_request/views.py:402
 msgid "Job is successfully taken."
 msgstr ""
 
-#: package_request/views.py:429
+#: package_request/views.py:437
 msgid "Job has successfully started!"
 msgstr ""
 
-#: package_request/views.py:434
+#: package_request/views.py:442
 msgid "Job has successfully completed!"
 msgstr ""
 
@@ -787,43 +805,47 @@ msgstr ""
 msgid "Don't have an account? <br>Create one!"
 msgstr ""
 
-#: users/models.py:10 users/models.py:34 users/models.py:50
+#: users/models.py:11 users/models.py:35 users/models.py:53
 msgid "first name"
 msgstr ""
 
-#: users/models.py:11 users/models.py:35 users/models.py:51
+#: users/models.py:12 users/models.py:36 users/models.py:54
 msgid "last name"
 msgstr ""
 
-#: users/models.py:12 users/models.py:36 users/models.py:52
+#: users/models.py:13 users/models.py:37 users/models.py:55
 msgid "username"
 msgstr ""
 
-#: users/models.py:13 users/models.py:37 users/models.py:54
+#: users/models.py:14 users/models.py:38 users/models.py:57
 msgid "email"
 msgstr ""
 
-#: users/models.py:14 users/models.py:38 users/models.py:55
+#: users/models.py:15 users/models.py:39 users/models.py:58
 msgid "phone number"
 msgstr ""
 
-#: users/models.py:39 users/models.py:56
-msgid "address"
+#: users/models.py:41
+msgid "customer address"
 msgstr ""
 
-#: users/models.py:40 users/models.py:59
+#: users/models.py:43 users/models.py:63
 msgid "profile picture"
 msgstr ""
 
-#: users/models.py:53
+#: users/models.py:56
 msgid "date of birth"
 msgstr ""
 
-#: users/models.py:57
+#: users/models.py:60
+msgid "driver address"
+msgstr ""
+
+#: users/models.py:61
 msgid "identification card"
 msgstr ""
 
-#: users/models.py:58
+#: users/models.py:62
 msgid "driving license"
 msgstr ""
 
@@ -960,11 +982,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: users/templates/users/account_form.html:83
+#: users/templates/users/account_form.html:21
 msgid "Editing Account:"
 msgstr ""
 
-#: users/templates/users/account_form.html:104
+#: users/templates/users/account_form.html:44
 msgid "Save"
 msgstr ""
 

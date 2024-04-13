@@ -4,21 +4,28 @@
 {% block content %}
     <div id="new_request_body">
         <div id="request_layer">
-            <h2>{% trans "Please enter the package description below:"%}</h2>
-            <br/>
+            <div class="request_layer_banner">
+                <h2>{% trans "Please enter the package description below:"%}</h2>
+                <br/>
+            </div>
+            
             <form action="{% url 'package_request_app:request_form_3_of_3' %}" method="post" >
                 <div class="package_form">
-                    {% csrf_token %}
-                    {% if form.name.errors %}
-                    {% endif %}
-                    {% for field in package_form %}
-                            <div class="mb-2">
-                                <label for="{{field.name}}" class=""> {{field.label}} </label> <br>
-                                    {{field}}
-                            </div>
-                    {% endfor %}
-                    <button type="submit" value="submit" class="btn btn-primary">{% trans "Confirm order"%}</button>
-                    <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">{% trans "Cancel"%}</a>
+                    <div class="step3_wrapper">
+                        {% csrf_token %}
+                        {% if form.name.errors %}
+                        {% endif %}
+                        {% for field in package_form %}
+                        <div class="step3_form_el mb-4">    
+                            <label for="{{field.name}}" class="form_label_text"> {{field.label}} </label> <br>
+                                 {{field}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="lower_button_group">
+                         <button type="submit" value="submit" class="btn btn-primary">{% trans "Confirm order"%}</button>
+                         <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">{% trans "Cancel"%}</a>
+                     </div>
                     {{ receiver_form.media }}
                 </div>
             </form>
