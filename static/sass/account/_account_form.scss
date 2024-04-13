@@ -4,9 +4,13 @@
 // }
 
 .format .edit_account_list form {
+  #id_address_0{
+    width: 100%;
+  }
   #id_address_1,
   #id_address_2{
   display: none;
+  
   }
   #map_location{
     display: none;
@@ -19,7 +23,7 @@
       padding-right: 0em;
   }
   .custom-input {
-      width: 200px; 
+      width: 100%;
       height: 35px;
   }
 }
@@ -28,23 +32,36 @@
       padding-left: 22em;
       padding-right: 10em;
   }
+  .custom-input { 
+    width: 100%;
+    height: 35px;
+}
 }
 @media only screen and (max-width: 900px) {
   .format {
       padding-left: 20em;
       padding-right: 10em;
   }
+  .custom-input {
+    width: 100%;
+    height: 35px;
+}
 }
 @media only screen and (max-width: 800px) {
   .format {
-      padding-left: 20em;
+      padding-left: 15em;
       padding-right: 20em;
   }
+  .custom-input {
+    // width: 200px; 
+    width: 100%;
+    height: 35px;
+}
 }
 @media only screen and (max-width: 700px) {
   .format {
       font-size: 16px;
-      padding-left: 15em;
+      padding-left: 10em;
       padding-right: 15em;
   }
 }
@@ -57,20 +74,21 @@
 }
 @media only screen and (max-width: 500px) {
   .custom-input {
-      width: 250px; 
+      //width: 250px; 
+      width: 100%;
       height: 30px;
       padding: 1em;
   }
 }
 @media only screen and (max-width: 400px) {
   .format {
-      //font-size: 14px;
+      font-size: 14px;
       padding-left: 1em;
       padding-right: 1em;
   }
   .custom-input {
-      width: 200px; 
-      //width: 100%;
+      // width: 200px; 
+      width: 100%;
       height: 30px;
   }
 }

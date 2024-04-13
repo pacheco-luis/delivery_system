@@ -33,7 +33,7 @@ class CustomerForm(ModelForm):
             'last_name': TextInput(attrs={'class': 'form-control'}),
             'username': TextInput(attrs={'class': 'form-control'}),
             'email': EmailInput(attrs={'class':  'form-control'}),
-            #'address': TextInput(attrs={'class': 'form-control'}),
+            #'address': TextInput(attrs={'class': 'custom-input'}),
             'phone_number': TextInput(attrs={'class': 'form-control'}),
         }
 
@@ -46,6 +46,6 @@ class DriverForm(ModelForm):
             'last_name': TextInput(attrs={'class': 'form-control'}),
             'username': TextInput(attrs={'class': 'form-control'}),
             'email': EmailInput(attrs={'class':  'form-control'}),
-            #'address': TextInput(attrs={'class': 'form-control'}),
+            #'address': TextInput(attrs={'class': 'custom-input'}),
             'phone_number': TextInput(attrs={'class': 'form-control'}),
         }
