@@ -254,6 +254,7 @@ def package_form_handler(request):
             package_obj.duration = int(duration / 60) # minutes
             package_obj.price = package_obj.distance * dollar_per_kilometer # NTD               
             package_obj.status = package_obj.STATUS_PENDING
+            package_obj.create_qrcode
             package_obj.save()
             
             # updating customer fields based on the package submited
@@ -544,3 +545,24 @@ def job_details(request, id):
 #     if request.user.is_driver is not True :
 #         return render(request, '401.html')
 #     return render(request, 'job_type_selection.html')        
+
+@login_required(login_url='users:login')
+def job_scanner(request):
+    user = request.user
+    driver = user.driver
+    if request.method == 'POST':
+        package_id = request.POST.get('package_id')
+        package = Package.objects.get(package_id=package_id)
+        print('DATA:', package_id)
+        if package.status == Package.STATUS_PENDING:
+            package.status = Package.STATUS_PICKING
+            package.driver = driver
+            package.save()
+            return redirect('package_request_app:success_or_fail')
+        else:
+            messages.error(request, 'This package has already been taken')
+    return render(request, 'job_scanner.html')
+
+@login_required(login_url='users:login')
+def success_or_fail(request):
+    return render(request, 'success_or_fail.html')

@@ -2,11 +2,11 @@ from django import forms
 from package_request.models import Package
 from stations.models import Station
 from places.fields import PlacesField
-from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 class SENDER_FORM(forms.ModelForm):
     sender_phone = forms.CharField( 
-        label = gettext("Sender phone:"),
+        label = _("Sender phone:"),
         required=False,
         widget = forms.TextInput( attrs={'required': 'True', 'class' : 'form-control', 'placeholder' : '0901234567'})
     )
@@ -23,7 +23,7 @@ class SENDER_FORM(forms.ModelForm):
 
 class RECEIVER_FORM(forms.ModelForm):
     recipient_name = forms.CharField(
-        label = gettext("Recipient name:"),
+        label = _("Recipient name:"),
         required=False,
         widget = forms.TextInput( attrs={'required': 'True', 'placeholder': 'John Doe', 'class' : 'form-control'} )
         )
@@ -40,7 +40,7 @@ class RECEIVER_FORM(forms.ModelForm):
         
 class PACKAGE_FORM(forms.ModelForm):
     package_description = forms.CharField(
-        label=gettext("Package description"),
+        label=_("Package description"),
         required=False,
         widget = forms.TextInput( attrs={'required': 'True',  'class' : 'form-control'} ) 
         )
@@ -52,7 +52,7 @@ class PACKAGE_FORM(forms.ModelForm):
     # )
 
     fragile = forms.BooleanField(
-        label = gettext("is the item fragile?"),
+        label = _("Fragile Item?"),
         required=False,
         widget=forms.CheckboxInput(attrs={'class': ''})
     )
@@ -60,8 +60,33 @@ class PACKAGE_FORM(forms.ModelForm):
     class Meta:
         model = Package
         #fields = ['package_description', 'estimate_package_weight', 'fragile', 'frozen', 'width', 'height', 'depth', 'estimate_package_weight_value']
-        fields = ['package_description','fragile', 'frozen', 'width', 'preferred_time', 'height', 'depth', 'estimate_package_weight_value']
-
+        fields = ['package_description','fragile', 'frozen',  'preferred_time', 'width', 'height', 'depth', 'estimate_package_weight_value']
+        widgets = {
+            'preferred_time' : forms.Select(
+                attrs={
+                    'class' : 'form-control'
+                }),
+            'width' : forms.NumberInput(
+                attrs={
+                'step' : 0.1,
+                'class' : 'form-control',
+                }),
+            'height' : forms.NumberInput(
+                attrs={
+                    'step': 0.1,
+                    'class' : 'form-control',
+                }),
+            'depth' : forms.NumberInput(
+                attrs={
+                    'step': 0.1,
+                    'class' : 'form-control',
+                }),
+            'estimate_package_weight_value' : forms.NumberInput(
+                attrs={
+                    'step' : 0.1,
+                    'class' : 'form-control',
+                }),        
+        }
         
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -78,7 +103,7 @@ class DRIVER_FILTER_QUERY_FORM(forms.Form):
         choices = [(station.alias, station.alias) for station in stations]
         
         self.fields['station'] = forms.ChoiceField(
-            choices=[(gettext('None'), gettext('Select your station'))] + choices,
+            choices=[(_('None'), _('Select your station'))] + choices,
             initial= 'None',  # Set initial value
             widget=forms.Select(attrs={
                 'class': 'form-control' 'dropdown',

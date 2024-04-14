@@ -2,17 +2,18 @@
 {% load static %}
 {% block title %}Routes{% endblock title %}
 {% block content %}
+{% load i18n %}
 
 <div id="pack-list-body">
-    <h1 style="padding: 0.5em;">Routes</h1>
+    <h1 style="padding: 0.5em;">{% trans "Available Tasks" %}</h1>
 
     <ul class="ul-job-list card">
         <ul class="nav nav-tabs tab">
             <li class="nav-item">
-                <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" href="{% url 'package_request_app:select_packages' %}">Packages</a>
+                <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" href="{% url 'package_request_app:select_packages' %}">{% trans "Packages" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if active_tab == 'routes' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:job_list' %}">Routes</a>
+                <a class="nav-link {% if active_tab == 'routes' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:job_list' %}">{% trans "Routes" %}</a>
             </li>
         </ul>
         <br>
@@ -20,7 +21,7 @@
             <div class="package_form dropdown">
                 {% csrf_token %}
                 {{query_form}}
-                <button type="submit" name="submit" value="submit" class="btn btn-primary btn-sm">Submit</button>    
+                <button type="submit" name="submit" value="submit" class="btn btn-primary btn-sm">{% trans "Submit" %}</button>    
             </div>
         </form>
         {% comment %} Check if the routes are populated. {% endcomment %}
@@ -28,7 +29,7 @@
             <tr style="background-color: #FFA758;">
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
-                <th scope="col">Date </th>
+                <th scope="col">{% trans "Date" %} </th>
                 
                 {% if routes %}
                     <th scope="col"> </th>
@@ -40,17 +41,17 @@
                     <td scope="row">{{forloop.counter}}</td>
                     <td scope="row">{{route.id}}</td>
                     <td scope="row">{{ route.created_at }}</td>
-                    <td scope="row"> <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}"><button type="button" class="btn btn-primary">View</button></a></td>
+                    <td scope="row"> <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}"><button type="button" class="btn btn-primary">{% trans "View"%}</button></a></td>
                 </tr>
                 {% endfor %}
         {% comment %} If no routes are assigned, display a text {% endcomment %}
         {% else %}
             <tr>
-                <p> You have not been assigned a route as of yet! </p>
+                {% comment %} <p> You have not been assigned a route as of yet! </p> {% endcomment %}
                     <td colspan="3" style="background-color: antiquewhite;">
                         <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
                             <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
-                            <p> You have not been assigned a route as of yet! </p>
+                            <p> {% trans "You have not been assigned a route as of yet!" %} </p>
                         </div>
                     </td>
             </tr>

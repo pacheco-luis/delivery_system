@@ -39,7 +39,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=255, null=True, blank=True, verbose_name=_("email"))
     phone_number = PhoneNumberField(region='TW' , null=True, blank=True, verbose_name=_("phone number"))
     #address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
-    address = PlacesField(blank=False, verbose_name=_("customer address"))
+    address = PlacesField(blank=False, verbose_name=_("address"))
 
     profile_image = models.ImageField(upload_to='profiles/customer/', null=True, blank=True, verbose_name=_("profile picture"))
 
@@ -58,7 +58,7 @@ class Driver(models.Model):
     email = models.EmailField(max_length=255, null=True, blank=True, verbose_name=_("email"))
     phone_number = PhoneNumberField(region='TW' , null=True, blank=True, verbose_name=_("phone number"))
     #address = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("address"))
-    address = PlacesField(blank=False, verbose_name=_("driver address"))
+    address = PlacesField(blank=False, verbose_name=_("address"))
     id_card = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("identification card"))
     driver_license = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("driving license"))
     profile_image = models.ImageField(upload_to='profiles/driver/', null=True, blank=True, verbose_name=_("profile picture"))

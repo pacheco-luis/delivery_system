@@ -24,4 +24,7 @@ urlpatterns = [
     # path('job_type_selection', views.job_type_selection, name = 'job_selector' ),
     # path('route_list/', views.create_routes, name = 'route_list'),
     path('route_list/<id>/', views.job_details, name = 'job_details'),
+
+    path('job_scanner/', views.job_scanner, name = 'job_scanner'),
+    path('success_or_fail/', views.success_or_fail, name = 'success_or_fail'),
 ]

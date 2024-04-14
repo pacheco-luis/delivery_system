@@ -1,3 +1,4 @@
+annotated-types==0.6.0
 asgiref==3.7.2
 beautifulsoup4==4.12.2
 certifi==2023.7.22
@@ -7,6 +8,7 @@ Django==4.2.3
 django-bootstrap-v5==1.0.11
 django-pdb==0.6.2
 django-phonenumber-field==7.1.0
+django-qr-code==4.0.1
 django-rosetta==0.10.0
 django-session-timeout==0.1.0
 idna==3.4
@@ -14,8 +16,13 @@ numpy==1.26.4
 phonenumberslite==8.13.19
 Pillow==10.0.0
 polib==1.2.0
+pydantic==2.7.0
+pydantic_core==2.18.1
+pypng==0.20220715.0
 python-decouple==3.8
+qrcode==7.4.2
 requests==2.31.0
+segno==1.6.1
 six==1.16.0
 soupsieve==2.5
 sqlparse==0.4.4

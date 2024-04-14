@@ -6,23 +6,26 @@
 
     <div id="new_request_body">
         <div id="request_layer">
-            <h2>{% trans "Enter the necessary information to send a package:"%} </h2>
-            <br/>
+            <div class="request_layer_banner">
+                <h2>{% trans "Enter the necessary information to send a package:"%} </h2>
+                <p> {% trans "NOTE: Please ensure the information is true"%}</p>     
+            </div>
              <form action="{% url 'package_request_app:request_form_1_of_3' %}" method="post">
                 <div class="package_form">
-                    <p style="font-style: italic; color:rgb(85, 85, 85)"> {% trans "NOTE: Please ensure the information is true"%}</p>
+                    
                         {% csrf_token %}
                         {% if form.name.errors %}
                         {% endif %}
                         {% for field in sender_form %}
                             <div class="mb-3">
-                                <label for="{{field.name}}"> {{field.label}} </label> <br>
+                                <label for="{{field.name}}" class="form_label_text"> {{field.label}} </label> <br>
                                     {{field}}
                             </div>
                         {% endfor %}
-                        
+                    <div class="lower_button_group">   
                         <button type="submit" name="submit" value="submit" class="btn btn-primary">{% trans "Next"%}</button>
                         <a class="btn btn-secondary" href="{% url 'package_request_app:home' %}" role="button" style="background-color: grey;">{% trans "Cancel"%}</a>
+                    </div>
                         {{ sender_form.media }}
                 </div>
         

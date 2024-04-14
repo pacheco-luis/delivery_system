@@ -29,19 +29,23 @@ class CustomerForm(ModelForm):
         model = Customer
         fields = ['first_name', 'last_name', 'username', 'email', 'address', 'phone_number', 'profile_image']
         widgets = {
-            'first_name': TextInput(attrs={'class': 'custom-input'}),
-            'last_name': TextInput(attrs={'class': 'custom-input'}),
-            'username': TextInput(attrs={'class': 'custom-input'}),
-            'email': EmailInput(attrs={'class': 'custom-input'}),
-            'address': TextInput(attrs={'class': 'custom-input'}),
-            'phone_number': TextInput(attrs={'class': 'custom-input'}),
+            'first_name': TextInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control'}),
+            'username': TextInput(attrs={'class': 'form-control'}),
+            'email': EmailInput(attrs={'class':  'form-control'}),
+            #'address': TextInput(attrs={'class': 'custom-input'}),
+            'phone_number': TextInput(attrs={'class': 'form-control'}),
         }
 
 class DriverForm(ModelForm):
     class Meta:
         model = Driver
         fields = ['first_name', 'last_name', 'username', 'email', 'address', 'phone_number', 'profile_image']
-        #modify widget for address and let it be able to set to empty
-        # widgets = {
-        #     'address' : 
-        # }
+        widgets = {
+            'first_name': TextInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control'}),
+            'username': TextInput(attrs={'class': 'form-control'}),
+            'email': EmailInput(attrs={'class':  'form-control'}),
+            #'address': TextInput(attrs={'class': 'custom-input'}),
+            'phone_number': TextInput(attrs={'class': 'form-control'}),
+        }
