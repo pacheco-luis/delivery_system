@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Customer, Driver
+from stations.models import Station
 from phonenumber_field.modelfields import PhoneNumberField
 from places.fields import PlacesField
 import uuid
@@ -14,6 +15,7 @@ from django.core.files.base import ContentFile
 # Create your models here.
 class Package(models.Model):
     STATUS_PENDING = 'pending'
+    STATUS_ASSIGNED = 'assigned'  #preparing to pick up
     STATUS_PICKING = 'picking'
     STATUS_TRANSIT = 'transiting'
     #Add in awaiting delivery state
@@ -22,6 +24,7 @@ class Package(models.Model):
     STATUS_CANCELED = 'canceled'
     STATUSES = (
         (STATUS_PENDING, 'Pending'),
+        (STATUS_ASSIGNED, 'Assigned'),
         (STATUS_PICKING, 'Picking'),
         (STATUS_DELIVERING, 'Delivering'),
         (STATUS_COMPLETED, 'Completed'),
@@ -94,11 +97,46 @@ class Package(models.Model):
         # Assign the ContentFile to the model's ImageField
         self.qrcode.save(filename, file_buffer, save=True)
     
+    def get_sender_coor(self) -> tuple:
+        return (float(self.sender_address.latitude), float(self.sender_address.longitude))
+    
+    def get_recipient_coor(self) -> tuple:
+        return (float(self.recipient_address.latitude), float(self.recipient_address.longitude))
+    
+    def get_sender_station(self):
+        stations = Station.objects.all()
+        for station in stations: 
+            if station.dist( self.get_sender_coor() ) <= station.radius:
+                return station
+        return None
+    
+    def get_recipient_station(self):
+        stations = Station.objects.all()
+        for station in stations:
+            if station.dist( self.get_recipient_coor() ) <= station.radius:
+                return station
+        return None
+    
 class Route(models.Model):
+    STATUS_UNASSIGNED = 'unassigned'
+    STATUS_ASSIGNED = 'assigned'
+    STATUS_COMPLETED = 'completed'
+    
+    STATUSES = (
+        ( STATUS_UNASSIGNED, STATUS_UNASSIGNED),
+        ( STATUS_ASSIGNED, STATUS_ASSIGNED),
+        ( STATUS_COMPLETED, STATUS_COMPLETED)
+        
+    )
+    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Add status state (Unassigned, Assigned, Completed)
     parcels = models.ManyToManyField(Package, related_name='route', blank=True)
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, related_name='route', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    status = models.CharField(max_length=10, choices=STATUSES, default=STATUS_UNASSIGNED)
+    station = models.ForeignKey(Station, on_delete=models.SET_NULL, null=True)
+    
 
 
     def __str__(self):

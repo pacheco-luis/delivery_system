@@ -226,6 +226,12 @@ def create_assign_routes(request):
 
             # Save all route instances after adding parcels
             for route in routes:
+                try:
+                    route.station = Package.get_sender_station() if route.parcels[0].status == Package.STATUS_PENDING else Package.get_sender_station()
+                except Exception as e:
+                    messages.error(request, 'unable to set a station to route')
+                    print( 'unable to set a station to route' )
+
                 route.save()
         return redirect('management:routes')
     

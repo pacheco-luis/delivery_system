@@ -41,3 +41,6 @@ stations/migrations/*
 !package_request/migrations/__init__.py
 !users/migrations/__init__.py
 !stations/migrations/__init__.py
+
+# qr-code packages images
+static/images/jobs/qrcode/*

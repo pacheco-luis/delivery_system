@@ -1,184 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
 {% block title %}Jobs{% endblock title %}
-
-
 {% block content %}
-<head>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
-        async defer></script>
 
-    <style>
-        .gm-ui-hover-effect {
-            display: none !important;
-        }
-        .job-details {
-            display: none;
-        }
-    </style>
-</head>
+<div id="pack-list-body">
+    <h1 style="padding: 0.5em;">Active Jobs</h1>
 
-<div class="container">
-    <h1>{% trans "Jobs" %}</h1>
-
-    {% if job %}
-
-    <div id="map" style="min-width: 400px; width: 100%; height: 500px;"></div>
-
-    <div>
-        <h2>{{ job.package_description }}</h2>
-        <p>{{ job.distance }} km</p>
-        <p>{{ job.duration }} {% trans "min" %}</p>
-        <p>${{ job.price }}{% trans "NTD"%}</p>
-        <p>{{ job.sender_address }}</p>
-        <p>{{ job.recipient_address }}</p>
-
+    <ul class="ul-job-list card">
+        <ul class="nav nav-tabs tab">
+            <li class="nav-item">
+                <a class="nav-link {% if active_tab == 'pickup' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:job_current' %}">Pick-Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_tab == 'deliver' %}active{% endif %}" href="">Deliver</a>
+            </li>
+        </ul>
         <form action="" method="POST">
             {% csrf_token %}
-            <input type="submit"
-                value="{% if job.status == 'picking' %}Pickup{% elif job.status == 'delivering' %}Drop-off{% endif %}">
+            <table class="table table-hover table-responsive pack-list-table">
+                <thead>
+                    <tr style="background-color: #FFA758;">
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if driver_packages %}
+                            {% for dp in driver_packages %}
+                                <tr>
+                                    <td scope="row">{{ forloop.counter }}</td>
+                                    <td scope="row">{{ dp.package_id }}</td>
+                                    <td scope="row">{{ dp.order_date }}</td>
+                                    <td scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="select_packages" value="{{ dp.package_id }}" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                              Add
+                                            </label>
+                                          </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        
+                    {% else %}
+                        <tr>
+                            <td colspan="4" style="background-color: antiquewhite;">
+                                <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                    <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                                    <p>No packages available!</p>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+            </table>
+
+            {% if driver_packages %}
+                <div><button class="btn btn-primary" type="submit">Create Route</button></div>
+            {% endif %}
         </form>
-    </div>
-
-    {% else %}
-
-    <div>
-        <p>{% trans "No jobs available" %}</p>
-    </div>
-
-    {% endif %}
-
-    {% if archived %}
-
-    <h1>{% trans "Archived Jobs"%}</h1>
-
-    <ul>
-        {% for job in archived %}
-
-        <li>
-            {{ job.package_description }} - {{ job.status }}
-        </li>
-
-        {% endfor %}
     </ul>
-
-    {% else %}
-
-    <div>
-        <p>{% trans "No archived jobs"%}</p>
-    </div>
-
-    {% endif %}
-
-    <script>
-        const sender_address = '{{ job.sender_address }}';
-        const recipient_address = '{{ job.recipient_address }}';
-        console.log(sender_address);
-        console.log(recipient_address);
-
-        const regex = /(-?\d+\.\d+),\s*(-?\d+\.\d+)/;
-        const sender = sender_address.match(regex);
-        const recipient = recipient_address.match(regex);
-
-        const sender_lat = parseFloat(sender[1]);
-        const sender_lng = parseFloat(sender[2]);
-        const recipient_lat = parseFloat(recipient[1]);
-        const recipient_lng = parseFloat(recipient[2]);
-
-        console.log(sender_lat);
-        console.log(sender_lng);
-        console.log(recipient_lat);
-        console.log(recipient_lng);
-
-        function initMap() {
-            if (!document.getElementById("map")) return;
-
-            const directionsService = new google.maps.DirectionsService();
-            const directionsRenderer = new google.maps.DirectionsRenderer();
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 7,
-                center: { lat: 41.85, lng: -87.65 },
-            });
-
-            directionsRenderer.setMap(map);
-
-            calculateAndDisplayRoute(map, directionsService, directionsRenderer);
-        }
-
-        function calculateAndDisplayRoute(map, directionsService, directionsRenderer) {
-            directionsService
-                .route({
-                    origin: new google.maps.LatLng(sender_lat, sender_lng),
-                    destination: new google.maps.LatLng(recipient_lat, recipient_lng),
-                    travelMode: google.maps.TravelMode.DRIVING,
-                })
-                .then((response) => {
-                    new google.maps.DirectionsRenderer({
-                        map: map,
-                        directions: response,
-                        suppressMarkers: true,
-                        polylineOptions: {
-                            strokeColor: "#000",
-                            strokeOpacity: 0.8,
-                            strokeWeight: 5,
-                        },
-                    });
-
-                    let leg = response.routes[0].legs[0];
-                    new google.maps.Marker({
-                        position: leg.start_location,
-                        map: map,
-                        icon: "{% static 'images/start.png' %}",
-                    });
-                    new google.maps.Marker({
-                        position: leg.end_location,
-                        map: map,
-                        icon: "{% static 'images/end.png' %}",
-                    });
-
-                    updateCourierPosition(map);
-                })
-                .catch((e) => window.alert("Directions request failed due to " + e));
-        }
-
-        function updateCourierPosition(map) {
-            const jobSocket = new WebSocket(
-                "ws://"
-                + window.location.host
-                + "/ws/job/"
-                + "{{ job.id }}/"
-            );
-            navigator.geolocation.watchPosition(position => {
-                const courierPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-                if (!window.courierMarker) {
-                    window.courierMarker = new google.maps.Marker({
-                        position: courierPosition,
-                        map: map,
-                        icon: "{% static 'images/courier.png' %}",
-                    });
-                } else {
-                    window.courierMarker.setPosition(courierPosition);
-                }
-
-                map.panTo(courierPosition);
-
-                try {
-                    jobSocket.send(JSON.stringify({
-                        job: {
-                            courier_lat: position.coords.latitude,
-                            courier_lng: position.coords.longitude,
-                        }
-                    }));
-                } catch (error) {
-                    console.log(error);
-                }
-            }, error => console.log(error));
-        }
-
-        window.initMap = initMap;
-    </script>
 </div>
 {% endblock content %}
