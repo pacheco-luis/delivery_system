@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from django import forms
 from users.models import User
+from package_request.models import Package
 from django.utils.translation import gettext
 
 
@@ -28,29 +29,6 @@ class ASSIGN_CLUSTER_FORM(forms.Form):
             'aria-describedby': 'basic-addon1',
             'style': 'color: #000;'
         }))
-
-class USERS_QUERY_FILTER(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(USERS_QUERY_FILTER, self).__init__(*args, **kwargs)
-        
-        user_types = [
-                        ('is_customer' , 'Customers'),
-                        ('is_driver','Drivers'),
-                        ('is_superuser','Admins'),
-                        ('is_manager','Managers'),
-                        ('is_staff','Staff')
-                    ]
-
-        self.fields['Users'] = forms.ChoiceField(
-            choices=[(gettext('All Users'), gettext('All Users'))] + user_types,
-            initial= 'All Users',  #    initial value
-            widget=forms.Select(attrs={
-                'class': 'form-control dropdown',
-                'aria-label': 'from_station',
-                'aria-describedby': 'basic-addon1',
-                'style': 'color: #000'
-            })
-        )
 
 class EDIT_USER_FORM(forms.Form):
     def __init__(self,*args, **kwargs):
@@ -84,6 +62,53 @@ class EDIT_USER_FORM(forms.Form):
     def set_joined(self, joined):
         self.joined=joined
 
+
+#################
+#### filter forms
+
+class USERS_QUERY_FILTER(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(USERS_QUERY_FILTER, self).__init__(*args, **kwargs)
+        
+        user_types = [
+                        ('is_customer' , 'Customers'),
+                        ('is_driver','Drivers'),
+                        ('is_superuser','Admins'),
+                        ('is_manager','Managers'),
+                        ('is_staff','Staff')
+                    ]
+
+        self.fields['Users'] = forms.ChoiceField(
+            choices=[(gettext('All Users'), gettext('All Users'))] + user_types,
+            initial= 'All Users',  #    initial value
+            widget=forms.Select(attrs={
+                'class': 'form-control dropdown',
+                'aria-label': 'from_station',
+                'aria-describedby': 'basic-addon1',
+                'style': 'color: #000'
+            })
+        )
+
+class PACKAGE_QUERY_FILTER(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(PACKAGE_QUERY_FILTER, self).__init__(*args, **kwargs)
+        
+        statuses = list(Package.STATUSES)
+
+        self.fields['status'] = forms.ChoiceField(
+            choices=[(gettext('select a status'), gettext('select a status'))] + statuses,
+            initial= 'All packages',  #    initial value
+            widget=forms.Select(attrs={
+                'class': 'form-control dropdown',
+                'aria-label': 'from_station',
+                'aria-describedby': 'basic-addon1',
+                'style': 'color: #000'
+            })
+        )
+
+#################
+#### search forms
+
 class SEARCH_USER_FORM(forms.Form):
     username_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
                     'id': 'username_search',
@@ -93,3 +118,14 @@ class SEARCH_USER_FORM(forms.Form):
                     'aria-describedby': 'basic-addon1',
                     'style': 'color: #000 !important;'
                 }))
+
+class SEARCH_PARCEL(forms.Form):
+    id_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+                    'id': 'id_search',
+                    'placeholder': 'search by ID',
+                    'class': 'form-control',
+                    'aria-label': 'field',
+                    'aria-describedby': 'basic-addon1',
+                    'style': 'color: #000 !important;'
+                }))
+    

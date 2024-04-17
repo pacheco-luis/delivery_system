@@ -3,7 +3,7 @@ import uuid
 from django.shortcuts import get_object_or_404, redirect, render
 from django.conf import settings
 import requests
-from management.forms import ASSIGN_CLUSTER_FORM, SEARCH_USER_FORM, USERS_QUERY_FILTER, EDIT_USER_FORM
+from management.forms import ASSIGN_CLUSTER_FORM, PACKAGE_QUERY_FILTER, SEARCH_PARCEL, SEARCH_USER_FORM, USERS_QUERY_FILTER, EDIT_USER_FORM
 from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
 from users.models import User, Customer, Driver
 from package_request.models import Package, Route
@@ -374,3 +374,51 @@ def admin_all_users(request):
     }
     
     return render( request, 'users.html', context=context )
+
+
+def admin_packages(request):
+    class Display_Parcel():
+        def __init__(self, parcel: Package) -> None:
+            if parcel is not None:
+                self.id = parcel.package_id
+                self.sender = parcel.customer.user.username
+                self.phone = parcel.customer.phone_number
+                self.date = parcel.order_date
+                self.status = parcel.status
+                
+    parcels = Package.objects.all()
+    parcels_count = 0
+    current_packages = 'All packages'
+    package_filter_form = PACKAGE_QUERY_FILTER()
+    search_parcel_form = SEARCH_PARCEL()
+
+    if request.method == "GET":
+        if 'get_packages' in request.GET:
+            package_filter_form = form = PACKAGE_QUERY_FILTER(request.GET)
+            if form.is_valid():
+                status = form.cleaned_data['status']
+                if status != 'select a status' :
+                    current_packages = status
+                    parcels = Package.objects.filter( status=status  )
+                
+        if 'search_package' in request.GET:
+            search_parcel_form = form = SEARCH_PARCEL(request.GET)
+            if form.is_valid():
+                id = form.cleaned_data['id_search']
+                try:
+                    searched = get_object_or_404( Package, package_id=uuid.UUID(id))
+                except Exception as e:
+                    messages.error( request, "No such package exists")
+
+    parcels_count = parcels.count()
+    parcels = [Display_Parcel(parcel=parcel) for parcel in parcels]
+    
+    context = {
+        'search_parcel': search_parcel_form,
+        'package_filter': package_filter_form,
+        'parcels': parcels,
+        'current_packages': current_packages,
+        'parcels_count': parcels_count
+    }
+    
+    return render( request, 'admin_packages.html', context=context )
