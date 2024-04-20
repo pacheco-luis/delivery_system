@@ -684,8 +684,8 @@ def job_scanner(request):
         package_id = request.POST.get('package_id')
         package = Package.objects.get(package_id=package_id)
         print('DATA:', package_id)
-        if package.status == Package.STATUS_PENDING:
-            package.status = Package.STATUS_PICKING
+        if package.status == Package.STATUS_TRANSIT:
+            package.status = Package.STATUS_DELIVERING
             package.driver = driver
             package.save()
             return redirect('package_request_app:success_or_fail')
