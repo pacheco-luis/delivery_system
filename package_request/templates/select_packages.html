@@ -9,10 +9,10 @@
     <ul class="ul-job-list card">
         <ul class="nav nav-tabs tab">
             <li class="nav-item">
-                <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:job_current' %}">Packages</a>
+                <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" aria-current="page" href="{% url 'package_request_app:select_packages' %}">Packages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if active_tab == 'routes' %}active{% endif %}" href="">Routes</a>
+                <a class="nav-link {% if active_tab == 'routes' %}active{% endif %}" href="{% url 'package_request_app:job_list' %}">Routes</a>
             </li>
         </ul>
         <form action="" method="POST">
@@ -35,8 +35,8 @@
                                     <td scope="row">{{ dp.order_date }}</td>
                                     <td scope="row">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="select_packages" value="{{ dp.package_id }}" id="flexCheckChecked" checked>
-                                            <label class="form-check-label" for="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" name="select_packages" value="{{ dp.package_id }}" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
                                               Add
                                             </label>
                                           </div>
