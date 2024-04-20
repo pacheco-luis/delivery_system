@@ -64,6 +64,9 @@ class Package(models.Model):
     depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("depth: (cm)"))
     estimate_package_weight_value = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("package weight: (kg)"))
     qrcode = models.ImageField(upload_to='jobs/qrcode/', blank=True)
+
+    pickup_photo = models.ImageField(upload_to='jobs/pickup/', blank=True)
+    delivery_photo = models.ImageField(upload_to='jobs/delivery/', blank=True)
     
     class Meta:
         db_table = "Packages"
