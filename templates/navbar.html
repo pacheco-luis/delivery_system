@@ -51,7 +51,19 @@
         <button id="close_menu" type="button" onclick="close_menu()" class="btn btn-secondary"><span class="material-symbols-outlined">close</span></button>
         {% include "driver_sidebar.html" %}
         {% endif %}
-      {% endif %}
+    {% endif %}
+
+    <div class="notification_dropdown dropdown" style="position: relative;">
+      <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.1rem;"></i>
+          <span style="position: absolute; top: 0; left: 10px; font-size:10px; background-color: red; border-radius:20px; width:10px; height:10px;"></span>
+      </span>
+      <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; width:300px; overflow-x:hidden; background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);">
+        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
+        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
+        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
+      </div>
+    </div>
     
   </nav>
 </header>

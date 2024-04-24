@@ -1,3 +1,4 @@
+from notifications.models import Notification
 from vincenty import vincenty
 import datetime
 import uuid
@@ -306,8 +307,19 @@ def delete_request(request, id):
     return redirect('package_request_app:package_list')
 
 @login_required(login_url='users:login')
-def home( request ):  
-    return render( request, "home.html" )
+def home( request ):
+    
+    # if request.user.is_customer is not True:
+    #     parcels = Package.objects.all()
+    #     for p in parcels:
+    #         print( '*\n*\n*\n*\n*\n*\n')
+    #         print( 'notified')
+    #         p.notify_picking('old', 'picking')
+    
+    context = {
+        'user_id': request.user.id
+    }
+    return render( request, "home.html", context=context )
 
 def landing_page( request ):
     from django.contrib.auth.hashers import make_password
@@ -560,15 +572,20 @@ def current_job(request):
                 routes[-1].parcels.add(parcel)
 
         # Save all route instances after adding parcels
+        print(f'notifications:\t{packages}')
+        print(f'parcels:\t{parcels}')
         print( "routes created:", len(routes) )
         for route in routes:
             route.station = route.parcels.first().get_sender_station()
             route.status = Route.STATUS_ASSIGNED
             route.driver = driver
             route.save()
+            route.parcels.update(status=Package.STATUS_PICKING)
+            print('parcels:', route.parcels.all())
+            notifications = [ Notification(message='Your package has changed status to picking', parcel=p, user=p.customer.user) for p in route.parcels.all() ]
+            print('^^^^^^^^^^^^^^^^^^^^^: about to notify')
+            [n.notify_picking('assigned', 'picking') for n in notifications]
         
-        parcels.update(status=Package.STATUS_PICKING)
-    
     context = {
         'active_tab' : 'pickup',
         'driver_packages' : driver_packages,

@@ -34,10 +34,12 @@ urlpatterns = i18n_patterns(
     # path('', include('stations.urls')),
     path('', include('management.urls')),
     path('rosetta/', include ('rosetta.urls')),
-    path('i18n/', set_language, name='set_language') 
+    path('i18n/', set_language, name='set_language'),
     #move password reset here  
     # path('package_request/', include('package_request.urls'), name='package_request'),
     # path('driver-sign-up', include('driver.urls')),
+    
+    path('', include('notifications.urls')),
 )
 
 urlpatterns += static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )

@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',                       # https://channels.readthedocs.io/en/stable/installation.html
+    'channels',                     # https://pypi.org/project/channels/
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     'package_request',
     'stations',
     'management',
+    'chatbot',
+    'notifications',
     
     
     'phonenumber_field',                    #   https://pypi.org/project/django-phonenumber-field/
@@ -93,8 +97,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'delivery_system.wsgi.application'
+# WSGI_APPLICATION = 'delivery_system.wsgi.application'
+ASGI_APPLICATION = 'delivery_system.asgi.application'
 
+CHANNEL_LAYERS = {
+    'default' : {
+        'BACKEND' : "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -185,7 +195,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 # Google Maps API Settings
-PLACES_MAPS_API_KEY='AIzaSyChRG829SbcWOvRzhf4o19Rjs_BrmNnWko'
+PLACES_MAPS_API_KEY=''
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'
