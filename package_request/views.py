@@ -593,6 +593,23 @@ def current_job(request):
     return render(request, 'current_job.html', context)
 
 @login_required(login_url='users:login')
+def job_deliver(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+    
+    driver = Driver.objects.get(user=request.user)
+    driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
+
+    if request.method == 'POST':
+        messages.success(request, gettext('Do something here'))
+
+    context = {
+        'active_tab' : 'deliver',
+        'driver_packages' : driver_packages,
+    }
+    return render(request, 'job_deliver.html', context)
+
+@login_required(login_url='users:login')
 def completed_job(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
@@ -684,8 +701,8 @@ def job_scanner(request):
         package_id = request.POST.get('package_id')
         package = Package.objects.get(package_id=package_id)
         print('DATA:', package_id)
-        if package.status == Package.STATUS_PENDING:
-            package.status = Package.STATUS_PICKING
+        if package.status == Package.STATUS_TRANSIT:
+            package.status = Package.STATUS_DELIVERING
             package.driver = driver
             package.save()
             return redirect('package_request_app:success_or_fail')

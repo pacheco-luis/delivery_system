@@ -90,6 +90,21 @@
                                             <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
                                             <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
                                             <p><b>{% trans "Item Description:" %} </b> {{ package_obj.package_description }}</p><br>
+                                            {% if package_obj.pickup_photo %}
+                                            <div>
+                                                <img src="{{ package_obj.pickup_photo.url }}" alt="Pickup Photo" style="width: 100px; height: 100px;">
+                                            </div>
+                                            {% else %}
+                                            <p><b>Not picked up yet</b></p>
+                                            {% endif %}
+
+                                            {% if package_obj.delivery_photo %}
+                                            <div>
+                                                <img src="{{ package_obj.delivery_photo.url }}" alt="Delivery Photo" style="width: 100px; height: 100px;">
+                                            </div>
+                                            {% else %}
+                                            <p><b>Not delivered yet</b></p>
+                                            {% endif %}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>
