@@ -23,12 +23,13 @@ class Package(models.Model):
     STATUS_COMPLETED = 'completed'
     STATUS_CANCELED = 'canceled'
     STATUSES = (
-        (STATUS_PENDING, 'Pending'),
-        (STATUS_ASSIGNED, 'Assigned'),
-        (STATUS_PICKING, 'Picking'),
-        (STATUS_DELIVERING, 'Delivering'),
-        (STATUS_COMPLETED, 'Completed'),
-        (STATUS_CANCELED, 'Canceled'),
+        (STATUS_PENDING, _('Pending')),
+        (STATUS_ASSIGNED, _('Assigned')),
+        (STATUS_PICKING, _('Picking')),
+        (STATUS_TRANSIT, _('Transiting')),
+        (STATUS_DELIVERING, _('Delivering')),
+        (STATUS_COMPLETED, _('Completed')),
+        (STATUS_CANCELED, _('Canceled')),
     )
     #remove
     # WEIGHT_CHOICES = [ ('<2', '<2'), ('2-5', '2-5'), 

@@ -2,7 +2,7 @@ from collections import OrderedDict
 from django import forms
 from users.models import User
 from package_request.models import Package
-from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 
 class ASSIGN_CLUSTER_FORM(forms.Form):
@@ -33,7 +33,7 @@ class ASSIGN_CLUSTER_FORM(forms.Form):
 class EDIT_USER_FORM(forms.Form):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
-        fields = ['username', 'role', 'active', 'joined']
+        fields = [_('username'), _('role'), _('active'), _('joined')]
         
         for field in fields:
             if field != 'active':
@@ -71,15 +71,15 @@ class USERS_QUERY_FILTER(forms.Form):
         super(USERS_QUERY_FILTER, self).__init__(*args, **kwargs)
         
         user_types = [
-                        ('is_customer' , 'Customers'),
-                        ('is_driver','Drivers'),
-                        ('is_superuser','Admins'),
-                        ('is_manager','Managers'),
-                        ('is_staff','Staff')
+                        ('is_customer' , _('Customers')),
+                        ('is_driver', _('Drivers')),
+                        ('is_superuser', _('Admins')),
+                        ('is_manager', _('Managers')),
+                        ('is_staff', _('Staff'))
                     ]
 
         self.fields['Users'] = forms.ChoiceField(
-            choices=[(gettext('All Users'), gettext('All Users'))] + user_types,
+            choices=[(_('All Users'), _('All Users'))] + user_types,
             initial= 'All Users',  #    initial value
             widget=forms.Select(attrs={
                 'class': 'form-control dropdown',
@@ -96,7 +96,7 @@ class PACKAGE_QUERY_FILTER(forms.Form):
         statuses = list(Package.STATUSES)
 
         self.fields['status'] = forms.ChoiceField(
-            choices=[(gettext('select a status'), gettext('select a status'))] + statuses,
+            choices=[(_('select a status'), _('select a status'))] + statuses,
             initial= 'All packages',  #    initial value
             widget=forms.Select(attrs={
                 'class': 'form-control dropdown',
@@ -112,7 +112,7 @@ class PACKAGE_QUERY_FILTER(forms.Form):
 class SEARCH_USER_FORM(forms.Form):
     username_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
                     'id': 'username_search',
-                    'placeholder': 'search by username',
+                    'placeholder': _('search by username'),
                     'class': 'form-control',
                     'aria-label': 'field',
                     'aria-describedby': 'basic-addon1',
@@ -122,7 +122,7 @@ class SEARCH_USER_FORM(forms.Form):
 class SEARCH_PARCEL(forms.Form):
     id_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
                     'id': 'id_search',
-                    'placeholder': 'search by ID',
+                    'placeholder': _('search by ID'),
                     'class': 'form-control',
                     'aria-label': 'field',
                     'aria-describedby': 'basic-addon1',

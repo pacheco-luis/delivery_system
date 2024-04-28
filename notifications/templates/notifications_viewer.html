@@ -1,0 +1,113 @@
+
+{% extends 'base.html' %}
+{% block title %}Notifications{% endblock title %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    <div id="pack-list-body">
+        <h1 style="padding: 0.5em;">Notifications</h1>
+
+        <ul class="ul-job-list card">
+                <table class="table table-hover table-responsive pack-list-table">
+                    <thead>
+                        <tr style="background-color: #FFA758;">
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col">Notification Heading:</th>
+                            <th scope="col">Created:</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if notifications %}
+                        {% for notification in notifications %}
+                        <tr>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td scope="row">
+                                <span>
+                                    {% if notification.read %}
+                                        <i class="bi bi-eye-fill"></i>
+                                    {% else %}
+                                        <i class="bi bi-eye-slash-fill"></i>
+                                    {% endif %}
+                                </span>
+                            </td>
+                            <td scope="row">{{ notification.message }}</td>
+                            <td scope="row">{{ notification.created }}</td>
+                            <td>
+                                <button onclick="window.location=`{% url 'notifications_app:view_notification' notification.id %}`" style="--bs-text-opacity: .5;" type="button" class="ps_view_button btn btn-primary">View</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        {% else %}
+                        <tr>
+                            <td colspan="5" style="background-color: antiquewhite;">
+                                <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                    <img src="{% static 'images/package_listing/empty_package.png' %}"
+                                        alt="Empty Package Image">
+                                    <p>No packages available!</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+
+                {% if driver_packages %}
+                {% endif %}
+        </ul>
+    </div>
+    <!-- <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="row justify-content-center">
+            <div class="col-sm-8" style="position: relative; background-color:#fff; border-radius: 1rem; border: 1px solid rgba(128, 128, 128, 0.356); min-height: 75vh;">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">something</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for notification in notifications %}
+                            <tr id="{{ notification.id }}">
+                                <th scope="row"> {{forloop.counter}} </th>
+                                <td>{{notification.message}}</td>
+                                <td>{{notification.created}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-link" value="notification-url" value="{% url 'notifications_app:view_notification' notification.id %}" style="background-color: #F7F7F9;">view</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% if not notifications %}
+                <div class="row w-100 h-50" style="position: absolute; transform: translateY(25%);">
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <h2 style="text-align:center; color:#777777ab; font-size: clamp(1.2rem, 2.5vw, 2rem); font-style:italic;">There is nothing to show here</h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <img style="width: min-content;" src="{% static 'images/package_listing/empty_package.png' %}" alt="no notifications">
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div> -->
+
+{% endblock content %} 
+
+{% block script_files %}
+
+<script>
+    window.onload = function() {
+        document.getElementById('sidebar_notifications_btn').classList.add("active_tab");
+    };
+    
+
+    </script>
+{% endblock script_files %}

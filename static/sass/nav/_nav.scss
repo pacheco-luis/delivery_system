@@ -18,7 +18,40 @@
     text-transform: capitalize;
     text-shadow: #fff;
     font-weight: 600;
+
+    .language__selector{
+        font-size: 1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        color: black;
+        // width: 100%;
+    }
+    .language__selector option{
+        color: black;
+        background-color: white;
+    }
+    .language__selector option:hover{
+        color: black;
+        background-color: lightblue;
+    }
+    .language__box{
+        margin-left: auto;
+        padding-right: 1em;
+    }
+    .notification__box{
+        margin-left: 0;
+        padding-right: 1em;
+    }
+    #notifications_list{
+        position: absolute;
+        right:0px;
+        width:300px;
+        overflow-x:hidden;
+        background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);
+    }
+
 }
+
 
 #nav_logo{
     font-family: 'RoundslabSerif', sans-serif;
@@ -99,7 +132,7 @@
 
 #sign_out_link,
 #sidebar ul li a{
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -120,7 +153,6 @@
 #main_nav nav #menu,
 #main_nav nav #close_menu{
     margin-right: 0;
-    margin-left: auto;
 }
 
 #main_nav nav #sign_out_link
@@ -179,6 +211,97 @@
 
 #main_nav nav #nav_logo img{
     height: 2em;
+}
+
+
+#notification_count{
+    position: absolute; 
+    top: 0; left: 10px; 
+    font-size: 13px; 
+    background-color: red; 
+    border-radius: 5px; 
+    color: aliceblue; 
+    line-height: initial; 
+    padding: 0 3px;
+}
+
+.top_border{
+    border-top: 1px #2b2b2b17 solid !important;
+}
+
+.padding_0{
+    padding: 0 !important;
+}
+
+.position_rel{
+    position: relative;
+}
+
+.position_abs{
+    position: absolute;
+}
+
+.trans_form_late_0_30{
+    transform: translate(0, 30%);
+}
+
+.b_radius_2rem{
+    border-radius: 2rem;
+}
+
+.w_h_2rem{
+    width: 2rem;
+    height: 2rem;
+}
+
+.w_Max_cont{
+    width:max-content;
+}
+
+.read_True{
+    background-color: #4545457a;
+}
+
+.read_False{
+    background-color: #454545e1;
+}
+
+.text_read_False{
+    font-weight: 500;
+}
+
+.notify_icon{
+    position: absolute;
+    transform: translate(50%, 20%); 
+    color: #fff;
+}
+
+.d_none{
+    display: none !important;
+}
+
+.picking_picking{
+    display: block !important;
+}
+
+.delivering_delivering{
+    display: block !important;
+}
+
+.general_general{
+    display: block !important;
+}
+
+.p_bottom{
+    padding-bottom: 0;
+}
+
+.notification_messg span{
+    font-size: 0.9rem;
+}
+
+.notification_created span{
+    font-size: 0.65rem;
 }
 
 
