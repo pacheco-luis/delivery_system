@@ -155,6 +155,19 @@ class Route(models.Model):
 
         return formatted_route.strip()
     
+    def get_senders_formatted_coords(self):
+        '''
+            function to get sender's coordinates to encode for waypoints
+        '''
+        formatted_coord = ''
+        
+        for p in self.parcels.all():
+            formatted_coord += f"{p.sender_address.latitude},+{p.sender_address.longitude}"
+            if p != self.parcels.all().last():
+                formatted_coord += '|'
+                
+        return formatted_coord
+        
     def get_formatted_items(self):
         formatted_route = ''
 

@@ -62,7 +62,13 @@
             </table>
 
             {% if driver_packages %}
-            <div><button class="btn btn-primary" type="submit">Create Route</button></div>
+                <div><button class="btn btn-primary" type="submit">Create Route</button></div>
+            {% endif %}
+            
+            {% if driver_route %}
+                {% for r in driver_route %}
+                    <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">View Route</a></div>
+                {% endfor %}
             {% endif %}
         </form>
     </ul>

@@ -454,6 +454,8 @@ def current_job(request):
     
     driver = Driver.objects.get(user=request.user)
     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_ASSIGNED)
+    driver_route = Route.objects.filter(driver=driver)
+    print(driver_route)
     
     if request.method == 'POST':
         
@@ -572,23 +574,19 @@ def current_job(request):
                 routes[-1].parcels.add(parcel)
 
         # Save all route instances after adding parcels
-        print(f'notifications:\t{packages}')
-        print(f'parcels:\t{parcels}')
         print( "routes created:", len(routes) )
         for route in routes:
             route.station = route.parcels.first().get_sender_station()
             route.status = Route.STATUS_ASSIGNED
             route.driver = driver
             route.save()
-            route.parcels.update(status=Package.STATUS_PICKING)
-            print('parcels:', route.parcels.all())
-            notifications = [ Notification(message='Your package has changed status to picking', parcel=p, user=p.customer.user) for p in route.parcels.all() ]
-            print('^^^^^^^^^^^^^^^^^^^^^: about to notify')
-            [n.notify_picking('assigned', 'picking') for n in notifications]
         
+        parcels.update(status=Package.STATUS_PICKING)
+    
     context = {
         'active_tab' : 'pickup',
         'driver_packages' : driver_packages,
+        'driver_route' : driver_route
     }
     return render(request, 'current_job.html', context)
 
@@ -633,11 +631,24 @@ def api_all_jobs(request):
     })
     
 @login_required(login_url='users:login')
-def cluster_route(request):
+def cluster_route(request, id):
     if request.user.is_driver is not True :
         return render(request, '401.html')
-    ### after integrating the algorithm get a route and render
-    return render(request, 'cluster_route.html')
+    
+    route = Route.objects.get(pk=id)
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    
+    coor = [ p.get_sender_coor() for p in route.parcels.all() ]
+    
+    print( route.get_formatted_route() )
+    
+    
+    context = {
+    'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+    'coor': coor,
+    'route': route,
+    }
+    return render(request, 'cluster_route.html', context)
 
 @login_required(login_url='users:login')
 def package_history(request):
