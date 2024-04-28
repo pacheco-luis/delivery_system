@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% block title %}Notifications{% endblock title %}
+{% load i18n %}
+{% block content %}
+
+    <div class="container" style="padding-top: 2rem;">
+        <div class="row justify-content-center">
+            <div class="col-sm-8" style="background-color:#fff;">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for notification in notifications %}
+                            <tr id="{{ notification.id }}" onclick="view_notification(this.id)">
+                                <th scope="row"> {{forloop.counter}} </th>
+                                <td>{{notification.message}}</td>
+                                <td>{{notification.created}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %} 
+
+{% block script_files %}
+
+<script>
+    window.onload = function() {
+        document.getElementById('sidebar_new_request_btn').classList.add("active_tab");
+    };
+    
+    function view_notification(id){
+        console.log('redirected');
+        url = "{% url 'notifications_app:notifications_viewer' %}";
+        url = url.concat(id);
+        window.location.replace(url);
+    }
+
+    </script>
+{% endblock script_files %}

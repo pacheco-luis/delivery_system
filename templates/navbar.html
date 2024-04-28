@@ -55,13 +55,98 @@
 
     <div class="notification_dropdown dropdown" style="position: relative;">
       <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.1rem;"></i>
-          <span style="position: absolute; top: 0; left: 10px; font-size:10px; background-color: red; border-radius:20px; width:10px; height:10px;"></span>
+          <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.25rem;"></i>
+          <span id="notification_count">{{ notifications|length }}</span>
       </span>
-      <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; width:300px; overflow-x:hidden; background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);">
-        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
-        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
-        <a class="dropdown-item" href="#">Notification for package 1 status has changed</a>
+      <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; border-radius: 10% 0% 10% 10%;">
+        <div class="container" >
+          <div class="row notification_header" style="padding-top: 0;">
+            <div class="w-50" style="padding: 0; text-align: left;">
+              <a href="#" style="font-style: none; text-decoration: none; color:#000;">Notifications</a>
+            </div>
+            <div class="w-50 col" style="padding: 0; text-align: right;" >
+              <a style="line-height: 1rem;" href="#">read all</a>
+            </div>
+          </div>
+        </div>
+
+        <a id="dropdown-item-template" class="dropdown-item top_border d_none" href="#">
+          <div class="container padding_0">
+            <div class="row">
+              <div class="col-2" >
+                <div class="positon_rel w_Max_cont">
+                    <div class="position_abs trans_form_late_0_30" >
+                        <div id="set_read" class="position_rel b_radius_2rem w_h_2rem ">
+                          <i class="bi bi-envelope-arrow-up d_none notify_icon "></i>
+                          <i class="bi bi-envelope-check-fill d_none notify_icon "></i>
+                          <i class="bi bi-info-square d_none notify_icon "></i>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div id="messg_container" class="col overflow-x-hidden p_bottom">
+                <div class="notification_messg">
+                  <span id="message_span" class="text_read_{{ n.read }}">{{ n.message }}</span>
+                </div>
+                <div class="notification_created">
+                  <span id="created_span" class="text_read_{{ n.read }}">{{ n.created }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        {% if notifications %}
+          {% for n in notifications %}
+            <a class="dropdown-item top_border" href="#">
+              <div class="container padding_0">
+                <div class="row">
+                  <div class="col-2" >
+                    <div class="positon_rel w_Max_cont">
+                        <div class="position_abs trans_form_late_0_30" >
+                            <div class="position_rel b_radius_2rem w_h_2rem read_{{ n.read }}">
+                              <i class="bi bi-envelope-arrow-up d_none notify_icon picking_{{ n.type }} "></i>
+                              <i class="bi bi-envelope-check-fill d_none notify_icon delivering_{{ n.type }}"></i>
+                              <i class="bi bi-info-square d_none notify_icon general_{{ n.type }}"></i>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col overflow-x-hidden p_bottom">
+                    <div class="notification_messg">
+                      <span class="text_read_{{ n.read }}">{{ n.message }}</span>
+                    </div>
+                    <div class="notification_created">
+                      <span class="text_read_{{ n.read }}">{{ n.created }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        {% else %}
+          <a id="empty_notification" class="dropdown-item read empty_notification" href="#" style="border-top: 1px #2b2b2b17 solid;">
+            <div class="container" style="padding: 0;">
+              <div class="row">
+                <div class="w-100 text-center" >
+                  <div>
+                    <img src="{% static 'images/package_listing/empty_package.png' %}" alt="empty" style="height: 250px; filter: grayscale(40%);">
+                  </div>
+                  <span>There is nothing to display here!</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+
+          <div class="container" style="border-top: 1px solid #2b2b2b17;" >
+            <div class="row notification_header" style="padding-bottom: 0;">
+              <div class="w-100" style="padding: 0; text-align: center;">
+                <a href="{% url 'notifications_app:notifications_viewer'%}">see all</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     

@@ -69,19 +69,30 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         )
 
     async def send_notification(self, event):
-        await self.send(text_data=json.dumps({ 'message': event['message'] }))
+        print( json.dumps({ 
+                                            'user_id': event['user_id'],
+                                            'id': event['id'],
+                                            'message': event['message'],
+                                            'n_type': event['n_type'],
+                                            'read': event['read'],
+                                            'created': event['created'],
+                                            },  default=str)
+              )
+        await self.send(text_data=json.dumps({ 
+                                            'user_id': event['user_id'],
+                                            'id': event['id'],
+                                            'message': event['message'],
+                                            'n_type': event['n_type'],
+                                            'read': str(event['read']),
+                                            'created': event['created'],
+                                            },  default=str))
 
     async def notify_user_status_change(self, event):
         # Check if the status change event is relevant to this user
-        user_id = 'user_id'
-        print(f'>{event[user_id]}<\n>{self.user_id}<')
-        print(type(event[user_id]), type(self.user_id))
         if event['user_id'] == self.user_id:
             print( 'sending' )
             # Send notification to the user
-            await self.send_notification({
-                'message': event['message']
-            })
+            await self.send_notification(event)
 
 
 # class NotificationDrivers(AsyncWebsocketConsumer):

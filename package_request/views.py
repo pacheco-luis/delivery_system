@@ -309,15 +309,12 @@ def delete_request(request, id):
 @login_required(login_url='users:login')
 def home( request ):
     
-    # if request.user.is_customer is not True:
-    #     parcels = Package.objects.all()
-    #     for p in parcels:
-    #         print( '*\n*\n*\n*\n*\n*\n')
-    #         print( 'notified')
-    #         p.notify_picking('old', 'picking')
+    # if not(request.user.is_driver) or not (request.user.is_customer):
+    #     return render(request, 'package_request_app:401')
     
     context = {
-        'user_id': request.user.id
+        'user_id': request.user.id,
+        'notifications': Notification.objects.filter( user=request.user ),
     }
     return render( request, "home.html", context=context )
 
@@ -572,18 +569,15 @@ def current_job(request):
                 routes[-1].parcels.add(parcel)
 
         # Save all route instances after adding parcels
-        print(f'notifications:\t{packages}')
-        print(f'parcels:\t{parcels}')
-        print( "routes created:", len(routes) )
+
+        mssg = 'Your parcel will be picked up soon.'
         for route in routes:
             route.station = route.parcels.first().get_sender_station()
             route.status = Route.STATUS_ASSIGNED
             route.driver = driver
             route.save()
             route.parcels.update(status=Package.STATUS_PICKING)
-            print('parcels:', route.parcels.all())
-            notifications = [ Notification(message='Your package has changed status to picking', parcel=p, user=p.customer.user) for p in route.parcels.all() ]
-            print('^^^^^^^^^^^^^^^^^^^^^: about to notify')
+            notifications = [ Notification.objects.create(message=mssg, type=Notification.TYPE_PICKING, parcel=p, user=p.customer.user) for p in route.parcels.all() ]
             [n.notify_picking('assigned', 'picking') for n in notifications]
         
     context = {
