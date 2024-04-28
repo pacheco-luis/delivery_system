@@ -18,7 +18,40 @@
     text-transform: capitalize;
     text-shadow: #fff;
     font-weight: 600;
+
+    .language__selector{
+        font-size: 1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        color: black;
+        // width: 100%;
+    }
+    .language__selector option{
+        color: black;
+        background-color: white;
+    }
+    .language__selector option:hover{
+        color: black;
+        background-color: lightblue;
+    }
+    .language__box{
+        margin-left: auto;
+        padding-right: 1em;
+    }
+    .notification__box{
+        margin-left: 0;
+        padding-right: 1em;
+    }
+    #notifications_list{
+        position: absolute;
+        right:0px;
+        width:300px;
+        overflow-x:hidden;
+        background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);
+    }
+
 }
+
 
 #nav_logo{
     font-family: 'RoundslabSerif', sans-serif;
@@ -99,7 +132,7 @@
 
 #sign_out_link,
 #sidebar ul li a{
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -120,7 +153,6 @@
 #main_nav nav #menu,
 #main_nav nav #close_menu{
     margin-right: 0;
-    margin-left: auto;
 }
 
 #main_nav nav #sign_out_link

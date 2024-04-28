@@ -23,11 +23,15 @@
         <div class="btns_container col-sm">
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; padding: 1em;"
-                href="{% url 'package_request_app:job_list' %}">{% trans "View Requests"%}</a>
+                href="{% url 'package_request_app:job_list' %}">{% trans "View Requests (Pickup)"%}</a>
 
             <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                 style="width: 100%; padding: 1em;"
-                href="{% url 'package_request_app:job_current' %}">{% trans "Current Jobs"%}</a>
+                href="{% url 'package_request_app:job_scanner' %}">{% trans "Scan QR Code (Deliver)"%}</a>
+
+            <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                style="width: 100%; padding: 1em;"
+                href="{% url 'package_request_app:job_current' %}">{% trans "Current Jobs "%}</a>
         </div>
         {% endif %}
     </div>

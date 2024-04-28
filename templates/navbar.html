@@ -13,22 +13,42 @@
     </a>
     
     {% comment %} Language switch form {% endcomment %}
-    <form id="languageForm" method="post" action="{% url 'set_language' %}">
-      {% csrf_token %}
-      <select class="form-select-sm align-middle" name="language" id="language" onchange="languageSwitch(this.value)">
-          {% get_current_language as LANGUAGE_CODE %}
-          {% get_available_languages as LANGUAGES %}
-          {% get_language_info_list for LANGUAGES as languages %}
-          {% for language in languages %}
-              <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                  {{ language.name_local }}
-              </option>
+    <div class="language__box">
+      <form id="languageForm" method="post" action="{% url 'set_language' %}">
+        {% csrf_token %}
+        <select class="language__selector form-select-sm bg-light" name="language" id="language"
+          onchange="languageSwitch(this.value)" style="height:100%;color:#000;">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+          <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+            {% if language.code == 'en' %} en 
+            {% elif language.code == 'zh-hant'%} zh 
+            {% endif%}
+           </option>
           {% endfor %}
-      </select>
-    </form>
-
+        </select>
+      </form>
+    </div>
+      
     {% if request.user.is_authenticated %}
       {% if request.user.is_customer %}
+      {% comment %} Notification Dropdown {% endcomment %}
+      <div class="notification__box">
+        <div class="notification_dropdown dropdown" style="position: relative;">
+          <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.1rem;"></i>
+              <span style="position: absolute; top: 0; left: 10px; font-size:10px; background-color: red; border-radius:20px; width:10px; height:10px;"></span>
+          </span>
+          <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+          </div>
+        </div>
+      </div>
+       {% comment %} Logout Button {% endcomment %}
         <a href="{% url 'users:logout-customer'%}" 
           id="sign_out_link" 
           class="btn btn-secondary btn-lg" 
@@ -36,10 +56,29 @@
           aria-pressed="true">
           <span> {% trans "Log out"%}</span>
         </a>
+        {% comment %} Initiate dropdown menu icon {% endcomment %}
         <button id="menu" type="button" onclick="show_menu()" class="btn btn-secondary"><span class="material-symbols-outlined">menu</span></button>
         <button id="close_menu" type="button" onclick="close_menu()" class="btn btn-secondary"><span class="material-symbols-outlined">close</span></button>
+        
         {% include "customer_sidebar.html" %}
+
       {% elif request.user.is_driver %}
+      {% comment %} Notification Dropdown {% endcomment %}
+      <div class="notification__box">
+        <div class="notification_dropdown dropdown" style="position: relative;">
+          <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.1rem;"></i>
+              <span style="position: absolute; top: 0; left: 10px; font-size:10px; background-color: red; border-radius:20px; width:10px; height:10px;"></span>
+          </span>
+          <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+            <a class="dropdown-item" href="#">Notification for package 1</a>
+          </div>
+        </div>
+      </div>
+      {% comment %}  Driver Logout Button {% endcomment %}
+      <div class="profile__box">
         <a href="{% url 'users:logout-driver'%}" 
           id="sign_out_link" 
           class="btn btn-secondary btn-lg" 
@@ -47,8 +86,11 @@
           aria-pressed="true">
           <span> {% trans "Log out"%}</span>
         </a>
+      </div>
+        {% comment %} Initiate Dropdown Menu {% endcomment %}
         <button id="menu" type="button" onclick="show_menu()" class="btn btn-secondary"><span class="material-symbols-outlined">menu</span></button>
         <button id="close_menu" type="button" onclick="close_menu()" class="btn btn-secondary"><span class="material-symbols-outlined">close</span></button>
+        
         {% include "driver_sidebar.html" %}
         {% endif %}
     {% endif %}

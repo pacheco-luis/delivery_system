@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-13 19:34+0800\n"
+"POT-Creation-Date: 2024-04-27 17:15+0800\n"
 "PO-Revision-Date: 2024-04-13 19:42+0800\n"
 "Last-Translator: admin admin <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: delivery_system/settings.py:141
+#: delivery_system/settings.py:151
 msgid "English"
-msgstr "英文"
+msgstr "en"
 
-#: delivery_system/settings.py:142
+#: delivery_system/settings.py:152
 msgid "Chinese"
-msgstr "中文"
+msgstr "zh"
 
-#: management/forms.py:45
+#: management/forms.py:36 users/models.py:13 users/models.py:38
+#: users/models.py:56
+msgid "username"
+msgstr "帳號"
+
+#: management/forms.py:36
+msgid "role"
+msgstr ""
+
+#: management/forms.py:36
+#, fuzzy
+#| msgid "Inactive:"
+msgid "active"
+msgstr "已離線:"
+
+#: management/forms.py:36
+#, fuzzy
+#| msgid "Joined"
+msgid "joined"
+msgstr "註冊時間："
+
+#: management/forms.py:74
+msgid "Customers"
+msgstr "客戶"
+
+#: management/forms.py:75
+msgid "Drivers"
+msgstr "司機"
+
+#: management/forms.py:76
+msgid "Admins"
+msgstr ""
+
+#: management/forms.py:77
+msgid "Managers"
+msgstr ""
+
+#: management/forms.py:78
+msgid "Staff"
+msgstr ""
+
+#: management/forms.py:82
 msgid "All Users"
 msgstr "所有使用者:"
+
+#: management/forms.py:99
+msgid "select a status"
+msgstr ""
+
+#: management/forms.py:115
+msgid "search by username"
+msgstr "帳號"
+
+#: management/forms.py:125
+#, fuzzy
+#| msgid "search by username"
+msgid "search by ID"
+msgstr "帳號"
 
 #: management/templates/admin_dashboard.html:18
 #: management/templates/admin_sidebar.html:23
@@ -123,7 +178,7 @@ msgstr "駕駛編號"
 msgid "Username"
 msgstr "帳號"
 
-#: management/templates/admin_dashboard.html:274
+#: management/templates/admin_dashboard.html:274 package_request/models.py:31
 msgid "Completed"
 msgstr "已完成"
 
@@ -135,18 +190,61 @@ msgstr "全部"
 msgid "Inactive:"
 msgstr "已離線:"
 
+#: management/templates/admin_packages.html:17
+#: management/templates/admin_sidebar.html:39
+#: management/templates/clusters.html:40
+#: package_request/templates/job_list.html:13
+msgid "Packages"
+msgstr "包裹"
+
+#: management/templates/admin_packages.html:24
+#: management/templates/users.html:24
+msgid "Search by username"
+msgstr "使用帳號查詢"
+
+#: management/templates/admin_packages.html:53
+#: management/templates/users.html:53
+msgid "Get"
+msgstr "讀取資料"
+
+#: management/templates/admin_packages.html:62
+#: management/templates/clusters.html:37 management/templates/users.html:62
+msgid "#"
+msgstr "#"
+
+#: management/templates/admin_packages.html:63
+#: management/templates/clusters.html:38
+msgid "ID"
+msgstr "ID"
+
+#: management/templates/admin_packages.html:64
+msgid "Sender"
+msgstr "寄件人:"
+
+#: management/templates/admin_packages.html:65
+#: users/templates/users/account.html:61
+msgid "Phone"
+msgstr "電話號碼:"
+
+#: management/templates/admin_packages.html:66
+#: package_request/templates/job_list.html:33
+msgid "Date"
+msgstr "日期:"
+
+#: management/templates/admin_packages.html:67
+#: management/templates/users.html:65
+msgid "Status"
+msgstr "狀態:"
+
+#: management/templates/admin_packages.html:92
+#: management/templates/clusters.html:62 management/templates/users.html:89
+msgid "It is empty here"
+msgstr "所有訂單皆已指派，尚無新訂單。"
+
 #: management/templates/admin_sidebar.html:31
 #: management/templates/users.html:17
 msgid "Users"
 msgstr "使用者"
-
-#: management/templates/admin_sidebar.html:39
-#: management/templates/clusters.html:40
-#: package_request/templates/job_list.html:13
-#: package_request/templates/select_packages.html:8
-#: package_request/templates/select_packages.html:13
-msgid "Packages"
-msgstr "包裹"
 
 #: management/templates/admin_sidebar.html:47
 #: management/templates/clusters.html:17
@@ -163,7 +261,7 @@ msgid "A very long option"
 msgstr ""
 
 #: management/templates/admin_sidebar.html:71
-#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:70
+#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:63
 msgid "Settings"
 msgstr "設定"
 
@@ -188,19 +286,23 @@ msgstr "經緯度座標"
 msgid "Radius"
 msgstr "運送/領取範圍"
 
-#: management/templates/admin_stations.html:84
+#: management/templates/admin_stations.html:86
+msgid "Select a station or add a new station."
+msgstr ""
+
+#: management/templates/admin_stations.html:90
 msgid "Stations Details:"
 msgstr "集貨區說明:"
 
-#: management/templates/admin_stations.html:85
+#: management/templates/admin_stations.html:91
 msgid "Add a station"
 msgstr "增加集貨區"
 
-#: management/templates/admin_stations.html:100
+#: management/templates/admin_stations.html:106
 msgid "Edit Station"
 msgstr "編輯集貨區"
 
-#: management/templates/admin_stations.html:103
+#: management/templates/admin_stations.html:109
 msgid "Add Station"
 msgstr "增加集貨區"
 
@@ -208,31 +310,25 @@ msgstr "增加集貨區"
 msgid "Current existing and unassigned routes:"
 msgstr "等待接單的運送群組"
 
-#: management/templates/clusters.html:37 management/templates/users.html:62
-msgid "#"
-msgstr "#"
-
-#: management/templates/clusters.html:38
-msgid "ID"
-msgstr "ID"
-
 #: management/templates/clusters.html:39
 msgid "Created"
 msgstr "已完成"
 
-#: management/templates/clusters.html:62 management/templates/users.html:89
-msgid "It is empty here"
-msgstr "所有訂單皆已指派，尚無新訂單。"
+#: management/templates/clusters.html:85
+msgid ""
+"by clicking on &#39;Create Routes&#39; you will deleate unassigned routes "
+"and recreate them again."
+msgstr ""
 
-#: management/templates/clusters.html:83
+#: management/templates/clusters.html:89
 msgid "Route details:"
 msgstr "運送群組說明:"
 
-#: management/templates/clusters.html:88
+#: management/templates/clusters.html:94
 msgid "Create Routes"
 msgstr "建立運送群組"
 
-#: management/templates/clusters.html:108
+#: management/templates/clusters.html:114
 msgid "Assign"
 msgstr "指派"
 
@@ -244,10 +340,6 @@ msgstr "增加集貨區"
 msgid "Primary"
 msgstr ""
 
-#: management/templates/users.html:24
-msgid "Search by username"
-msgstr "使用帳號查詢"
-
 #: management/templates/users.html:25
 msgid "Search"
 msgstr "查詢"
@@ -256,31 +348,23 @@ msgstr "查詢"
 msgid "All users:"
 msgstr "所有使用者:"
 
-#: management/templates/users.html:53
-msgid "Get"
-msgstr "讀取資料"
-
 #: management/templates/users.html:64
 msgid "Role"
 msgstr "身份："
-
-#: management/templates/users.html:65
-msgid "Status"
-msgstr "狀態:"
 
 #: management/templates/users.html:66
 msgid "Joined"
 msgstr "註冊時間："
 
-#: management/templates/users.html:105
-msgid "Select a user to show their summary"
+#: management/templates/users.html:111
+msgid "Select a user to show their summary."
 msgstr "選擇使用者以顯示其資料"
 
-#: management/templates/users.html:112
+#: management/templates/users.html:115
 msgid "User summary:"
 msgstr "使用者資料:"
 
-#: management/templates/users.html:130
+#: management/templates/users.html:133
 #: package_request/templates/job_list.html:24
 msgid "Submit"
 msgstr "送出"
@@ -298,48 +382,48 @@ msgstr "查無此帳號，請重新輸入"
 msgid "Invalid input format. Please check your data and submit again."
 msgstr "此為無效的輸入，請確認您的資料並重新輸入。"
 
-#: management/views.py:135
+#: management/views.py:135 package_request/views.py:483
 msgid "Unable to create new Routes. No available Parcels."
 msgstr "目前無訂單，無法建立新群組。"
 
-#: management/views.py:255
+#: management/views.py:261
 msgid "Station has been edited successfully."
 msgstr "已完成編輯"
 
-#: management/views.py:257
+#: management/views.py:263
 msgid "Invalid Station ID. Please check your input and try again."
 msgstr "無效編號，請重新輸入。"
 
-#: management/views.py:265
+#: management/views.py:271
 msgid "New station has been added successfully."
 msgstr "成功新增集貨區。"
 
-#: management/views.py:267
+#: management/views.py:273
 msgid "We encountered an issue while creating the staion. Please try again."
 msgstr "集貨區建立失敗，請再次嘗試。"
 
-#: management/views.py:269
+#: management/views.py:275
 msgid "Invalid action. Please Try again."
 msgstr "無效輸入，請重新嘗試。"
 
-#: management/views.py:273 package_request/views.py:135
-#: package_request/views.py:185 package_request/views.py:274
+#: management/views.py:279 package_request/views.py:136
+#: package_request/views.py:186 package_request/views.py:278
 msgid "Invalid input. Please check your input and try again."
 msgstr "此為無效的輸入，請確認您的資料並重新輸入。"
 
-#: management/views.py:325
+#: management/views.py:331
 msgid "Invalid query. Please try again."
 msgstr "無效輸入，請重新嘗試。"
 
-#: management/views.py:341
+#: management/views.py:347
 msgid "User not found."
 msgstr "查無使用者"
 
-#: management/views.py:343
+#: management/views.py:349
 msgid "Invalid input. Please try again."
 msgstr "無效輸入，請重新嘗試。"
 
-#: management/views.py:357
+#: management/views.py:363
 msgid "We encountered an issue while editing the user. Please try again."
 msgstr "發生錯誤，請再次嘗試。"
 
@@ -367,51 +451,85 @@ msgstr "尚未選擇"
 msgid "Select your station"
 msgstr "選擇集貨地"
 
+#: package_request/models.py:26
+#, fuzzy
+#| msgid "Pending:"
+msgid "Pending"
+msgstr "處理中"
+
+#: package_request/models.py:27
+#, fuzzy
+#| msgid "Assign"
+msgid "Assigned"
+msgstr "指派"
+
+#: package_request/models.py:28
+#, fuzzy
+#| msgid "Picking:"
+msgid "Picking"
+msgstr "即將取貨"
+
+#: package_request/models.py:29
+msgid "Transiting"
+msgstr ""
+
+#: package_request/models.py:30
+#, fuzzy
+#| msgid "Delivering:"
+msgid "Delivering"
+msgstr "運送中"
+
 #: package_request/models.py:32
+#, fuzzy
+#| msgid "Cancelled:"
+msgid "Canceled"
+msgstr "已取消"
+
+#: package_request/models.py:41
 msgid "No Preference"
 msgstr "沒有"
 
-#: package_request/models.py:40
+#: package_request/models.py:49
 msgid "sender address"
 msgstr "取件地址:"
 
-#: package_request/models.py:42
+#: package_request/models.py:51
 msgid "recipient phone:"
 msgstr "收件人手機號碼:"
 
-#: package_request/models.py:43
+#: package_request/models.py:52
 msgid "recipient address"
 msgstr "配送地址:"
 
-#: package_request/models.py:44
+#: package_request/models.py:53
 msgid "package description:"
 msgstr "包裹外觀:"
 
-#: package_request/models.py:45
+#: package_request/models.py:54
 msgid "fragile?"
 msgstr "是否為易碎品？"
 
-#: package_request/models.py:46
+#: package_request/models.py:55
 msgid "preferred delivery time:"
 msgstr "方便駕駛收貨的時段:"
 
-#: package_request/models.py:47
+#: package_request/models.py:56
 msgid "does the package need to be refrigerated?"
 msgstr "此包裹需要低溫配送嗎？"
 
-#: package_request/models.py:54
+#: package_request/models.py:63
 msgid "width: (cm)"
 msgstr "寬度: (cm)"
 
-#: package_request/models.py:55
+#: package_request/models.py:64
 msgid "height: (cm)"
 msgstr "高度: (cm)"
 
-#: package_request/models.py:56
+#: package_request/models.py:65
 msgid "depth: (cm)"
 msgstr "長度: (cm)"
 
-#: package_request/models.py:57
+#: package_request/models.py:66
 msgid "package weight: (kg)"
 msgstr "重量: (cm)"
 
@@ -439,33 +557,13 @@ msgstr "您已完成此任務"
 msgid "Check available jobs"
 msgstr "可選取的任務"
 
-#: package_request/templates/create_routes.html:14
+#: package_request/templates/create_routes.html:15
 msgid "Route List"
 msgstr "路線清單"
 
-#: package_request/templates/current_job.html:24
-msgid "Jobs"
-msgstr "任務"
-
-#: package_request/templates/current_job.html:33
-msgid "min"
-msgstr "分"
-
-#: package_request/templates/current_job.html:34
-msgid "NTD"
-msgstr "元"
-
-#: package_request/templates/current_job.html:48
-msgid "No jobs available"
-msgstr "暫無任務"
-
-#: package_request/templates/current_job.html:55
-msgid "Archived Jobs"
-msgstr "已封存之任務"
-
-#: package_request/templates/current_job.html:70
-msgid "No archived jobs"
-msgstr "無封存任務"
+#: package_request/templates/create_routes.html:18
+msgid "Route:"
+msgstr "運送路線"
 
 #: package_request/templates/home.html:10
 msgid "Welcome home"
@@ -484,11 +582,15 @@ msgid "View progress"
 msgstr "查詢進度"
 
 #: package_request/templates/home.html:26
-msgid "View Requests"
+msgid "View Requests (Pickup)"
 msgstr "選取新任務"
 
-#: package_request/templates/home.html:30 templates/driver_sidebar.html:42
-msgid "Current Jobs"
+#: package_request/templates/home.html:30
+msgid "Scan QR Code (Deliver)"
+msgstr ""
+
+#: package_request/templates/home.html:34
+msgid "Current Jobs "
 msgstr "已選任務"
 
 #: package_request/templates/job_detail.html:29
@@ -529,13 +631,8 @@ msgid "Available Tasks"
 msgstr "可選取的任務"
 
 #: package_request/templates/job_list.html:16
-#: package_request/templates/select_packages.html:16
 msgid "Routes"
 msgstr "運送路線"
-
-#: package_request/templates/job_list.html:33
-msgid "Date"
-msgstr "日期:"
 
 #: package_request/templates/job_list.html:45
 #: package_request/templates/package_history.html:49
@@ -546,6 +643,10 @@ msgstr "檢視"
 #: package_request/templates/job_list.html:57
 msgid "You have not been assigned a route as of yet!"
 msgstr "尚未成立路線"
+
+#: package_request/templates/job_scanner.html:10
+msgid "Job Scanner"
+msgstr ""
 
 #: package_request/templates/package_history.html:9
 msgid "These are the past requests you have made: "
@@ -606,7 +707,7 @@ msgstr "包裹序號(ID)"
 
 #: package_request/templates/package_history.html:64
 #: package_request/templates/package_list.html:72
-#: package_request/templates/package_list.html:95
+#: package_request/templates/package_list.html:110
 msgid "Close"
 msgstr "關閉"
 
@@ -648,7 +749,7 @@ msgstr "請確認是否要取消遞送申請"
 msgid "This is the information of your active request"
 msgstr "目前的申請資料"
 
-#: package_request/templates/package_list.html:109
+#: package_request/templates/package_list.html:124
 msgid "You have no package requests made."
 msgstr "目前尚未建立申請"
 
@@ -683,6 +784,14 @@ msgstr "請輸入包裹內容物"
 msgid "Confirm order"
 msgstr "確認"
 
+#: package_request/templates/success_or_fail.html:11
+msgid "Successfully added task"
+msgstr " "
+
+#: package_request/templates/success_or_fail.html:12
+msgid "Scan Another Code"
+msgstr ""
+
 #: package_request/templates/successful_request.html:20
 msgid "Successfully submited a request! "
 msgstr "您已成功送出遞送申請！ "
@@ -697,42 +806,48 @@ msgstr "我們的服務人員將會盡速向您領取所要寄送的包裹，謝
 msgid "Return to homepage"
 msgstr "回到首頁"
 
-#: package_request/views.py:122
+#: package_request/views.py:123
 msgid ""
 "You must be within our stations' range to send a parcel. Please see our "
 "locations page."
 msgstr "配送地必須位於現階段有效之集貨範圍中"
 
-#: package_request/views.py:172
+#: package_request/views.py:173
 msgid ""
 "Sender must be within our stations' range to send a package. Please see our "
 "locations page."
 msgstr "配送地必須位於現階段有效之集貨範圍中"
 
-#: package_request/views.py:177
+#: package_request/views.py:178
 msgid ""
 "Sender and receiver address should not be within the same station range."
 msgstr "寄件與收件人不能位於同一個集貨範圍之中"
 
-#: package_request/views.py:245
+#: package_request/views.py:246
 msgid "Something went wrong. Please try again."
 msgstr "發生錯誤，請重新嘗試。"
 
-#: package_request/views.py:407
+#: package_request/views.py:247
+msgid "Unable to determine the distance."
+msgstr ""
+
+#: package_request/views.py:416
+msgid "Packages successfully selected!"
+msgstr ""
+
+#: package_request/views.py:435
 msgid "Job is no longer available."
 msgstr "無法領取此任務"
 
-#: package_request/views.py:414
+#: package_request/views.py:442
 msgid "Job is successfully taken."
 msgstr "已成功領取任務"
 
-#: package_request/views.py:449
-msgid "Job has successfully started!"
-msgstr "已開始執行任務"
-
-#: package_request/views.py:454
-msgid "Job has successfully completed!"
-msgstr "成功完成任務！"
+#: package_request/views.py:605
+#, fuzzy
+#| msgid "Reset it here"
+msgid "Do something here"
+msgstr "重新設定密碼 "
 
 #: templates/401.html:9
 msgid "401 - Unauthorized:"
@@ -766,7 +881,7 @@ msgstr ""
 msgid "Company privacy policy.."
 msgstr ""
 
-#: templates/customer_sidebar.html:28 templates/driver_sidebar.html:29
+#: templates/customer_sidebar.html:28 templates/driver_sidebar.html:27
 msgid "Home"
 msgstr "首頁"
 
@@ -778,7 +893,7 @@ msgstr "配送包裹"
 msgid "View Progress"
 msgstr "查詢進度"
 
-#: templates/customer_sidebar.html:71 templates/driver_sidebar.html:57
+#: templates/customer_sidebar.html:71 templates/driver_sidebar.html:52
 msgid "History"
 msgstr "紀錄"
 
@@ -786,74 +901,81 @@ msgstr "紀錄"
 msgid "Log-out"
 msgstr "登出"
 
-#: templates/driver_sidebar.html:79
-msgid "logout"
-msgstr "登出"
+#: templates/driver_sidebar.html:38
+msgid "Current Jobs"
+msgstr "已選任務"
 
-#: templates/driver_sidebar.html:80 templates/navbar.html:38
-#: templates/navbar.html:49
+#: templates/driver_sidebar.html:71 templates/navbar.html:40
+#: templates/navbar.html:66
 msgid "Log out"
 msgstr "登出"
 
-#: templates/index.html:44 users/templates/sign-up.html:18
+#: templates/index.html:54 users/templates/sign-up.html:18
 msgid "Sign up"
 msgstr "註冊"
 
-#: templates/index.html:51
+#: templates/index.html:61
 msgid "Delivery Made Simple"
 msgstr "配送可以這麼簡單"
 
-#: templates/index.html:53 users/templates/sign-up.html:43
+#: templates/index.html:63 users/templates/sign-up.html:43
 msgid "Log in"
 msgstr "登入"
 
-#: templates/index.html:56 users/templates/sign-in.html:30
+#: templates/index.html:66 users/templates/sign-in.html:30
 msgid "Don't have an account?"
 msgstr "還沒有帳戶嗎？"
 
-#: templates/index.html:56
+#: templates/index.html:66
 msgid "Create One!"
 msgstr "趕快來建立吧！"
 
-#: templates/index.html:62
+#: templates/index.html:72
 msgid "What we do:"
 msgstr "我們的服務："
 
-#: templates/index.html:65
+#: templates/index.html:75
+#, fuzzy
+#| msgid ""
+#| "We connect drivers with other users that wish to deliver packages.\n"
+#| "            Currently, our services are only offered between and within "
+#| "Taipei and Hualien."
 msgid ""
 "We connect drivers with other users that wish to deliver packages.\n"
-"            Currently, our services are only offered between and within Taipei and Hualien."
+"                Currently, our services are only offered between and within "
+"Taipei and Hualien."
 msgstr ""
 "我們為駕駛與需要寄送包裹的使用者建立橋樑。\n"
 "現階段，我們的服務範圍為台北市與花蓮縣之內與之間的往返配送。"
 
-#: templates/index.html:74
+#: templates/index.html:84
 msgid "Our Mission:"
 msgstr "我們的使命："
 
-#: templates/index.html:77
+#: templates/index.html:87
 msgid ""
 "We aim to make package deliveries as simple and as convenient as possible\n"
-"                while ensuring that the packages arrive safely at their destination."
+"                while ensuring that the packages arrive safely at their "
+"destination."
 msgstr "我們致力於提升包裹配送之效率與便利性，同時確保包裹能安穩地抵達目的地。"
 
-#: templates/index.html:85 templates/register.html:70
+#: templates/index.html:95 templates/register.html:70
 msgid "Have a concern?"
 msgstr "有其他疑問？"
 
-#: templates/index.html:86 templates/register.html:71
+#: templates/index.html:96 templates/register.html:71
 msgid "Contact Us"
 msgstr "歡迎與我們聯繫。"
 
-#: templates/index.html:87 templates/register.html:72
+#: templates/index.html:97 templates/register.html:72
 msgid "Our Future Plans"
 msgstr "我們的藍圖"
 
-#: templates/index.html:88 templates/register.html:73
+#: templates/index.html:98 templates/register.html:73
 msgid "Terms of Use"
 msgstr "服務條款"
 
-#: templates/index.html:89 templates/register.html:74
+#: templates/index.html:99 templates/register.html:74
 msgid "Privacy Policy"
 msgstr "隱私政策"
 
@@ -864,9 +986,11 @@ msgstr "登入"
 #: templates/register.html:48
 msgid ""
 "\n"
-"            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> to start sending packages between Hualien and Taipei.</p>\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">customer</span> "
+"to start sending packages between Hualien and Taipei.</p>\n"
 "            <br>\n"
-"            <p>Register as a <span class=\"reg_pg_emphasis\">driver</span> to join our team and start delivering packages for users.</p>\n"
+"            <p>Register as a <span class=\"reg_pg_emphasis\">driver</span> "
+"to join our team and start delivering packages for users.</p>\n"
 "            "
 msgstr ""
 "\n"
@@ -893,10 +1017,6 @@ msgstr "名字"
 #: users/models.py:12 users/models.py:37 users/models.py:55
 msgid "last name"
 msgstr "姓氏"
-
-#: users/models.py:13 users/models.py:38 users/models.py:56
-msgid "username"
-msgstr "帳號"
 
 #: users/models.py:14 users/models.py:39 users/models.py:58
 msgid "email"
@@ -932,8 +1052,8 @@ msgstr " 變更密碼"
 
 #: users/templates/reset_password.html:12
 msgid ""
-"Enter your email address below, and we will email instructions for setting a"
-" new one."
+"Enter your email address below, and we will email instructions for setting a "
+"new one."
 msgstr "請輸入您的email信箱已進行密碼變更"
 
 #: users/templates/reset_password.html:14
@@ -952,7 +1072,7 @@ msgstr "您已成功變更密碼"
 msgid "Your password has been reset successfully. You may log in again now."
 msgstr "您已成功變更密碼"
 
-#: users/templates/reset_password_complete.html:13
+#: users/templates/reset_password_complete.html:14
 msgid "Go to login page"
 msgstr "回到登入頁面"
 
@@ -969,7 +1089,8 @@ msgid ""
 "                <br>\n"
 "                <br>\n"
 "                If you do not receive an email,\n"
-"                please make sure you have entered the address you registered with,\n"
+"                please make sure you have entered the address you registered "
+"with,\n"
 "                and check your spam folder.\n"
 "                "
 msgstr ""
@@ -1044,10 +1165,6 @@ msgstr "聯絡資訊"
 msgid "Email"
 msgstr "email:"
 
-#: users/templates/users/account.html:61
-msgid "Phone"
-msgstr "電話號碼:"
-
 #: users/templates/users/account.html:66
 msgid "Location"
 msgstr "地點"
@@ -1091,6 +1208,41 @@ msgstr "已完成"
 #: users/views.py:159 users/views.py:177
 msgid "Account details updated successfully."
 msgstr "已完成編輯"
+
+#, fuzzy
+#~| msgid "Archived Jobs"
+#~ msgid "Active Jobs"
+#~ msgstr "已封存之任務"
+
+#~ msgid "Pick-Up"
+#~ msgstr "取件地址:"
+
+#~ msgid "Deliver"
+#~ msgstr "配送地點:"
+
+#~ msgid "Create Route"
+#~ msgstr "建立運送群組"
+
+#~ msgid "Date: "
+#~ msgstr "日期:"
+
+#~ msgid "logout"
+#~ msgstr "登出"
+
+#~ msgid "Jobs"
+#~ msgstr "任務"
+
+#~ msgid "min"
+#~ msgstr "分"
+
+#~ msgid "NTD"
+#~ msgstr "元"
+
+#~ msgid "No archived jobs"
+#~ msgstr "無封存任務"
+
+#~ msgid "Job has successfully started!"
+#~ msgstr "已開始執行任務"
 
 #~ msgid "We'll keep your information safe."
 #~ msgstr "您所填入的資訊將會受到安全保障"
