@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <p><b>{% trans "Package ID:" %} </b> {{ package_obj.package_id }}</p><br>
-                                            <p><b> Package Created:  </b> {{ package_obj.order_date }}</p><br>
+                                            <p><b> {% trans "Package Created: " %} </b> {{ package_obj.order_date }}</p><br>
                                             <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
                                             <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
                                             <p><b>{% trans "Item Description:" %} </b> {{ package_obj.package_description }}</p><br>

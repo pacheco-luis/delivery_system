@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Job Scanner{% endblock title %}
 {% block content %}
-
+{% load i18n %}
 {% block head %}
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {% endblock head %}
 
 <div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
-    <h1>Add Success</h1>
-    <a href="{% url 'package_request_app:job_scanner' %}" class="btn btn-primary">Continue Scanning</a>
+    <h1>{% trans "Sucessfully Added Task" %}</h1>
+    <a href="{% url 'package_request_app:job_scanner' %}" class="btn btn-primary">{% trans "Continue Scanning" %}</a>
 </div>
 
 {% endblock content %}

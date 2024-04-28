@@ -2,19 +2,20 @@
 {% load static %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
+{% load i18n %}
 
 <div id="pack-list-body">
-    <h1 style="padding: 0.5em;">Active Jobs</h1>
+    <h1 style="padding: 0.5em;">{% trans "Active Jobs" %}</h1>
 
     <ul class="ul-job-list card">
         <ul class="nav nav-tabs tab">
             <li class="nav-item">
                 <a class="nav-link {% if active_tab == 'pickup' %}active{% endif %}" aria-current="page"
-                    href="{% url 'package_request_app:job_current' %}">Pick-Up</a>
+                    href="{% url 'package_request_app:job_current' %}">{% trans "Pick-Up" %}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if active_tab == 'deliver' %}active{% endif %}"
-                    href="{% url 'package_request_app:job_deliver' %}">Deliver</a>
+                    href="{% url 'package_request_app:job_deliver' %}">{% trans "Deliver" %}</a>
             </li>
         </ul>
         <form action="" method="POST">
@@ -24,8 +25,8 @@
                     <tr style="background-color: #FFA758;">
                         <th scope="col">#</th>
                         <th scope="col">ID</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">{% trans "Date"%}</th>
+                        <th scope="col">{% trans "Action" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +41,7 @@
                                 <input class="form-check-input" type="checkbox" name="select_packages"
                                     value="{{ dp.package_id }}" id="flexCheckChecked" checked>
                                 <label class="form-check-label" for="flexCheckChecked">
-                                    Add
+                                    {% trans "Add" %}
                                 </label>
                             </div>
                         </td>
@@ -53,7 +54,7 @@
                             <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
                                 <img src="{% static 'images/package_listing/empty_package.png' %}"
                                     alt="Empty Package Image">
-                                <p>No packages available!</p>
+                                <p>{% trans "No packages available!" %}</p>
                             </div>
                         </td>
                     </tr>
@@ -62,12 +63,12 @@
             </table>
 
             {% if driver_packages %}
-                <div><button class="btn btn-primary" type="submit">Create Route</button></div>
+                <div><button class="btn btn-primary" type="submit">{% trans "Create Route" %}</button></div>
             {% endif %}
             
             {% if driver_route %}
                 {% for r in driver_route %}
-                    <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">View Route</a></div>
+                    <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">{% trans "View Route" %}</a></div>
                 {% endfor %}
             {% endif %}
         </form>

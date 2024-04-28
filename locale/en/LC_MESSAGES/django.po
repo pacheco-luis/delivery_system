@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 17:15+0800\n"
+"POT-Creation-Date: 2024-04-29 02:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,12 +188,18 @@ msgstr ""
 #: management/templates/admin_sidebar.html:39
 #: management/templates/clusters.html:40
 #: package_request/templates/job_list.html:13
+#: package_request/templates/select_packages.html:13
 msgid "Packages"
 msgstr ""
 
 #: management/templates/admin_packages.html:24
 #: management/templates/users.html:24
 msgid "Search by username"
+msgstr ""
+
+#: management/templates/admin_packages.html:25
+#: management/templates/users.html:25
+msgid "Search"
 msgstr ""
 
 #: management/templates/admin_packages.html:53
@@ -221,7 +227,10 @@ msgid "Phone"
 msgstr ""
 
 #: management/templates/admin_packages.html:66
+#: package_request/templates/current_job.html:28
+#: package_request/templates/job_deliver.html:27
 #: package_request/templates/job_list.html:33
+#: package_request/templates/select_packages.html:26
 msgid "Date"
 msgstr ""
 
@@ -255,7 +264,7 @@ msgid "A very long option"
 msgstr ""
 
 #: management/templates/admin_sidebar.html:71
-#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:63
+#: templates/customer_sidebar.html:97 templates/driver_sidebar.html:76
 msgid "Settings"
 msgstr ""
 
@@ -278,6 +287,10 @@ msgstr ""
 
 #: management/templates/admin_stations.html:41
 msgid "Radius"
+msgstr ""
+
+#: management/templates/admin_stations.html:64
+msgid "nothing to display here"
 msgstr ""
 
 #: management/templates/admin_stations.html:86
@@ -334,10 +347,6 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
-#: management/templates/users.html:25
-msgid "Search"
-msgstr ""
-
 #: management/templates/users.html:44
 msgid "All users:"
 msgstr ""
@@ -376,7 +385,7 @@ msgstr ""
 msgid "Invalid input format. Please check your data and submit again."
 msgstr ""
 
-#: management/views.py:135 package_request/views.py:483
+#: management/views.py:135 package_request/views.py:481
 msgid "Unable to create new Routes. No available Parcels."
 msgstr ""
 
@@ -419,6 +428,35 @@ msgstr ""
 
 #: management/views.py:363
 msgid "We encountered an issue while editing the user. Please try again."
+msgstr ""
+
+#: notifications/templates/notification.html:25
+msgid "Notify"
+msgstr ""
+
+#: notifications/templates/notifications_viewer.html:8
+#: templates/customer_sidebar.html:84 templates/driver_sidebar.html:65
+#: templates/navbar.html:50 templates/navbar.html:170
+msgid "Notifications"
+msgstr ""
+
+#: notifications/templates/notifications_viewer.html:16
+msgid "Notification Heading:"
+msgstr ""
+
+#: notifications/templates/notifications_viewer.html:17
+msgid "Created:"
+msgstr ""
+
+#: notifications/templates/notifications_viewer.html:38
+#: package_request/templates/job_list.html:45
+#: package_request/templates/package_history.html:49
+#: package_request/templates/package_list.html:79
+msgid "View"
+msgstr ""
+
+#: notifications/templates/notifications_viewer.html:49
+msgid "There are no new notifications"
 msgstr ""
 
 #: package_request/forms.py:9
@@ -517,20 +555,8 @@ msgstr ""
 msgid "package weight: (kg)"
 msgstr ""
 
-#: package_request/templates/cluster_route.html:7
+#: package_request/templates/cluster_route.html:25
 msgid "This is the map of the route you must take to complete all requests."
-msgstr ""
-
-#: package_request/templates/cluster_route.html:9
-msgid "map"
-msgstr ""
-
-#: package_request/templates/cluster_route.html:11
-msgid "Undo"
-msgstr ""
-
-#: package_request/templates/cluster_route.html:11
-msgid "Return"
 msgstr ""
 
 #: package_request/templates/completed_job.html:33
@@ -541,12 +567,49 @@ msgstr ""
 msgid "Check available jobs"
 msgstr ""
 
-#: package_request/templates/create_routes.html:15
+#: package_request/templates/create_routes.html:14
 msgid "Route List"
 msgstr ""
 
-#: package_request/templates/create_routes.html:18
-msgid "Route:"
+#: package_request/templates/current_job.html:8
+#: package_request/templates/job_deliver.html:7
+msgid "Active Jobs"
+msgstr ""
+
+#: package_request/templates/current_job.html:14
+#: package_request/templates/job_deliver.html:13
+msgid "Pick-Up"
+msgstr ""
+
+#: package_request/templates/current_job.html:18
+#: package_request/templates/job_deliver.html:17
+msgid "Deliver"
+msgstr ""
+
+#: package_request/templates/current_job.html:29
+#: package_request/templates/job_deliver.html:28
+#: package_request/templates/select_packages.html:27
+msgid "Action"
+msgstr ""
+
+#: package_request/templates/current_job.html:44
+#: package_request/templates/job_deliver.html:43
+#: package_request/templates/select_packages.html:41
+msgid "Add"
+msgstr ""
+
+#: package_request/templates/current_job.html:57
+#: package_request/templates/job_deliver.html:56
+msgid "No packages available!"
+msgstr ""
+
+#: package_request/templates/current_job.html:66
+#: package_request/templates/job_deliver.html:65
+msgid "Create Route"
+msgstr ""
+
+#: package_request/templates/current_job.html:71
+msgid "View Route"
 msgstr ""
 
 #: package_request/templates/home.html:10
@@ -611,17 +674,13 @@ msgid "Customer"
 msgstr ""
 
 #: package_request/templates/job_list.html:8
+#: package_request/templates/select_packages.html:8
 msgid "Available Tasks"
 msgstr ""
 
 #: package_request/templates/job_list.html:16
+#: package_request/templates/select_packages.html:16
 msgid "Routes"
-msgstr ""
-
-#: package_request/templates/job_list.html:45
-#: package_request/templates/package_history.html:49
-#: package_request/templates/package_list.html:79
-msgid "View"
 msgstr ""
 
 #: package_request/templates/job_list.html:57
@@ -689,6 +748,10 @@ msgstr ""
 msgid "Package ID:"
 msgstr ""
 
+#: package_request/templates/package_history.html:58
+msgid "Package Created: "
+msgstr ""
+
 #: package_request/templates/package_history.html:64
 #: package_request/templates/package_list.html:72
 #: package_request/templates/package_list.html:110
@@ -733,8 +796,32 @@ msgstr ""
 msgid "This is the information of your active request"
 msgstr ""
 
+#: package_request/templates/package_list.html:88
+msgid "Pickup Address:"
+msgstr ""
+
+#: package_request/templates/package_list.html:89
+msgid "Package Created:"
+msgstr ""
+
+#: package_request/templates/package_list.html:98
+msgid "Not picked up yet"
+msgstr ""
+
+#: package_request/templates/package_list.html:106
+msgid "Not delivered yet"
+msgstr ""
+
 #: package_request/templates/package_list.html:124
 msgid "You have no package requests made."
+msgstr ""
+
+#: package_request/templates/select_packages.html:53
+msgid "No packages available for pickup!"
+msgstr ""
+
+#: package_request/templates/select_packages.html:62
+msgid "Select Packages"
 msgstr ""
 
 #: package_request/templates/step1.html:10
@@ -768,25 +855,25 @@ msgstr ""
 msgid "Confirm order"
 msgstr ""
 
+#: package_request/templates/success_or_fail.html:10
+msgid "Sucessfully Added Task"
+msgstr ""
+
 #: package_request/templates/success_or_fail.html:11
-msgid "Successfully added task"
+msgid "Continue Scanning"
 msgstr ""
 
-#: package_request/templates/success_or_fail.html:12
-msgid "Scan Another Code"
-msgstr ""
-
-#: package_request/templates/successful_request.html:20
+#: package_request/templates/successful_request.html:10
 msgid "Successfully submited a request! "
 msgstr ""
 
-#: package_request/templates/successful_request.html:21
+#: package_request/templates/successful_request.html:11
 msgid ""
 "Please hang onto your package while we send our agents to pick it up from "
 "your given address. Thank you for your patience!"
 msgstr ""
 
-#: package_request/templates/successful_request.html:22 templates/401.html:25
+#: package_request/templates/successful_request.html:12 templates/401.html:25
 msgid "Return to homepage"
 msgstr ""
 
@@ -815,19 +902,19 @@ msgstr ""
 msgid "Unable to determine the distance."
 msgstr ""
 
-#: package_request/views.py:416
+#: package_request/views.py:412
 msgid "Packages successfully selected!"
 msgstr ""
 
-#: package_request/views.py:435
+#: package_request/views.py:431
 msgid "Job is no longer available."
 msgstr ""
 
-#: package_request/views.py:442
+#: package_request/views.py:438
 msgid "Job is successfully taken."
 msgstr ""
 
-#: package_request/views.py:605
+#: package_request/views.py:601
 msgid "Do something here"
 msgstr ""
 
@@ -879,7 +966,7 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: templates/customer_sidebar.html:97
+#: templates/customer_sidebar.html:110
 msgid "Log-out"
 msgstr ""
 
@@ -887,71 +974,83 @@ msgstr ""
 msgid "Current Jobs"
 msgstr ""
 
-#: templates/driver_sidebar.html:71 templates/navbar.html:40
-#: templates/navbar.html:66
+#: templates/driver_sidebar.html:86 templates/navbar.html:146
+#: templates/navbar.html:264
 msgid "Log out"
 msgstr ""
 
-#: templates/index.html:54 users/templates/sign-up.html:18
+#: templates/index.html:51 users/templates/sign-up.html:18
 msgid "Sign up"
 msgstr ""
 
-#: templates/index.html:61
+#: templates/index.html:58
 msgid "Delivery Made Simple"
 msgstr ""
 
-#: templates/index.html:63 users/templates/sign-up.html:43
+#: templates/index.html:60 users/templates/sign-up.html:43
 msgid "Log in"
 msgstr ""
 
-#: templates/index.html:66 users/templates/sign-in.html:30
+#: templates/index.html:63 users/templates/sign-in.html:30
 msgid "Don't have an account?"
 msgstr ""
 
-#: templates/index.html:66
+#: templates/index.html:63
 msgid "Create One!"
 msgstr ""
 
-#: templates/index.html:72
+#: templates/index.html:69
 msgid "What we do:"
 msgstr ""
 
-#: templates/index.html:75
+#: templates/index.html:72
 msgid ""
 "We connect drivers with other users that wish to deliver packages.\n"
 "                Currently, our services are only offered between and within "
 "Taipei and Hualien."
 msgstr ""
 
-#: templates/index.html:84
+#: templates/index.html:81
 msgid "Our Mission:"
 msgstr ""
 
-#: templates/index.html:87
+#: templates/index.html:84
 msgid ""
 "We aim to make package deliveries as simple and as convenient as possible\n"
 "                while ensuring that the packages arrive safely at their "
 "destination."
 msgstr ""
 
-#: templates/index.html:95 templates/register.html:70
+#: templates/index.html:92 templates/register.html:70
 msgid "Have a concern?"
 msgstr ""
 
-#: templates/index.html:96 templates/register.html:71
+#: templates/index.html:93 templates/register.html:71
 msgid "Contact Us"
 msgstr ""
 
-#: templates/index.html:97 templates/register.html:72
+#: templates/index.html:94 templates/register.html:72
 msgid "Our Future Plans"
 msgstr ""
 
-#: templates/index.html:98 templates/register.html:73
+#: templates/index.html:95 templates/register.html:73
 msgid "Terms of Use"
 msgstr ""
 
-#: templates/index.html:99 templates/register.html:74
+#: templates/index.html:96 templates/register.html:74
 msgid "Privacy Policy"
+msgstr ""
+
+#: templates/navbar.html:53 templates/navbar.html:173
+msgid "read all"
+msgstr ""
+
+#: templates/navbar.html:120 templates/navbar.html:238
+msgid "There are no new notifications!"
+msgstr ""
+
+#: templates/navbar.html:130 templates/navbar.html:248
+msgid "see all"
 msgstr ""
 
 #: templates/register.html:42

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Job Scanner{% endblock title %}
 {% block content %}
-
+{% load i18n %}
 {% block head %}
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {% endblock head %}
 
 <div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
-    <h1>Job Scanner</h1>
+    <h1>{% trans "Job Scanner" %}</h1>
 
     <div id="reader"></div>
     <div id="result"></div>

@@ -45,10 +45,10 @@
               <div class="container" >
                 <div class="row notification_header" style="padding-top: 0;">
                   <div class="w-50" style="padding: 0; text-align: left;">
-                    <a href="#" style="font-style: none; text-decoration: none; color:#000;">Notifications</a>
+                    <a href="#" style="font-style: none; text-decoration: none; color:#000;">{% trans "Notifications" %}</a>
                   </div>
                   <div class="w-50 col" style="padding: 0; text-align: right;" >
-                    <a style="line-height: 1rem;" href="#">read all</a>
+                    <a style="line-height: 1rem;" href="#">{% trans "read all" %}</a>
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@
                         <div>
                           <img src="{% static 'images/package_listing/empty_package.png' %}" alt="empty" style="height: 250px; filter: grayscale(40%);">
                         </div>
-                        <span>There is nothing to display here!</span>
+                        <span>{% trans "There are no new notifications!"%}</span>
                       </div>
                     </div>
                   </div>
@@ -125,7 +125,7 @@
                 <div class="container" style="border-top: 1px solid #2b2b2b17;" >
                   <div class="row notification_header" style="padding-bottom: 0;">
                     <div class="w-100" style="padding: 0; text-align: center;">
-                      <a href="{% url 'notifications_app:notifications_viewer'%}">see all</a>
+                      <a href="{% url 'notifications_app:notifications_viewer'%}">{% trans "see all" %}</a>
                     </div>
                   </div>
                 </div>
@@ -161,10 +161,10 @@
               <div class="container" >
                 <div class="row notification_header" style="padding-top: 0;">
                   <div class="w-50" style="padding: 0; text-align: left;">
-                    <a href="#" style="font-style: none; text-decoration: none; color:#000;">Notifications</a>
+                    <a href="#" style="font-style: none; text-decoration: none; color:#000;">{% trans "Notifications" %}</a>
                   </div>
                   <div class="w-50 col" style="padding: 0; text-align: right;" >
-                    <a style="line-height: 1rem;" href="#">read all</a>
+                    <a style="line-height: 1rem;" href="#">{% trans "read all" %}</a>
                   </div>
                 </div>
               </div>
@@ -229,7 +229,7 @@
                         <div>
                           <img src="{% static 'images/package_listing/empty_package.png' %}" alt="empty" style="height: 250px; filter: grayscale(40%);">
                         </div>
-                        <span>There is nothing to display here!</span>
+                        <span>{% trans "There are no new notifications!" %}</span>
                       </div>
                     </div>
                   </div>
@@ -239,7 +239,7 @@
                 <div class="container" style="border-top: 1px solid #2b2b2b17;" >
                   <div class="row notification_header" style="padding-bottom: 0;">
                     <div class="w-100" style="padding: 0; text-align: center;">
-                      <a href="{% url 'notifications_app:notifications_viewer'%}">see all</a>
+                      <a href="{% url 'notifications_app:notifications_viewer'%}">{% trans "see all" %}</a>
                     </div>
                   </div>
                 </div>
