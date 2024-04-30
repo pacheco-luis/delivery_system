@@ -124,11 +124,13 @@ class Package(models.Model):
 class Route(models.Model):
     STATUS_UNASSIGNED = 'unassigned'
     STATUS_ASSIGNED = 'assigned'
+    STATUS_TO_DELIVER = 'to_deliver'
     STATUS_COMPLETED = 'completed'
     
     STATUSES = (
         ( STATUS_UNASSIGNED, STATUS_UNASSIGNED),
         ( STATUS_ASSIGNED, STATUS_ASSIGNED),
+        ( STATUS_TO_DELIVER, STATUS_TO_DELIVER),
         ( STATUS_COMPLETED, STATUS_COMPLETED)
         
     )
@@ -156,6 +158,16 @@ class Route(models.Model):
 
         return formatted_route.strip()
     
+    def get_formatted_route_deliver(self):
+        formatted_route = ''
+
+        for parcel in self.parcels.all():
+            formatted_route += f"{parcel.recipient_address}"
+            if parcel != self.parcels.all().last():
+                formatted_route += " -> "
+
+        return formatted_route.strip()
+    
     def get_senders_formatted_coords(self):
         '''
             function to get sender's coordinates to encode for waypoints
@@ -164,6 +176,19 @@ class Route(models.Model):
         
         for p in self.parcels.all():
             formatted_coord += f"{p.sender_address.latitude},+{p.sender_address.longitude}"
+            if p != self.parcels.all().last():
+                formatted_coord += '|'
+                
+        return formatted_coord
+    
+    def get_recipients_formatted_coords(self):
+        '''
+            function to get recipient's coordinates to encode for waypoints
+        '''
+        formatted_coord = ''
+        
+        for p in self.parcels.all():
+            formatted_coord += f"{p.recipient_address.latitude},+{p.recipient_address.longitude}"
             if p != self.parcels.all().last():
                 formatted_coord += '|'
                 

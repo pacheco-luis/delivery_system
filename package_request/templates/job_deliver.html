@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Jobs{% endblock title %}
-{% block content %}
 {% load i18n %}
+{% block title %}Jobs{% endblock title %}
+
+{% block content %}
 <div id="pack-list-body">
     <h1 style="padding: 0.5em;">{% trans "Active Jobs" %}</h1>
 
@@ -63,6 +64,12 @@
 
             {% if driver_packages %}
             <div><button class="btn btn-primary" type="submit">{% trans "Create Route" %}</button></div>
+            {% endif %}
+
+            {% if driver_route %}
+                {% for r in driver_route %}
+                    <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route_deliver' r.id %}" type="submit">{% trans "View Route" %}</a></div>
+                {% endfor %}
             {% endif %}
         </form>
     </ul>

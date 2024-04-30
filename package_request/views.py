@@ -589,20 +589,165 @@ def current_job(request):
     }
     return render(request, 'current_job.html', context)
 
+# @login_required(login_url='users:login')
+# def job_deliver(request):
+#     if request.user.is_driver is not True :
+#         return render(request, '401.html')
+    
+#     driver = Driver.objects.get(user=request.user)
+#     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
+
+#     if request.method == 'POST':
+#         messages.success(request, gettext('Do something here'))
+
+#     context = {
+#         'active_tab' : 'deliver',
+#         'driver_packages' : driver_packages,
+#     }
+#     return render(request, 'job_deliver.html', context)
+
 @login_required(login_url='users:login')
 def job_deliver(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
     
     driver = Driver.objects.get(user=request.user)
-    driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
-
+    driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_TRANSIT)
+    driver_route = Route.objects.filter(driver=driver)
+    print(driver_route)
+    
     if request.method == 'POST':
-        messages.success(request, gettext('Do something here'))
+        
+        selected_packages = request.POST.getlist('select_packages')
+        packages = driver_packages.filter(package_id__in=selected_packages)
+        
+        # verify packages in Packages to not belong to unassigned routes
+        # If in unassigned routes, delete unassigned route
+        unassign_routes = Route.objects.filter(status= Route.STATUS_UNASSIGNED)
+        to_delete = unassign_routes.filter(parcels__in=packages)
+        to_delete.delete()
+          
+        # Create route
+        print('attempting to create routes')
+            
+        # Coordinates of the depot
+        if packages.count():
+            depot = packages[0].get_sender_station().get_coordinates_as_float()
+            depot = [depot[0], depot[1]]
 
+        # Get all the parcels
+        parcels = packages
+            
+        # detecting if no packages avalable to cluster
+        if parcels.count() == 0 :
+            messages.error( request, gettext("Unable to create new Routes. No available Parcels."))
+            return redirect( 'management:routes' )
+
+        # Get the coordinates of the parcels
+        # Add the depot as the first coordinate
+        coordinates = [
+            [float(parcel.recipient_address.latitude),
+            float(parcel.recipient_address.longitude)]
+            for parcel in parcels
+        ]
+        coordinates.insert(0, depot)
+
+        # Set the capacity of the couriers
+        capacity = [99999, 99999, 99999, 99999]
+
+        # Set the dimensions and weight of the parcels
+        items = [
+            [float(parcel.width),
+            float(parcel.height),
+            float(parcel.depth),
+            float(parcel.estimate_package_weight_value)]
+            for parcel in parcels
+        ]
+
+        # Get the distance and duration matrix
+        distance_matrix = []
+        # Google Maps API configuration
+        API_key=settings.PLACES_MAPS_API_KEY
+        base_url = 'https://maps.googleapis.com/maps/api/distancematrix/json'
+        origins = [[f'{coordinates[i][0]},{coordinates[i][1]}'] for i in range(len(coordinates))]
+        destinations = origins.copy()
+
+        # Get the distance and duration matrix
+        for i in range(0, len(origins), 6):
+            chunk_origins = origins[i:i+6]
+
+            for i in range(0, len(destinations), 6):
+                chunk_destinations = destinations[i:i+6]
+
+                params = {
+                'origins': '|'.join([','.join(origin) for origin in chunk_origins]),
+                'destinations': '|'.join([','.join(destination) for destination in chunk_destinations]),
+                'key': API_key
+                }
+
+                response = requests.get(url=base_url, params=params)
+                data = response.json()
+                
+                for k, _ in enumerate(chunk_origins):
+                    distance_matrix.append([])
+
+                for l, _ in enumerate(chunk_destinations):
+                    status = data['rows'][k]['elements'][l]['status']
+
+                    if status == 'OK':
+                        distance = data['rows'][k]['elements'][l]['distance']['value']
+
+                        distance_matrix[-1].append(distance)
+                    else:
+                        distance_matrix[-1].append(-1)
+        
+        vrp = VRP(coordinates, distance=None)
+        packer = Packer(capacity, items, n_decimals=3)
+        aco = ACO(vrp, packer, n_ants=1, max_iter=1,
+                alpha=1.0, beta=3.0, rho=0.1,
+                pheromone=1.0, phe_deposit_weight=1.0)
+
+        best_tour, best_distance = aco.ACS()
+
+        print('Here is the best tour:')
+        print(best_tour)
+        print(best_distance)
+
+        # Delete all existing routes
+        # Route.objects.all().delete()
+
+        # Initialize a list to store created route instances
+        routes = list([])
+
+        # Iterate through the best_tour
+        for _, location in enumerate(best_tour):
+            if location == 0:
+                # Create a new route instance for each depot
+                route = Route.objects.create()
+                routes.append(route)  # Add the route to the list
+            else:
+                # Retrieve the parcel associated with the current location
+                parcel = parcels[location - 1]
+
+                # Associate the parcel with the last created route (assuming the first route is already created)
+                routes[-1].parcels.add(parcel)
+
+        # Save all route instances after adding parcels
+
+        mssg = 'Your parcel will be picked up soon.'
+        for route in routes:
+            route.station = route.parcels.first().get_recipient_station()
+            route.status = Route.STATUS_TO_DELIVER
+            route.driver = driver
+            route.save()
+            route.parcels.update(status=Package.STATUS_DELIVERING)
+            notifications = [ Notification.objects.create(message=mssg, type=Notification.TYPE_PICKING, parcel=p, user=p.customer.user) for p in route.parcels.all() ]
+            [n.notify_picking('assigned', 'delivering') for n in notifications]
+        
     context = {
         'active_tab' : 'deliver',
         'driver_packages' : driver_packages,
+        'driver_route' : driver_route
     }
     return render(request, 'job_deliver.html', context)
 
@@ -643,11 +788,26 @@ def cluster_route(request, id):
     
     
     context = {
-    'GOOGLE_MAPS_API_KEY': google_maps_api_key,
-    'coor': coor,
-    'route': route,
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        'coor': coor,
+        'route': route,
     }
     return render(request, 'cluster_route.html', context)
+
+@login_required(login_url='users:login')
+def cluster_route_deliver(request, id):
+    if request.user.is_driver is not True :
+        return render(request, '401.html')
+
+    driver = request.user.driver
+    driver_route = Route.objects.get(driver=driver, status=Route.STATUS_TO_DELIVER)
+    google_maps_api_key = settings.PLACES_MAPS_API_KEY
+    
+    context = {
+        'GOOGLE_MAPS_API_KEY': google_maps_api_key,
+        'driver_route': driver_route,
+    }
+    return render(request, 'cluster_route2.html', context)
 
 @login_required(login_url='users:login')
 def package_history(request):

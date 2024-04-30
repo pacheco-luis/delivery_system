@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Route{% endblock title %}
+{% block content %}
+
+{% block head %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=places&v=weekly"
+        defer async></script>
+        <style>
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+        </style>
+{% endblock head %}
+
+<div id="pack-list-body">
+    <h3 style="padding: 0.5em;">{% trans "This is the map of the route you must take to complete all requests." %}</h3>
+    <div class="ul-job-list card">
+        <div id="map" style="height: 400px;"></div>
+    </div>
+
+    <div style="padding: 10px; display: flex; justify-content: center;">
+        <button class="btn btn-success" onclick="exportToGoogleMaps()">Open in Google Maps</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="locationModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enable Location</h5>
+        </div>
+        <div class="modal-body">
+          <p>Please enable location services for the map to work.</p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+</div>
+
+<div id="overlay" style="display: none;" class="overlay"></div>
+
+<script type="text/javascript">
+    function initMap() {
+        const taiwan = {
+            lat: 23.69781,
+            lng: 120.960515
+        };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 7,
+            center: taiwan,
+        });
+
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        // Get user's current position and set it as origin for route calculation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                {% comment %} const latitude = 25.049043474894294; {% endcomment %}
+                {% comment %} const longitude = 121.51141109015104; {% endcomment %}
+                const origin = new google.maps.LatLng(latitude, longitude);
+
+                // Call route calculation function with user's current location as origin
+                calculateAndDisplayRoute(map, directionsService, directionsRenderer, origin);
+            }, error => {
+                // Handle error if geolocation fails
+                console.error("Error getting current position:", error);
+            });
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function calculateAndDisplayRoute(map, directionsService, directionsRenderer, origin) {
+        // Station Address
+        const regex = /(-?\d+\.\d+),\s*(-?\d+\.\d+)/;
+        const station_address = '{{ driver_route.station.address }}';
+        const stationLatLng = station_address.match(regex);
+
+        const station_lat = parseFloat(stationLatLng[1]);
+        const station_lng = parseFloat(stationLatLng[2]);
+
+        const waypts = [];
+        // split and get all the address except the last two of each string
+        const route = "{{ driver_route.get_formatted_route_deliver }}".split(";").map((point) => point.split(",").slice(0, -2).join(","));
+        console.log('route:', route)
+        for (let i = 0; i < route.length; i++) {
+            waypts.push({
+                location: route[i],
+                stopover: true
+            });
+        }
+        console.log(waypts);
+
+        directionsService.route({
+            origin: origin,
+            destination: new google.maps.LatLng(station_lat, station_lng),
+            waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+        })
+        .then((response) => {
+            new google.maps.DirectionsRenderer({
+                map: map,
+                directions: response,
+                suppressMarkers: true,
+                polylineOptions: {
+                    strokeColor: "#000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 5,
+                },
+            });
+
+            let leg = response.routes[0].legs[0];
+            new google.maps.Marker({
+                position: leg.start_location,
+                map: map,
+                icon: "{% static 'images/start.png' %}",
+            });
+            new google.maps.Marker({
+                position: leg.end_location,
+                map: map,
+                icon: "{% static 'images/end.png' %}",
+            });
+
+            directionsRenderer.setDirections(response);
+
+            updateDriverPosition(map);
+        })
+        .catch((e) => window.alert("Directions request failed due to " + e));
+    }
+
+    function updateDriverPosition(map) {
+        navigator.geolocation.watchPosition(pos => {
+            const driverPosition = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            {% comment %} const driverPosition = new google.maps.LatLng(25.049043474894294, 121.51141109015104); {% endcomment %}
+
+            if (!window.courierMarker) {
+                window.courierMarker = new google.maps.Marker({
+                    position: driverPosition,
+                    map: map,
+                    icon: "{% static 'images/courier.png' %}",
+                });
+            } else {
+                window.courierMarker.setPosition(driverPosition);
+            }
+            map.panTo(driverPosition);
+        }, posError => console.log(posError));
+    }
+
+    // Google Maps Link
+    function exportToGoogleMaps() {
+        // Station Address
+        const regex = /(-?\d+\.\d+),\s*(-?\d+\.\d+)/;
+        const station_address = '{{ driver_route.station.address }}';
+        const stationLatLng = station_address.match(regex);
+
+        const station_lat = parseFloat(stationLatLng[1]);
+        const station_lng = parseFloat(stationLatLng[2]);
+
+        navigator.geolocation.watchPosition(function(position) {
+            let current_location = `${position.coords.latitude},${position.coords.longitude}`;
+            {% comment %} let current_location = "25.049043474894294,121.51141109015104" {% endcomment %}
+            let route_coords = "{{ driver_route.get_recipients_formatted_coords }}"
+
+            let googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(current_location)}&destination=${station_lat},${station_lng}&waypoints=${encodeURIComponent(route_coords)}&travelmode=motorcycle&dir_action=navigate`;
+            console.log("Google Maps URL:", googleMapsUrl);
+
+            window.open(googleMapsUrl, '_blank');
+        });
+    }
+
+    window.initMap = initMap;
+</script>
+
+{% endblock content %}
