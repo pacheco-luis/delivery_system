@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 02:31+0800\n"
+"POT-Creation-Date: 2024-05-01 00:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,8 +263,8 @@ msgstr ""
 msgid "A very long option"
 msgstr ""
 
-#: management/templates/admin_sidebar.html:71
-#: templates/customer_sidebar.html:97 templates/driver_sidebar.html:76
+#: management/templates/admin_sidebar.html:71 templates/navbar.html:168
+#: templates/navbar.html:314
 msgid "Settings"
 msgstr ""
 
@@ -436,7 +436,7 @@ msgstr ""
 
 #: notifications/templates/notifications_viewer.html:8
 #: templates/customer_sidebar.html:84 templates/driver_sidebar.html:65
-#: templates/navbar.html:50 templates/navbar.html:170
+#: templates/navbar.html:51 templates/navbar.html:199
 msgid "Notifications"
 msgstr ""
 
@@ -966,17 +966,8 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: templates/customer_sidebar.html:110
-msgid "Log-out"
-msgstr ""
-
 #: templates/driver_sidebar.html:38
 msgid "Current Jobs"
-msgstr ""
-
-#: templates/driver_sidebar.html:86 templates/navbar.html:146
-#: templates/navbar.html:264
-msgid "Log out"
 msgstr ""
 
 #: templates/index.html:51 users/templates/sign-up.html:18
@@ -1041,16 +1032,20 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/navbar.html:53 templates/navbar.html:173
+#: templates/navbar.html:54 templates/navbar.html:202
 msgid "read all"
 msgstr ""
 
-#: templates/navbar.html:120 templates/navbar.html:238
+#: templates/navbar.html:121 templates/navbar.html:267
 msgid "There are no new notifications!"
 msgstr ""
 
-#: templates/navbar.html:130 templates/navbar.html:248
+#: templates/navbar.html:131 templates/navbar.html:277
 msgid "see all"
+msgstr ""
+
+#: templates/navbar.html:178 templates/navbar.html:324
+msgid "Log-out"
 msgstr ""
 
 #: templates/register.html:42

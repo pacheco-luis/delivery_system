@@ -20,28 +20,86 @@
     font-weight: 600;
 
     .language__selector{
-        font-size: 1em;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
+        //height: 20px;
+        //font-size: 1em;
+        //padding-left: 0.5em;
+        //padding-right: 0.5em;
         color: black;
+        border: none;
         // width: 100%;
     }
     .language__selector option{
         color: black;
         background-color: white;
     }
-    .language__selector option:hover{
-        color: black;
-        background-color: lightblue;
-    }
     .language__box{
         margin-left: auto;
-        padding-right: 1em;
+        padding-right: 0.8em;
     }
     .notification__box{
         margin-left: 0;
-        padding-right: 1em;
+        padding-right: 0.4em;
+        padding-left: 0.2em;
     }
+    .profile__box{
+        margin-left: 0;
+        padding-left: 0.4em;
+        padding-right: 0.3em;
+
+    }
+
+    .profile__box .user__picture{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .profile_box_dropdown_cont{
+        position: absolute;
+        top: 100%;
+        right: 5%;
+        width: 280px;
+        max-height: 0px;
+        overflow: hidden;
+        border-radius: 5%;
+    }
+    .profile_box_dropdown_cont.trigger_menu{
+        max-height: 400px;
+    }
+    .profile_box_dropdown{
+        background-color: #ffffff;
+        padding: 1.5em;
+        margin: 0em;
+    }
+    .user-data{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h3{
+            font-weight: 400;
+        }
+    }
+
+    .profile_box_dropdown_link{
+        display: flex;
+        align-items: center;
+        color: #000;
+        text-decoration: none;
+        margin: 0.5em;
+        font-weight: 500;
+
+        span{
+            padding-left: 1em;
+            width: 100%;
+            //transition: transform 0.4s;
+        }
+        span:hover{
+            //transform: translateX(5px);
+            font-weight: 600;
+        }
+    }
+
     #notifications_list{
         position: absolute;
         right:0px;
@@ -81,7 +139,7 @@
     height: 95%;
     width: fit-content;
     position: fixed;
-    top: 4em;
+    top: 57px;
     left: 0;
     padding: 1em;
 }
@@ -340,6 +398,18 @@
 
     #main_nav nav{
         padding: 0.2em 2em;
+    }
+
+    #mobile__menu{
+        //padding-right: 0.5em;
+        .menu__btn{
+            color: aliceblue;
+        }
+    }
+
+    #notifications_list{
+        transform: translateX(-60%);
+        left: 50%;
     }
 
     #sidebar{

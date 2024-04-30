@@ -65,7 +65,7 @@
           <span class="sidebar_list_text">{% trans "Notifications"%}</span>
         </a>
     </li>
-    <li>
+    {% comment %} <li>
       <a href="{% url 'users:driver-account'%}" id="sidebar_settings_btn" class="sidebar_btns btn btn-secondary btn-lg"
         role="button" aria-pressed="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill"
@@ -85,7 +85,7 @@
         </svg>
         <span class="sidebar_list_text">{%trans "Log out"%}</span>
       </a>
-    </li>
+    </li> {% endcomment %}
 
   </ul>
 </div>

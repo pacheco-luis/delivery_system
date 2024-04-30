@@ -84,7 +84,7 @@
             <span class="sidebar_list_text">{% trans "Notifications"%}</span>
           </a>
       </li>
-      <li>
+      {% comment %} <li>
         <a href="{% url 'users:customer-account'%}"
           id="sidebar_settings_btn" 
           class="sidebar_btns btn btn-secondary btn-lg" 
@@ -109,7 +109,7 @@
         </svg>
         <span class="sidebar_list_text">{% trans "Log-out"%}</span>
       </a>
-      </li>
+      </li> {% endcomment %}
 
     </ul>
   </div>
