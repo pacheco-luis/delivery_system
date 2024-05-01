@@ -398,6 +398,7 @@ def job_detail(request, id):
 
 @login_required(login_url='users:login')
 def current_job(request):
+    print( "in current job views!" )
     if request.user.is_driver is not True :
         return render(request, '401.html', context=update_context( request, {}) )
     
@@ -701,7 +702,7 @@ def job_deliver(request):
         'driver_packages' : driver_packages,
         'driver_route' : driver_route
     }
-    return render(request, 'job_deliver.html', context=update_context( request, {context}) )
+    return render(request, 'job_deliver.html', context=update_context( request, context) )
 
 @login_required(login_url='users:login')
 def completed_job(request):
@@ -736,7 +737,7 @@ def cluster_route(request, id):
     
     coor = [ p.get_sender_coor() for p in route.parcels.all() ]
     
-    print( route.get_formatted_route(), context=update_context( request, {}) )
+    print( route.get_formatted_route())
     
     
     context = {
@@ -744,7 +745,7 @@ def cluster_route(request, id):
         'coor': coor,
         'route': route,
     }
-    return render(request, 'cluster_route.html', context=update_context( request, {context}))
+    return render(request, 'cluster_route.html', context=update_context( request, context))
 
 @login_required(login_url='users:login')
 def cluster_route_deliver(request):
@@ -805,7 +806,7 @@ def job_details(request, id):
         # 'job': job,
         'route': route,
     }
-    return render(request, 'job_details.html', context=update_context( request, {context}) )
+    return render(request, 'job_details.html', context=update_context( request, context) )
 
 # #section that gives the driver the option to choose
 # #between delivering or picking up packages

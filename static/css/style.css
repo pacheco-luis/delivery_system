@@ -125,8 +125,7 @@ a {
   padding-left: 0.5em;
   padding-right: 0.5em;
   color: black;
-  border: none;
-}
+  border: none; }
 #home_page header nav .language__box {
   margin-left: auto;
   padding-right: 1em; }
@@ -441,82 +440,65 @@ hr {
   background-color: #454545;
   text-transform: capitalize;
   text-shadow: #fff;
-  font-weight: 600;
-}
-#main_nav nav .language__selector {
-  color: black;
-  border: none;
-}
-#main_nav nav .language__selector option {
-  color: black;
-  background-color: white;
-}
-#main_nav nav .language__box {
-  margin-left: auto;
-  padding-right: 0.8em;
-}
-#main_nav nav .notification__box {
-  margin-left: 0;
-  padding-right: 0.4em;
-  padding-left: 0.2em;
-}
-#main_nav nav .profile__box {
-  margin-left: 0;
-  padding-left: 0.4em;
-  padding-right: 0.3em;
-}
-#main_nav nav .profile__box .user__picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-#main_nav nav .profile_box_dropdown_cont {
-  position: absolute;
-  top: 100%;
-  right: 5%;
-  width: 280px;
-  max-height: 0px;
-  overflow: hidden;
-  border-radius: 5%;
-}
-#main_nav nav .profile_box_dropdown_cont.trigger_menu {
-  max-height: 400px;
-}
-#main_nav nav .profile_box_dropdown {
-  background-color: #ffffff;
-  padding: 1.5em;
-  margin: 0em;
-}
-#main_nav nav .user-data {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#main_nav nav .user-data h3 {
-  font-weight: 400;
-}
-#main_nav nav .profile_box_dropdown_link {
-  display: flex;
-  align-items: center;
-  color: #000;
-  text-decoration: none;
-  margin: 0.5em;
-  font-weight: 500;
-}
-#main_nav nav .profile_box_dropdown_link span {
-  padding-left: 1em;
-  width: 100%;
-}
-#main_nav nav .profile_box_dropdown_link span:hover {
-  font-weight: 600;
-}
-#main_nav nav #notifications_list {
-  position: absolute;
-  right: 0px;
-  width: 300px;
-  overflow-x: hidden;
-  background-image: linear-gradient(to right, rgba(240, 248, 255, 0.5), rgba(165, 165, 165, 0.5) 95%);
-}
+  font-weight: 600; }
+  #main_nav nav .language__selector {
+    color: black;
+    border: none; }
+  #main_nav nav .language__selector option {
+    color: black;
+    background-color: white; }
+  #main_nav nav .language__box {
+    margin-left: auto;
+    padding-right: 0.8em; }
+  #main_nav nav .notification__box {
+    margin-left: 0;
+    padding-right: 0.4em;
+    padding-left: 0.2em; }
+  #main_nav nav .profile__box {
+    margin-left: 0;
+    padding-left: 0.4em;
+    padding-right: 0.3em; }
+  #main_nav nav .profile__box .user__picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; }
+  #main_nav nav .profile_box_dropdown_cont {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+    width: 280px;
+    max-height: 0px;
+    overflow: hidden;
+    border-radius: 5%; }
+  #main_nav nav .profile_box_dropdown_cont.trigger_menu {
+    max-height: 400px; }
+  #main_nav nav .profile_box_dropdown {
+    background-color: #ffffff;
+    padding: 1.5em;
+    margin: 0em; }
+  #main_nav nav .user-data {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    #main_nav nav .user-data h3 {
+      font-weight: 400; }
+  #main_nav nav .profile_box_dropdown_link {
+    display: flex;
+    align-items: center;
+    color: #000;
+    text-decoration: none;
+    margin: 0.5em;
+    font-weight: 500; }
+    #main_nav nav .profile_box_dropdown_link span {
+      padding-left: 1em;
+      width: 100%; }
+    #main_nav nav .profile_box_dropdown_link span:hover {
+      font-weight: 600; }
+  #main_nav nav #notifications_list {
+    position: absolute;
+    right: 0px;
+    overflow-x: hidden;
+    width: 350px; }
 
 #nav_logo {
   font-family: 'RoundslabSerif', sans-serif;
@@ -747,15 +729,15 @@ hr {
     display: block; }
 
   #main_nav nav {
-    padding: 0.2em 2em;
-  }
+    padding: 0.2em 2em; }
+
   #mobile__menu .menu__btn {
-    color: aliceblue;
-  }
+    color: aliceblue; }
+
   #notifications_list {
     transform: translateX(-60%);
-    left: 50%;
-  }
+    left: 50%; }
+
   #sidebar {
     background-color: #fff;
     width: 100%;
@@ -830,18 +812,15 @@ hr {
   background-color: #454545;
   text-transform: uppercase;
   text-shadow: #fff;
-  font-weight: 600;
-}
-#register_pg_bd header nav .language__selector {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  color: black;
-  border: none;
-}
-#register_pg_bd header nav .language__box {
-  margin-left: auto;
-  padding-right: 1em;
-}
+  font-weight: 600; }
+  #register_pg_bd header nav .language__selector {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    color: black;
+    border: none; }
+  #register_pg_bd header nav .language__box {
+    margin-left: auto;
+    padding-right: 1em; }
 
 #nav_logo {
   font-family: 'RoundslabSerif', sans-serif;
