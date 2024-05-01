@@ -8,7 +8,8 @@
         <h1 style="padding: 0.5em;">{% trans "Notifications"%}</h1>
 
         <ul class="ul-job-list card">
-                <table class="table table-hover table-responsive pack-list-table">
+            <div class="table-responsive">
+                <table class="table table-hover pack-list-table">
                     <thead>
                         <tr style="background-color: #FFA758;">
                             <th scope="col">#</th>
@@ -56,6 +57,7 @@
 
                 {% if driver_packages %}
                 {% endif %}
+            </div>
         </ul>
     </div>
     <!-- <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">

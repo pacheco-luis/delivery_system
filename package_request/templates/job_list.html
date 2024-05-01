@@ -25,38 +25,40 @@
             </div>
         </form>
         {% comment %} Check if the routes are populated. {% endcomment %}
-        <table class = "table table-hover table-responsive pack-list-table">
-            <tr style="background-color: #FFA758;">
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">{% trans "Date" %} </th>
-                
-                {% if routes %}
-                    <th scope="col"> </th>
-                {% endif %}
-            </tr>
-        {% if routes %}
-            {% for route in routes %}
-                <tr>
-                    <td scope="row">{{forloop.counter}}</td>
-                    <td scope="row">{{route.id}}</td>
-                    <td scope="row">{{ route.created_at }}</td>
-                    <td scope="row"> <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}"><button type="button" class="btn btn-primary">{% trans "View"%}</button></a></td>
+        <div class="table-responsive">
+            <table class = "table table-hover pack-list-table">
+                <tr style="background-color: #FFA758;">
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">{% trans "Date" %} </th>
+                    
+                    {% if routes %}
+                        <th scope="col"> </th>
+                    {% endif %}
                 </tr>
-                {% endfor %}
-        {% comment %} If no routes are assigned, display a text {% endcomment %}
-        {% else %}
-            <tr>
-                {% comment %} <p> You have not been assigned a route as of yet! </p> {% endcomment %}
-                    <td colspan="3" style="background-color: antiquewhite;">
-                        <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
-                            <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
-                            <p> {% trans "You have not been assigned a route as of yet!" %} </p>
-                        </div>
-                    </td>
-            </tr>
-        {% endif %}
-        </table>   
+            {% if routes %}
+                {% for route in routes %}
+                    <tr>
+                        <td scope="row">{{forloop.counter}}</td>
+                        <td scope="row">{{route.id}}</td>
+                        <td scope="row">{{ route.created_at }}</td>
+                        <td scope="row"> <a style="margin-left: 40px" href="{% url 'package_request_app:job_details' route.id %}"><button type="button" class="btn btn-primary">{% trans "View"%}</button></a></td>
+                    </tr>
+                    {% endfor %}
+            {% comment %} If no routes are assigned, display a text {% endcomment %}
+            {% else %}
+                <tr>
+                    {% comment %} <p> You have not been assigned a route as of yet! </p> {% endcomment %}
+                        <td colspan="3" style="background-color: antiquewhite;">
+                            <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                                <p> {% trans "You have not been assigned a route as of yet!" %} </p>
+                            </div>
+                        </td>
+                </tr>
+            {% endif %}
+            </table>   
+        </div>
     </ul>
 </div>
 {% endblock content %}
