@@ -145,10 +145,10 @@ a {
 }
 
 #home_page header nav .language__selector {
-  font-size: 0.7em;
   padding-left: 0.5em;
   padding-right: 0.5em;
   color: black;
+  border: none;
 }
 #home_page header nav .language__box {
   margin-left: auto;
@@ -954,6 +954,16 @@ hr {
   text-transform: uppercase;
   text-shadow: #fff;
   font-weight: 600;
+}
+#register_pg_bd header nav .language__selector {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: black;
+  border: none;
+}
+#register_pg_bd header nav .language__box {
+  margin-left: auto;
+  padding-right: 1em;
 }
 
 #nav_logo {

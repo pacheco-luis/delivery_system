@@ -9,6 +9,21 @@
     text-transform: uppercase;
     text-shadow: #fff;
     font-weight: 600;
+    .language__selector{
+        //font-size: 0.7em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        color: black;
+        border: none;
+
+        // width: 100%;
+    }
+    .language__box{
+        margin-left: auto;
+        padding-right: 1em;
+        //align-items: center;
+    }
+
 }
 
 #nav_logo{

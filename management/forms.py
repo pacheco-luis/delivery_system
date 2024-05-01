@@ -33,7 +33,7 @@ class ASSIGN_CLUSTER_FORM(forms.Form):
 class EDIT_USER_FORM(forms.Form):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
-        fields = [_('username'), _('role'), _('active'), _('joined')]
+        fields = [('username'), ('role'), ('active'), ('joined')]
         
         for field in fields:
             if field != 'active':
@@ -79,7 +79,7 @@ class USERS_QUERY_FILTER(forms.Form):
                     ]
 
         self.fields['Users'] = forms.ChoiceField(
-            choices=[(_('All Users'), _('All Users'))] + user_types,
+            choices=[(('All Users'), _('All Users'))] + user_types,
             initial= 'All Users',  #    initial value
             widget=forms.Select(attrs={
                 'class': 'form-control dropdown',
@@ -96,7 +96,7 @@ class PACKAGE_QUERY_FILTER(forms.Form):
         statuses = list(Package.STATUSES)
 
         self.fields['status'] = forms.ChoiceField(
-            choices=[(_('select a status'), _('select a status'))] + statuses,
+            choices=[(('select a status'), _('select a status'))] + statuses,
             initial= 'All packages',  #    initial value
             widget=forms.Select(attrs={
                 'class': 'form-control dropdown',
@@ -112,7 +112,7 @@ class PACKAGE_QUERY_FILTER(forms.Form):
 class SEARCH_USER_FORM(forms.Form):
     username_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
                     'id': 'username_search',
-                    'placeholder': _('search by username'),
+                    'placeholder': ('search by username'),
                     'class': 'form-control',
                     'aria-label': 'field',
                     'aria-describedby': 'basic-addon1',
@@ -122,7 +122,7 @@ class SEARCH_USER_FORM(forms.Form):
 class SEARCH_PARCEL(forms.Form):
     id_search = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
                     'id': 'id_search',
-                    'placeholder': _('search by ID'),
+                    'placeholder': ('search by ID'),
                     'class': 'form-control',
                     'aria-label': 'field',
                     'aria-describedby': 'basic-addon1',
