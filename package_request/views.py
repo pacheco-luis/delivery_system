@@ -795,7 +795,7 @@ def cluster_route(request, id):
     return render(request, 'cluster_route.html', context)
 
 @login_required(login_url='users:login')
-def cluster_route_deliver(request, id):
+def cluster_route_deliver(request):
     if request.user.is_driver is not True :
         return render(request, '401.html')
 
@@ -807,7 +807,12 @@ def cluster_route_deliver(request, id):
         'GOOGLE_MAPS_API_KEY': google_maps_api_key,
         'driver_route': driver_route,
     }
-    return render(request, 'cluster_route2.html', context)
+    return render(request, 'cluster_route_deliver.html', context)
+
+@login_required(login_url='users:login')
+def take_photo(request, id):
+    context = {}
+    return render(request, 'job_deliver_camera.html', context)
 
 @login_required(login_url='users:login')
 def package_history(request):
