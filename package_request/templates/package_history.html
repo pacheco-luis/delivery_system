@@ -59,6 +59,9 @@
                                             <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
                                             <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
                                             <p><b>{% trans "Description:" %} </b> {{ package_obj.package_description }}</p><br>
+                                            {% if package_obj.delivered_photo %}
+                                            <p><img src="{{ package_obj.delivered_photo.url }}" alt="Package Image" style="width: 100%;"></p>
+                                            {% endif %}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>

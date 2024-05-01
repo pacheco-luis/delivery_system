@@ -22,6 +22,7 @@ from management.forms import ASSIGN_CLUSTER_FORM
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext
 from notifications.views import update_context
+from django.utils import timezone
 
 
 # Create your views here.
@@ -565,7 +566,7 @@ def job_deliver(request):
         return render(request, '401.html', context=update_context( request, {}))
     
     driver = Driver.objects.get(user=request.user)
-    driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_TRANSIT)
+    driver_packages = Package.objects.filter(driver=driver, status__in=[Package.STATUS_TRANSIT, Package.STATUS_DELIVERING])
     driver_route = Route.objects.filter(driver=driver)
     print(driver_route)
     
@@ -753,27 +754,97 @@ def cluster_route_deliver(request):
         return render(request, '401.html')
 
     driver = request.user.driver
-    driver_route = Route.objects.get(driver=driver, status=Route.STATUS_TO_DELIVER)
+    if Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER).count() == 0:
+        messages.error(request, gettext('No route to deliver'))
+        return redirect('package_request_app:job_deliver')
+    driver_route = Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER)
+    jobs = driver_route.parcels.filter(status=Package.STATUS_DELIVERING)
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
     
     context = {
         'GOOGLE_MAPS_API_KEY': google_maps_api_key,
         'driver_route': driver_route,
+        'jobs': jobs,
     }
     return render(request, 'cluster_route_deliver.html', context)
 
+# @login_required(login_url='users:login')
+# def take_photo(request, id):
+#     context = {}
+#     return render(request, 'job_deliver_camera.html', context)
+
 @login_required(login_url='users:login')
 def take_photo(request, id):
-    context = {}
+    job = Package.objects.filter(
+        pk=id,
+        driver=request.user.driver,
+        status=Package.STATUS_DELIVERING
+    ).last()
+    if not job:
+        messages.error(request, gettext('Job is no longer available'))
+        return redirect('package_request_app:cluster_route_deliver')
+    context = {
+        'job': job,
+    }
     return render(request, 'job_deliver_camera.html', context)
+
+@csrf_exempt
+@login_required(login_url='users:login')
+def api_take_photo(request, id):
+    driver=request.user.driver
+    job = Package.objects.filter(
+        pk=id,
+        driver=driver,
+        status=Package.STATUS_DELIVERING
+    ).last()
+
+    jobs = Package.objects.filter(
+        driver=driver,
+        status=Package.STATUS_DELIVERING
+    ).values()
+    
+    if job.status == Package.STATUS_DELIVERING:
+        route = Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER).last()
+
+        # change the status of the job in the route to completed
+        job.delivered_photo = request.FILES['delivered_photo']
+        job.delivered_at = timezone.now()
+        job.status = Package.STATUS_COMPLETED
+        job.save()
+
+        # if all jobs in the route are completed, change the status of the route to completed
+        # if route.parcels.filter(status=Package.STATUS_DELIVERING).count() == 0:
+        #     route.status = Route.STATUS_COMPLETED
+        #     route.save()
+        #     messages.success(request, gettext('Route completed!'))
+
+        # loop through all the jobs in the route and check if all are completed
+        # if all jobs are completed, change the status of the route to completed
+        completed = True
+        for job in jobs:
+            if job['status'] == Package.STATUS_DELIVERING:
+                completed = False
+                break
+        if completed:
+            route.status = Route.STATUS_COMPLETED
+            route.save()
+            messages.success(request, gettext('Route completed!'))
+
+    return JsonResponse({
+        'success': True,
+    })
 
 @login_required(login_url='users:login')
 def package_history(request):
     import json
-    if request.user.is_customer is not True :
-        return render(request, '401.html', context=update_context( request, {}) )
-    customer = request.user.customer
-    package_history = Package.objects.filter(customer=customer, status__in=[Package.STATUS_COMPLETED,Package.STATUS_CANCELED])
+    # if request.user.is_customer is not True :
+    #     return render(request, '401.html', context=update_context( request, {}) )
+    if request.user.is_customer:
+        customer = request.user.customer
+        package_history = Package.objects.filter(customer=customer, status__in=[Package.STATUS_COMPLETED,Package.STATUS_CANCELED])
+    elif request.user.is_driver:
+        driver = request.user.driver
+        package_history = Package.objects.filter(driver=driver, status__in=[Package.STATUS_COMPLETED])
     context = {'package_history': package_history}
     return render(request, 'package_history.html', context=update_context(request, context ))
 

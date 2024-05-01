@@ -16,6 +16,7 @@ urlpatterns = [
     path('job_current/', views.current_job, name = 'job_current'),
     path('job_completed/', views.completed_job, name = 'job_completed'),
     path('api/job_list/', views.api_all_jobs, name = 'api_job_list'),
+    path('api/job_list/current/<id>/update/', views.api_take_photo, name = 'api_job_list_current'),
     path('delete_request/<id>/', views.delete_request, name = 'delete_request'),
     path('cluster_route/<id>/', views.cluster_route, name = 'cluster_route'),
     path('jobs/delivery/', views.job_deliver, name = 'job_deliver'),

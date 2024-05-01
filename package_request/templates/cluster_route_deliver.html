@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
@@ -28,7 +29,13 @@
 
     <div style="padding: 10px; display: flex; justify-content: center;">
         <button class="btn btn-success" onclick="exportToGoogleMaps()">Open in Google Maps</button>
-        <a href="{% url 'package_request_app:take_photo' driver_route.id %}" class="btn btn-primary">Take Photo</a>
+    </div>
+
+    <div>
+        {% for job in jobs %}
+            <p>{{ job.package_description }} - {{ job.recipient_address }}</p>
+            <a href="{% url 'package_request_app:take_photo' job.package_id %}" class="btn btn-primary" {% if job.delivery_photo %}disabled{% endif %}>Deliver</a>
+        {% endfor %}
     </div>
 </div>
 
@@ -88,10 +95,13 @@
         // Station Address
         const regex = /(-?\d+\.\d+),\s*(-?\d+\.\d+)/;
         const station_address = '{{ driver_route.station.address }}';
+        console.log('station_address:', station_address);
         const stationLatLng = station_address.match(regex);
 
         const station_lat = parseFloat(stationLatLng[1]);
         const station_lng = parseFloat(stationLatLng[2]);
+        console.log('station_lat:', station_lat);
+        console.log('station_lng:', station_lng);
 
         const waypts = [];
         // split and get all the address except the last two of each string

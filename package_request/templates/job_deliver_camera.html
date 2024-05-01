@@ -1,21 +1,25 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera</title>
+    <title>Camera-container</title>
 
     <style>
-        body {
+        /*body {
             margin: 0;
             background-color: #000;
+            min-height: 100dvh;
         }
 
-        .camera-body {
+        .camera-container {
             position: relative;
             width: 100%;
-            height: auto;
+            height: 100dvh;
         }
 
         .btn-back {
@@ -23,15 +27,198 @@
             top: 10px;
             left: 10px;
         }
+
+        #canvas {
+            display: none;
+        }
+
+        #webcam {
+            width: 100%;
+            height: 99dvh;
+        }
+
+        #snap {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #camera-control {
+            display: none;
+            position: relative;
+            height: min-content;
+        }
+
+        .btn-group {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #retake,
+        #upload {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 10px auto;
+        }
+
+        #photo {
+            object-fit: contain;
+            width: 100%;
+            height: auto;
+        }*/
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            background-color: #000;
+            height: 100dvh;
+        }
+
+        .camera-container {
+            position: relative;
+            width: 100dvw;
+            height: 100dvh;
+            /*background-color: aliceblue;*/
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #webcam {
+            max-width: 100%;
+            max-height: 100%;
+
+            width: 100%;
+            height: auto;
+
+            /*background-color: aqua;*/
+        }
+
+        #canvas,
+        #photo,
+        #retake-photo,
+        #upload-photo {
+            display: none;
+        }
+
+        #exit-camera {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .camera-control {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .camera-control a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="camera-body">
-        <video src="" class="webcam" autoplay playsinline></video>
-        <canvas class="canvas" width="640" height="480"></canvas>
-        <a href="{% url 'package_request_app:cluster_route_deliver' %}" class="btn-back">Go Back</a>
+    <div class="camera-container">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas id="canvas">canvas</canvas>
+        <img id="photo" src="" alt="Photo">
+        <a href="{% url 'package_request_app:cluster_route_deliver' %}" id="exit-camera">Go Back</a>
     </div>
+
+    <div class="camera-control">
+        <a href="javascript:void(take_photo())" id="take-photo">Take Photo</a>
+        <a href="javascript:void(retake_photo())" id="retake-photo">Retake Photo</a>
+        <a href="javascript:void(upload_photo())" id="upload-photo">Upload Photo</a>
+    </div>
+
+    <script src="{% static 'js/webcam-easy.min.js' %}"></script>
+    <script text="text/javascript">
+        const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const webcam = new Webcam(webcamElement, 'environment', canvasElement);
+        const photo = document.getElementById('photo');
+        const takeBtn = document.getElementById('take-photo');
+        const retakeBtn = document.getElementById('retake-photo');
+        const uploadBtn = document.getElementById('upload-photo');
+
+        webcam.start();
+
+        function take_photo() {
+            let picture = webcam.snap();
+            console.log(picture);
+
+            photo.src = picture;
+
+            webcamElement.style.display = 'none';
+            takeBtn.style.display = 'none';
+
+            photo.style.display = 'block';
+            retakeBtn.style.display = 'block';
+            uploadBtn.style.display = 'block';
+        }
+
+        function retake_photo() {
+            webcamElement.style.display = 'block';
+            takeBtn.style.display = 'block';
+
+            photo.style.display = 'none';
+            retakeBtn.style.display = 'none';
+            uploadBtn.style.display = 'none';
+        }
+
+        function upload_photo() {
+            document.getElementById('canvas').toBlob(function (blob) {
+                const formData = new FormData();
+                formData.append('delivered_photo', blob, 'delivered_photo.png');
+
+                fetch("{% url 'package_request_app:api_job_list_current' job.package_id %}", {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    if (data.success) {
+                        window.location.href = "{% url 'package_request_app:cluster_route_deliver' %}";
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

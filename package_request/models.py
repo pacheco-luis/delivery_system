@@ -66,8 +66,8 @@ class Package(models.Model):
     estimate_package_weight_value = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0, verbose_name=_("package weight: (kg)"))
     qrcode = models.ImageField(upload_to='jobs/qrcode/', blank=True)
 
-    pickup_photo = models.ImageField(upload_to='jobs/pickup/', blank=True)
-    delivery_photo = models.ImageField(upload_to='jobs/delivery/', blank=True)
+    delivered_photo = models.ImageField(upload_to='jobs/delivered/', blank=True)
+    delivered_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = "Packages"

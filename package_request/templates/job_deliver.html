@@ -66,12 +66,13 @@
             </div>
             {% if driver_packages %}
             <div><button class="btn btn-primary" type="submit">{% trans "Create Route" %}</button></div>
-            {% endif %}
 
             {% if driver_route %}
                 {% for r in driver_route %}
                     <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route_deliver' %}" type="submit">{% trans "View Route" %}</a></div>
                 {% endfor %}
+            {% endif %}
+
             {% endif %}
         </form>
     </ul>
