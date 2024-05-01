@@ -97,7 +97,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'delivery_system.wsgi.application'
+WSGI_APPLICATION = 'delivery_system.wsgi.application'
 ASGI_APPLICATION = 'delivery_system.asgi.application'
 
 CHANNEL_LAYERS = {

@@ -45,9 +45,9 @@
     #notifications_list{
         position: absolute;
         right:0px;
-        width:300px;
         overflow-x:hidden;
-        background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);
+        width: 350px;
+        // background-image: linear-gradient(to right, rgb(240, 248, 255, 0.5), rgba(165,165,165, 0.5) 95%);
     }
 
 }
@@ -271,6 +271,10 @@
     font-weight: 500;
 }
 
+.time_read_False{
+    color: #0d6efd;
+}
+
 .notify_icon{
     position: absolute;
     transform: translate(50%, 20%); 
@@ -311,6 +315,7 @@
         display: none;
     }
 }
+
 @media screen and (max-width: 600px) {
     #company_name, 
     #primary_logo,
@@ -353,4 +358,15 @@
     #sign_out_link{
         display: none;        
     }
+}
+
+@media screen and (max-width: 600px) {
+    .notification_dropdown{
+        position: static !important;
+    }
+    #notifications_list{
+        width: 80vw !important;
+        margin: 0 10vw !important;
+    }
+
 }

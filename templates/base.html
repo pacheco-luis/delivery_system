@@ -63,11 +63,11 @@
 
       <script>
         // setup chat scoket
-        var user_id = "{{ user_id }}";
+        var id = "{{ user_id|safe }}".replace(/[^0-9a-fA-F]/g, '');
 
         // will attempt to establish connection only if user is authenticated
-        if (user_id != ""){
-          const notifySocket = new WebSocket( `ws://${window.location.host}/ws/notify/${user_id}/` );
+        if (id != ""){
+          const notifySocket = new WebSocket( `ws://${window.location.host}/ws/notify/${id}/` );
           
           // socket open
           notifySocket.onopen = function (e) {
@@ -105,6 +105,7 @@
               new_notif.querySelector('#message_span').classList.add("text_read_".concat(read));
               new_notif.querySelector('#message_span').innerHTML = message;
               new_notif.querySelector('#created_span').classList.add("text_read_".concat(read));
+              new_notif.querySelector('#created_span').classList.add("time_read_False");
               new_notif.querySelector('#created_span').innerHTML = created;
 
               let count = parseInt(document.getElementById("notification_count").innerHTML);
@@ -120,7 +121,12 @@
           }
         }
     
-    
+        function read_all_notifications(value) {
+          // Set the value of the hidden input
+          document.getElementById('url').value = value;
+          // Submit the form
+          document.getElementById('read_all_form').submit();
+        }
     </script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/nav.js' %}"></script>

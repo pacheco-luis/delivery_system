@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from notifications.models import Notification
+from notifications.views import update_context
 
 # from django.contrib.auth.models import User
 from .models import Customer, Driver, User
@@ -55,7 +57,7 @@ def login_user(request):
                 messages.error(request, gettext('Username and password do not match.'))
                 return redirect('users:login')
             
-    return render(request, 'sign-in.html')
+    return render(request, 'sign-in.html', )
 
 def logoutCustomer(request):
     logout(request)
@@ -97,7 +99,7 @@ def registerCustomer(request):
             # messages.error(request, 'An error has occurred during registration')
             messages.error(request, form.errors )
 
-    return render(request, 'sign-up.html', context)
+    return render(request, 'sign-up.html', context=context )
 
 def registerDriver(request):
     page = 'driver'
@@ -128,13 +130,13 @@ def registerDriver(request):
             # messages.error(request, 'An error has occurred during registration')
             messages.error(request, form.errors)
 
-    return render(request, 'sign-up.html', context)
+    return render(request, 'sign-up.html', context=context )
 
 @login_required(login_url='users:login')
 def driverAccount(request):
     account = request.user.driver
     context = {'account': account}
-    return render(request, 'users/account.html', context)
+    return render(request, 'users/account.html', context=update_context(request, context) )
 
 @login_required(login_url='users:login')
 def customerAccount(request):
@@ -142,7 +144,7 @@ def customerAccount(request):
     print( request.user.customer.phone_number )
     account = request.user.customer
     context = {'account': account}
-    return render(request, 'users/account.html', context)
+    return render(request, 'users/account.html', update_context(request, context) )
 
 @login_required(login_url='users:login')
 def editCustomerAccount(request):
@@ -164,7 +166,7 @@ def editCustomerAccount(request):
                 'form': form,
                 'profile_img_url': profile_img_url,               
                }
-    return render(request, 'users/account_form.html', context)
+    return render(request, 'users/account_form.html',  update_context(request, context) )
 
 @login_required(login_url='users:login')
 def editDriverAccount(request):
@@ -182,10 +184,10 @@ def editDriverAccount(request):
                 'form': form,
                 'profile_img_url': profile_img_url,               
                }
-    return render(request, 'users/account_form.html', context)
+    return render(request, 'users/account_form.html',  update_context(request, context) )
 
 def register(request):
-    return render(request, 'register.html')
+    return render(request, 'register.html' )
   
 def viewCompanyInformation(request):
     return render(request, 'company_info.html')

@@ -21,39 +21,20 @@ from package_request.algorithm.aco3dvrp import VRP, Packer, ACO
 from management.forms import ASSIGN_CLUSTER_FORM
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext
-
-
-
-# !!!!!!!!!!!! GLOBAL VARIABLES !!!!!!!!!!!!!!!!
-
-# stations addresses
-# stations_addr = [
-#                 "No. 8號, Zhengzhou Rd, Zhongzheng District, Taipei City, 100",             # Taipei main train station
-#                 "No. 100, Guolian 1st Rd, Hualien City, Hualien County, 970",               # Hualien main train station
-#                 ]
-
-# stations coordinates 
-# stations_coo = [
-#                 (25.049033812357674, 121.51378218301954),
-#                 (23.993489655177992, 121.60129912114395) 
-#                 ]
-
-# radius away from stations in km
-radius = 10        
-
-# !!!!!!!!!!!! END OF GLOBAL VARIABLES !!!!!!!!!!!!!!!!
+from notifications.views import update_context
 
 
 # Create your views here.
 @login_required
 def sucess( request ):
-    return render( request, "successful_request.html")
+    return render( request, "successful_request.html", context=update_context( request, {}))
 
-
-# returns tuple (bool, int)
-# true if address is within the radius, false otherwise
-# if within radius index points to the station index nearest to the address
 def in_range_of_stations( address ):
+    ''''
+        returns tuple (bool, int)
+        true if address is within the radius of station, false otherwise
+        if within radius index points to the station index nearest to the address
+    '''
     nearest_station = float(10000)
     station_id = uuid.uuid4()
     
@@ -70,32 +51,6 @@ def in_range_of_stations( address ):
             
     # returning the closest station near the senders location but within the nears station and sender's location does not satisfy station radius
     return ( False, station_id ) 
-
-
-# def haversine(coord1: tuple, coord2: tuple) -> float:
-#     # coordinates in decimal degrees (e.g. 2.89078, 12.79797)
-#     import math
-    
-#     lon1, lat1 = coord1
-#     lon2, lat2 = coord2
-
-#     R = 6371000  # radius of earth (m)
-#     phi_1 = math.radians(lat1)
-#     phi_2 = math.radians(lat2)
-
-#     delta_phi = math.radians(lat2 - lat1)
-#     delta_lambda = math.radians(lon2 - lon1)
-
-#     a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi_1) * math.cos(phi_2) * math.sin(delta_lambda / 2.0) ** 2
-#     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-
-#     meters = R * c  # output distance in meters
-#     km = meters / 1000.0  # output distance in kilometers
-
-#     # km = round(km, 3)
-    
-#     return km
-
 
 @login_required(login_url='users:login')
 def sender_form_handler(request):
@@ -122,7 +77,7 @@ def sender_form_handler(request):
                     print(e)
                     messages.error(request, gettext("You must be within our stations' range to send a parcel. Please see our locations page."))
                 
-                return render(request, "step1.html", {'sender_form': SENDER_FORM(request.POST)} )
+                return render(request, "step1.html", context=update_context( request, {'sender_form': SENDER_FORM(request.POST)}) )
                     
             
             # print( form.cleaned_data )
@@ -134,7 +89,7 @@ def sender_form_handler(request):
         # if input is invalid refill the form
         else:
             messages.error(request, gettext('Invalid input. Please check your input and try again.'))
-            return render(request,"step1.html", {'sender_form': SENDER_FORM(request.POST)} )
+            return render(request,"step1.html", context=update_context( request, {'sender_form': SENDER_FORM(request.POST)}) )
     
     # prefilling the customer phone number
     sender_form_inst = { 'sender_phone' : Customer.objects.get(user=request.user).phone_number }
@@ -143,7 +98,7 @@ def sender_form_handler(request):
         'sender_form': SENDER_FORM(sender_form_inst)
     }
     
-    return render(request,"step1.html", context=context)
+    return render(request,"step1.html", context=update_context(request, context))
 
 @login_required(login_url='users:login')
 def receiver_form_handler(request):
@@ -172,11 +127,11 @@ def receiver_form_handler(request):
                 except Exception as e:
                     messages.error(request, gettext("Sender must be within our stations' range to send a package. Please see our locations page."))
             
-                return render(request, "step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
+                return render(request, "step2.html", context=update_context( request, {'receiver_form': RECEIVER_FORM(request.POST)}) )
             # a parcel destionation location must not be within the sender's station range, sender must fill the form again with a valid location for receiver
             if temp_stat == r_addr_stat:
                 messages.error(request, gettext("Sender and receiver address should not be within the same station range.") )
-                return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
+                return render(request,"step2.html", context=update_context( request, {'receiver_form': RECEIVER_FORM(request.POST)}) )
             
             # saving receiver's info as session for step 3
             request.session['receiver_data'] = json.dumps(r_raw, default=str)
@@ -184,12 +139,12 @@ def receiver_form_handler(request):
 
         else:
             messages.error(request, gettext('Invalid input. Please check your input and try again.'))
-            return render(request,"step2.html", {'receiver_form': RECEIVER_FORM(request.POST)} )
+            return render(request,"step2.html", context=update_context( request, {'receiver_form': RECEIVER_FORM(request.POST)}) )
     
     context = {
         'receiver_form': RECEIVER_FORM(),
     }
-    return render(request,"step2.html", context=context)
+    return render(request,"step2.html", context=update_context( request, context))
 
 
 @login_required(login_url='users:login')
@@ -245,7 +200,7 @@ def package_form_handler(request):
                     pass
                 messages.error(request, gettext("Something went wrong. Please try again."))
                 messages.error(request, gettext("Unable to determine the distance."))
-                # return redirect( 'package_request_app:request_form_1_of_3')
+                # return redirect( 'package_request_app:request_form_1_of_3', context=update_context( request, {}) )
             
             print( 'distance:', distance )
             print( 'duration:', duration )
@@ -271,14 +226,14 @@ def package_form_handler(request):
                 pass
             
             # redirecting to susccessful page
-            return redirect( 'package_request_app:successful')
+            return redirect( 'package_request_app:successful' )
         
         # rendering page again if input was invalid
         else:
             messages.error(request, gettext('Invalid input. Please check your input and try again.'))
-            return render( request, "step3.html", {'package_form': PACKAGE_FORM(request.POST)})
+            return render( request, "step3.html", context=update_context( request, {'package_form': PACKAGE_FORM(request.POST)}) )
         
-    return render( request, "step3.html", {'package_form': PACKAGE_FORM()})
+    return render( request, "step3.html", context=update_context( request, {'package_form': PACKAGE_FORM()}) )
 
 @login_required(login_url='users:login')
 def all_packages(request):
@@ -291,7 +246,7 @@ def all_packages(request):
     for x in package_list:
         print( x.sender_address )
         print( x.recipient_address )
-    return render(request, 'package_list.html', {'package_list': package_list, 'package_count': package_count})
+    return render(request, 'package_list.html', context=update_context( request, {'package_list': package_list, 'package_count': package_count}) )
 
 
 @login_required(login_url='users:login-customer')
@@ -312,11 +267,9 @@ def home( request ):
     # if not(request.user.is_driver) or not (request.user.is_customer):
     #     return render(request, 'package_request_app:401')
     
-    context = {
-        'user_id': request.user.id,
-        'notifications': Notification.objects.filter( user=request.user ),
-    }
-    return render( request, "home.html", context=context )
+    context = {}
+    
+    return render( request, "home.html", context=update_context( request, context ))
 
 def landing_page( request ):
     from django.contrib.auth.hashers import make_password
@@ -342,13 +295,12 @@ def landing_page( request ):
         for x in User.objects.all():
             print( x )
         
-    return render( request, "../templates/index.html" )
-
+    return render( request, "index.html" )
 # HERE BE DRAGONS
 @login_required(login_url='users:login')
 def all_jobs(request):
     if request.user.is_driver is not True:
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     
     filtered_routes = Route.objects.filter(status=Route.STATUS_UNASSIGNED)
     driver = Driver.objects.get(user=request.user)
@@ -386,11 +338,11 @@ def all_jobs(request):
         'query_form': DRIVER_FILTER_QUERY_FORM(),
         'active_tab' : 'routes'
     }
-    return render(request, 'job_list.html', context)
+    return render(request, 'job_list.html', context=update_context( request, context))
 
 def select_packages(request):
     if not request.user.is_driver:
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     
     driver = Driver.objects.get(user=request.user)
     
@@ -417,12 +369,12 @@ def select_packages(request):
         'parcels': parcels,
         'active_tab': 'individual'
     }
-    return render(request, 'select_packages.html', context)
+    return render(request, 'select_packages.html', context=update_context( request, context) )
 
 @login_required(login_url='users:login')
 def job_detail(request, id):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     
     job = Package.objects.get(pk=id)
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
@@ -442,12 +394,12 @@ def job_detail(request, id):
         'GOOGLE_MAPS_API_KEY': google_maps_api_key,
         'job': job,
     }
-    return render(request, 'job_detail.html', context)
+    return render(request, 'job_detail.html', context=update_context( request, context) )
 
 @login_required(login_url='users:login')
 def current_job(request):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     
     driver = Driver.objects.get(user=request.user)
     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_ASSIGNED)
@@ -587,12 +539,12 @@ def current_job(request):
         'driver_packages' : driver_packages,
         'driver_route' : driver_route
     }
-    return render(request, 'current_job.html', context)
+    return render(request, 'current_job.html', context=update_context( request, context) )
 
 @login_required(login_url='users:login')
 def job_deliver(request):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}))
     
     driver = Driver.objects.get(user=request.user)
     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
@@ -604,14 +556,14 @@ def job_deliver(request):
         'active_tab' : 'deliver',
         'driver_packages' : driver_packages,
     }
-    return render(request, 'job_deliver.html', context)
+    return render(request, 'job_deliver.html', context=update_context( request, {context}) )
 
 @login_required(login_url='users:login')
 def completed_job(request):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}))
     
-    return render(request, 'completed_job.html')
+    return render(request, 'completed_job.html', context=update_context( request, {}))
 
 @csrf_exempt
 @login_required(login_url='users:login')
@@ -632,14 +584,14 @@ def api_all_jobs(request):
 @login_required(login_url='users:login')
 def cluster_route(request, id):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}))
     
     route = Route.objects.get(pk=id)
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
     
     coor = [ p.get_sender_coor() for p in route.parcels.all() ]
     
-    print( route.get_formatted_route() )
+    print( route.get_formatted_route(), context=update_context( request, {}) )
     
     
     context = {
@@ -647,25 +599,26 @@ def cluster_route(request, id):
     'coor': coor,
     'route': route,
     }
-    return render(request, 'cluster_route.html', context)
+    return render(request, 'cluster_route.html', context=update_context( request, {context}))
 
 @login_required(login_url='users:login')
 def package_history(request):
     import json
     if request.user.is_customer is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     customer = request.user.customer
     package_history = Package.objects.filter(customer=customer, status__in=[Package.STATUS_COMPLETED,Package.STATUS_CANCELED])
-    return render(request, 'package_history.html', {'package_history': package_history})
+    context = {'package_history': package_history}
+    return render(request, 'package_history.html', context=update_context(request, context ))
 
 def unauthorized(request):
-    return render(request, '401.html')
+    return render(request, '401.html', context=update_context( request, {}))
 
 
 @login_required(login_url='users:login')
 def job_details(request, id):
     if request.user.is_driver is not True :
-        return render(request, '401.html')
+        return render(request, '401.html', context=update_context( request, {}) )
     
     # job = Package.objects.get(pk=id)
     route = Route.objects.get(pk=id)
@@ -687,7 +640,7 @@ def job_details(request, id):
         # 'job': job,
         'route': route,
     }
-    return render(request, 'job_details.html', context)
+    return render(request, 'job_details.html', context=update_context( request, {context}) )
 
 # #section that gives the driver the option to choose
 # #between delivering or picking up packages
@@ -718,8 +671,8 @@ def job_scanner(request):
             return redirect('package_request_app:success_or_fail')
         else:
             messages.error(request, 'This package has already been taken')
-    return render(request, 'job_scanner.html')
+    return render(request, 'job_scanner.html', context=update_context( request, {}) )
 
 @login_required(login_url='users:login')
 def success_or_fail(request):
-    return render(request, 'success_or_fail.html')
+    return render(request, 'success_or_fail.html',context=update_context( request, {}) )

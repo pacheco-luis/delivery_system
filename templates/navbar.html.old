@@ -39,20 +39,32 @@
           <div class="notification_dropdown dropdown" style="position: relative;">
             <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.25rem;"></i>
-                <span id="notification_count">{{ notifications_count }}</span>
+                {% if nav_notifications_count %}
+                  {% if nav_notifications_count > 10 %}
+                    <span id="notification_count">10+</span>
+                  {% elif nav_notifications_count > 0 %}
+                    <span id="notification_count">{{ nav_notifications_count }}</span>
+                  {% endif %}
+                {% endif %}
             </span>
-            <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; border-radius: 10% 0% 10% 10%;">
-              <div class="container" >
+            <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; border-radius:1rem;">
+              <div class="container" style=" background-color: grey; background: linear-gradient(transparent, #dfdfdf8f );">
                 <div class="row notification_header" style="padding-top: 0;">
                   <div class="w-50" style="padding: 0; text-align: left;">
                     <a href="#" style="font-style: none; text-decoration: none; color:#000;">{% trans "Notifications" %}</a>
                   </div>
                   <div class="w-50 col" style="padding: 0; text-align: right;" >
-                    <a style="line-height: 1rem;" href="#">{% trans "read all" %}</a>
+                    <form id="read_all_form" action="{% url 'notifications_app:read_all_notifications' %}" method="POST">
+                      <input type="hidden" name="url" id="url" value="initialValue">
+                      {% csrf_token %}
+                      <a href="#" onclick="read_all_notifications('{{ request.path }}'); return false;">{% trans "read all" %}</a>
+                    </form>
+
                   </div>
                 </div>
               </div>
 
+              <!-- template to be cloned to inseart new notifications -->
               <a id="dropdown-item-template" class="dropdown-item top_border d_none" href="#">
                 <div class="container padding_0">
                   <div class="row">
@@ -79,49 +91,50 @@
                 </div>
               </a>
 
-              {% if notifications %}
-                {% for n in notifications %}
-                  <a class="dropdown-item top_border" href="#">
-                    <div class="container padding_0">
-                      <div class="row">
-                        <div class="col-2" >
-                          <div class="positon_rel w_Max_cont">
-                              <div class="position_abs trans_form_late_0_30" >
-                                  <div class="position_rel b_radius_2rem w_h_2rem read_{{ n.read }}">
-                                    <i class="bi bi-envelope-arrow-up d_none notify_icon picking_{{ n.type }} "></i>
-                                    <i class="bi bi-envelope-check-fill d_none notify_icon delivering_{{ n.type }}"></i>
-                                    <i class="bi bi-info-square d_none notify_icon general_{{ n.type }}"></i>
-                                  </div>
-                              </div>
+              {% if nav_notifications_count %}
+                {% if nav_notifications_count > 0 %}
+                  {% for n in nav_notifications %}
+                    <a class="dropdown-item top_border" href="#">
+                      <div class="container padding_0">
+                        <div class="row">
+                          <div class="col-2" >
+                            <div class="positon_rel w_Max_cont">
+                                <div class="position_abs trans_form_late_0_30" >
+                                    <div class="position_rel b_radius_2rem w_h_2rem read_{{ n.read }}">
+                                      <i class="bi bi-envelope-arrow-up d_none notify_icon picking_{{ n.type }} "></i>
+                                      <i class="bi bi-envelope-check-fill d_none notify_icon delivering_{{ n.type }}"></i>
+                                      <i class="bi bi-info-square d_none notify_icon general_{{ n.type }}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col overflow-x-hidden p_bottom">
+                            <div class="notification_messg">
+                              <span class="text_read_{{ n.read }}">{{ n.message }}</span>
+                            </div>
+                            <div class="notification_created">
+                              <span class="text_read_{{ n.read }} time_read_{{ n.read }}">{{ n.created }}</span>
+                            </div>
                           </div>
                         </div>
-                        <div class="col overflow-x-hidden p_bottom">
-                          <div class="notification_messg">
-                            <span class="text_read_{{ n.read }}">{{ n.message }}</span>
+                      </div>
+                    </a>
+                  {% endfor %}
+                {% else %}
+                  <a id="empty_notification" class="dropdown-item read empty_notification" href="#" style="border-top: 1px #2b2b2b17 solid;">
+                    <div class="container" style="padding: 0;">
+                      <div class="row">
+                        <div class="w-100 text-center" >
+                          <div>
+                            <img src="{% static 'images/package_listing/empty_package.png' %}" alt="empty" style="height: 250px; filter: grayscale(40%);">
                           </div>
-                          <div class="notification_created">
-                            <span class="text_read_{{ n.read }}">{{ n.created }}</span>
-                          </div>
+                          <span>{% trans "There are no new notifications!"%}</span>
                         </div>
                       </div>
                     </div>
                   </a>
-                {% endfor %}
-              {% else %}
-                <a id="empty_notification" class="dropdown-item read empty_notification" href="#" style="border-top: 1px #2b2b2b17 solid;">
-                  <div class="container" style="padding: 0;">
-                    <div class="row">
-                      <div class="w-100 text-center" >
-                        <div>
-                          <img src="{% static 'images/package_listing/empty_package.png' %}" alt="empty" style="height: 250px; filter: grayscale(40%);">
-                        </div>
-                        <span>{% trans "There are no new notifications!"%}</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
+                {% endif %}
               {% endif %}
-
                 <div class="container" style="border-top: 1px solid #2b2b2b17;" >
                   <div class="row notification_header" style="padding-bottom: 0;">
                     <div class="w-100" style="padding: 0; text-align: center;">
@@ -155,7 +168,7 @@
           <div class="notification_dropdown dropdown" style="position: relative;">
             <span style="position: relative;" class="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-bell-fill" style="color: aliceblue; font-size: 1.25rem;"></i>
-                <span id="notification_count">{{ notifications|length }}</span>
+                <span id="notification_count">{{ nav_notifications_count }}</span>
             </span>
             <div id="notifications_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; right:0px; border-radius: 10% 0% 10% 10%;">
               <div class="container" >
@@ -193,8 +206,8 @@
                   </div>
                 </div>
               </a>
-              {% if notifications %}
-                {% for n in notifications %}
+              {% if nav_notifications %}
+                {% for n in nav_notifications %}
                   <a class="dropdown-item top_border" href="#">
                     <div class="container padding_0">
                       <div class="row">
