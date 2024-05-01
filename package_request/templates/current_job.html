@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %}Jobs{% endblock title %}
 {% block content %}
-{% load i18n %}
 
+<style>
+    @media (max-width: 300px) {
+        
+    }
+</style>
 <div id="pack-list-body">
     <h1 style="padding: 0.5em;">{% trans "Active Jobs" %}</h1>
 
@@ -20,55 +25,56 @@
         </ul>
         <form action="" method="POST">
             {% csrf_token %}
-            <table class="table table-hover table-responsive pack-list-table">
-                <thead>
-                    <tr style="background-color: #FFA758;">
-                        <th scope="col">#</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">{% trans "Date"%}</th>
-                        <th scope="col">{% trans "Action" %}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if driver_packages %}
-                    {% for dp in driver_packages %}
-                    <tr>
-                        <td scope="row">{{ forloop.counter }}</td>
-                        <td scope="row">{{ dp.package_id }}</td>
-                        <td scope="row">{{ dp.order_date }}</td>
-                        <td scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="select_packages"
-                                    value="{{ dp.package_id }}" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    {% trans "Add" %}
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-
-                    {% else %}
-                    <tr>
-                        <td colspan="4" style="background-color: antiquewhite;">
-                            <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
-                                <img src="{% static 'images/package_listing/empty_package.png' %}"
-                                    alt="Empty Package Image">
-                                <p>{% trans "No packages available!" %}</p>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endif %}
-                </tbody>
-            </table>
-
+            <div class="table-responsive">
+                <table class="table table-hover pack-list-table">
+                    <thead>
+                        <tr style="background-color: #FFA758;">
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">{% trans "Date"%}</th>
+                            <th scope="col">{% trans "Action" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if driver_packages %}
+                        {% for dp in driver_packages %}
+                        <tr>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td scope="row">{{ dp.package_id }}</td>
+                            <td scope="row">{{ dp.order_date }}</td>
+                            <td scope="row">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="select_packages"
+                                        value="{{ dp.package_id }}" id="flexCheckChecked" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        {% trans "Add" %}
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+    
+                        {% else %}
+                        <tr>
+                            <td colspan="4" style="background-color: antiquewhite;">
+                                <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                    <img src="{% static 'images/package_listing/empty_package.png' %}"
+                                        alt="Empty Package Image">
+                                    <p>{% trans "No packages available!" %}</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
             {% if driver_packages %}
-                <div><button class="btn btn-primary" type="submit">{% trans "Create Route" %}</button></div>
+                <div style="display: inline-block; padding-bottom: 0.5em;"><a class="btn btn-primary" type="submit">{% trans "Create Route" %}</a></div>
             {% endif %}
-            
+
             {% if driver_route %}
                 {% for r in driver_route %}
-                    <div><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">{% trans "View Route" %}</a></div>
+                    <div style="display: inline-block;"><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">{% trans "View Route" %}</a></div>
                 {% endfor %}
             {% endif %}
         </form>

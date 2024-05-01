@@ -120,3 +120,15 @@ function languageSwitch(languageCode) {
   form.elements.language.value = languageCode;
   form.submit();
 }
+
+const dropdownMenu = document.getElementById("dropdownMenu");
+const imgTrigger = document.getElementById("imgTrigger");
+
+function triggerMenu(){
+  dropdownMenu.classList.toggle("trigger_menu");
+}
+document.addEventListener('click',e => {
+  if (!dropdownMenu.contains(e.target) && e.target !== imgTrigger) {
+    dropdownMenu.classList.remove("trigger_menu");
+  }
+})

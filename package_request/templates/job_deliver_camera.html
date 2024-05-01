@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+        }
+
+        .camera-body {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="camera-body">
+        <video src="" class="webcam" autoplay playsinline></video>
+        <canvas class="canvas" width="640" height="480"></canvas>
+        <a href="{% url 'package_request_app:cluster_route_deliver' %}" class="btn-back">Go Back</a>
+    </div>
+</body>
+
+</html>

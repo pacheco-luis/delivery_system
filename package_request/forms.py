@@ -18,14 +18,14 @@ class SENDER_FORM(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         #self.fields['sender_phone'].widget.attrs.update({'placeholder': '0987654321'})
-        self.fields['sender_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control'})
+        self.fields['sender_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control', 'placeholder' : _('Enter an address')})
         
 
 class RECEIVER_FORM(forms.ModelForm):
     recipient_name = forms.CharField(
         label = _("Recipient name:"),
         required=False,
-        widget = forms.TextInput( attrs={'required': 'True', 'placeholder': 'John Doe', 'class' : 'form-control'} )
+        widget = forms.TextInput( attrs={'required': 'True', 'placeholder': _('John Doe'), 'class' : 'form-control'} )
         )
     
     class Meta:
@@ -36,7 +36,7 @@ class RECEIVER_FORM(forms.ModelForm):
         super().__init__(*args, **kwargs)
         #self.fields['recipient_name'].widget.attrs.update({'placeholder': 'John Doe'})
         self.fields['recipient_phone'].widget.attrs.update({'placeholder': '0987654321', 'class' : 'form-control'})
-        self.fields['recipient_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control'})
+        self.fields['recipient_address'].widget.attrs.update({'required': 'true', 'class' : 'form-control', 'placeholder' : _('Enter an address')})
         
 class PACKAGE_FORM(forms.ModelForm):
     package_description = forms.CharField(
