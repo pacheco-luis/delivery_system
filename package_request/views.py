@@ -766,7 +766,7 @@ def cluster_route_deliver(request):
         'driver_route': driver_route,
         'jobs': jobs,
     }
-    return render(request, 'cluster_route_deliver.html', context)
+    return render(request, 'cluster_route_deliver.html', context=update_context( request, context))
 
 @login_required(login_url='users:login')
 def take_photo(request, id):
@@ -781,7 +781,7 @@ def take_photo(request, id):
     context = {
         'job': job,
     }
-    return render(request, 'job_deliver_camera.html', context)
+    return render(request, 'job_deliver_camera.html', context=update_context( request, context))
 
 @csrf_exempt
 @login_required(login_url='users:login')
