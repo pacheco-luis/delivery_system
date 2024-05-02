@@ -566,7 +566,7 @@ def job_deliver(request):
         return render(request, '401.html', context=update_context( request, {}))
     
     driver = Driver.objects.get(user=request.user)
-    driver_packages = Package.objects.filter(driver=driver, status__in=[Package.STATUS_TRANSIT, Package.STATUS_DELIVERING])
+    driver_packages = Package.objects.filter(driver=driver, status__in=[Package.STATUS_DELIVERING])
     driver_route = Route.objects.filter(driver=driver)
     print(driver_route)
     
@@ -757,8 +757,8 @@ def cluster_route_deliver(request):
     if Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER).count() == 0:
         messages.error(request, gettext('No route to deliver'))
         return redirect('package_request_app:job_deliver')
-    driver_route = Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER)
-    jobs = driver_route.parcels.filter(status=Package.STATUS_DELIVERING)
+    driver_route = Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER).last()
+    jobs = driver_route.parcels.filter(status=Package.STATUS_DELIVERING).values()
     google_maps_api_key = settings.PLACES_MAPS_API_KEY
     
     context = {
@@ -767,11 +767,6 @@ def cluster_route_deliver(request):
         'jobs': jobs,
     }
     return render(request, 'cluster_route_deliver.html', context)
-
-# @login_required(login_url='users:login')
-# def take_photo(request, id):
-#     context = {}
-#     return render(request, 'job_deliver_camera.html', context)
 
 @login_required(login_url='users:login')
 def take_photo(request, id):
