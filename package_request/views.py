@@ -402,11 +402,10 @@ def current_job(request):
     print( "in current job views!" )
     if request.user.is_driver is not True :
         return render(request, '401.html', context=update_context( request, {}) )
-    
+
     driver = Driver.objects.get(user=request.user)
     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_ASSIGNED)
     driver_route = Route.objects.filter(driver=driver)
-    print(driver_route)
     
     if request.method == 'POST':
         
@@ -535,13 +534,43 @@ def current_job(request):
             route.parcels.update(status=Package.STATUS_PICKING)
             notifications = [ Notification.objects.create(message=mssg, type=Notification.TYPE_PICKING, parcel=p, user=p.customer.user) for p in route.parcels.all() ]
             [n.notify_picking('assigned', 'picking') for n in notifications]
+            
+    all_parcels = []
+    for route in driver_route:
+        parcels_in_route = route.parcels.all()
+        all_parcels.extend(parcels_in_route)
         
+    parcels_price = sum(parcel.price for parcel in all_parcels)
+    parcels_duration = sum(parcel.duration for parcel in all_parcels)
+
+    num_packages = len(all_parcels)
     context = {
         'active_tab' : 'pickup',
         'driver_packages' : driver_packages,
-        'driver_route' : driver_route
+        'driver_route' : driver_route,
+        'all_parcels' : all_parcels,
+        'parcels_price': parcels_price,
+        'parcels_duration': parcels_duration,
+        'num_packages': num_packages
     }
     return render(request, 'current_job.html', context=update_context( request, context) )
+
+@login_required(login_url='users:login-customer')
+def delete_route(request, id):
+    try:
+        route = Route.objects.get(pk=id)
+        parcels_in_route = route.parcels.all()
+       
+        for parcel in parcels_in_route:
+            parcel.status = Package.STATUS_ASSIGNED
+            parcel.save()
+
+        route.delete()
+    except Route.DoesNotExist:
+        pass
+    
+    return redirect('package_request_app:job_current')
+
 
 # @login_required(login_url='users:login')
 # def job_deliver(request):

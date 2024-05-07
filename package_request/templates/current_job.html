@@ -29,19 +29,16 @@
                 <table class="table table-hover pack-list-table">
                     <thead>
                         <tr style="background-color: #FFA758;">
+                            <th scope="col"></th>
                             <th scope="col">#</th>
                             <th scope="col">ID</th>
                             <th scope="col">{% trans "Date"%}</th>
-                            <th scope="col">{% trans "Action" %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% if driver_packages %}
                         {% for dp in driver_packages %}
                         <tr>
-                            <td scope="row">{{ forloop.counter }}</td>
-                            <td scope="row">{{ dp.package_id }}</td>
-                            <td scope="row">{{ dp.order_date }}</td>
                             <td scope="row">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="select_packages"
@@ -51,6 +48,9 @@
                                     </label>
                                 </div>
                             </td>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td scope="row">{{ dp.package_id }}</td>
+                            <td scope="row">{{ dp.order_date }}</td>
                         </tr>
                         {% endfor %}
     
@@ -60,7 +60,7 @@
                                 <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
                                     <img src="{% static 'images/package_listing/empty_package.png' %}"
                                         alt="Empty Package Image">
-                                    <p>{% trans "No packages available!" %}</p>
+                                    <p>No packages available to create your route. Click <a href="{% url 'package_request_app:select_packages' %}">here</a> to add more packages! </p>
                                 </div>
                             </td>
                         </tr>
@@ -71,13 +71,37 @@
             {% if driver_packages %}
                 <div style="display: inline-block; padding-bottom: 0.5em;"><button class="btn btn-primary" type="submit">{% trans "Create Route" %}</button></div>
             {% endif %}
-
-            {% if driver_route %}
-                {% for r in driver_route %}
-                    <div style="display: inline-block;"><a class="btn btn-primary" href="{% url 'package_request_app:cluster_route' r.id %}" type="submit">{% trans "View Route" %}</a></div>
-                {% endfor %}
-            {% endif %}
-        </form>
-    </ul>
+        </ul>
+        <!-- Pick-Up Details -->
+        {% if driver_route %}
+            {% for r in driver_route %}
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="border-bottom: 1px solid #FFA758;; padding-bottom: 10px;">Pick-Up Details</h5>
+                        <h3>${{ parcels_price }}</h3>
+                        <p class="card-text">No. of Packages: {{ num_packages }}</p>
+                        <p class="card-text"><i class="bi bi-geo-alt-fill" style="color: red;"></i> {{ r.station.address.place }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for dp in all_parcels %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                {{ dp.package_description }}
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a href="tel:{{ dp.sender_phone }}" data-toggle="tooltip" data-placement="top" title="Call Sender" style="color: #359e64;"><i class="bi bi-telephone-forward"></i></a>
+                                <i class="bi bi-qr-code" style="color: #FFA758; margin-left: 1em;"></i>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>        
+                    <div class="card-body">
+                        <a href="{% url 'package_request_app:cluster_route' r.id %}" class="card-link">View Route</a>
+                        <a href="{% url 'package_request_app:delete_route' id=r.id %}" class="card-link">Delete Route</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </form>
 </div>
 {% endblock content %}
