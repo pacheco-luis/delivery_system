@@ -14,11 +14,7 @@ def update_context(request, context: dict ) -> dict:
     context['user_id']=request.user.id.hex,
     context['nav_notifications']=Notification.objects.filter( user=request.user )[:3]
     context['nav_notifications_count']=Notification.objects.filter( user=request.user, read=False ).count()
-    
-    conv, _ = Conversation.objects.get_or_create(user=request.user)
-    context["messages"] = conv.get_messages()
-    
-    print( context["messages"] )
+    context["chat_messages"] = Conversation.objects.get_or_create(user=request.user)[0].get_messages()
     
     return context
 

@@ -145,8 +145,8 @@
             </div>
         </div>
       </div>
-      {% if messages %}
-        {% for message in messages %}
+      {% if chat_messages %}
+        {% for message in chat_messages %}
           {% if message.sender == None %}
 
             <div class="message bot">
