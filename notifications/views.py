@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from notifications.forms import READ_ALL_FORM
 from notifications.models import Notification
 from package_request.models import Package
+from chatbot.models import Conversation
 
 # Create your views here.
 
@@ -13,6 +14,11 @@ def update_context(request, context: dict ) -> dict:
     context['user_id']=request.user.id.hex,
     context['nav_notifications']=Notification.objects.filter( user=request.user )[:3]
     context['nav_notifications_count']=Notification.objects.filter( user=request.user, read=False ).count()
+    
+    conv, _ = Conversation.objects.get_or_create(user=request.user)
+    context["messages"] = conv.get_messages()
+    
+    print( context["messages"] )
     
     return context
 
