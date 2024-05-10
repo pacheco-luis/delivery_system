@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Sign In{% endblock title %}
+
+{% comment %} Main Sign-in Page for Customer and Driver {% endcomment %}
+
+{% block content %}
+<div id="sign_in_container" style="background-image: url( '../../images/admin-sites/admin_login/lungshang_tempel.png' );">
+    <form id="sign_in_form" style="background-color: #ffffffb9;" action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="log-in_email">{% trans "Email address"%}</label>
+            <input name="email" type="email" class="form-control" id="log-in_email" aria-describedby="emailHelp" placeholder="Enter your email" autocomplete="email">
+            {% comment %} <small id="emailHelp" class="form-text text-muted">{% trans "We'll keep your information safe."%}</small> {% endcomment %}
+        </div>
+        <div class="form-group">
+            <label for="password_input">{% trans "Password"%}</label>
+            <input name="password" type="password" class="form-control" id="password_input" placeholder="Password">
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="show_pwd_check_box" onclick="show_pwd()">
+            <label class="form-check-label" for="show_pwd_check_box">{% trans "Show Password"%}</label>
+        </div>
+        <div id="links" class="form-group">
+            <p>
+                {% trans "Don't have an account?"%}
+                <a href="{% url 'users:register' %}">{% trans "Sign Up"%}</a>
+                {% comment %} {{request.path}} {% endcomment %}
+            </p>
+            <p>
+               {% trans " Forgot password?"%}
+                <a href="{% url 'users:reset_password' %}">{% trans "Reset it here"%}</a>
+            </p>
+        </div>
+        <div>
+            <button id="customer_submit_btn" type="submit" name="admin" value="Login" class="log_in_btns btn btn-primary">{% trans "Log-in"%}</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block script_files %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{% static 'js/sign-in.js' %}"></script>
+{% endblock script_files %}

@@ -135,24 +135,28 @@
         </div>
         {% comment %} Initiate mobile dropdown menu icon {% endcomment %}
         <div id="mobile__menu">
-          <button id="menu" type="button" onclick="show_menu()" class="btn menu__btn"><span class="material-symbols-outlined">density_small</span></button>
-          <button id="close_menu" type="button" onclick="close_menu()" class="btn menu__btn"><span class="material-symbols-outlined">close</span></button>
+          <button id="menu" type="button" onclick="show_menu()" class="btn menu__btn">
+            <i class="bi bi-list" style="color: aliceblue; font-size: 1.25rem;"></i>
+          </button>
+          <button id="close_menu" type="button" onclick="close_menu()" class="btn menu__btn">
+            <i class="bi bi-x-lg" style="color: aliceblue; font-size: 1.25rem;"></i>
+          </button>
         </div>
         {% comment %} Logout Button {% endcomment %}
         <div class="profile__box">
           {% if request.user.customer.profile_image %}
-             <img src="{{ request.user.customer.profile_image.url }}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image"/>
+             <img src="{{ request.user.customer.profile_image.url }}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image" style="height: 1.6rem; width: 1.6rem;"/>
           {% else %}
-            <img src="{% static 'images/user-default.png' %}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image"/>
+            <img src="{% static 'images/user-default.png' %}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image" style="height: 1.6rem; width: 1.6rem;"/>
           {% endif %}
         </div>
         {% comment %} Main Profile Dropdown {% endcomment %}
-        <div class="profile_box_dropdown_cont" id="dropdownMenu">
+        <div class="profile_box_dropdown_cont border" id="dropdownMenu">
           <div class="profile_box_dropdown">
             <div class="user-data">
-              <h3>{{request.user.customer.first_name}} {{request.user.customer.last_name}} </h3>
+              <h6 style="margin: 0;">{{request.user.customer.username}}</h6>
             </div>
-            <hr>
+            <hr style="margin: 0.5rem;">
             {% comment %} Settings  {% endcomment %}
             <a href="{% url 'users:customer-account'%}" class="profile_box_dropdown_link">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
@@ -274,19 +278,23 @@
         </div>
         {% comment %} Initiate Dropdown Menu {% endcomment %}
         <div id="mobile__menu">
-          <button id="menu" type="button" onclick="show_menu()" class="btn menu__btn"><span class="material-symbols-outlined">density_small</span></button>
-          <button id="close_menu" type="button" onclick="close_menu()" class="btn menu__btn"><span class="material-symbols-outlined">close</span></button>
+          <button id="menu" type="button" onclick="show_menu()" class="btn menu__btn">
+            <i class="bi bi-list" style="color: aliceblue; font-size: 1.25rem;"></i>
+          </button>
+          <button id="close_menu" type="button" onclick="close_menu()" class="btn menu__btn">
+            <i class="bi bi-x-lg" style="color: aliceblue; font-size: 1.25rem;"></i>
+          </button>
         </div>
         {% comment %}  Driver Logout Button {% endcomment %}
         <div class="profile__box">
           {% if request.user.driver.profile_image %}
-             <img src="{{ request.user.driver.profile_image.url }}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image"/>
+             <img src="{{ request.user.driver.profile_image.url }}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image" style="height: 1.6rem; width: 1.6rem;"/>
           {% else %}
-            <img src="{% static 'images/user-default.png' %}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image"/>
+            <img src="{% static 'images/user-default.png' %}" id="imgTrigger" class="user__picture" onclick="triggerMenu()" alt="user profile image" style="height: 1.6rem; width: 1.6rem;"/>
           {% endif %}
         </div>
         {% comment %} Main Profile Dropdown {% endcomment %}
-        <div class="profile_box_dropdown_cont" id="dropdownMenu">
+        <div class="profile_box_dropdown_cont border" id="dropdownMenu">
           <div class="profile_box_dropdown">
             <div class="user-data">
               <h3>{{request.user.driver.first_name}} {{request.user.driver.last_name}} </h3>

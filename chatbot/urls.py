@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'chatbot_app'
 urlpatterns = [
-    path('chatbot/', views.conversation, name='chatbot'),
+    # this url was only used to developing the chat interface
+    # path('chatbot/', views.conversation, name='chatbot'),
 ]

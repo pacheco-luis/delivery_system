@@ -12,4 +12,5 @@ urlpatterns = [
     path('admin_stations/', views.admin_stations, name='admin_stations'),
     path('admin_all_users/', views.admin_all_users, name='admin_all_users'),
     path('admin_packages/', views.admin_packages, name='admin_packages'),
+    path('admin_login/', views.admin_login, name='admin_login'),
 ]
