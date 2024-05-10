@@ -13,6 +13,8 @@ from stations.forms import STATIONS_FORM
 from places.fields import PlacesField 
 from django.utils.translation import gettext
 from django.db.models import Q
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -22,6 +24,7 @@ from django.db.models import Q
 def exception_handler( object_queryset ) -> int:
     return  object_queryset.count() if object_queryset is not None  else int(0)
 
+@login_required(login_url='management:admin_login')
 def admin_dashboard(request):
     # for users card
     all_users = exception_handler( User.objects.all() )
@@ -79,7 +82,7 @@ def admin_dashboard(request):
     
     
 
-# @login_required(login_url='users:login')
+@login_required(login_url='management:admin_login')
 def create_assign_routes(request):
     # if request.user.is_driver is not True :
     #     return render(request, '401.html')
@@ -244,7 +247,7 @@ def create_assign_routes(request):
 
     return render(request, 'clusters.html', context)
 
-
+@login_required(login_url='management:admin_login')
 def admin_stations(request):
     if request.method == "POST":
         form = STATIONS_FORM( request.POST )
@@ -292,6 +295,7 @@ def admin_stations(request):
 
 
 # function to display all users in management template
+@login_required(login_url='management:admin_login')
 def admin_all_users(request):
     
     # class to extract and send only required fields from users to users page in management
@@ -376,6 +380,7 @@ def admin_all_users(request):
     return render( request, 'users.html', context=context )
 
 
+@login_required(login_url='management:admin_login')
 def admin_packages(request):
     class Display_Parcel():
         def __init__(self, parcel: Package) -> None:
@@ -422,3 +427,29 @@ def admin_packages(request):
     }
     
     return render( request, 'admin_packages.html', context=context )
+
+
+def admin_login(request):
+    if request.user.is_authenticated:
+        return redirect('management:admin_dashboard')
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        try:
+            user = User.objects.get(email=email, is_superuser=True, is_staff=True)
+            user = authenticate(request, email=email, password=password)
+        except:
+            messages.error(request, gettext('Account not registered as admin.'))
+            return redirect('users:admin_login')
+
+        if user is not None:
+            login(request, user)
+            request.session['sname'] = email
+            return redirect('management:admin_dashboard')
+        else:
+            messages.error(request, gettext('Username and password do not match.'))
+            return redirect('users:admin_login')
+    
+    return render(request, 'admin_login.html', )
