@@ -1,0 +1,149 @@
+#chat_parent_container{
+  background-color: #f4f5f6;
+  padding: 0;
+}
+
+.chat-container.rounded.p-3 {
+  position: relative;
+  background-color: #f4f5f6;
+  height: 440px;
+  overflow-y: auto;
+  font-size: clamp(0.9rem, 0.8vw, 2rem);
+  padding-top: 0 !important;
+}
+
+.chat-header{
+  padding: 20px auto;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background-color: #f4f5f6;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.137);
+}
+
+.chat-header{
+  padding: 0.5rem 0;
+}
+
+.chatbot_icon_container{
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 3rem;
+  border: 2px solid #0079D6;
+  line-height: 0;
+}
+
+.chatbot_icon_container img{
+  pointer-events: none;
+  user-select: none;
+  width: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50%);
+}
+
+.icons_col{
+  width: auto;
+  height: 2.5rem;
+  margin-right:0; 
+  text-align: right;
+  padding-top: 0.25rem;
+}
+
+.bustom_btn_link{
+  border-radius: 50%;
+  color: #0079D6;
+  background-color: transparent;
+  border: none;
+}
+
+.bustom_btn_link:hover{
+  color: #fff;
+  background-color: #0079D6;
+}
+
+
+.chat_header_icons{
+  font-size: 1.25rem;
+  padding: 0 0.25rem;
+}
+
+.message {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.message-body{
+  position: relative;
+}
+
+.message.bot .message-body {
+  background-color: #dbdbdb;
+  color: #333;
+}
+.message.user .message-body {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.bot .message-body{
+    border-radius: 1rem 1rem 1rem 0;
+    width: fit-content;
+}
+
+.user .message-body{
+    border-radius: 1rem 1rem 0 1rem;
+    width: fit-content;
+}
+
+.user{
+  padding-left: 30px;  
+}
+
+.bot{
+  padding-right: 30px;  
+}
+
+.user .message-body.p-2{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.bot .message-body.p-2{
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.time_stamp{
+  text-align: right;
+  font-size: clamp(0.6rem, 0.5vw, 8rem); 
+}
+
+#chat-form .input-group input{
+  font-size: clamp(0.9rem, 0.8vw, 2rem);
+  margin: auto 10px;
+  border-radius: 20px;
+}
+
+#chat-form .input-group button{
+  color: #007bff;
+  background-color: transparent;
+  border: none;
+  margin: auto 10px auto 0;
+  border-radius: 20px;
+}
+
+#chat-form .input-group button:hover{
+  background-color: transparent;
+}
+
+
+@media screen and (max-width: 600px) {
+  .chat-container.rounded.p-3{
+    height: 91vh ;
+  }
+}
