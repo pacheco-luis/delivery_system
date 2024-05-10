@@ -240,7 +240,7 @@ def package_form_handler(request):
 def all_packages(request):
     import json
     
-    package_list = Package.objects.filter(customer=request.user.customer, status__in=[Package.STATUS_PENDING, Package.STATUS_PICKING, Package.STATUS_DELIVERING])
+    package_list = Package.objects.filter(customer=request.user.customer, status__in=[Package.STATUS_PENDING, Package.STATUS_PICKING, Package.STATUS_TRANSIT, Package.STATUS_DELIVERING])
     package_count = Package.objects.filter(customer=request.user.customer).count()
     print( package_count )
     
@@ -405,8 +405,11 @@ def current_job(request):
 
     driver = Driver.objects.get(user=request.user)
     driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_ASSIGNED)
-    driver_route = Route.objects.filter(driver=driver)
+    driver_route = Route.objects.filter(driver=driver, status= Route.STATUS_ASSIGNED)
+    parcels = Package.objects.filter(driver=driver, status__in=[Package.STATUS_PICKING, Package.STATUS_TRANSIT, Package.STATUS_DELIVERING])
     
+    all_transiting = all(parcel.status == Package.STATUS_TRANSIT for parcel in parcels)
+    print(all_transiting)
     if request.method == 'POST':
         
         selected_packages = request.POST.getlist('select_packages')
@@ -541,7 +544,6 @@ def current_job(request):
         all_parcels.extend(parcels_in_route)
         
     parcels_price = sum(parcel.price for parcel in all_parcels)
-    parcels_duration = sum(parcel.duration for parcel in all_parcels)
 
     num_packages = len(all_parcels)
     context = {
@@ -550,7 +552,7 @@ def current_job(request):
         'driver_route' : driver_route,
         'all_parcels' : all_parcels,
         'parcels_price': parcels_price,
-        'parcels_duration': parcels_duration,
+        'all_transiting': all_transiting,
         'num_packages': num_packages
     }
     return render(request, 'current_job.html', context=update_context( request, context) )
@@ -571,6 +573,14 @@ def delete_route(request, id):
     
     return redirect('package_request_app:job_current')
 
+@login_required(login_url='users:login')
+def complete_route(request, id):
+    
+    route = Route.objects.get(pk=id)
+    route.status = Route.STATUS_COMPLETED
+    route.save()
+    messages.success( request, gettext("You have completed the route!"))
+    return redirect('package_request_app:job_history')
 
 # @login_required(login_url='users:login')
 # def job_deliver(request):
@@ -740,6 +750,13 @@ def completed_job(request):
         return render(request, '401.html', context=update_context( request, {}))
     
     return render(request, 'completed_job.html', context=update_context( request, {}))
+
+@login_required(login_url='users:login')
+def job_history(request):
+    if request.user.is_driver is not True :
+        return render(request, '401.html', context=update_context( request, {}))
+    
+    return render(request, 'job_history.html', context=update_context( request, {}))
 
 @csrf_exempt
 @login_required(login_url='users:login')
@@ -916,6 +933,23 @@ def job_details(request, id):
 #     if request.user.is_driver is not True :
 #         return render(request, '401.html')
 #     return render(request, 'job_type_selection.html')        
+@login_required(login_url='users:login')
+def job_scanner_pickup(request):
+    user = request.user
+    driver = user.driver
+    if request.method == 'POST':
+        package_id = request.POST.get('package_id')
+        package = Package.objects.get(package_id=package_id)
+        print('DATA:', package_id)
+        print('DATA:', package.status)
+        if package.status == Package.STATUS_PICKING:
+            package.status = Package.STATUS_TRANSIT
+            package.driver = driver
+            package.save()
+            return redirect('package_request_app:success_or_fail')
+        else:
+            messages.error(request, 'This package has already been taken')
+    return render(request, 'job_scanner_pickup.html', context=update_context( request, {}) )
 
 @login_required(login_url='users:login')
 def job_scanner(request):

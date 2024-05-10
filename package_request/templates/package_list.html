@@ -49,6 +49,9 @@
                             {% if package_obj.status == 'picking' %}
                                 <strong style="color:#5aa5b9;"> {% trans "Picking Up" %}</strong>
                                 {% endif %}
+                            {% if package_obj.status == 'transiting' %}
+                                <strong style="color:#7d9764;"> Transiting </strong>
+                                {% endif %}
                             {% if package_obj.status == 'delivering' %}
                                 <strong> {% trans "Being Delivered"%}</strong>
                                 {% endif %}

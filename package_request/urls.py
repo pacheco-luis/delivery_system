@@ -14,12 +14,14 @@ urlpatterns = [
     path('job_list/', views.all_jobs, name = 'job_list'),
     path('job_list/<id>/', views.job_detail, name = 'job_detail'),
     path('job_current/', views.current_job, name = 'job_current'),
+    path('job_history/', views.job_history, name = 'job_history'),
     path('job_completed/', views.completed_job, name = 'job_completed'),
     path('api/job_list/', views.api_all_jobs, name = 'api_job_list'),
     path('api/job_list/current/<id>/update/', views.api_take_photo, name = 'api_job_list_current'),
     path('delete_request/<id>/', views.delete_request, name = 'delete_request'),
     path('cluster_route/<id>/', views.cluster_route, name = 'cluster_route'),
     path('delete_route/<id>/', views.delete_route, name = 'delete_route'),
+    path('complete_route/<id>/', views.complete_route, name = 'complete_route'),
     path('jobs/delivery/', views.job_deliver, name = 'job_deliver'),
     path('jobs/delivery/route/', views.cluster_route_deliver, name = 'cluster_route_deliver'),
     path('jobs/delivery/route/<id>/camera/', views.take_photo, name = 'take_photo'),
@@ -31,5 +33,6 @@ urlpatterns = [
     path('route_list/<id>/', views.job_details, name = 'job_details'),
 
     path('job_scanner/', views.job_scanner, name = 'job_scanner'),
+    path('job_scanner_pickup/', views.job_scanner_pickup, name = 'job_scanner_pickup'),
     path('success_or_fail/', views.success_or_fail, name = 'success_or_fail'),
 ]
