@@ -32,9 +32,9 @@
     {% block head %}{% endblock head %}
   </head>
 
-  <body id="base_body">
-    <img id="body_bg" src="{% static '/images/base/faded_defined_4.png' %}" alt="">
-    <img id="body_bg_2" src="{% static '/images/base/faded_defined.png' %}" alt="">
+  <body id="base_body" style="background-color: #ffffff; background-image: linear-gradient(43deg, #ffffff 0%, #ddbedb59 46%, #ff600024 100%);">
+    <!-- <img id="body_bg" src="{% static '/images/base/faded_defined_4.png' %}" alt="">
+    <img id="body_bg_2" src="{% static '/images/base/faded_defined.png' %}" alt=""> -->
     {# Display django.contrib.messages as Bootstrap alerts #}
     <div style="position: absolute; z-index: 9999; transform: translate(-50%, -50%); top: 6rem; left: 50%;">
       {% bootstrap_messages %}
