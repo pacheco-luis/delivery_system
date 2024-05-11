@@ -309,10 +309,10 @@ def all_jobs(request):
     if driver.address is not None:
         for station in Station.objects.all():
             if station.dist((float(driver.address.latitude), float(driver.address.longitude))) <= station.radius:
-                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=station)
+                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=station, status=Route.STATUS_UNASSIGNED)
                 driver_location = station.alias
     else:
-        filtered_routes = Route.objects.all()
+        filtered_routes = Route.objects.filter(status=Route.STATUS_UNASSIGNED)
     
     if request.method == 'POST':
         form = DRIVER_FILTER_QUERY_FORM(request.POST)
@@ -328,7 +328,7 @@ def all_jobs(request):
                     except:
                         pass
     
-                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=location)
+                filtered_routes = Route.objects.filter(parcels__sender_address__icontains=location, status=Route.STATUS_UNASSIGNED)
                 
                 if not filtered_routes.exists():
                     messages.error(request, "No routes found based on the selected criteria.")
@@ -537,6 +537,7 @@ def current_job(request):
             route.parcels.update(status=Package.STATUS_PICKING)
             notifications = [ Notification.objects.create(message=mssg, type=Notification.TYPE_PICKING, parcel=p, user=p.customer.user) for p in route.parcels.all() ]
             [n.notify_picking('assigned', 'picking') for n in notifications]
+        return HttpResponseRedirect(reverse('package_request_app:job_current'))
             
     all_parcels = []
     for route in driver_route:
@@ -558,7 +559,7 @@ def current_job(request):
     return render(request, 'current_job.html', context=update_context( request, context) )
 
 @login_required(login_url='users:login-customer')
-def delete_route(request, id):
+def delete_pickup_route(request, id):
     try:
         route = Route.objects.get(pk=id)
         parcels_in_route = route.parcels.all()
@@ -572,6 +573,22 @@ def delete_route(request, id):
         pass
     
     return redirect('package_request_app:job_current')
+
+@login_required(login_url='users:login-customer')
+def delete_deliver_route(request, id):
+    try:
+        route = Route.objects.get(pk=id)
+        parcels_in_route = route.parcels.all()
+       
+        for parcel in parcels_in_route:
+            parcel.status = Package.STATUS_DELIVERING
+            parcel.save()
+
+        route.delete()
+    except Route.DoesNotExist:
+        pass
+    
+    return redirect('package_request_app:job_deliver')
 
 @login_required(login_url='users:login')
 def complete_route(request, id):
@@ -599,15 +616,34 @@ def complete_route(request, id):
 #     }
 #     return render(request, 'job_deliver.html', context)
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 @login_required(login_url='users:login')
 def job_deliver(request):
-    if request.user.is_driver is not True :
-        return render(request, '401.html', context=update_context( request, {}))
+    if not request.user.is_driver:
+        return render(request, '401.html', context=update_context(request, {}))
     
     driver = Driver.objects.get(user=request.user)
-    driver_packages = Package.objects.filter(driver=driver, status__in=[Package.STATUS_DELIVERING])
-    driver_route = Route.objects.filter(driver=driver)
-    print(driver_route)
+    driver_packages = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
+    driver_route = Route.objects.filter(driver=driver, status=Route.STATUS_TO_DELIVER)
+
+    parcels = Package.objects.filter(driver=driver, status=Package.STATUS_DELIVERING)
+
+    all_completed = all(parcel.status == Package.STATUS_COMPLETED for parcel in parcels)
+
+    print(driver_packages)
+
+    parcels_in_route = []
+    if driver_route.exists():
+        route = driver_route.first()
+        parcels_in_route = route.parcels.all()
+    
+    packages_not_in_route = []
+
+    for package in driver_packages:
+        if not driver_route.filter(parcels=package).exists():
+            packages_not_in_route.append(package)
     
     if request.method == 'POST':
         
@@ -631,10 +667,10 @@ def job_deliver(request):
         # Get all the parcels
         parcels = packages
             
-        # detecting if no packages avalable to cluster
-        if parcels.count() == 0 :
-            messages.error( request, gettext("Unable to create new Routes. No available Parcels."))
-            return redirect( 'management:routes' )
+        # detecting if no packages available to cluster
+        if parcels.count() == 0:
+            messages.error(request, gettext("Unable to create new Routes. No available Parcels."))
+            return redirect('management:routes')
 
         # Get the coordinates of the parcels
         # Add the depot as the first coordinate
@@ -673,9 +709,9 @@ def job_deliver(request):
                 chunk_destinations = destinations[i:i+6]
 
                 params = {
-                'origins': '|'.join([','.join(origin) for origin in chunk_origins]),
-                'destinations': '|'.join([','.join(destination) for destination in chunk_destinations]),
-                'key': API_key
+                    'origins': '|'.join([','.join(origin) for origin in chunk_origins]),
+                    'destinations': '|'.join([','.join(destination) for destination in chunk_destinations]),
+                    'key': API_key
                 }
 
                 response = requests.get(url=base_url, params=params)
@@ -706,9 +742,6 @@ def job_deliver(request):
         print(best_tour)
         print(best_distance)
 
-        # Delete all existing routes
-        # Route.objects.all().delete()
-
         # Initialize a list to store created route instances
         routes = list([])
 
@@ -736,13 +769,22 @@ def job_deliver(request):
             route.parcels.update(status=Package.STATUS_DELIVERING)
             notifications = [ Notification.objects.create(message=mssg, type=Notification.TYPE_PICKING, parcel=p, user=p.customer.user) for p in route.parcels.all() ]
             [n.notify_picking('assigned', 'delivering') for n in notifications]
-        
+
+        return HttpResponseRedirect(reverse('package_request_app:job_deliver'))
+     
     context = {
-        'active_tab' : 'deliver',
-        'driver_packages' : driver_packages,
-        'driver_route' : driver_route
+        'active_tab': 'deliver',
+        'driver_packages': driver_packages,
+        'driver_route': driver_route,
+        'parcels_price': sum(parcel.price for parcel in parcels),
+        'parcels_in_route': parcels_in_route,
+        'num_packages': len(parcels_in_route), 
+        'packages_not_in_route' : packages_not_in_route,
+        'all_completed': all_completed
     }
-    return render(request, 'job_deliver.html', context=update_context( request, context) )
+
+    return render(request, 'job_deliver.html', context=update_context(request, context))
+
 
 @login_required(login_url='users:login')
 def completed_job(request):
@@ -753,29 +795,23 @@ def completed_job(request):
 
 @login_required(login_url='users:login')
 def job_history(request):
-    if request.user.is_driver is not True :
-        return render(request, '401.html', context=update_context( request, {}))
     driver = Driver.objects.get(user=request.user)
-    routes  = Route.objects.filter(driver=driver, status=Route.STATUS_COMPLETED)
+    routes = Route.objects.filter(driver=driver, status=Route.STATUS_COMPLETED).prefetch_related('parcels')
 
+    driver_packages = []
     for route in routes:
-        driver_packages = route.parcels.all()
-    
+        driver_packages.extend(route.parcels.all())
+
+
     parcels_price = sum(parcel.price for parcel in driver_packages)
-    print(routes)
-    
-    all_parcels = []
-    for route in routes:
-        parcels_in_route = route.parcels.all()
-        all_parcels.extend(parcels_in_route)
-        
-    num_packages = len(all_parcels)
+    num_packages = len(driver_packages)
+
     context = {
-       'routes': routes,
-       'driver': driver,
-       'driver_packages' : driver_packages,
-       'num_packages' : num_packages,
-       'parcels_price' : parcels_price
+        'routes': routes,
+        'driver': driver,
+        'driver_packages': driver_packages,
+        'num_packages': num_packages,
+        'parcels_price': parcels_price
     }
     
     return render(request, 'job_history.html', context=update_context( request, context))

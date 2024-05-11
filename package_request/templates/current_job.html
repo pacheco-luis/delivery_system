@@ -26,7 +26,9 @@
                             <th scope="col"></th>
                             <th scope="col">#</th>
                             <th scope="col">ID</th>
-                            <th scope="col">{% trans "Date"%}</th>
+                            <th scope="col">{% trans "Item Description" %}</th>
+                            <th scope="col">{% trans "Date" %}</th>
+                            <th scope="col">{% trans "Size" %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,13 +46,15 @@
                             </td>
                             <td scope="row">{{ forloop.counter }}</td>
                             <td scope="row">{{ dp.package_id }}</td>
+                            <td scope="row">{{ dp.package_description }}</td>
                             <td scope="row">{{ dp.order_date }}</td>
+                            <td scope="row">{{ dp.width }} cm * {{ dp.height }} cm * {{ dp.depth }} cm</td>
                         </tr>
                         {% endfor %}
     
                         {% else %}
                         <tr>
-                            <td colspan="4" style="background-color: antiquewhite;">
+                            <td colspan="6" style="background-color: antiquewhite;">
                                 <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
                                     <img src="{% static 'images/package_listing/empty_package.png' %}"
                                         alt="Empty Package Image">
@@ -131,7 +135,7 @@
                 </ul>        
                 <div class="card-body">
                     <a href="{% url 'package_request_app:cluster_route' r.id %}" class="card-link">View Route</a>
-                    <a href="{% url 'package_request_app:delete_route' id=r.id %}" class="card-link">Delete Route</a>
+                    <a href="{% url 'package_request_app:delete_pickup_route' id=r.id %}" class="card-link">Delete Route</a>
                     {% if all_transiting %}
                         <a href="{% url 'package_request_app:complete_route' r.id %}" class="card-link">Complete Route</a>  
                     {% endif %}
