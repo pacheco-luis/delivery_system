@@ -755,8 +755,30 @@ def completed_job(request):
 def job_history(request):
     if request.user.is_driver is not True :
         return render(request, '401.html', context=update_context( request, {}))
+    driver = Driver.objects.get(user=request.user)
+    routes  = Route.objects.filter(driver=driver, status=Route.STATUS_COMPLETED)
+
+    for route in routes:
+        driver_packages = route.parcels.all()
     
-    return render(request, 'job_history.html', context=update_context( request, {}))
+    parcels_price = sum(parcel.price for parcel in driver_packages)
+    print(routes)
+    
+    all_parcels = []
+    for route in routes:
+        parcels_in_route = route.parcels.all()
+        all_parcels.extend(parcels_in_route)
+        
+    num_packages = len(all_parcels)
+    context = {
+       'routes': routes,
+       'driver': driver,
+       'driver_packages' : driver_packages,
+       'num_packages' : num_packages,
+       'parcels_price' : parcels_price
+    }
+    
+    return render(request, 'job_history.html', context=update_context( request, context))
 
 @csrf_exempt
 @login_required(login_url='users:login')

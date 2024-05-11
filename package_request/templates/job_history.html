@@ -1,12 +1,79 @@
 {% extends 'base.html' %}
-{% block title %}Job Scanner{% endblock title %}
-{% block content %}
+{% load static %}
 {% load i18n %}
+{% block title %}Jobs History{% endblock title %}
+{% block content %}
 
+<div id="pack-list-body">
+    <h1 style="padding: 0.5em;">{% trans "Jobs History" %}</h1>
 
-<div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
-    <h1>Complete Route</h1>
-   
+    <ul class="ul-job-list card">
+        <div style="overflow-x:auto;">
+            <table class="table table-hover table-responsive pack-list-table" style="width:100%;">
+                <tr style="background-color: #FFA758;">
+                    <th scope="col"><h4>Route Details</h4></th>
+                </tr>
+                {% if routes %}
+                    {% for obj in routes %}
+                    <tr>
+                        <td>
+                            <h3>${{ parcels_price }} NTD</h3>
+                            <p class="card-text"><i class="bi bi-geo-alt-fill" style="color: red;"></i> Station: {{ obj.station.address.place }}</p>
+                            <p class="card-text"><i class="bi bi-box-seam-fill" style="color: #FFA758;"></i> No. of Packages: {{ num_packages }}</p>
+                            
+                            <ul class="list-group list-group-flush">
+                                {% for pack in driver_packages %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: rgb(98.8%, 90.6%, 82.4%); border-bottom: 1px solid #dee2e6; padding-bottom: 10px;" >
+                                        <button class="btn btn-link link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover p-0" data-bs-toggle="modal" data-bs-target="#viewModal{{ dp.package_id }}" style="color: #212529;">{{ pack.package_description }}</button>
+                                        <div class="modal fade" id="viewModal{{ dp.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of the package" %}</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p><b>{% trans "Package ID:" %} </b> {{ pack.package_id }}</p><br>
+                                                        <p><b> Sender Phone Number: </b> {{ pack.sender_phone }}</p><br>
+                                                        <p><b> {% trans "Pickup Address:" %} </b> {{ pack.sender_address }}</p><br>
+                                                        <p><b> {% trans "Package Created:" %} </b> {{ pack.order_date }}</p><br>
+                                                        <p><b>{% trans "Receiver:" %} </b> {{ pack.recipient_name }}</p><br>
+                                                        <p><b>{% trans "Destination:" %} </b> {{ pack.recipient_address }}</p><br>
+                                                        <p><b>{% trans "Item Description:" %} </b> {{ pack.package_description }}</p><br>
+                                                        <p><b>Size:</b> {{ pack.width }} cm * {{ pack.height }} cm * {{ pack.depth }} cm</p>
+                                                        {% if package_obj.delivery_photo %}
+                                                            <div>
+                                                                <p><b>Delivery Photo:</b></p>
+                                                                <img src="{{ pack.delivery_photo.url }}" alt="Delivery Photo" style="width: 100px; height: 100px;">
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>  
+                            <div class="card-footer">
+                                <p class="card-text" style="text-align: right; font-size: medium;"><small class="text-muted">Created at {{ obj.created_at }}</small></p> 
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" style="background-color: antiquewhite;">
+                            <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                                <p>You have not made any deliveries as yet. Click <a href="{% url 'package_request_app:select_packages' %}">here</a> to start! </p>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    </ul>  
 </div>
-
 {% endblock content %}
