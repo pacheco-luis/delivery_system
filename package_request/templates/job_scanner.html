@@ -6,23 +6,26 @@
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {% endblock head %}
 
-<div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
-    <h1>{% trans "QR Code Scanner" %}</h1>
-
-    <div id="reader"></div>
-    <div id="result"></div>
+<div id="new_request_body">
+    <div id="request_layer"  class=" job-body border">
+            <div class="card-body">
+                <h3 class="card-title" style="border-bottom: 1px solid #FFA758; padding-bottom: 10px;">{% trans "QR Code Scanner" %}</h3><br>
+                <div id="reader"></div>
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
 </div>
-
 <script>
     const scanner = new Html5QrcodeScanner('reader', {
         qrbox: {
             width: 250,
-            height: 250
+            height: 400
         },
         fps: 20,
     });
     scanner.render(success, error);
-
+    
     function success(result) {
         // Create a form to send package ID to Django view
         const form = document.createElement('form');
