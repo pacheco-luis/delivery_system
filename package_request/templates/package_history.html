@@ -4,61 +4,60 @@
 {% block title %}History{% endblock title %}
 
 {% block content %}
-<div id="pack-list-body">
-    <div>
-        <h2 style="padding: 0.5em; ">{% trans "These are the past requests you have made: "%}</h2>
-    </div>
-    <div style="overflow-x:auto;">
-        <table class="table table-hover table-responsive pack-list-table" style="width:100%;">
-            <tr style="background-color: #FFA758;">
-                <th scope="col"> </th>
-                <th scope="col">{% trans "Sender:"%}</th>
-                <th scope="col">{% trans "Receiver:"%}</th>
-                <th scope="col">{% trans "Date:"%}</th>
-                <th scope="col">{% trans "Destination:"%}</th>
-                <th scope="col">{% trans "Item Description:"%}</th>
-                <th scope="col">{% trans "Status:"%}</th>
-                {% if package_history %}
+<div id="pack-list-body" style="padding-top: 3em;">
+    <ul class="ul-job-list job-body border">
+        <h2 class="card-title" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">{% trans "These are the past requests you have made: "%}</h2><br>
+        <div style="overflow-x:auto;">
+            <table class="table table-hover table-responsive pack-list-table border" style="width:100%;">
+                <tr style="background-color: #FFA758;">
+                    <th scope="col"> </th>
+                    <th scope="col">{% trans "Sender:"%}</th>
+                    <th scope="col">{% trans "Receiver:"%}</th>
+                    <th scope="col">{% trans "Date:"%}</th>
+                    <th scope="col">{% trans "Destination:"%}</th>
+                    <th scope="col">{% trans "Item Description:"%}</th>
+                    <th scope="col">{% trans "Status:"%}</th>
+                    {% if package_history %}
                     <th scope="col"> </th>
                 {% endif %}
             </tr>
-            {% if package_history%}
+            {% if package_history %}
                 {% for package_obj in package_history %}
-                    <tr>
-                        <td scope="row">
-                            {% if package_obj.frozen %}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-snow2" viewBox="0 0 16 16" style="color: #0dcaf0;">
-                                    <path d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5"/>
-                                </svg>
-                            {% else %}
-                                    
-                            {% endif %}
-                        </td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ package_obj.recipient_name }}</td>
-                        <td>{{ package_obj.order_date }}</td>
-                        <td>{{ package_obj.recipient_address }}</td>
-                        <td>{{ package_obj.package_description }}</td>
-                        <td scope="row">{% if package_obj.status == 'completed' %}
-                            <strong style="color: #359e64;">{% trans "The package has been delivered." %}</strong>
-                        {% elif package_obj.status == 'canceled' %}
-                            <strong style="color: #fc4b0b;">{% trans "Request Canceled" %}</strong>
+                <tr>
+                    <td scope="row">
+                        {% if package_obj.frozen %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-snow2" viewBox="0 0 16 16" style="color: #0dcaf0;">
+                            <path d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5"/>
+                        </svg>
+                        {% else %}
+                        
                         {% endif %}
-                        </td>
-                        <td>
-                            <button type="button" class="ps_view_button btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ package_obj.package_id }}">{% trans "View" %}</button>
-                            <div class="modal fade" id="viewModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of your active request "%}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p><b>{% trans "Package ID:" %} </b> {{ package_obj.package_id }}</p><br>
-                                            <p><b> {% trans "Date Created: " %} </b> {{ package_obj.order_date }}</p><br>
-                                            <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
-                                            <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
-                                            <p><b>{% trans "Description:" %} </b> {{ package_obj.package_description }}</p><br>
+                    </td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ package_obj.recipient_name }}</td>
+                    <td>{{ package_obj.order_date }}</td>
+                    <td>{{ package_obj.recipient_address }}</td>
+                    <td>{{ package_obj.package_description }}</td>
+                    <td scope="row">{% if package_obj.status == 'completed' %}
+                        <strong style="color: #359e64;">{% trans "The package has been delivered." %}</strong>
+                        {% elif package_obj.status == 'canceled' %}
+                        <strong style="color: #fc4b0b;">{% trans "Request Canceled" %}</strong>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button type="button" class="ps_view_button btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ package_obj.package_id }}">{% trans "View" %}</button>
+                        <div class="modal fade" id="viewModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="staticBackdropLabel">{% trans "This is the information of your active request "%}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><b>{% trans "Package ID:" %} </b> {{ package_obj.package_id }}</p><br>
+                                        <p><b> {% trans "Date Created: " %} </b> {{ package_obj.order_date }}</p><br>
+                                        <p><b>{% trans "Receiver:" %} </b> {{ package_obj.recipient_name }}</p><br>
+                                        <p><b>{% trans "Destination:" %} </b> {{ package_obj.recipient_address }}</p><br>
+                                        <p><b>{% trans "Description:" %} </b> {{ package_obj.package_description }}</p><br>
                                             {% if package_obj.delivered_photo %}
                                             <p><img src="{{ package_obj.delivered_photo.url }}" alt="Package Image" style="width: 100%;"></p>
                                             {% endif %}
@@ -71,22 +70,24 @@
                             </div>
                         </td>
                     </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="7" style="background-color: antiquewhite;">
-                        <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
-                            <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
-                            <p>{% trans "You currently do not have any previous package requests on record."%}</p>
-                        </div>
-                    </td>
-                </tr>
-            {% endif %}
-        </table>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="7" style="background-color: antiquewhite;">
+                            <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                                <p>{% trans "You currently do not have any previous package requests on record."%}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </ul>
     </div>
-</div>
-{% endblock content %}
-
-{% block script_files %}
-    <script src="{% static 'js/package_history.js' %}"></script>
-{% endblock script_files %}
+    {% endblock content %}
+        
+        {% block script_files %}
+        <script src="{% static 'js/package_history.js' %}"></script>
+        {% endblock script_files %}
+        

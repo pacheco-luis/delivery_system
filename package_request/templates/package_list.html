@@ -6,36 +6,35 @@
 {% block content %}
 {% load i18n %}
 
-<div id="pack-list-body">
-    <div>
-        <h2 style="padding: 0.5em;">{% trans "Viewing current active requests"%}</h2>
-    </div>
-    <div style="overflow-x:auto;">
-        <table class="table table-hover table-responsive pack-list-table" style="width:100%;"> 
-            <tr style="background-color: #FFA758;">
-                <th scope="col"> </th>
-                <th scope="col">{% trans "Sender:"%}</th>
-                <th scope="col">{% trans "Receiver:"%}</th>
-                <th scope="col">{% trans "Date:"%}</th>
-                <th scope="col">{% trans "Destination:"%}</th>
-                <th scope="col">{% trans "Item Description:"%}</th>
-                <th scope="col">{% trans "Status:" %}</th>
-                {% if package_count %}
+<div id="pack-list-body" style="padding-top: 3em;">
+    <ul class="ul-job-list job-body border">
+        <h2 class="card-title" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">{% trans "Viewing current active requests"%}</h2><br>
+        <div style="overflow-x:auto;">
+            <table class="table table-hover table-responsive pack-list-table border" style="width:100%;"> 
+                <tr style="background-color: #FFA758;">
                     <th scope="col"> </th>
-                {% endif %}
-            </tr>
-            {% if package_count %}
+                    <th scope="col">{% trans "Sender:"%}</th>
+                    <th scope="col">{% trans "Receiver:"%}</th>
+                    <th scope="col">{% trans "Date:"%}</th>
+                    <th scope="col">{% trans "Destination:"%}</th>
+                    <th scope="col">{% trans "Item Description:"%}</th>
+                    <th scope="col">{% trans "Status:" %}</th>
+                    {% if package_count %}
+                    <th scope="col"> </th>
+                    {% endif %}
+                </tr>
+                {% if package_count %}
                 {% for package_obj in package_list %}
-                    <tr>
+                <tr>
                         <td scope="row">
                             {% if package_obj.frozen %}
-                                <button type="button" class="btn" id="tooltipButton" data-bs-toggle="tooltip" data-bs-placement="top" title="Frozen Package">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-snow2" viewBox="0 0 16 16" style="color: #0dcaf0;">
-                                        <path d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5"/>
-                                    </svg> 
-                                </button>
+                            <button type="button" class="btn" id="tooltipButton" data-bs-toggle="tooltip" data-bs-placement="top" title="Frozen Package">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-snow2" viewBox="0 0 16 16" style="color: #0dcaf0;">
+                                    <path d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5"/>
+                                </svg> 
+                            </button>
                             {% else %}
-                                 
+                            
                             {% endif %}
                         </td>
                         <td scope="row">{{ user.first_name }}</td>
@@ -44,23 +43,27 @@
                         <td scope="row">{{ package_obj.recipient_address.place }}</td>
                         <td scope="row">{{ package_obj.package_description }}</td>
                         <td scope="row">{% if package_obj.status == 'pending' %}
-                                <strong style="color: #FFA758;"> {% trans "Package Pending" %} </strong>
-                                {% endif %}
+                            <strong style="color: #FFA758;"> {% trans "Package Pending" %} </strong>
+                            {% endif %}
                             {% if package_obj.status == 'picking' %}
-                                <strong style="color:#5aa5b9;"> {% trans "Picking Up" %}</strong>
-                                {% endif %}
+                            <strong style="color:#5aa5b9;"> {% trans "Picking Up" %}</strong>
+                            {% endif %}
                             {% if package_obj.status == 'transiting' %}
-                                <strong style="color:#7d9764;"> Transiting </strong>
-                                {% endif %}
+                            <strong style="color:#7d9764;"> Transiting </strong>
+                            {% endif %}
                             {% if package_obj.status == 'delivering' %}
-                                <strong> {% trans "Being Delivered"%}</strong>
-                                {% endif %}
+                            <strong> {% trans "Being Delivered"%}</strong>
+                            {% endif %}
                         </td>
                         <td scope="row">
                             {% if package_obj.status == 'pending' %}
-                                <button type="button" class="ps_del_button btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ package_obj.package_id }}">{% trans "Delete" %}</button>
+                            <button type="button" class="ps_del_button btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ package_obj.package_id }}">{% trans "Delete" %}</button>
                             {% elif package_obj.status == 'picking' %}
-                                <button type="button" class="ps_del_button btn btn-secondary" disabled>{% trans "Delete" %}</button>
+                            <button type="button" class="ps_del_button btn btn-secondary" disabled>{% trans "Delete" %}</button> 
+                            {% elif package_obj.status == 'transiting' %}
+                            <button type="button" class="ps_del_button btn btn-secondary" disabled>{% trans "Delete" %}</button> 
+                            {% elif package_obj.status == 'delivering' %}
+                            <button type="button" class="ps_del_button btn btn-secondary" disabled>{% trans "Delete" %}</button>
                             {% endif %}
                             <div class="modal fade" id="deleteModal{{ package_obj.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -100,7 +103,7 @@
                                             {% else %}
                                             <p><b>{% trans "Not picked up yet" %}</b></p>
                                             {% endif %}
-
+                                            
                                             {% if package_obj.delivery_photo %}
                                             <div>
                                                 <img src="{{ package_obj.delivery_photo.url }}" alt="Delivery Photo" style="width: 100px; height: 100px;">
@@ -115,23 +118,24 @@
                                     </div>
                                 </div>
                             </div>
-                              
+                            
                         </td>
                     </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="8" style="background-color: antiquewhite;">
-                        <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
-                            <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
-                            <p>{% trans "You have no package requests made."%}</p>
-                        </div>
-                    </td>
-                </tr>
-            {% endif %}
-        </table>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="8" style="background-color: antiquewhite;">
+                            <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
+                                <img src="{% static 'images/package_listing/empty_package.png' %}" alt="Empty Package Image">
+                                <p>{% trans "You have no package requests made."%}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </ul>
     </div>
-</div>
 {% endblock content %}
 
 {% block script_files %}
