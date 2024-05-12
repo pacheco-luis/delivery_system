@@ -85,7 +85,7 @@ a {
   border-radius: 10px 10px 0 0;
   background-color: #f4f5f6;
   position: fixed;
-  z-index: 9999999;
+  z-index: 996;
   bottom: 0;
   right: 20px;
   width: 350px;
@@ -95,9 +95,6 @@ a {
   #chat_super_contaienr {
     right: 0; } }
 @media screen and (max-width: 600px) {
-  body {
-    overflow: hidden; }
-
   #chat_super_contaienr {
     border-radius: 10px 10px 0 0;
     width: 100vw;
@@ -489,7 +486,7 @@ hr {
   padding: 0; }
 
 #main_nav {
-  z-index: 998;
+  z-index: 990;
   width: 100%;
   position: fixed;
   top: 0;
@@ -999,7 +996,7 @@ hr {
   position: relative;
   width: 100%;
   background-color: #454545;
-  z-index: 998; }
+  z-index: 995; }
 
 #sign_in_container {
   background-image: url("../../images/login/taipei.jpg");

@@ -1,24 +1,7 @@
 
 
 window.onresize = function() {
-  var menu_open_btn = document.getElementById("menu");
-  var menu_close_btn = document.getElementById("close_menu");
-  var menu_sidebar = document.getElementById("sidebar");
-  var sidebar_log_out = document.getElementById("log_out_container");
-
-  if( menu_open_btn && menu_close_btn && menu_sidebar){
-    if( window.innerWidth > 600  ){
-        menu_open_btn.style.display="none";
-        menu_sidebar.style.display = "block";
-        // log_out_container.style.display = "none";
-    }
-    else{
-      menu_open_btn.style.display="block";
-      menu_sidebar.style.display = "none";
-      // log_out_container.style.display = "block";
-    }
-    menu_close_btn.style.display="none";
-  }
+  location.reload();
 };
 
 
@@ -41,10 +24,12 @@ for (var i = 0; i < btns.length; i++) {
 
 function show_menu(){
   sidebar_helper("block");
+  document.getElementById("ripple_container").style.display = "none";
 }
 
 function close_menu(){
   sidebar_helper("none");
+  document.getElementById("ripple_container").style.display = "block";
 }
 
 function sidebar_helper( sidebar_display ) {
