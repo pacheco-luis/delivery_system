@@ -6,9 +6,16 @@
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {% endblock head %}
 
-<div class="container" style="max-width: 1200px; margin: 0 auto; margin: 0 80px;">
-    <h1>{% trans "Sucessfully Added Task" %}</h1>
-    <a href="{% url 'package_request_app:job_scanner' %}" class="btn btn-primary">{% trans "Scan another code" %}</a>
+<div id="new_request_body">
+    <div id="request_layer"  class=" job-body border">
+            <div class="card-body">
+                <h2 class="card-title h2-title">{% trans "Sucessfully Added Task" %}</h2><br>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'package_request_app:job_scanner' %}" class="btn btn-primary">{% trans "Scan another code" %}</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

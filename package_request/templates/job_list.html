@@ -6,7 +6,7 @@
 
 <div id="pack-list-body" style="padding-top: 3em;">
     <ul class="ul-job-list job-body border">
-        <h2 class="card-title" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">{% trans "Available Tasks" %}</h2><br>
+        <h2 class="card-title h2-title">{% trans "Available Tasks" %}</h2><br>
         <ul class="nav nav-tabs tab">
             <li class="nav-item">
                 <a class="nav-link {% if active_tab == 'individual' %}active{% endif %}" href="{% url 'package_request_app:select_packages' %}">{% trans "Packages" %}</a>
