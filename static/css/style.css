@@ -1679,6 +1679,11 @@ section {
   background-color: #fff;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
+.h2-title {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  text-align: center; }
+
 #chat_parent_container {
   background-color: #f4f5f6;
   padding: 0; }
