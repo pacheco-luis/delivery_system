@@ -1676,7 +1676,8 @@ section {
 .job-body {
   padding: 20px;
   border-radius: 5px;
-  background-color: #fff; }
+  background-color: #fff;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
 #chat_parent_container {
   background-color: #f4f5f6;
