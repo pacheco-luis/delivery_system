@@ -21,34 +21,57 @@
                 <table class="table table-hover border pack-list-table">
                     <thead>
                         <tr style="background-color: #FFA758;">
+                            <th scope="col"> </th>
                             <th scope="col">#</th>
                             <th scope="col">ID</th>
                             <th scope="col">{% trans "Item Description" %}</th>
                             <th scope="col">{% trans "Date" %}</th>
                             <th scope="col">{% trans "Size" %}</th>
-                            <th scope="col"> </th>
                         </tr>
                     </thead>
                     <tbody>
                         {% if parcels %}
-                        {% for dp in parcels %}
-                        <tr>
-                            <td scope="row">{{ forloop.counter }}</td>
-                            <td scope="row">{{ dp.package_id }}</td>
-                            <td scope="row">{{ dp.package_description }}</td>
-                            <td scope="row">{{ dp.order_date }}</td>
-                            <td scope="row">{{ dp.width }} cm * {{ dp.height }} cm * {{ dp.depth }} cm</td>
-                            <td scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="select_packages" value="{{ dp.package_id }}" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        {% trans "Add" %}
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% else %}
+                            {% for dp in parcels %}
+                            <tr>
+                                <td scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="select_packages" value="{{ dp.package_id }}" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            {% trans "Add" %}
+                                        </label>
+                                    </div>
+                                </td>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td scope="row">{{ dp.package_id }}</td>
+                                <td scope="row">
+                                    <button class="btn" style="color: #212529; padding: 0;" data-bs-toggle="modal" data-bs-target="#viewModal{{ dp.package_id }}">{{ dp.package_description }}</button>
+                                    <div class="modal fade" id="viewModal{{ dp.package_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{ dp.package_id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="staticBackdropLabel{{ dp.package_id }}">{% trans "This is the information of your active request" %}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><b>{% trans "Package ID:" %} </b> {{ dp.package_id }}</p><br>
+                                                    <p><b> {% trans "Pickup Address:" %} </b> {{ dp.sender_address }}</p><br>
+                                                    <p><b> {% trans "Package Created:" %} </b> {{ dp.order_date }}</p><br>
+                                                    <p><b>{% trans "Receiver:" %} </b> {{ dp.recipient_name }}</p><br>
+                                                    <p><b>{% trans "Destination:" %} </b> {{ dp.recipient_address }}</p><br>
+                                                    <p><b>{% trans "Item Description:" %} </b> {{ dp.package_description }}</p><br>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger p-0" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td scope="row">{{ dp.order_date }}</td>
+                                <td scope="row">{{ dp.width }} cm * {{ dp.height }} cm * {{ dp.depth }} cm</td>
+                            </tr>
+                            {% endfor %}
+                    {% else %}
                         <tr>
                             <td colspan="6" style="background-color: antiquewhite;">
                                 <div style="padding: 2em; background-color: antiquewhite;" class="no-pack-div">
