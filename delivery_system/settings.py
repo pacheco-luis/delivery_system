@@ -195,7 +195,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 # Google Maps API Settings
-PLACES_MAPS_API_KEY=''
+PLACES_MAPS_API_KEY='AIzaSyAd9OCx97v7Kd1I9xZg25JfFdbcYd8Ek1I'
 PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 23.993356020228287, "lng": 121.60125981977495 }, "zoom": 15}'
 PLACES_MARKER_OPTIONS='{"draggable": true, "clickable": true}'

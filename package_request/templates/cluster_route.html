@@ -88,7 +88,7 @@
             let googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(current_location)}&destination=${station_lat},${station_lng}+&waypoints=${encodeURIComponent(route_coords)}`;
             console.log("Google Maps URL:", googleMapsUrl);
             
-            window.open(googleMapsUrl, '_blank');
+            window.location.href = googleMapsUrl;
         });
     }
 

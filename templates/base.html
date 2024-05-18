@@ -169,7 +169,7 @@
 
           // will attempt to establish connection only if user is authenticated
           if (id != ""){
-            const notifySocket = new WebSocket( `ws://${window.location.host}/ws/notify/${id}/` );
+            const notifySocket = new WebSocket( `wss://${window.location.host}/ws/notify/${id}/` );
             
             // socket open
             notifySocket.onopen = function (e) {
