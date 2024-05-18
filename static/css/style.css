@@ -88,8 +88,7 @@ a {
   z-index: 9999999;
   bottom: 0;
   right: 20px;
-  width: 350px;
-  height: 500px; }
+  width: 350px; }
 
 @media screen and (max-width: 600px) {
   #chat_super_contaienr {
@@ -98,7 +97,6 @@ a {
   #chat_super_contaienr {
     border-radius: 10px 10px 0 0;
     width: 100vw;
-    height: 100vh;
     right: 0; } }
 .alert-wrapper {
   position: fixed;
@@ -1802,6 +1800,6 @@ section {
 
 @media screen and (max-width: 600px) {
   .chat-container.rounded.p-3 {
-    height: 91vh; } }
+    height: 80vh; } }
 
 /*# sourceMappingURL=style.css.map */

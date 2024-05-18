@@ -65,6 +65,7 @@
 
 
       {% if user.is_authenticated %}
+        <div id="chat_blocker" style="display:none; position:absolute; top:0; right:0; z-index: 990; height:100vh; width:100vw;background:rgba(214, 214, 214, 0.295);"></div>
         <div id="chat_super_contaienr" class="border d-none">
           {% include 'chatbot_universal.html' %}
         </div>
@@ -84,11 +85,15 @@
         const chat_container = document.getElementById("chat_container")
         const chat_super_contaienr = document.getElementById("chat_super_contaienr");
         function show_chat(){
+          document.getElementById("chat_blocker").style.display = "block";
+          document.getElementById("base_body").style.overflowY = "hidden";
           chat_super_contaienr.classList.remove("d-none");
           chat_container.scrollTop = chat_container.scrollHeight;
         }
 
         function hide_chat(){
+          document.getElementById("chat_blocker").style.display = "none";
+          document.getElementById("base_body").style.overflowY = "auto";
           chat_super_contaienr.classList.add("d-none");
         }
 
@@ -102,7 +107,7 @@
     
         // will attempt to establish connection only if user is authenticated
         if (id != ""){
-          const chatSocket = new WebSocket( `ws://${window.location.host}/ws/chat/${id}/` );
+          const chatSocket = new WebSocket( `wss://${window.location.host}/ws/chat/${id}/` );
           
           // socket open
           chatSocket.onopen = function (e) {

@@ -95,9 +95,6 @@ a {
   #chat_super_contaienr {
     right: 0; } }
 @media screen and (max-width: 600px) {
-  body {
-    overflow: hidden; }
-
   #chat_super_contaienr {
     border-radius: 10px 10px 0 0;
     width: 100vw;
@@ -489,7 +486,7 @@ hr {
   padding: 0; }
 
 #main_nav {
-  z-index: 998;
+  z-index: 990;
   width: 100%;
   position: fixed;
   top: 0;
@@ -999,7 +996,7 @@ hr {
   position: relative;
   width: 100%;
   background-color: #454545;
-  z-index: 998; }
+  z-index: 995; }
 
 #sign_in_container {
   background-image: url("../../images/login/taipei.jpg");
@@ -1679,6 +1676,11 @@ section {
   background-color: #fff;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
+.h2-title {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  text-align: center; }
+
 #chat_parent_container {
   background-color: #f4f5f6;
   padding: 0; }
@@ -1800,6 +1802,6 @@ section {
 
 @media screen and (max-width: 600px) {
   .chat-container.rounded.p-3 {
-    height: 91vh; } }
+    height: 80vh; } }
 
 /*# sourceMappingURL=main.css.map */
