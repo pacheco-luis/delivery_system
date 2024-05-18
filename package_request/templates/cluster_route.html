@@ -86,7 +86,7 @@
             let route_coords = "{{ route.get_senders_formatted_coords }}"
 
             let googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(current_location)}&destination=${station_lat},${station_lng}+&waypoints=${encodeURIComponent(route_coords)}`;
-            console.log("Google Maps URL:", googleMapsUrl);
+            // console.log("Google Maps URL:", googleMapsUrl); -->
             
             window.location.href = googleMapsUrl;
         });
